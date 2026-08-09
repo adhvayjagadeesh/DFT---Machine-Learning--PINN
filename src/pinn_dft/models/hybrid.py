@@ -42,6 +42,15 @@ class HybridConfig:
     use_anisotropy_loss: bool = True
     out_of_fold_prior: bool = True
 
+    #: Learn a scalar gate on the correction, initialised at zero.
+    #:
+    #: Without it the head applies a correction unconditionally, so a noisy
+    #: correction can only add variance to an already-good prior -- which is what
+    #: the measured ablation shows happening. With the gate the model starts as
+    #: an identity map onto the prior and must earn any departure from it, so the
+    #: hybrid degrades gracefully to its base learner instead of below it.
+    use_shrinkage_gate: bool = False
+
 
 class HybridResidualNet(nn.Module):
     """Neural correction head operating on ``[x, x * prior, prior]``."""
@@ -78,6 +87,23 @@ class HybridResidualNet(nn.Module):
         if self.quantile_heads is None and self.residual_head is None:
             raise ValueError("hybrid needs at least one prediction head")
 
+        # Shrinkage gate, parameterised as sigmoid(raw) and initialised at
+        # raw = -3 so the gate opens at ~0.05. A bare unconstrained scalar was
+        # tried first and behaved badly: it is free to take negative values, so
+        # the correction can flip sign fold to fold (measured range -0.26 to
+        # +0.28) and the model is no more stable than the ungated version.
+        # Constraining the gate to (0, 1) makes "apply no correction" the
+        # default the optimiser must actively move away from.
+        self.correction_gate_raw = (
+            nn.Parameter(torch.full((1,), -3.0)) if cfg.use_shrinkage_gate else None
+        )
+
+    @property
+    def correction_gate(self) -> torch.Tensor | None:
+        if self.correction_gate_raw is None:
+            return None
+        return torch.sigmoid(self.correction_gate_raw)
+
     def forward(self, x_hybrid: torch.Tensor):
         d = self.raw_dim
         x_raw = x_hybrid[:, :d]
@@ -107,6 +133,10 @@ class HybridResidualNet(nn.Module):
             correction = correction + 0.25 * (q50 + 0.1 * gate * (q75 - q25))
         if self.residual_head is not None:
             correction = correction + 0.75 * self.residual_head(latent)
+
+        gate = self.correction_gate
+        if gate is not None:
+            correction = correction * gate
 
         return prior + correction, quantiles, aspect_ratio
 

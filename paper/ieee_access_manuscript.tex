@@ -8,124 +8,341 @@
 
 \begin{document}
 
-\title{Physics-Informed Hybrid Residual Learning for Band-Gap Prediction of Two-Dimensional Materials}
+\title{Leakage-Free Benchmarking of Physics-Informed and Hybrid Residual Models
+for Band-Gap Prediction of Two-Dimensional Materials}
 
-\author{Anonymous Authors}
+\author{Adhvay Jagadeesh, Rutvi Mudalagi, and Marx Akl%
+\thanks{The authors are with the Aspiring Scholars Directed Research Program
+(ASDRP), Fremont, CA 94539 USA. Corresponding author: Marx Akl
+(e-mail: makl@asdrp.org).}}
 
 \markboth{IEEE Access,~Vol.~X, No.~X, XXXX~2026}{}
 
 \maketitle
 
 \begin{abstract}
-We present a hybrid machine-learning framework for predicting band gaps of two-dimensional materials from tabular physicochemical descriptors. The workflow combines systematic data cleaning and feature engineering, tree-based base learners, and a physics-informed neural network with a Poisson-coupled anisotropy module. After preprocessing 930 materials into 1,156 numerical descriptors, we evaluated seven models using five-fold cross-validation. The proposed hybrid gradient-boosting plus physics-informed network achieved an out-of-fold coefficient of determination of $R^2=0.7431$, a mean squared error of $0.6340$, and a mean absolute error of $0.5546$ eV, outperforming the standalone gradient-boosting regressor and yielding statistically significant error reduction ($p=2.54\times10^{-3}$). Our results show that injecting a physically structured inductive bias through a Poisson-inspired coupling term improves generalization for band-gap prediction in layered materials.
+Hybrid architectures that place a neural residual corrector on top of a
+gradient-boosted prior are widely reported to improve tabular property
+prediction in materials informatics. We test that claim for HSE06 band-gap
+prediction of rectangular-lattice two-dimensional materials under an evaluation
+protocol designed to remove the leakage pathways that commonly inflate such
+comparisons: composition-grouped cross-validation, fold-local feature encoding
+and scaling, out-of-fold construction of the tree prior, a held-out test set
+carved before model selection, and significance testing at the fold level with
+the Nadeau--Bengio variance correction. On 1{,}169 C2DB materials evaluated over
+25 fold estimates from repeated grouped cross-validation, the hybrid residual
+model does \emph{not} improve on its own gradient-boosting prior
+($R^2 = 0.810 \pm 0.047$ versus $0.823 \pm 0.043$; better on 12 of 25 folds;
+$p = 0.27$). A component ablation shows that removing the structural coupling
+layer, the boundary penalty, or the anisotropy penalty each leaves accuracy
+unchanged or slightly improved, and that the tree prior alone outperforms the
+complete framework. Two positive results survive. First, neural models are
+competitive with or superior to tree ensembles on this task once
+composition-derived descriptors replace formula indicator variables, inverting
+the usual tabular-data expectation. Second, heterogeneous stacked generalisation
+delivers a large and unambiguous gain over the best single model
+($R^2 = 0.877 \pm 0.038$, MAE $= 0.363$ eV, superior on 25 of 25 folds,
+$p < 0.001$), and the physics-informed network receives the single largest
+non-negative ensemble weight ($0.35$). We conclude that the benefit previously
+attributed to physics-informed residual coupling in this setting is not
+reproducible under leakage-free evaluation, while ensemble diversity --- to
+which the physics-informed model is the largest contributor --- is.
 \end{abstract}
 
 \begin{IEEEkeywords}
-band-gap prediction, physics-informed neural networks, hybrid learning, two-dimensional materials, Poisson coupling, materials informatics.
+Band-gap prediction, cross-validation, data leakage, ensemble learning,
+materials informatics, physics-informed neural networks, reproducibility,
+two-dimensional materials.
 \end{IEEEkeywords}
+
+\section{Introduction}
+\IEEEPARstart{A}{ccurate} prediction of electronic band gaps ($E_g$) is a
+foundational objective in computational materials design. The magnitude and
+nature of the band gap govern whether a low-dimensional material acts as a
+metal, semiconductor, or insulator, and directly determine suitability for
+field-effect transistors, valleytronics, optoelectronic sensors, and
+photocatalytic water splitting \cite{raissi2019physics}. Density functional
+theory with hybrid functionals such as HSE06 offers excellent accuracy at
+computational scaling that renders high-throughput screening impractical, which
+motivates fast surrogate estimators.
+
+For heterogeneous tabular materials data, decision-tree ensembles frequently
+match or exceed deep architectures \cite{breiman2001random, friedman2001greedy,
+shwartzziv2022tabular}, although the conditions under which this holds are
+narrower than often assumed \cite{mcelfresh2023when}. A natural response is the
+hybrid residual design: a tree supplies a prior estimate and a neural network
+learns a correction, optionally regularised by physical constraints
+\cite{raissi2019physics}. Such designs are attractive because they appear to
+combine the sample efficiency of ensembles with the smoothness of neural
+function approximation.
+
+This paper reports a careful test of that design, and the test is largely
+negative. Our contribution is threefold.
+
+\begin{enumerate}
+\item \textbf{A leakage-free evaluation protocol} for tabular materials
+regression, addressing six specific pathways --- identifier-like features,
+whole-dataset encoding, in-sample construction of stacked priors, polymorphs
+straddling folds, absent held-out data, and significance tests applied at the
+sample rather than fold level. Leakage of exactly these kinds has been
+identified as a principal driver of irreproducibility in machine-learning-based
+science \cite{kapoor2023leakage}.
+
+\item \textbf{A negative result.} Under that protocol, the physics-informed
+hybrid residual architecture does not improve on its own gradient-boosted prior,
+and its individual physics-motivated components contribute nothing measurable.
+We report the ablation that establishes this, and we diagnose the mechanism.
+
+\item \textbf{A positive alternative.} Heterogeneous stacked generalisation
+\cite{wolpert1992stacked, breiman1996stacked} yields a large, significant, and
+stable improvement on the same data and protocol, with the physics-informed
+network carrying the largest ensemble weight.
+\end{enumerate}
 
 \section{Methods}
 
-\subsection{Dataset preparation and feature engineering}
-We used a curated tabular dataset containing 930 two-dimensional materials and their associated electronic-structure properties. The target variable was the HSE06 band gap, denoted as $y$. To make the data suitable for numerical learning, we first parsed chemical formulas with the Python Materials Genomics library, \textit{pymatgen} \cite{ong2013pymatgen}, and computed the total number of atoms in each composition. This allowed us to create a physically interpretable packing-density proxy,
+\subsection{Dataset}
+We use 1{,}169 rectangular-lattice (\textit{op}) two-dimensional materials from
+the Computational 2D Materials Database \cite{haastrup2018c2db} carrying an
+HSE06 band-gap label. The target $y \in \mathbb{R}^+$ ranges from $0.001$ to
+$8.85$ eV (mean $2.60$ eV).
+
+A note on sample count: an earlier revision of this work reported 930
+materials. That figure resulted from applying a blanket missing-value filter
+across all columns, which discarded 239 labelled entries because a single
+descriptor (total magnetic moment) was absent. We instead impute that column
+from training-fold medians and carry an explicit missingness indicator,
+recovering the full labelled set.
+
+\subsection{Descriptors}
+Each material is represented by seven continuous C2DB descriptors (energy above
+hull, heat of formation, thickness, total energy, unit-cell area, vacuum level,
+total magnetic moment), three nominal descriptors (magnetic state, layer group,
+stoichiometry prototype), an atom count, a packing-density proxy
+$\rho_{\mathrm{cell}} = N_{\mathrm{atoms}} / A_{\mathrm{cell}}$, and 120 Magpie
+elemental-property statistics \cite{ward2016magpie} computed with matminer
+\cite{ward2018matminer}.
+
+Magpie statistics replace the raw chemical formula. A previous revision one-hot
+encoded the formula string into 1{,}077 indicator columns, of which 825 occurred
+in exactly one material. Such columns are row identifiers rather than
+descriptors: a formula appearing only in a validation fold contributes an
+all-zero block and cannot generalise.
+
+\subsection{Evaluation protocol}
+Six controls define the protocol.
+
+\emph{Composition grouping.} 176 labelled materials share a chemical formula
+with at least one other entry. These are polymorphs, distinguished by layer
+group, whose band gaps differ by up to $2.92$ eV. Because composition-derived
+descriptors are near-identical within such a pair, an ungrouped split allows a
+model to memorise one polymorph and be scored on another. All splits are
+therefore \texttt{GroupKFold} on chemical formula.
+
+\emph{Fold-local preprocessing.} Categorical vocabularies, imputation medians,
+and standardisation statistics are estimated on the training fold only.
+
+\emph{Out-of-fold priors.} The hybrid's correction head is trained against
+out-of-fold predictions from an inner five-fold split, not in-sample
+predictions of the fitted tree. This is the standard stacked-generalisation
+construction \cite{wolpert1992stacked}; training a corrector against in-sample
+predictions exposes it to a prior of far higher quality than it meets at
+inference.
+
+\emph{Held-out test set.} 15\% of materials, split by formula group, are
+withheld before any model selection.
+
+\emph{Equal tuning budget.} All baselines receive an identical randomised
+hyperparameter search within each training fold.
+
+\emph{Repeated cross-validation and corrected inference.} We report five repeats
+of grouped five-fold cross-validation, giving 25 fold estimates. Model
+comparisons use the Nadeau--Bengio variance-corrected paired $t$-test
+\cite{nadeau2003inference}, which accounts for the positive correlation induced
+by overlapping training sets. We note that a paired test applied to per-sample
+squared errors --- as used in an earlier revision of this work --- treats
+non-independent quantities as independent observations of model performance and
+overstates significance by roughly two orders of magnitude in effective sample
+size.
+
+\subsection{Models}
+Baselines are random forest (RF), gradient boosting (GBR), support vector
+regression (SVR), a deep multilayer perceptron (MLP), and a physics-informed
+network (PINN) sharing the MLP backbone with an added boundary penalty
 \begin{equation}
-\rho_{\mathrm{cell}} = \frac{N_{\mathrm{atoms}}}{A_{\mathrm{cell}}},
+\mathcal{L}_{\mathrm{phy}} = \mathrm{ReLU}(-\hat{y})
+  + 0.1\left(e^{\mathrm{ReLU}(0.05-\hat{y})}-1\right),
 \end{equation}
-where $N_{\mathrm{atoms}}$ is the total atom count and $A_{\mathrm{cell}}$ is the unit-cell area. The density proxy was included because local packing and geometric compactness often correlate with electronic-structure behavior in layered solids \cite{nye1957physical}.
+which discourages the physically impossible negative gaps.
 
-Nominal categorical variables were one-hot encoded, and all resulting columns were cast to floating point values. Missing entries were removed, yielding a final matrix $\mathbf{X} \in \mathbb{R}^{930 \times 1156}$ with one target channel $y$. Each feature was standardized within each training fold as
+The hybrid forms $\mathbf{x}_{\mathrm{hybrid}} = [\mathbf{x},\;
+\mathbf{x}\odot\hat{y}_{\mathrm{prior}},\;\hat{y}_{\mathrm{prior}}]$ and adds a
+learned correction to the prior. A structural coupling layer builds
 \begin{equation}
-\tilde{x}_{ij} = \frac{x_{ij}-\mu_j}{\sigma_j},
+\mathbf{s} = \left[g_1 g_2,\; g_1^2-g_2^2,\;
+  \sqrt{g_1^2+g_2^2+\epsilon},\; g_1,\; g_2\right]
 \end{equation}
-where $\mu_j$ and $\sigma_j$ are the mean and standard deviation of feature $j$ estimated from the training split only. Standardization is particularly important in our setting because the input variables span heterogeneous physical scales, and it stabilizes gradient-based optimization in neural-network models \cite{hastie2009elements}.
+from two geometric channels and projects it back onto the feature map.
 
-\subsection{Model family and architectural choices}
-We compared seven regressors: random forest (RF), gradient boosting regressor (GBR), support vector regressor (SVR), a deep multilayer perceptron (MLP), a standalone physics-informed neural network (PINN), and two hybrid residual models that combine a tree-based predictor with a neural correction head. The tree-based baselines were selected because ensemble methods are strong performers on tabular materials data and are robust to heterogeneous feature scales and nonlinear interactions \cite{breiman2001random,friedman2001greedy}.
+An important correction concerns those channels. The earlier implementation
+selected them by array position (indices 0 and 1), which in the assembled matrix
+were energy above hull and heat of formation --- two formation energies. The
+layer's physical motivation therefore described a transform of quantities it did
+not receive. Channels are now resolved by name. We emphasise that the available
+C2DB export contains no in-plane lattice vectors $a$ and $b$; the geometric
+channels are unit-cell area and thickness, and we accordingly describe the layer
+as a soft geometric inductive bias rather than as a derivation from elasticity
+theory.
 
-The MLP used a feedforward architecture
-\begin{equation}
-\hat{y} = \mathbf{W}_2\phi(\mathbf{W}_1\mathbf{x}+\mathbf{b}_1)+\mathbf{b}_2,
-\end{equation}
-with two hidden layers and SiLU activations, which are known to improve optimization stability and representation capacity compared with standard rectified activations \cite{elfwing2018sigmoid,ramachandran2017searching}. Batch normalization was also applied to accelerate convergence and reduce internal covariate shift \cite{ioffe2015batch}.
+\section{Results}
 
-The standalone PINN used a similar MLP backbone but was trained with an additional physics-informed penalty to discourage physically implausible negative predictions. Its total loss was
-\begin{equation}
-\mathcal{L}_{\mathrm{PINN}} = \mathrm{MSE}(\hat{y},y)+\lambda_p \mathcal{L}_{\mathrm{phy}},
-\end{equation}
-with
-\begin{equation}
-\mathcal{L}_{\mathrm{phy}} = \mathrm{ReLU}(-\hat{y}) + 0.1\left(e^{\mathrm{ReLU}(0.05-\hat{y})}-1\right).
-\end{equation}
-This term acts as a soft boundary constraint that penalizes negative or near-zero band-gap predictions, reflecting the physical requirement that band gaps should not be negative in the present formulation. The PINN formulation follows the general physics-informed framework introduced by Raissi \textit{et al.} \cite{raissi2019physics}.
+\subsection{Benchmark}
+Table~\ref{tab:main} reports pooled results over 25 fold estimates.
 
-\subsection{Hybrid Poisson-coupled residual architecture}
-To exploit both the inductive bias of tree-based models and the flexibility of neural networks, we designed a hybrid residual model in which a base tree regressor supplies an informative prior prediction $\hat{y}_{\mathrm{tree}}$. The hybrid input was constructed as
-\begin{equation}
-\mathbf{x}_{\mathrm{hybrid}} = [\mathbf{x},\; \mathbf{x}\odot \hat{y}_{\mathrm{tree}},\; \hat{y}_{\mathrm{tree}}],
-\end{equation}
-where $\odot$ denotes elementwise multiplication. This augmentation encourages the network to learn residual corrections conditioned on both the original descriptors and the tree-based prior.
-
-In addition, we introduced a Poisson-coupled anisotropic strain module. For the two lattice-related scalar channels $a$ and $b$, the layer computes a compact anisotropy descriptor,
-\begin{equation}
-\mathbf{s} = \left[ab,\; a^2-b^2,\; \sqrt{a^2+b^2+\epsilon}\right],
-\end{equation}
-which captures cross-directional distortion, directional asymmetry, and a smooth measure of planar magnitude. The descriptor is then projected through a learned nonlinearity and added back to the original feature map. This design is motivated by continuum elasticity, where transverse strain coupling and anisotropic distortion are governed by Poisson-type relations and strongly influence the electronic response of layered materials \cite{nye1957physical}. We therefore used the Poisson-inspired module as a structured inductive bias to encode known physical coupling between lattice geometry and electronic structure.
-
-The hybrid network predicts three quantile-based residual components,
-\begin{equation}
-\hat{q}_{0.25},\;\hat{q}_{0.50},\;\hat{q}_{0.75},
-\end{equation}
-which are combined as
-\begin{equation}
-\hat{y}_{\mathrm{hybrid}} = \hat{y}_{\mathrm{tree}} + \hat{q}_{0.50} + 0.1\,\sigma(\hat{q}_{0.75}-\hat{q}_{0.25})\left(\hat{q}_{0.75}+\hat{q}_{0.25}\right),
-\end{equation}
-where $\sigma(\cdot)$ is the sigmoid function. The training loss was
-\begin{equation}
-\mathcal{L}_{\mathrm{hybrid}} = \mathrm{MSE}(\hat{y},y) + w_{\mathrm{adpt}}\left[\tfrac{1}{2}(\mathcal{L}_{q25}+\mathcal{L}_{q75}) + \mathcal{L}_{\mathrm{phy}}\right],
-\end{equation}
-where $\mathcal{L}_{q25}$ and $\mathcal{L}_{q75}$ are pinball losses for the lower and upper quantiles \cite{koenker1978regression}. This choice allows the model to learn both a central residual estimate and an uncertainty-aware correction term.
-
-\subsection{Training protocol and evaluation}
-All models were trained and evaluated using a five-fold cross-validation protocol with shuffled folds and a fixed random seed. In each fold, the training set was standardized independently, and the same transformation was applied to the held-out fold. The MLP, PINN, and hybrid networks were optimized with AdamW for 1,200--1,500 epochs depending on the architecture. Model performance was quantified using the coefficient of determination $R^2$, mean squared error (MSE), and mean absolute error (MAE). The significance of the hybrid improvement over the baseline GBR was assessed with a paired $t$-test on squared errors across the out-of-fold predictions.
-
-\section{Results and Discussion}
-
-\subsection{Performance comparison}
-The pooled out-of-fold predictions from the five folds show that tree-based models were the strongest baselines, while the hybrid residual formulations achieved the best overall accuracy (Table~\ref{tab:results}). The standalone GBR achieved $R^2=0.7323$, MSE $=0.6606$, and MAE $=0.5788$ eV. The proposed hybrid GBR-PINN improved these values to $R^2=0.7431$, MSE $=0.6340$, and MAE $=0.5546$ eV. The hybrid RF-PINN also improved upon its RF baseline, increasing $R^2$ from $0.6619$ to $0.7028$ and reducing MSE from $0.8343$ to $0.7333$.
-
-\begin{table*}[t]
+\begin{table}[t]
 \centering
-\caption{Cross-validated prediction performance of the evaluated models. Values are reported from pooled out-of-fold predictions over five folds.}
-\label{tab:results}
-\begin{tabular}{lccc}
+\caption{Repeated grouped five-fold cross-validation (25 fold estimates).
+Folds column counts estimates on which the model beats the GBR baseline.
+$p$-values are Nadeau--Bengio corrected, one-sided, against GBR.}
+\label{tab:main}
+\begin{tabular}{lcccc}
 \toprule
-Model & $R^2$ & MSE (eV$^2$) & MAE (eV) \\
+Model & $R^2$ & MAE [eV] & Folds & $p$ \\
 \midrule
-Random forest & 0.6619 & 0.8343 & 0.6611 \\
-GBR & 0.7323 & 0.6606 & 0.5788 \\
-SVR & 0.4288 & 1.4095 & 0.9417 \\
-MLP & 0.4079 & 1.4610 & 0.9434 \\
-PINN & 0.3360 & 1.6385 & 1.0104 \\
-Hybrid RF-PINN & 0.7028 & 0.7333 & 0.6057 \\
-Hybrid GBR-PINN & 0.7431 & 0.6340 & 0.5546 \\
+Stacked ensemble (ridge) & $\mathbf{0.877 \pm 0.038}$ & $\mathbf{0.363}$ & 25/25 & $<0.001$ \\
+Stacked ensemble (NNLS)  & $0.875 \pm 0.038$ & $0.364$ & 25/25 & $<0.001$ \\
+Deep MLP                 & $0.864 \pm 0.039$ & $0.378$ & 24/25 & $0.002$ \\
+PINN                     & $0.856 \pm 0.043$ & $0.385$ & 22/25 & $0.033$ \\
+Random forest            & $0.827 \pm 0.041$ & $0.442$ & 13/25 & $0.323$ \\
+GBR (baseline)           & $0.823 \pm 0.043$ & $0.464$ & ---   & ---    \\
+Hybrid GBR + corrector   & $0.810 \pm 0.047$ & $0.445$ & 12/25 & $0.271$ \\
+SVR                      & $0.774 \pm 0.039$ & $0.497$ &  1/25 & --- \\
 \bottomrule
 \end{tabular}
-\end{table*}
+\end{table}
 
-The fold-wise stability analysis was also favorable to the hybrid approach. The mean fold-wise $R^2$ values were $0.6574\pm0.0436$ for RF, $0.7285\pm0.0409$ for GBR, and $0.7394\pm0.0470$ for the hybrid GBR-PINN. This indicates that the hybrid model not only improved the central tendency of the prediction error but also maintained competitive robustness across folds.
+The hybrid does not improve on its prior. It is better on 12 of 25 fold
+estimates, and the corrected test does not reject the null ($p = 0.27$). On the
+held-out test set the gap is larger and in the same direction
+($R^2 = 0.775$ for the hybrid against $0.855$ for GBR).
 
-\subsection{Why the Poisson-coupled layer helps}
-The performance gain of the hybrid architecture is consistent with the physical structure of the problem. Band gaps of layered and low-dimensional materials are strongly influenced by lattice geometry, anisotropic strain, and directional bonding effects. A purely tabular MLP does not explicitly encode these relationships, whereas the Poisson-coupled module introduces a physically informed feature transformation before the residual head is applied. The descriptor in Eq. (6) is designed to represent directional coupling terms that are common in continuum elasticity and crystal anisotropy, where the response of a material under loading is governed by Poisson-type coupling coefficients and not solely by scalar magnitudes \cite{nye1957physical}. By providing this structured inductive bias, the hybrid model can better relate geometric descriptors to electronic-structure behavior.
+Two baselines invert the expected ordering: the MLP and the PINN both outperform
+every tree ensemble. With identifier-like features removed and composition
+statistics supplied, this task falls outside the regime in which boosted trees
+dominate neural networks \cite{mcelfresh2023when}.
 
-This interpretation is supported by the empirical results. The hybrid GBR-PINN reduced MSE relative to the standalone GBR by approximately $4.0\%$ and increased $R^2$ by $0.0108$. Although the absolute gain is modest, it is meaningful in a materials-science setting because the target band gap spans a broad range of values and the error is evaluated on held-out data. The paired $t$-test yielded $t=-2.8090$ and $p=2.54\times10^{-3}$, indicating that the hybrid residual architecture significantly reduced squared prediction error relative to the standalone GBR.
+\subsection{Ablation}
+Table~\ref{tab:ablation} reports measured ablations under grouped five-fold
+cross-validation. Every configuration was trained and evaluated.
 
-\subsection{Interpretation of the neural and physics-informed components}
-The poor performance of the standalone PINN relative to the tree-based methods merits discussion. Although physics-informed penalties can improve data efficiency and enforce domain constraints, they do not automatically provide the same inductive bias as tree-based models for heterogeneous tabular data. In this study, the PINN was trained with a soft non-negativity constraint, but the target relationship remained difficult to infer from a shallow representation without stronger prior structure. By contrast, the hybrid model uses the tree-based prediction as a strong prior and then learns a physically regularized residual correction. This hybrid formulation is therefore more effective in our setting than using the physics-informed term alone.
+\begin{table}[t]
+\centering
+\caption{Component ablation, pooled out-of-fold $R^2$.}
+\label{tab:ablation}
+\begin{tabular}{lcc}
+\toprule
+Configuration & $R^2$ & $\Delta$ vs.\ full \\
+\midrule
+Tree prior alone, no correction head & 0.819 & $+0.018$ \\
+In-sample prior (leaky construction) & 0.817 & $+0.015$ \\
+Without boundary penalty             & 0.806 & $+0.004$ \\
+Without structural coupling layer    & 0.804 & $+0.002$ \\
+Without anisotropy penalty           & 0.804 & $+0.002$ \\
+\textbf{Full framework}              & 0.801 & --- \\
+Without quantile heads               & 0.796 & $-0.005$ \\
+Without residual head                & 0.766 & $-0.035$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-The quantile-based residual correction also provides practical value beyond point predictions. The lower and upper quantile heads capture uncertainty in the residual term and allow the network to represent asymmetric error behavior, which is common when the relation between structure and band gap is nonlinear and heterogeneous. The use of quantile regression is well established in statistical learning and provides a principled alternative to purely mean-based regression when variability is nonuniform \cite{koenker1978regression}.
+No physics-motivated component contributes positively. Removing the structural
+layer, the boundary penalty, or the anisotropy penalty leaves performance
+unchanged to within noise, and the tree prior alone is the strongest
+configuration in the table.
+
+The second row is diagnostic. Reverting to the leaky in-sample prior
+\emph{raises} measured $R^2$. With a prior that appears near-perfect on training
+rows, the correction head has almost no residual signal to fit and learns to
+emit approximately zero, degenerating into a pass-through of the tree. The
+apparent benefit of the original architecture was therefore substantially an
+artefact of the head being trained to do nothing.
+
+\subsection{Uncertainty calibration}
+The architecture predicts quantiles at $\tau \in \{0.25, 0.50, 0.75\}$, and
+earlier revisions described these as uncertainty estimates. The nominal
+$q_{0.25}$--$q_{0.75}$ interval should cover 50\% of outcomes; measured
+empirical coverage is $17.2\%$ at a mean interval width of $2.47$ eV. The
+intervals are simultaneously wide and badly miscalibrated, and we therefore make
+no uncertainty claim for this architecture. Proper scoring of predictive
+distributions \cite{gneiting2007probabilistic} should accompany any such claim.
+
+\subsection{Stacked generalisation}
+A ridge meta-learner over out-of-fold predictions of all five base models
+achieves $R^2 = 0.877 \pm 0.038$ and MAE $= 0.363$ eV, superior to GBR on all 25
+fold estimates ($p < 0.001$). The non-negative least-squares variant performs
+equivalently and is interpretable; its mean weights are PINN $0.350$, MLP
+$0.299$, GBR $0.246$, RF $0.127$, SVR $0.000$.
+
+The physics-informed network carries the largest single weight. This is the
+defensible form of the claim that physical regularisation helps here: not that a
+physics-informed corrector improves a tree prior, but that a physics-informed
+network is the most valuable single contributor to a diverse ensemble.
+
+\section{Discussion}
+
+\subsection{Why residual correction fails}
+Once the prior is constructed out of fold, its residuals on unseen materials are
+dominated by irreducible noise rather than by recoverable structure. An
+unconstrained corrector fitted to such residuals adds variance without removing
+bias. This mechanism is not specific to materials data; residual-boosting
+correctors are known to produce negative gains when the residual signal is
+noise-dominated.
+
+We tested the natural remedy --- a shrinkage gate constraining the correction by
+$\sigma(\cdot) \in (0,1)$, initialised near zero so the model begins as a
+pass-through and must earn any departure from the prior. It did not work. The
+gate converged to a small value ($0.081 \pm 0.007$), but accuracy became
+markedly less stable ($R^2 = 0.681 \pm 0.237$, with 7 of 25 folds below $0.70$
+and one at $-0.24$). Shrinking the gate rescales the gradient reaching the
+correction head, whose raw output grows to compensate; the product is then
+poorly controlled on unseen data. A workable version would need to penalise
+correction magnitude directly rather than gate it post hoc.
+
+\subsection{Implications}
+Three points follow for practitioners. First, hybrid residual architectures
+should be validated against their own prior with an out-of-fold construction;
+compared against a prior built in sample, they can appear to help while doing
+nothing. Second, formula-derived indicator features should be treated as
+identifiers and excluded. Third, in this data regime the reliable route to
+accuracy is ensemble diversity rather than architectural coupling.
+
+\subsection{Limitations}
+All data derive from a single database and a single Bravais class, with 1{,}169
+labelled materials. The structural layer operates on unit-cell area and
+thickness because in-plane lattice vectors are unavailable in the current
+export; recovering $a$ and $b$ would permit a direct test of the anisotropy
+hypothesis, which the present work cannot settle. We compare against tabular
+baselines only, not against graph neural networks, which require relaxed atomic
+coordinates that this tabular setting does not supply.
 
 \section{Conclusion}
-We developed and evaluated a hybrid materials-informatics framework for predicting band gaps of two-dimensional materials. The workflow combined formula parsing, feature engineering, one-hot encoding, standardization, and a hybrid architecture that integrates tree-based priors, a Poisson-inspired anisotropy module, and a physics-informed residual correction head. The proposed hybrid GBR-PINN achieved the highest predictive performance among the tested models, with $R^2=0.7431$ and MSE $=0.6340$ eV$^2$ on pooled out-of-fold predictions, and it significantly outperformed the standalone GBR baseline. These results suggest that the inclusion of physically structured inductive bias, especially through Poisson-coupled anisotropy features, is beneficial for predicting electronic properties in layered materials.
+Under a leakage-free protocol, a physics-informed hybrid residual architecture
+does not improve band-gap prediction for two-dimensional materials relative to
+its own gradient-boosted prior, and none of its physics-motivated components
+contributes measurably. The improvement reported previously is attributable to
+evaluation artefacts, principally an in-sample prior construction that trained
+the correction head to be inert. On the same data, heterogeneous stacked
+generalisation improves $R^2$ from $0.823$ to $0.877$ and MAE from $0.464$ to
+$0.363$ eV, superior on all 25 fold estimates, with the physics-informed network
+the largest ensemble contributor. We release the complete pipeline, including
+every configuration reported here, so that both the negative and the positive
+result can be reproduced end to end.
+
+\section*{Data and Code Availability}
+All code, the curated dataset, per-fold out-of-sample predictions, and the
+scripts generating every table in this article are available at
+\url{https://github.com/<organisation>/PINN-DFT}. The benchmark reproduces from
+a single command under a pinned environment with a fixed seed.
 
 \bibliographystyle{IEEEtran}
 \bibliography{ieee_access_bibliography}
