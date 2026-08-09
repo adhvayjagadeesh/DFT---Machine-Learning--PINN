@@ -279,9 +279,62 @@ def fig_calibration():
     plt.close(fig)
 
 
+# ---------------------------------------------------------------- figure 8
+def fig_repeated_holdout():
+    """Per-split held-out performance across independent held-out sets."""
+    if not _exists("repeated_holdout.csv", "repeated_holdout.json"):
+        return
+    df = pd.read_csv(M / "repeated_holdout.csv")
+    with open(M / "repeated_holdout.json") as fh:
+        s = json.load(fh)
+
+    order = [m for m in ["gbr", "rf", "svr", "mlp", "pinn", "stack_nnls", "stack_ridge"]
+             if m in df.variant.unique()]
+    jitter = np.random.RandomState(0)
+
+    fig, axes = plt.subplots(1, 2, figsize=(9.2, 3.9))
+    for i, m in enumerate(order):
+        g = df[df.variant == m]
+        color = ACCENT if "stack" in m else NEUTRAL
+        axes[0].scatter(np.full(len(g), i) + jitter.uniform(-.12, .12, len(g)),
+                        g.r2, s=22, color=color, alpha=.65, edgecolors="none")
+        axes[0].hlines(g.r2.mean(), i - .28, i + .28, color=color, lw=2.2)
+    axes[0].set_xticks(range(len(order)), [PRETTY[m] for m in order],
+                       rotation=25, ha="right", fontsize=8)
+    axes[0].set_ylabel("Held-out $R^2$")
+    axes[0].set_title(f"(a) {s['n_splits']} independent held-out sets "
+                      f"($\\approx${s['mean_n_test']} materials each)",
+                      fontsize=9, fontweight="bold")
+
+    piv = df.pivot_table(index="split", columns="variant", values="r2")
+    pairs = [(inc, "stack_ridge") for inc in ("pinn", "mlp", "gbr") if inc in piv]
+    for j, (inc, ch) in enumerate(pairs):
+        delta = piv[ch] - piv[inc]
+        axes[1].scatter(np.full(len(delta), j) + jitter.uniform(-.1, .1, len(delta)),
+                        delta, s=26, edgecolors="none",
+                        color=[GOOD if d > 0 else WARN for d in delta])
+        axes[1].hlines(delta.mean(), j - .26, j + .26, color="#333", lw=2)
+        c = s["comparisons"].get(f"{ch}_vs_{inc}")
+        if c:
+            axes[1].annotate(f"{c['splits_won']}/{c['n_splits']}\n"
+                             f"p={c['p_one_sided']:.3f}", (j, delta.max()),
+                             textcoords="offset points", xytext=(0, 9),
+                             ha="center", fontsize=7.5)
+    axes[1].axhline(0, color="#333", lw=1)
+    axes[1].set_xticks(range(len(pairs)),
+                       [f"vs {PRETTY[inc]}" for inc, _ in pairs], fontsize=8)
+    axes[1].set_ylabel("$\\Delta R^2$ (stack $-$ single model)")
+    axes[1].set_title("(b) Paired per-split difference", fontsize=9, fontweight="bold")
+    axes[1].margins(y=0.28)
+    fig.subplots_adjust(wspace=0.3)
+    fig.savefig(F / "fig8_repeated_holdout.png")
+    plt.close(fig)
+
+
 def main() -> None:
     for fn in (fig_model_comparison, fig_drop_one_and_weights, fig_error_correlation,
-               fig_learning_curve, fig_parity_and_rec, fig_ablation, fig_calibration):
+               fig_learning_curve, fig_parity_and_rec, fig_ablation, fig_calibration,
+               fig_repeated_holdout):
         try:
             fn()
         except Exception as exc:  # keep going; report what failed
