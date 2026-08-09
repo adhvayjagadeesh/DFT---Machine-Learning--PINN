@@ -1,8 +1,12 @@
 """Regenerate every manuscript figure from the committed result files.
 
-Run after ``run_benchmarks.py`` and ``run_ablation.py``::
+Run after run_benchmarks.py, run_ablation.py, run_recovery_study.py and
+run_stacking_analysis.py::
 
     python experiments/make_figures.py
+
+Figures are written to results/figures/ at 300 dpi and are also copied into the
+LaTeX tree if one is present.
 """
 from __future__ import annotations
 
@@ -17,119 +21,279 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from pinn_dft import config                                # noqa: E402
-from pinn_dft.evaluation.metrics import rec_curve          # noqa: E402
+from pinn_dft import config                            # noqa: E402
+from pinn_dft.evaluation.metrics import rec_curve      # noqa: E402
 
 mpl.rcParams.update({
-    "figure.dpi": 200, "savefig.dpi": 300, "font.size": 10,
+    "figure.dpi": 150, "savefig.dpi": 300, "font.size": 9,
     "axes.spines.top": False, "axes.spines.right": False,
-    "axes.grid": True, "grid.alpha": 0.25, "savefig.bbox": "tight",
-    "figure.facecolor": "white",
+    "axes.grid": True, "grid.alpha": 0.22, "grid.linewidth": .6,
+    "axes.axisbelow": True, "savefig.bbox": "tight", "figure.facecolor": "white",
 })
 
-ACCENT, NEUTRAL, WARN = "#2E6FD9", "#6B7280", "#C2453B"
+ACCENT, NEUTRAL, WARN, GOOD = "#2E6FD9", "#6B7280", "#C2453B", "#1A7A3C"
+PRETTY = {"rf": "Random forest", "gbr": "GBR", "svr": "SVR", "mlp": "MLP",
+          "pinn": "PINN", "stack_ridge": "Stack (ridge)", "stack_nnls": "Stack (NNLS)",
+          "hybrid_ungated": "Hybrid residual", "hybrid_gated": "Hybrid + gate"}
+
+M = config.RESULTS_METRICS
+F = config.RESULTS_FIGURES
 
 
-def _load():
-    oof = pd.read_csv(config.RESULTS_METRICS / "predictions_oof.csv")
-    with open(config.RESULTS_METRICS / "benchmark_summary.json") as fh:
-        summary = json.load(fh)
-    return oof, summary
+def _exists(*names) -> bool:
+    missing = [n for n in names if not (M / n).exists()]
+    if missing:
+        print(f"[figures] skipping - missing {missing}")
+    return not missing
 
 
-def figure_parity(oof, summary):
-    fig, axes = plt.subplots(1, 2, figsize=(9.2, 4.5), sharex=True, sharey=True)
-    lim = (0, max(oof["true"].max(), oof["hybrid_gbr"].max()) * 1.05)
-    for ax, model, label in zip(axes, ["gbr", "hybrid_gbr"],
-                                ["Gradient boosting baseline", "Hybrid GBR + correction head"]):
-        m = summary["pooled_out_of_fold"][model]
-        ax.scatter(oof["true"], oof[model], s=9, alpha=.35,
-                   color=NEUTRAL if model == "gbr" else ACCENT, edgecolors="none")
-        ax.plot(lim, lim, ls="--", lw=1.1, color="#333")
+# ---------------------------------------------------------------- figure 1
+def fig_model_comparison():
+    """Forest plot: mean fold R2 with 95% CI across repeated CV estimates."""
+    if not _exists("recovery_fold_metrics.csv"):
+        return
+    df = pd.read_csv(M / "recovery_fold_metrics.csv")
+    stats = df.groupby("variant").r2.agg(["mean", "std", "count"])
+    stats["se"] = stats["std"] / np.sqrt(stats["count"])
+    stats = stats.sort_values("mean")
+
+    fig, ax = plt.subplots(figsize=(6.6, 4.2))
+    ypos = np.arange(len(stats))
+    colors = [ACCENT if "stack" in v else (WARN if "hybrid" in v else NEUTRAL)
+              for v in stats.index]
+    ax.errorbar(stats["mean"], ypos, xerr=1.96 * stats["se"], fmt="o",
+                ecolor="#999", elinewidth=1.2, capsize=3, markersize=0, zorder=1)
+    ax.scatter(stats["mean"], ypos, s=46, c=colors, zorder=2, edgecolors="white")
+
+    gbr = stats.loc["gbr", "mean"]
+    ax.axvline(gbr, ls="--", lw=1, color=NEUTRAL, zorder=0)
+    ax.text(gbr - .004, -0.62, "GBR baseline", fontsize=7.5, color=NEUTRAL,
+            ha="right", va="center")
+    ax.set_ylim(-1.0, len(stats) - 0.4)
+
+    for i, (v, r) in enumerate(zip(stats.index, stats["mean"])):
+        ax.text(r + 1.96 * stats.loc[v, "se"] + .006, i, f"{r:.3f}",
+                va="center", fontsize=7.5, color="#444")
+    ax.set_yticks(ypos, [PRETTY.get(v, v) for v in stats.index])
+    ax.set_xlabel("Cross-validated $R^2$ (mean $\\pm$ 95% CI, 25 fold estimates)")
+    ax.set_title("Model comparison under grouped repeated cross-validation",
+                 fontsize=10, fontweight="bold")
+    fig.savefig(F / "fig1_model_comparison.png")
+    plt.close(fig)
+
+
+# ---------------------------------------------------------------- figure 2
+def fig_drop_one_and_weights():
+    """Stacking weights next to the drop-one ablation that actually tests them."""
+    if not _exists("stacking_analysis.json", "stacking_weights.csv"):
+        return
+    with open(M / "stacking_analysis.json") as fh:
+        s = json.load(fh)
+    w = pd.read_csv(M / "stacking_weights.csv")
+    base = [c for c in ["rf", "gbr", "svr", "mlp", "pinn"] if c in w.columns]
+    mean_w = w[w.method == "stack_nnls"][base].mean()
+
+    fig, axes = plt.subplots(1, 2, figsize=(9.0, 3.8))
+
+    axes[0].bar(range(len(base)), [mean_w[b] for b in base],
+                color=NEUTRAL, edgecolor="white", width=.62)
+    axes[0].set_xticks(range(len(base)), [PRETTY[b] for b in base],
+                       rotation=20, ha="right")
+    axes[0].set_ylabel("Mean NNLS weight")
+    axes[0].set_title("(a) Ensemble weights", fontsize=9.5, fontweight="bold")
+
+    drop = s["drop_one_ablation"]
+    order = sorted(base, key=lambda m: drop[m]["mse_penalty_when_removed"])
+    penalties = [drop[m]["mse_penalty_when_removed"] for m in order]
+    colors = [GOOD if p > 0 else WARN for p in penalties]
+    axes[1].barh(range(len(order)), penalties, color=colors,
+                 edgecolor="white", height=.62)
+    axes[1].axvline(0, color="#333", lw=1)
+    span = max(penalties) - min(penalties)
+    axes[1].set_xlim(min(penalties) - 0.12 * span, max(penalties) + 0.34 * span)
+    # Annotations sit in a fixed right-hand column so they never collide with
+    # the tick labels of near-zero bars.
+    label_x = max(penalties) + 0.10 * span
+    for i, m in enumerate(order):
+        d = drop[m]
+        axes[1].text(label_x, i, f"{d['folds_worse_without']}/{d['n_folds']}"
+                     f"  p={d['p_one_sided']:.3f}", va="center", ha="left",
+                     fontsize=7)
+    short = {"rf": "RF", "gbr": "GBR", "svr": "SVR", "mlp": "MLP", "pinn": "PINN"}
+    axes[1].set_yticks(range(len(order)), [short[m] for m in order])
+    axes[1].set_xlabel("MSE penalty when removed (eV$^2$)")
+    axes[1].set_title("(b) Drop-one ablation", fontsize=9.5, fontweight="bold")
+    fig.subplots_adjust(wspace=0.28)
+    fig.text(0.5, -0.04, "A large weight does not establish a contribution: "
+             "collinear members split weight between them. Panel (b) is the test.",
+             ha="center", fontsize=7.5, color="#666")
+    fig.savefig(F / "fig2_ensemble_contributions.png")
+    plt.close(fig)
+
+
+# ---------------------------------------------------------------- figure 3
+def fig_error_correlation():
+    """Error-correlation heatmap - the diversity stacking exploits."""
+    if not _exists("stacking_analysis.json"):
+        return
+    with open(M / "stacking_analysis.json") as fh:
+        s = json.load(fh)
+    corr = pd.DataFrame(s["error_correlation"])
+    order = ["rf", "gbr", "svr", "mlp", "pinn"]
+    corr = corr.loc[order, order]
+
+    fig, ax = plt.subplots(figsize=(4.6, 4.0))
+    im = ax.imshow(corr.to_numpy(), cmap="RdBu_r", vmin=0, vmax=1)
+    ax.set_xticks(range(len(order)), [PRETTY[m] for m in order],
+                  rotation=40, ha="right", fontsize=8)
+    ax.set_yticks(range(len(order)), [PRETTY[m] for m in order], fontsize=8)
+    for i in range(len(order)):
+        for j in range(len(order)):
+            v = corr.iloc[i, j]
+            ax.text(j, i, f"{v:.2f}", ha="center", va="center", fontsize=7.5,
+                    color="white" if v > 0.75 else "#222")
+    ax.grid(False)
+    fig.colorbar(im, ax=ax, shrink=.8, label="Pearson correlation of residuals")
+    ax.set_title(f"Residual correlation (mean off-diagonal "
+                 f"{s['mean_pairwise_error_correlation']:.2f})",
+                 fontsize=9.5, fontweight="bold")
+    fig.savefig(F / "fig3_error_correlation.png")
+    plt.close(fig)
+
+
+# ---------------------------------------------------------------- figure 4
+def fig_learning_curve():
+    if not _exists("learning_curve.csv"):
+        return
+    df = pd.read_csv(M / "learning_curve.csv")
+    fig, ax = plt.subplots(figsize=(6.0, 4.0))
+    for model, color, lw in (("stack_nnls", ACCENT, 2.0), ("mlp", "#7C3AED", 1.4),
+                             ("gbr", NEUTRAL, 1.4), ("rf", "#9CA3AF", 1.2)):
+        if model not in df.columns:
+            continue
+        g = df.groupby("n_train")[model].agg(["mean", "std", "count"])
+        se = g["std"] / np.sqrt(g["count"])
+        ax.plot(g.index, g["mean"], "o-", color=color, lw=lw,
+                label=PRETTY.get(model, model), markersize=4)
+        ax.fill_between(g.index, g["mean"] - 1.96 * se, g["mean"] + 1.96 * se,
+                        color=color, alpha=.12)
+    ax.set_xlabel("Training-set size (materials)")
+    ax.set_ylabel("Cross-validated $R^2$")
+    ax.set_title("Learning curves", fontsize=10, fontweight="bold")
+    ax.legend(frameon=False, loc="lower right", fontsize=8)
+    fig.savefig(F / "fig4_learning_curve.png")
+    plt.close(fig)
+
+
+# ---------------------------------------------------------------- figure 5
+def fig_parity_and_rec():
+    if not _exists("stacking_oof_predictions.csv"):
+        return
+    oof = pd.read_csv(M / "stacking_oof_predictions.csv")
+    oof = oof[oof.repeat == oof.repeat.min()]
+    from sklearn.metrics import mean_absolute_error, r2_score
+
+    fig, axes = plt.subplots(1, 3, figsize=(11.4, 3.9))
+    lim = (0, max(oof["true"].max(), oof["stack_nnls"].max()) * 1.04)
+    for ax, model, color in ((axes[0], "gbr", NEUTRAL), (axes[1], "stack_nnls", ACCENT)):
+        ax.scatter(oof["true"], oof[model], s=7, alpha=.32, color=color,
+                   edgecolors="none")
+        ax.plot(lim, lim, ls="--", lw=1, color="#333")
         ax.set_xlim(lim); ax.set_ylim(lim); ax.set_aspect("equal")
         ax.set_xlabel("HSE06 band gap (eV)")
-        ax.set_title(f"{label}\n$R^2$={m['r2']:.4f}  MAE={m['mae']:.3f} eV", fontsize=10)
+        ax.set_title(f"{PRETTY[model]}\n$R^2$={r2_score(oof['true'], oof[model]):.3f}  "
+                     f"MAE={mean_absolute_error(oof['true'], oof[model]):.3f} eV",
+                     fontsize=9)
     axes[0].set_ylabel("Predicted band gap (eV)")
-    fig.savefig(config.RESULTS_FIGURES / "fig_parity.png")
-    plt.close(fig)
 
-
-def figure_rec(oof):
-    fig, ax = plt.subplots(figsize=(6.4, 4.2))
-    for model, label, color in (("pinn", "Standalone PINN", "#9CA3AF"),
-                                ("gbr", "GBR baseline", NEUTRAL),
-                                ("hybrid_gbr", "Hybrid (ours)", ACCENT)):
+    for model, color, lw in (("pinn", "#9CA3AF", 1.2), ("gbr", NEUTRAL, 1.4),
+                             ("mlp", "#7C3AED", 1.4), ("stack_nnls", ACCENT, 2.0)):
         tol, acc = rec_curve(oof["true"], oof[model])
-        ax.plot(tol, acc, lw=1.8, label=label, color=color)
-    ax.set_xlabel("Absolute error tolerance $\\tau$ (eV)")
-    ax.set_ylabel("Fraction of materials within $\\tau$")
-    ax.set_title("Regression error characteristic", fontsize=11)
-    ax.legend(frameon=False, loc="lower right")
-    fig.savefig(config.RESULTS_FIGURES / "fig_rec_curve.png")
+        axes[2].plot(tol, acc, lw=lw, color=color, label=PRETTY[model])
+    axes[2].set_xlabel("Absolute error tolerance $\\tau$ (eV)")
+    axes[2].set_ylabel("Fraction within $\\tau$")
+    axes[2].set_title("Regression error characteristic", fontsize=9)
+    axes[2].legend(frameon=False, fontsize=7.5, loc="lower right")
+    fig.savefig(F / "fig5_parity_rec.png")
     plt.close(fig)
 
 
-def figure_fold_significance(summary):
-    diffs = np.array(summary["significance"]["fold_mse_differences"])
-    fig, ax = plt.subplots(figsize=(6.4, 4.0))
-    ax.bar(np.arange(1, len(diffs) + 1), diffs, width=.6,
-           color=[ACCENT if d > 0 else WARN for d in diffs], edgecolor="white")
-    ax.axhline(0, color="#333", lw=1)
-    ax.axhline(diffs.mean(), ls="--", lw=1.2, color="#1a7a3c",
-               label=f"mean {diffs.mean():+.4f}")
-    nb = summary["significance"]["nadeau_bengio_corrected"]
-    ax.set_xticks(np.arange(1, len(diffs) + 1),
-                  [f"Fold {i}" for i in range(1, len(diffs) + 1)])
-    ax.set_ylabel("MSE reduction vs GBR (eV$^2$)")
-    ax.set_title(f"Per-fold improvement — Nadeau-Bengio $p$={nb['p_value_one_sided']:.3f} "
-                 f"(one-sided)", fontsize=10.5)
-    ax.legend(frameon=False)
-    fig.savefig(config.RESULTS_FIGURES / "fig_fold_significance.png")
-    plt.close(fig)
-
-
-def figure_ablation():
-    path = config.RESULTS_METRICS / "ablation_results.csv"
-    if not path.exists():
-        print("[figures] ablation_results.csv missing - run run_ablation.py first")
+# ---------------------------------------------------------------- figure 6
+def fig_ablation():
+    if not _exists("ablation_results.csv"):
         return
-    df = pd.read_csv(path).sort_values("pooled_r2")
-    fig, ax = plt.subplots(figsize=(7.6, 4.4))
+    df = pd.read_csv(M / "ablation_results.csv").sort_values("pooled_r2")
+    labels = {
+        "gbr_prior_only": "Tree prior alone", "in_sample_prior": "In-sample prior (leaky)",
+        "no_physics_loss": "No boundary penalty", "no_structural_layer": "No coupling layer",
+        "no_anisotropy_loss": "No anisotropy penalty", "full": "Full framework",
+        "no_quantile_heads": "No quantile heads", "no_residual_head": "No residual head",
+    }
+    fig, ax = plt.subplots(figsize=(6.6, 3.9))
     colors = [ACCENT if v == "full" else NEUTRAL for v in df["variant"]]
-    ax.barh(np.arange(len(df)), df["pooled_r2"], color=colors, edgecolor="white", height=.68)
-    for i, (v, r) in enumerate(zip(df["variant"], df["pooled_r2"])):
-        ax.text(r + .003, i, f"{r:.4f}", va="center", fontsize=8.5)
-    ax.set_yticks(np.arange(len(df)), df["variant"], fontsize=8.5)
+    ax.barh(np.arange(len(df)), df["pooled_r2"], color=colors,
+            edgecolor="white", height=.66)
+    for i, r in enumerate(df["pooled_r2"]):
+        ax.text(r + .003, i, f"{r:.4f}", va="center", fontsize=7.5)
+    ax.set_yticks(np.arange(len(df)),
+                  [labels.get(v, v) for v in df["variant"]], fontsize=8)
+    ax.set_xlim(0, df["pooled_r2"].max() * 1.10)
     ax.set_xlabel("Pooled out-of-fold $R^2$")
-    ax.set_xlim(0, df["pooled_r2"].max() * 1.12)
-    ax.set_title("Component ablation (measured)", fontsize=11)
-    fig.savefig(config.RESULTS_FIGURES / "fig_ablation.png")
+    ax.set_title("Component ablation (all configurations trained)",
+                 fontsize=10, fontweight="bold")
+    fig.savefig(F / "fig6_ablation.png")
     plt.close(fig)
 
 
-def figure_error_vs_aspect(summary):
-    fig, ax = plt.subplots(figsize=(6.4, 4.0))
-    for model, label, color in (("gbr", "GBR baseline", NEUTRAL),
-                                ("hybrid_gbr", "Hybrid (ours)", ACCENT)):
-        bins = summary["error_vs_aspect_ratio"][model]
-        centres = [(b["covariate_low"] + b["covariate_high"]) / 2 for b in bins]
-        ax.plot(centres, [b["mae"] for b in bins], "o-", label=label, color=color, lw=1.8)
-    ax.set_xlabel("Structural aspect ratio (area / thickness, standardised)")
-    ax.set_ylabel("MAE (eV)")
-    ax.set_title("Error versus structural distortion", fontsize=11)
-    ax.legend(frameon=False)
-    fig.savefig(config.RESULTS_FIGURES / "fig_error_vs_aspect.png")
+# ---------------------------------------------------------------- figure 7
+def fig_calibration():
+    if not _exists("benchmark_summary.json", "predictions_oof.csv"):
+        return
+    oof = pd.read_csv(M / "predictions_oof.csv")
+    if "hybrid_gbr_q25" not in oof.columns:
+        return
+    lo = np.minimum(oof.hybrid_gbr_q25, oof.hybrid_gbr_q75)
+    hi = np.maximum(oof.hybrid_gbr_q25, oof.hybrid_gbr_q75)
+
+    fig, axes = plt.subplots(1, 2, figsize=(8.6, 3.7))
+    levels = np.linspace(0.05, 0.95, 19)
+    centre = (lo + hi) / 2
+    half = (hi - lo) / 2
+    empirical = [float((np.abs(oof["true"] - centre) <= half * (L / 0.5)).mean())
+                 for L in levels]
+    axes[0].plot([0, 1], [0, 1], ls="--", color="#333", lw=1, label="ideal")
+    axes[0].plot(levels, empirical, "o-", color=WARN, lw=1.8, markersize=3.5,
+                 label="measured")
+    axes[0].set_xlabel("Nominal coverage"); axes[0].set_ylabel("Empirical coverage")
+    axes[0].set_title("(a) Interval calibration", fontsize=9.5, fontweight="bold")
+    axes[0].legend(frameon=False, fontsize=8)
+
+    axes[1].hist(hi - lo, bins=40, color=NEUTRAL, edgecolor="white")
+    axes[1].axvline((hi - lo).mean(), color=WARN, lw=1.6,
+                    label=f"mean {float((hi - lo).mean()):.2f} eV")
+    axes[1].set_xlabel("Predicted interval width (eV)")
+    axes[1].set_ylabel("Count")
+    axes[1].set_title("(b) Interval width", fontsize=9.5, fontweight="bold")
+    axes[1].legend(frameon=False, fontsize=8)
+    fig.savefig(F / "fig7_calibration.png")
     plt.close(fig)
 
 
 def main() -> None:
-    oof, summary = _load()
-    figure_parity(oof, summary)
-    figure_rec(oof)
-    figure_fold_significance(summary)
-    figure_error_vs_aspect(summary)
-    figure_ablation()
-    print(f"[figures] written to {config.RESULTS_FIGURES}")
+    for fn in (fig_model_comparison, fig_drop_one_and_weights, fig_error_correlation,
+               fig_learning_curve, fig_parity_and_rec, fig_ablation, fig_calibration):
+        try:
+            fn()
+        except Exception as exc:  # keep going; report what failed
+            print(f"[figures] {fn.__name__} failed: {exc}")
+
+    latex_figs = config.ROOT / "paper" / "ieee_access" / "figures"
+    if latex_figs.exists():
+        import shutil
+        for png in F.glob("fig*.png"):
+            shutil.copy(png, latex_figs / png.name)
+        print(f"[figures] copied into {latex_figs}")
+    print(f"[figures] written to {F}")
 
 
 if __name__ == "__main__":

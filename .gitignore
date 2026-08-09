@@ -4,3 +4,9 @@ __pycache__/
 .unzipped_tmp/
 .DS_Store
 results/metrics/_*_log.txt
+paper/ieee_access/*.aux
+paper/ieee_access/*.log
+paper/ieee_access/*.blg
+paper/ieee_access/*.fls
+paper/ieee_access/*.fdb_latexmk
+paper/ieee_access/*.synctex
