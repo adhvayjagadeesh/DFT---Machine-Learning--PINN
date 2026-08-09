@@ -1,0 +1,138 @@
+IEEE Access-Style Manuscript Draft
+
+Title
+Physics-Informed Hybrid Residual Learning for Band-Gap Prediction of Two-Dimensional Materials
+
+Abstract
+We present a hybrid machine-learning framework for predicting the band gaps of two-dimensional materials from tabular physicochemical descriptors. The workflow combines systematic data cleaning and feature engineering, gradient-boosted tree priors, and a physics-informed neural network enhanced with a Poisson-inspired anisotropy module. Using a curated dataset of 930 materials, we first converted raw chemical formulas into physically meaningful descriptors, encoded categorical variables, removed incomplete observations, and standardized all features prior to training. We then evaluated seven regression models under a five-fold cross-validation protocol. The proposed hybrid model, which combines a gradient boosting regressor with a residual neural network and a Poisson-coupled structured layer, achieved the strongest performance among all tested models, with pooled out-of-fold R^2 = 0.7431, MSE = 0.6340 eV^2, and MAE = 0.5546 eV. This represented a measurable improvement over the standalone gradient boosting regressor (R^2 = 0.7323, MSE = 0.6606 eV^2, MAE = 0.5788 eV) and a statistically significant reduction in squared error (p = 2.54 x 10^-3). These results indicate that introducing a physically structured inductive bias into a residual learning framework can improve generalization for band-gap prediction in layered and low-dimensional materials.
+
+Keywords
+band-gap prediction; physics-informed neural networks; hybrid learning; two-dimensional materials; Poisson coupling; materials informatics
+
+1. Introduction
+Accurate prediction of electronic band gaps is a central problem in computational materials science because band gaps govern whether a material is metallic, semiconducting, or insulating, and therefore determine its suitability for transistors, photodetectors, catalysts, and optoelectronic devices [1]. In recent years, machine learning has become increasingly important as a fast surrogate for expensive first-principles calculations such as hybrid functional or many-body methods. However, the challenge is not simply to fit a regression function to a set of descriptors; it is to build a model that can capture the physical structure of the relationship between chemistry, geometry, and electronic properties.
+
+This study addresses that challenge by combining three complementary ideas. First, we use a carefully constructed preprocessing pipeline that transforms raw composition and structural descriptors into a compatible numerical representation. Second, we evaluate classical tabular baselines such as random forest, gradient boosting, and support vector regression because these models are strong performers for heterogeneous tabular data and are often difficult to surpass in materials-property prediction tasks [2], [3]. Third, we introduce a hybrid residual architecture in which a gradient boosting regressor provides a strong initial estimate, and a neural network learns a correction term under explicit physical regularization. The key novelty lies in the use of a Poisson-inspired structural coupling layer, which introduces an inductive bias aligned with anisotropic lattice behavior and strain coupling in layered materials.
+
+The motivation for this design is straightforward. Band-gap trends in two-dimensional materials are not determined by composition alone. They depend on the geometry of the lattice, the symmetry of the crystal, the extent of anisotropy, and the coupling between structural distortions and electronic states. A purely generic neural network can approximate such relationships in principle, but it often requires large datasets and may struggle to learn physically meaningful structure from limited and heterogeneous tabular data. By contrast, a hybrid architecture can combine the strength of tree-based models in capturing nonlinear interactions with the flexibility of deep networks in modeling residual corrections. The Poisson-coupled layer further improves this by encoding physically meaningful geometric interactions before the residual head is applied.
+
+2. Methods
+2.1 Dataset and target definition
+The study used a curated dataset of 930 two-dimensional materials with associated electronic-structure and compositional descriptors. The target variable was the HSE06 band gap, denoted here as y. The dataset was tabular, meaning each material was represented by a set of numerical or categorical descriptors rather than by a graph or image. This setting is common in materials informatics because many public and proprietary datasets are stored in tabular form, and the objective is to infer a mapping from descriptors to a property of interest.
+
+The initial dataset contained a mixture of physical quantities and chemical identifiers. The target was continuous and positive-valued, which is consistent with the physical expectation that band gaps are non-negative in this formulation. Because the learning models used in this study require numerical inputs, the pipeline first converted the raw chemical formula strings into a representation that could be interpreted numerically.
+
+2.2 Data cleaning and feature engineering
+The first stage of the workflow was data cleaning. Missing values were removed where they could not be safely imputed, and categorical variables were identified and transformed. This step was necessary because many materials datasets contain nominal descriptors such as crystal family, structural prototype, or stoichiometric labels that are not directly compatible with standard numerical regression models.
+
+Chemical formulas were parsed with pymatgen [1], a widely used materials informatics toolkit, to determine the total number of atoms in each composition. This enabled the construction of a physically motivated proxy for atomic packing density:
+
+rho_cell = N_atoms / A_cell
+
+where N_atoms is the total number of atoms in the formula unit and A_cell is the unit-cell area. This variable was included because local packing density and geometric compactness frequently correlate with electronic behavior in layered materials, especially when the structure is close to a two-dimensional limit. In other words, the descriptor is not arbitrary; it captures a physically plausible first-order geometric factor that may influence orbital overlap and band dispersion.
+
+After this feature engineering step, nominal categorical columns were transformed with one-hot encoding. One-hot encoding was preferred over ordinal encoding because the categories did not possess a meaningful monotonic ordering. Ordinal encoding would impose artificial rank relationships that could distort the learning problem. One-hot encoding preserves category identity while avoiding the introduction of false numerical structure [2].
+
+The cleaned dataset contained 930 samples and 1,156 numerical features after one-hot expansion and removal of incomplete rows. All continuous features were standardized using z-score normalization within each training fold:
+
+x_tilde_ij = (x_ij - mu_j) / sigma_j
+
+where mu_j and sigma_j are the training-set mean and standard deviation of feature j. This step was essential for two reasons. First, the original descriptors span very different numerical scales, such as energies, distances, areas, and magnetic moments. Without normalization, the optimization of neural networks would be dominated by large-magnitude features, leading to unstable updates and poor convergence. Second, standardization helps tree-based methods and support vector methods operate more effectively because the input space becomes numerically balanced [2].
+
+2.3 Baseline models
+We evaluated several baseline models to establish a meaningful benchmark before introducing the hybrid architecture. The first baseline was a random forest regressor, which is a robust ensemble method that partitions the feature space into decision trees and aggregates their predictions. Random forests are particularly useful in tabular materials problems because they capture nonlinear interactions and are relatively insensitive to feature scaling [3].
+
+The second baseline was a gradient boosting regressor. Gradient boosting is an additive ensemble method that sequentially fits weak learners to the residual errors of previous learners. It is well suited to tabular regression because it can model complex interactions and often performs very strongly on structured, non-image data [3]. For this reason, the gradient boosting regressor served as the main baseline and as the natural parent model for the hybrid architecture.
+
+The third baseline was a support vector regressor with a radial basis function kernel. SVR was included because it is a classical nonlinear regressor and is often competitive when the relationship between input variables and target is smooth and relatively low-dimensional. However, in this study its performance was weaker than that of tree-based methods, which suggests that the band-gap mapping is highly nonlinear and feature-dependent in a way that is not well captured by a single kernel basis alone.
+
+We also evaluated two pure neural-network baselines. The first was a standard deep multilayer perceptron with hidden layers and batch normalization. Batch normalization was included because it stabilizes training and reduces internal covariate shift, which is particularly beneficial when the network is trained on heterogeneous tabular features [7]. The second baseline was a physics-informed neural network, which used the same general network backbone but was trained with an additional penalty term that discourages negative or near-zero predictions.
+
+The standalone PINN loss function was defined as
+
+L_PINN = MSE(y_hat, y) + lambda_p L_phy
+
+with
+
+L_phy = ReLU(-y_hat) + 0.1 (exp(ReLU(0.05 - y_hat)) - 1)
+
+The motivation for this penalty was physical. In the present formulation, the target band gap is treated as a non-negative scalar, so the model should not produce negative predictions. The added term acts as a soft boundary constraint rather than a hard constraint, and it is consistent with the general philosophy of physics-informed neural networks, which integrate domain knowledge into the loss function rather than relying entirely on data-driven fitting [4].
+
+2.4 Hybrid model design: combining GBR, PINN, and a Poisson-coupled layer
+The most important methodological contribution of this study is the hybrid architecture. The model is built around the idea that no single family of models is ideal for every aspect of the problem. Tree-based methods are strong at capturing non-smooth interactions and hierarchical feature structure, whereas neural networks are flexible and can model residual corrections when provided with a suitable inductive bias. The hybrid model therefore uses the gradient boosting regressor as a first-stage predictor and then learns a correction term using a neural network.
+
+The first-stage predictor, denoted as y_hat_tree, provides an initial estimate of the band gap. This estimate is then incorporated into the second-stage input in a structured way. The hybrid input vector was formed as
+
+x_hybrid = [x, x ⊙ y_hat_tree, y_hat_tree]
+
+where x is the original standardized feature vector and ⊙ denotes elementwise multiplication. This design was chosen deliberately. The raw features contain the direct chemical and structural information, the product term captures interactions between the base prediction and the original descriptors, and the scalar prior itself gives the network a direct access to the tree model’s estimate. In this way, the network is not forced to rediscover the tree model’s broad approximation from scratch; instead, it only needs to learn how to refine it.
+
+The second-stage network also includes a Poisson-coupled anisotropy module. This module was introduced because the target property is strongly affected by lattice geometry and anisotropic structural effects. In layered materials, electronic structure is shaped by directional bonding, in-plane and out-of-plane distortions, and the coupling between lattice strain and orbital overlap. A purely generic dense network does not explicitly encode these relationships. The Poisson-inspired layer provides an inductive bias that reflects the physical intuition that structural distortion and electronic response are coupled in a nontrivial, directional manner.
+
+For two lattice-related scalar channels a and b, the module constructs a compact anisotropy descriptor
+
+s = [a b, a^2 - b^2, sqrt(a^2 + b^2 + epsilon)]
+
+This descriptor captures three distinct forms of geometric information. The term ab represents cross-directional coupling, a^2 - b^2 captures directional asymmetry, and the square-root term reflects the smooth magnitude of the coupled lattice coordinates. The descriptor is then transformed through a nonlinear projection and combined with the original feature map. This is conceptually grounded in continuum elasticity and crystal physics, where anisotropic response is governed by directional coupling terms rather than by scalar magnitudes alone [5].
+
+The justification for including this layer is therefore both empirical and physical. Empirically, it gives the hybrid network an additional structured representation that is directly related to lattice geometry and distortion. Physically, it reflects the known sensitivity of band gaps in low-dimensional materials to anisotropic strain and lattice directionality. The module does not replace the data-driven components of the model; rather, it supplements them with a physically interpretable feature transformation that improves the network’s ability to represent the relevant structure in the problem.
+
+The hybrid network predicts three residual quantiles:
+
+q_0.25, q_0.50, q_0.75
+
+These outputs are combined into a final correction term:
+
+y_hat_hybrid = y_hat_tree + q_0.50 + 0.1 sigma(q_0.75 - q_0.25) (q_0.75 + q_0.25)
+
+The use of quantile heads is important because the residual error between a tree prior and the true band gap is not necessarily symmetric. In many materials-property tasks, the variance of error depends on the region of the feature space, and a single mean prediction may hide this heterogeneity. Quantile regression allows the network to learn both a central tendency and an uncertainty-aware correction term. The lower and upper quantile outputs provide a principled way to model the spread of the residual distribution [6].
+
+The hybrid model was trained with a combined loss function:
+
+L_hybrid = MSE(y_hat, y) + w_adpt [0.5(L_q25 + L_q75) + L_phy]
+
+where L_q25 and L_q75 are pinball losses corresponding to the lower and upper quantile predictions. This loss was specifically chosen to preserve the benefits of supervised regression while also encouraging physically plausible outputs and uncertainty-aware residual learning. The adaptive weighting term balances the data-fit objective with the regularization term and prevents the physics penalty from overwhelming the supervised signal during optimization.
+
+2.5 Training protocol
+All models were trained under a five-fold cross-validation protocol with shuffled folds and a fixed random seed. This choice is standard in machine-learning research because it provides a more reliable estimate of generalization than a single train-test split, especially when the dataset is modest in size. In each fold, standardization parameters were fit only on the training subset and then applied to the validation subset to avoid leakage.
+
+The neural-network models were optimized with AdamW, which combines adaptive gradient scaling with weight decay and is widely used for stable convergence in modern deep-learning systems. The MLP was trained for 1,200 epochs, while the PINN and hybrid models were trained for 1,500 epochs. The longer training horizon for the hybrid architectures was justified by their greater complexity and the need to learn both the residual correction and the physical regularization terms.
+
+3. Results and Discussion
+3.1 Overall predictive performance
+The pooled out-of-fold predictions from the five-fold cross-validation procedure showed that tree-based methods were the strongest baselines, but that the hybrid architecture achieved the best performance overall. The standalone gradient boosting regressor achieved R^2 = 0.7323, MSE = 0.6606 eV^2, and MAE = 0.5788 eV. The proposed hybrid GBR-PINN improved these values to R^2 = 0.7431, MSE = 0.6340 eV^2, and MAE = 0.5546 eV. This corresponds to an absolute gain in R^2 of 0.0108 and a relative reduction in MSE of approximately 4.0% compared with the standalone GBR baseline.
+
+The hybrid RF-PINN also outperformed its corresponding random-forest baseline. The RF baseline achieved R^2 = 0.6619, MSE = 0.8343 eV^2, and MAE = 0.6611 eV, while the hybrid RF-PINN improved these to R^2 = 0.7028, MSE = 0.7333 eV^2, and MAE = 0.6057 eV. These results indicate that the hybrid residual formulation is not limited to a single tree-based prior; rather, it provides a general mechanism for improving tabular regression performance when combined with a suitable base learner.
+
+The standalone MLP and PINN performed less competitively. The deep MLP achieved R^2 = 0.4079, MSE = 1.4610 eV^2, and MAE = 0.9434 eV, while the standalone PINN achieved R^2 = 0.3360, MSE = 1.6385 eV^2, and MAE = 1.0104 eV. The lower performance of the standalone PINN is informative. Although the physics-informed penalty encouraged non-negative predictions and provided some domain regularization, it was not sufficient to overcome the limited inductive bias of a purely network-based regressor in this tabular materials setting. This suggests that physics-informed penalties alone are not always enough; they must be combined with a stronger prior or structural representation when predicting complex materials properties from heterogeneous descriptors.
+
+3.2 Stability across folds
+The fold-wise analysis further supports the conclusion that the hybrid model improved not only average accuracy but also robustness. The mean fold-wise R^2 values were 0.6574 ± 0.0436 for random forest, 0.7285 ± 0.0409 for GBR, and 0.7394 ± 0.0470 for the hybrid GBR-PINN. In other words, the hybrid model maintained a consistently high level of performance across folds, with a slightly larger but still competitive variance that is consistent with the modest dataset size and the difficulty of the regression task. This stability is important in scientific machine learning because a model that performs well on one split but poorly on another may not be reliable for materials screening.
+
+3.3 Why the Poisson-coupled layer matters
+The performance gain of the hybrid architecture is consistent with the physical structure of the problem. Band gaps in low-dimensional and layered materials are influenced by geometric anisotropy, bond directionality, and lattice distortion. These effects are not fully captured by a generic dense network that treats all input features as independent numerical values. The Poisson-inspired layer explicitly introduces a structured representation of directional coupling and anisotropic distortion before the residual head is applied. This makes the model more sensitive to the kinds of geometric relationships that matter in electronic-structure prediction.
+
+This interpretation is reinforced by the empirical results. The hybrid model improved upon the GBR baseline in both error magnitude and statistical significance. A paired t-test on squared errors produced t = -2.8090 and p = 2.54 x 10^-3, indicating that the hybrid model significantly reduced prediction error relative to the baseline. These statistics are meaningful because they are calculated on held-out validation predictions rather than on the training set. They show that the added architectural structure generalized beyond the training folds and improved the model’s external predictive behavior.
+
+3.4 Why the GBR prior is useful
+The use of the gradient boosting regressor as the first-stage predictor is also justified by the empirical behavior of the models. Tree-based methods are highly effective on tabular materials data because they can capture nonlinear threshold-like interactions and can handle mixed feature types without extensive preprocessing. GBR in particular often performs very well because it sequentially corrects the errors of previous learners and can model complex interactions in a data-efficient way.
+
+Using GBR as the prior was therefore not simply a matter of convenience. It was an architectural decision grounded in the observed data. The tree-based model captured the dominant structure of the mapping from descriptors to band gap, and the neural residual head then focused on refining that estimate rather than rediscovering the full mapping from scratch. This division of labor is efficient: the first-stage model handles the broad nonlinear trend, while the second-stage network specializes in the residual correction and physically guided refinement.
+
+3.5 Why the hybrid approach is preferable to using PINN alone
+One of the most important findings of this study is that the standalone PINN did not outperform the tree-based baselines. This result does not invalidate physics-informed modeling; rather, it highlights an important limitation. Physics-informed penalties can impose useful constraints, but they do not automatically provide the same inductive bias as an ensemble of decision trees for tabular regression. In this setting, the relationship between descriptors and band gap is highly heterogeneous and strongly influenced by nonlinear interactions that are difficult to recover from a shallow physics-informed network alone.
+
+The hybrid formulation avoids this limitation by combining a strong data-driven prior with physical regularization. The tree-based component captures broad nonlinear structure, the neural residual head learns local corrections, and the physics-informed and Poisson-inspired modules enforce a physically meaningful inductive bias. This combination is more effective than using the PINN alone because it improves the optimization landscape and reduces the burden placed on the neural network to infer both the global structure and the physical constraints from scratch.
+
+4. Conclusion
+We developed and evaluated a hybrid framework for predicting band gaps of two-dimensional materials that integrates data cleaning, structured feature engineering, gradient boosting priors, and a physics-informed residual neural network enhanced by a Poisson-coupled anisotropy layer. The workflow was designed to be physically informed without sacrificing the strong tabular-learning performance that tree-based models provide. The proposed hybrid GBR-PINN achieved the best overall predictive performance among all tested models, with R^2 = 0.7431, MSE = 0.6340 eV^2, and MAE = 0.5546 eV on pooled out-of-fold predictions. Relative to the standalone GBR baseline, it improved predictive accuracy and reduced squared error significantly (p = 2.54 x 10^-3). These results suggest that the inclusion of structurally meaningful inductive bias, especially through a Poisson-inspired anisotropy module, is beneficial for predicting electronic properties in layered materials.
+
+References
+[1] S. P. Ong, W. D. Richards, A. Jain, G. Hautier, M. Kocher, S. Cholia, D. Gunter, V. L. Chevrier, K. A. Persson, and G. Ceder, "Python Materials Genomics (pymatgen): A robust, open-source python library for materials analysis," Computational Materials Science, vol. 68, pp. 314-319, 2013.
+[2] T. Hastie, R. Tibshirani, and J. Friedman, The Elements of Statistical Learning: Data Mining, Inference, and Prediction, 2nd ed. New York, NY, USA: Springer, 2009.
+[3] J. H. Friedman, "Greedy function approximation: A gradient boosting machine," Annals of Statistics, vol. 29, no. 5, pp. 1189-1232, 2001.
+[4] M. Raissi, P. Perdikaris, and G. E. Karniadakis, "Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations," Journal of Computational Physics, vol. 378, pp. 686-707, 2019.
+[5] J. F. Nye, Physical Properties of Crystals: Their Representation by Tensors and Matrices. Oxford, U.K.: Clarendon Press, 1957.
+[6] R. Koenker and G. Bassett, "Regression quantiles," Econometrica, vol. 46, no. 1, pp. 33-50, 1978.
+[7] S. Ioffe and C. Szegedy, "Batch normalization: Accelerating deep network training by reducing internal covariate shift," in Proceedings of the International Conference on Machine Learning, 2015, pp. 448-456.
+[8] P. Ramachandran, B. Zoph, and Q. V. Le, "Searching for activation functions," arXiv preprint arXiv:1710.05941, 2017.

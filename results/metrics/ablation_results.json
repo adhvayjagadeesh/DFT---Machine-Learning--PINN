@@ -1,0 +1,107 @@
+{
+  "runtime_seconds": 667.2,
+  "splitter": "group",
+  "variants": [
+    {
+      "variant": "full",
+      "description": "complete framework",
+      "pooled_r2": 0.8013923541592886,
+      "pooled_mse": 0.4744740516017669,
+      "pooled_mae": 0.45659083866109756,
+      "fold_r2_mean": 0.7957516979766999,
+      "fold_r2_std": 0.07354454394547012,
+      "mean_mse_gain_vs_prior": -0.04235342324781133,
+      "folds_improved_vs_prior": 1,
+      "p_one_sided_vs_prior": 0.1259037356860417,
+      "delta_r2_vs_full": 0.0
+    },
+    {
+      "variant": "no_structural_layer",
+      "description": "removes the forward geometric coupling layer, keeps its loss term",
+      "pooled_r2": 0.8037066175195531,
+      "pooled_mse": 0.4689452719398857,
+      "pooled_mae": 0.4337048396197232,
+      "fold_r2_mean": 0.7932320039831067,
+      "fold_r2_std": 0.13811821834577362,
+      "mean_mse_gain_vs_prior": -0.036824643585930066,
+      "folds_improved_vs_prior": 2,
+      "p_one_sided_vs_prior": 0.31025483401952875,
+      "delta_r2_vs_full": 0.0023142633602645235
+    },
+    {
+      "variant": "no_quantile_heads",
+      "description": "point residual head only, no quantile outputs or pinball loss",
+      "pooled_r2": 0.7960946472243349,
+      "pooled_mse": 0.4871302837573116,
+      "pooled_mae": 0.4469643339518345,
+      "fold_r2_mean": 0.7894484649559668,
+      "fold_r2_std": 0.09347322901711871,
+      "mean_mse_gain_vs_prior": -0.055009655403355784,
+      "folds_improved_vs_prior": 1,
+      "p_one_sided_vs_prior": 0.12853567043790168,
+      "delta_r2_vs_full": -0.005297706934953683
+    },
+    {
+      "variant": "no_residual_head",
+      "description": "correction driven solely by the quantile heads",
+      "pooled_r2": 0.7660029016755691,
+      "pooled_mse": 0.5590195223103103,
+      "pooled_mae": 0.47057647800373315,
+      "fold_r2_mean": 0.759848824587528,
+      "fold_r2_std": 0.1052344990754405,
+      "mean_mse_gain_vs_prior": -0.12689889395635462,
+      "folds_improved_vs_prior": 1,
+      "p_one_sided_vs_prior": 0.059348416604208094,
+      "delta_r2_vs_full": -0.0353894524837195
+    },
+    {
+      "variant": "no_physics_loss",
+      "description": "removes the non-negativity boundary penalty",
+      "pooled_r2": 0.8057568568570955,
+      "pooled_mse": 0.46404724618101195,
+      "pooled_mae": 0.43741727263180896,
+      "fold_r2_mean": 0.7974923903596104,
+      "fold_r2_std": 0.10566789926428609,
+      "mean_mse_gain_vs_prior": -0.03192661782705629,
+      "folds_improved_vs_prior": 2,
+      "p_one_sided_vs_prior": 0.2617470635769612,
+      "delta_r2_vs_full": 0.004364502697806971
+    },
+    {
+      "variant": "no_anisotropy_loss",
+      "description": "removes the aspect-ratio coupling penalty",
+      "pooled_r2": 0.8036501910113563,
+      "pooled_mse": 0.46908007497754606,
+      "pooled_mae": 0.439299035482214,
+      "fold_r2_mean": 0.7964249464489636,
+      "fold_r2_std": 0.09268972014981988,
+      "mean_mse_gain_vs_prior": -0.03695944662359043,
+      "folds_improved_vs_prior": 1,
+      "p_one_sided_vs_prior": 0.15911562646995975,
+      "delta_r2_vs_full": 0.0022578368520677072
+    },
+    {
+      "variant": "in_sample_prior",
+      "description": "reverts the leakage fix: trains the head on in-sample tree predictions",
+      "pooled_r2": 0.8165222435551697,
+      "pooled_mse": 0.4383287164533515,
+      "pooled_mae": 0.4307640758880461,
+      "fold_r2_mean": 0.8086763180992916,
+      "fold_r2_std": 0.0965423207148195,
+      "mean_mse_gain_vs_prior": -0.006208088099395737,
+      "folds_improved_vs_prior": 3,
+      "p_one_sided_vs_prior": 0.4204601861033775,
+      "delta_r2_vs_full": 0.015129889395881113
+    },
+    {
+      "variant": "gbr_prior_only",
+      "description": "tree prior, no neural correction",
+      "pooled_r2": 0.819120855130303,
+      "pooled_mse": 0.43212062835395565,
+      "pooled_mae": 0.46426191332250244,
+      "fold_r2_mean": 0.8131035883742757,
+      "fold_r2_std": 0.07455464001456798,
+      "delta_r2_vs_full": 0.017728500971014416
+    }
+  ]
+}

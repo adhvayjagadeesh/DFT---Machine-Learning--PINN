@@ -1,0 +1,10 @@
+==================================================================
+          STATISTICAL HYPOTHESIS TESTING REPORT (AMW)            
+==================================================================
+Paired T-Test (Hybrid GBR-PINN vs Standalone GBR Errors):
+Calculated Aggregated T-Statistic : -2.8090
+Calculated Significance p-value    : 2.536705e-03
+------------------------------------------------------------------
+Decision: Reject Null Hypothesis. The performance improvement of the Hybrid GBR-PINN
+is statistically significant at an alpha level of 0.05.
+==================================================================

@@ -1,0 +1,2849 @@
+Formula,Energy above hull [eV/atom],Heat of formation [eV/atom],Magnetic,Layer group (not Space group),2D Bravais type,Band gap (HSE06) [eV],Thickness [Å],Energy [eV],Unit cell area [Å2],Vacuum level [eV],Stoichiometry,Total magnetic moment [μB]
+Ta2Rh2Te8,0,-0.444,No,p2_1/m11,Rectangular (op),0.001,4.005,-64.89,47.833,2.343,ABC4,
+Ta4Pd6Se10,0.044,-0.608,No,pmmn,Rectangular (op),0.009,4.04,-109.166,65.202,2.335,A2B3C5,0
+Nb4Ni6S10,0.039,-0.752,No,pmmn,Rectangular (op),0.009,3.328,-140.612,58.655,2.141,A2B3C5,0
+Pt2Ta4Te14,0.019,-0.365,No,p2_1/m11,Rectangular (op),0.009,6.572,-104.149,76.306,2.388,AB2C7,0
+Pt2Nb4Te14,0.013,-0.413,No,p2_1/m11,Rectangular (op),0.013,6.612,-107.147,75.946,2.382,AB2C7,0
+Co2S3,0.065,-0.381,No,pm2m,Rectangular (op),0.015,2.961,-30.596,17.535,3.129,A2B3,0
+Nb2Cr2Te10,0.003,-0.313,Yes,p2_1/m11,Rectangular (op),0.029,8.44,-75.895,41.952,2.741,ABC5,0
+Nb2Ir2Te8,0.008,-0.424,No,p2_1/m11,Rectangular (op),0.033,4.029,-69.926,47.662,2.39,ABC4,
+W2Te4,0,-0.136,No,p2_1/m11,Rectangular (op),0.044,4.18,-36.604,22.044,4.751,AB2,
+Mo2S4,0.18,-0.741,No,p2_1/m11,Rectangular (op),0.069,3.463,-43.161,18.221,4.369,AB2,
+Co2Se3,0.046,-0.255,No,pm2m,Rectangular (op),0.07,3.19,-28.18,19.287,3.16,A2B3,0
+Bi2As2,0.067,0.067,No,pm2_1n,Rectangular (op),0.071,2.914,-18.405,19.554,3.32,AB,0
+Ti2N2I2,0.002,-1.18,No,pmmn,Rectangular (op),0.078,5.82,-40.119,14.037,4.467,ABC,
+Rh2S2Cl2,0.094,-0.533,No,pm2_1n,Rectangular (op),0.081,4.926,-29.216,18.988,3.555,ABC,0
+In4F4,0.037,-1.726,No,pmma,Rectangular (op),0.085,3.025,-31.205,26.637,2.727,AB,0
+MoV3Te8,0.031,-0.285,Yes,pm2m,Rectangular (op),0.086,3.567,-65.838,44.229,4.444,AB3C8,2.908
+Cu2Sb2Te4,0.089,-0.011,No,pm2_1b,Rectangular (op),0.1,5.763,-29.072,29.891,2.196,ABC2,0
+Mo2Se4,0.109,-0.598,No,p2_1/m11,Rectangular (op),0.108,3.747,-39.926,19.585,4.449,AB2,
+W2Se4,0.092,-0.503,No,p2_1/m11,Rectangular (op),0.118,3.784,-39.918,19.659,4.541,AB2,
+Nb4Pd6Se10,0.034,-0.619,No,pmmn,Rectangular (op),0.118,4.001,-111.439,65.327,2.315,A2B3C5,0
+Ta2Ir2Te8,0.007,-0.39,No,p2_1/m11,Rectangular (op),0.119,4.031,-68.501,47.767,2.394,ABC4,
+Hf2Te10,0,-0.455,No,pmmn,Rectangular (op),0.126,5.298,-52.522,55.587,2.113,AB5,
+Mn4Se6,0.005,-0.418,Yes,pm2_1b,Rectangular (op),0.138,3.877,-63.939,28.708,4.095,A2B3,3.996
+Zr2Te10,0,-0.514,No,pmmn,Rectangular (op),0.142,5.352,-53.026,55.788,2.101,AB5,
+Tl4As4,0.055,0.055,No,pbma,Rectangular (op),0.158,5.01,-28.201,31.537,3.361,AB,0
+Rh2Se2Br2,0.023,-0.495,No,pmmn,Rectangular (op),0.165,5.795,-27.402,18.24,3.88,ABC,
+Rh2Se2Cl2,0.034,-0.579,No,pmmn,Rectangular (op),0.195,5.527,-28.304,17.907,3.86,ABC,
+Ta4Ge2Se8,0.028,-0.697,No,pbam,Rectangular (op),0.197,3.444,-85.912,48.185,2.336,AB2C4,0
+Ta4Ni6Se10,0,-0.63,No,pmmn,Rectangular (op),0.228,3.623,-130.168,60.955,2.264,A2B3C5,0
+Hf2Se10,0,-0.69,No,pmmn,Rectangular (op),0.229,5.243,-58.119,46.24,2.017,AB5,0
+Zr2Se10,0,-0.727,No,pmmn,Rectangular (op),0.243,5.321,-58.362,46.482,2.003,AB5,0
+Co2S2Cl2,0,-0.567,No,pmmn,Rectangular (op),0.29,5.173,-31.585,14.688,3.9,ABC,
+Ti2Se6,0.018,-0.83,No,pmmn,Rectangular (op),0.32,6.013,-40.917,19.058,5.03,AB3,
+Nb4Ge2Se8,0.009,-0.776,No,pbam,Rectangular (op),0.331,3.434,-89.059,48.108,2.313,AB2C4,0
+Tl2Pb2As2,0,-0.017,No,pm2_1n,Rectangular (op),0.335,4.309,-21.943,29.761,2.987,ABC,0
+Sn2Te6,0.096,-0.043,No,p2_111,Rectangular (op),0.346,6.796,-27.687,28.376,4.423,AB3,0
+Bi4,0.096,0.096,No,pm2_1n,Rectangular (op),0.346,3.481,-18.315,22.238,3.658,A,0
+Cu2As2Se4,0.058,-0.089,No,pm2_1b,Rectangular (op),0.361,5.047,-31.324,25.272,2.031,ABC2,0
+Ta4Sn2Te8,0.004,-0.352,No,pbam,Rectangular (op),0.362,3.781,-77.943,55.509,2.45,AB2C4,0
+CoNiTe2SeBr,0.049,-0.259,No,pm11,Rectangular (op),0.372,2.88,-28.506,23.373,3.61,ABCDE2,0
+Nb4Ni6Se10,0,-0.649,No,pmmn,Rectangular (op),0.406,3.619,-132.606,61.295,2.235,A2B3C5,0
+Bi2As2,0.072,0.072,No,p2/m11,Rectangular (op),0.417,2.977,-18.385,19.623,3.262,AB,0
+Ta4Si2S8,0.1,-0.861,No,pbam,Rectangular (op),0.42,3.175,-94.74,44.248,2.276,AB2C4,0
+Ti2I4,0.004,-0.717,No,p2_1/m11,Rectangular (op),0.423,4.098,-23.595,25.019,4.018,AB2,
+Nb4Sn2Te8,0,-0.461,No,pbam,Rectangular (op),0.427,3.772,-81.508,55.51,2.428,AB2C4,0
+Co2S2Br2,0,-0.447,No,pmmn,Rectangular (op),0.428,5.446,-30.465,15.06,3.932,ABC,
+Ni4S2Se6,0.016,-0.258,No,pb11,Rectangular (op),0.44,2.56,-61.134,42.232,3.507,AB2C3,0
+Ta4Ge2Te8,0,-0.404,No,pbam,Rectangular (op),0.447,3.799,-79.588,51.943,2.516,AB2C4,0
+Co2S2I2,0.04,-0.288,No,pmmn,Rectangular (op),0.45,5.761,-29.296,15.661,4.317,ABC,
+WMnTe3Se,0.096,-0.187,Yes,pm11,Rectangular (op),0.458,3.953,-35.42,20.969,4.379,ABCD3,1.001
+Ag4Se4O12,0.014,-0.522,No,p2_1/b11,Rectangular (op),0.477,2.794,-97.229,79.974,1.072,ABC3,0
+Rh2S2I2,0.038,-0.398,No,pmmn,Rectangular (op),0.483,6.011,-27.794,17.317,4.248,ABC,
+Ta4Ni6Te10,0,-0.416,No,pmmn,Rectangular (op),0.51,3.924,-123.109,66.134,2.418,A2B3C5,0
+Ir2Se2I2,0.042,-0.213,No,pmmn,Rectangular (op),0.52,6.014,-29.755,18.941,4.344,ABC,
+Nb4Ge2Te8,0.002,-0.5,No,pbam,Rectangular (op),0.535,3.784,-82.982,52.02,2.487,AB2C4,
+Ta4Si2Se8,0.017,-0.745,No,pbam,Rectangular (op),0.545,3.436,-88.36,46.586,2.359,AB2C4,0
+Nb4Si2S8,0.07,-0.93,No,pbam,Rectangular (op),0.555,3.159,-97.755,44.227,2.249,AB2C4,0
+Fe2Te4,0.092,-0.101,No,p2_1/m11,Rectangular (op),0.581,3.482,-31.512,21.664,4.358,AB2,
+Ir2Se2Br2,0.015,-0.322,No,pmmn,Rectangular (op),0.598,5.729,-30.616,18.365,4.039,ABC,
+Rh2S2Br2,0,-0.524,No,pmmn,Rectangular (op),0.598,5.716,-28.767,16.737,3.92,ABC,
+NbMnSe4,0.027,-0.647,No,pm2m,Rectangular (op),0.598,3.373,-37.854,19.034,4.321,ABC4,0
+Ti4Te4Br4,0.082,-0.877,Yes,pm2_1n,Rectangular (op),0.599,3.633,-56.446,45.997,3.943,ABC,3.901
+Ir2Se2Cl2,0.022,-0.408,No,pmmn,Rectangular (op),0.609,5.458,-31.535,18.034,4.015,ABC,
+Cu4H4O4I4,0.053,-0.539,No,p2_1/b11,Rectangular (op),0.615,5.201,-63.041,38.115,1.904,ABCD,0
+Ti4Te4I4,0.081,-0.68,Yes,pm2_1n,Rectangular (op),0.618,3.736,-53.657,49.609,4.03,ABC,3.922
+Pb3Se3,0.08,-0.503,No,pm2m,Rectangular (op),0.622,6.086,-24.742,19.218,4.385,AB,0
+Rh2S2Cl2,0.007,-0.62,No,pmmn,Rectangular (op),0.623,5.438,-29.741,16.43,3.893,ABC,
+Tl2Sn2P2,0.049,0.026,No,pm2_1n,Rectangular (op),0.625,5.343,-23.678,24.448,3.088,ABC,0
+Nb4Si2Se8,0,-0.825,No,pbam,Rectangular (op),0.636,3.415,-91.51,46.671,2.329,AB2C4,0
+V2IBrS2,0.045,-0.826,Yes,pm11,Rectangular (op),0.638,5.647,-33.222,17.817,3.921,ABC2D2,4
+Tl4Sn4As4,0.057,0.017,No,pb2_1a,Rectangular (op),0.651,3.851,-44.667,55.056,3.224,ABC,0
+Pb2Te6,0.129,-0.082,No,p2_111,Rectangular (op),0.654,6.867,-27.401,30.615,4.238,AB3,
+Ta4Si2Te8,0,-0.425,No,pbam,Rectangular (op),0.655,3.793,-81.657,50.467,2.541,AB2C4,0
+Cu2Sb2Se4,0.072,-0.149,No,pm2_1b,Rectangular (op),0.669,5.434,-31.285,26.047,2.096,ABC2,
+Rh2O2Br2,0.114,-0.524,No,pmmn,Rectangular (op),0.677,5.353,-30.854,13.72,3.708,ABC,
+Au4Se4O12,0.064,-0.399,No,p2_1/b11,Rectangular (op),0.685,2.805,-95.929,80.931,1.118,ABC3,0
+TiHf3Te8,0.132,-0.666,No,pm2m,Rectangular (op),0.688,3.732,-62.843,51.886,4.162,AB3C8,
+ZrHf3Te8,0.127,-0.72,No,pm2m,Rectangular (op),0.69,3.71,-64.203,53.022,4.183,AB3C8,
+Hf2Ti2Te8,0.129,-0.636,No,pm2m,Rectangular (op),0.692,3.694,-61.667,50.754,4.149,ABC4,
+Ru2O4,0.163,-0.925,No,p2_1/m11,Rectangular (op),0.693,2.461,-44.976,14.784,3.655,AB2,
+Tl2Pb2P2,0.057,0.046,No,pm2_1n,Rectangular (op),0.7,4.195,-22.965,28.097,3.087,ABC,0
+Mn2Sb2I2Se4,0.116,-0.266,Yes,p2/m11,Rectangular (op),0.701,4.254,-47.79,44.718,1.756,ABCD2,9.946
+NiPd3Se8,0.016,-0.266,No,p2/m11,Rectangular (op),0.702,2.657,-49.763,47.084,3.515,AB3C8,0
+V2SeSI2,0.051,-0.665,Yes,pm11,Rectangular (op),0.71,5.846,-31.555,19.086,3.997,ABC2D2,4
+Li2V4O10,0.037,-2.292,Yes,pmmn,Rectangular (op),0.712,4.664,-125.787,41.327,1.419,AB2C5,1.996
+Hf2Zr2Te8,0.121,-0.742,No,pm2m,Rectangular (op),0.717,3.72,-64.367,53.083,4.174,ABC4,
+Rh2S2F2,0.095,-1.005,No,pm2_1n,Rectangular (op),0.72,4.063,-31.655,17.319,3.295,ABC,0
+Nb4Si2Te8,0.002,-0.518,No,pbam,Rectangular (op),0.722,3.768,-84.996,50.676,2.506,AB2C4,
+ZrTi3Te8,0.114,-0.635,No,pm2m,Rectangular (op),0.722,3.647,-60.726,49.645,4.138,AB3C8,
+HfTi3Te8,0.119,-0.613,No,pm2m,Rectangular (op),0.724,3.641,-60.574,49.623,4.143,AB3C8,
+Be4Tl4As4,0.082,0.021,No,pmma,Rectangular (op),0.735,5.935,-43.197,35.462,3.182,ABC,0
+Zr2Ti2Te8,0.118,-0.68,No,pm2m,Rectangular (op),0.744,3.714,-61.981,50.893,4.13,ABC4,
+Ag2Te2,0.11,0.059,No,p2/m11,Rectangular (op),0.756,2.966,-11.852,25.763,2.458,AB,
+Rh2O2Cl2,0.07,-0.651,No,pmmn,Rectangular (op),0.759,5.079,-32.018,13.394,3.662,ABC,
+HfZr3Te8,0.115,-0.765,No,pm2m,Rectangular (op),0.766,3.728,-64.531,53.167,4.163,AB3C8,
+TiZr3Te8,0.115,-0.732,No,pm2m,Rectangular (op),0.793,3.765,-63.321,52.107,4.131,AB3C8,
+Co2O2Br2,0.079,-0.679,No,pmmn,Rectangular (op),0.801,5.142,-33.952,11.903,3.803,ABC,
+Ti2Br4,0,-1.178,No,p2_1/m11,Rectangular (op),0.817,3.796,-26.787,21.422,3.636,AB2,0
+Ta4S12,0,-0.844,No,p2_1/m11,Rectangular (op),0.823,6.603,-101.702,39,2.691,AB3,0
+WCr3Te8,0.097,-0.098,No,pm2m,Rectangular (op),0.841,3.528,-66.521,42.363,4.59,AB3C8,
+Cu2As2S4,0.054,-0.152,No,pm2_1b,Rectangular (op),0.845,4.971,-34.21,22.154,2.055,ABC2,0
+Au2O2,0.007,-0.01,No,p2/m11,Rectangular (op),0.865,1.475,-16.547,18.967,2.137,AB,
+Tl2O2I2,0.054,-0.501,No,pmmn,Rectangular (op),0.865,6.56,-21.209,16.894,4.168,ABC,
+Al2Te2I2,0.101,-0.468,No,pmmn,Rectangular (op),0.87,6.198,-19.651,22.596,3.731,ABC,0
+W2Cr2Te8,0.082,-0.093,No,pm2m,Rectangular (op),0.876,3.588,-68.544,42.948,4.651,ABC4,
+Au4I8,0.034,-0.032,No,p2/b11,Rectangular (op),0.88,3.401,-24.731,72.503,1.58,AB2,0
+Hf2Se6,0.003,-1.016,No,pmmn,Rectangular (op),0.885,6.194,-44.039,20.449,5.138,AB3,
+Ni4S4,0.096,-0.282,No,pbma,Rectangular (op),0.888,2.552,-47.558,28.429,2.923,AB,0
+Zr2I4,0,-0.911,No,p2_1/m11,Rectangular (op),0.889,4.402,-26.186,26.052,4.111,AB2,0
+MoCr3Te8,0.087,-0.149,No,pm2m,Rectangular (op),0.893,3.532,-66.85,42.264,4.576,AB3C8,
+Cr2Se2I2,0,-0.522,Yes,pmmn,Rectangular (op),0.895,6.105,-31.872,19,4.003,ABC,6
+Cu2Bi2S4,0.104,-0.201,No,pm2_1b,Rectangular (op),0.896,5.229,-34.624,24.473,1.988,ABC2,
+Ba4Sb4Te8F4,0.049,-1.582,No,p2_1/b11,Rectangular (op),0.896,12.657,-88.558,41.535,3.822,ABCD2,0
+Sn2Te2,0.063,-0.215,No,pm2_1n,Rectangular (op),0.897,3.155,-15.384,20.827,3.59,AB,
+Hg4Te4,0.044,-0.159,No,p2/m11,Rectangular (op),0.899,5.491,-17.632,37.223,3.534,AB,0
+Cr2Se2Cl2,0.026,-0.834,Yes,pmmn,Rectangular (op),0.914,5.451,-34.354,17.833,3.632,ABC,6.001
+Rh2S2F2,0.039,-1.061,No,pmmn,Rectangular (op),0.918,4.751,-31.989,15.653,3.519,ABC,0
+Ti2Br2Cl2,0.013,-1.348,No,pm11,Rectangular (op),0.919,3.661,-28.206,20.387,3.394,ABC,0
+CrW3Te8,0.056,-0.099,No,pm2m,Rectangular (op),0.937,3.716,-70.695,43.312,4.714,AB3C8,
+Hg4Se4,0.04,-0.205,No,p2/m11,Rectangular (op),0.937,5.317,-19.113,32.925,3.463,AB,0
+Ag4H4O4Br4,0.094,-0.49,No,p2_1/b11,Rectangular (op),0.938,5.195,-59.325,41.773,1.653,ABCD,0
+Au2Hg2Se2I2,0.087,-0.146,No,pm2_1b,Rectangular (op),0.94,5,-19.123,33.885,1.727,ABCD,0
+Bi2H2Se4,0.006,-0.237,No,p2_1/m11,Rectangular (op),0.958,6.603,-31.824,25.048,3.449,ABC2,0
+Pd4As4Te4,0.067,-0.271,No,p2/b11,Rectangular (op),0.967,4.828,-50.007,39.56,2.381,ABC,0
+Ag4Cl8,0.004,-0.36,No,p2/b11,Rectangular (op),0.971,2.742,-29.959,56.863,1.38,AB2,0
+Hf2Sn2Te8,0.033,-0.488,No,pm2_1n,Rectangular (op),0.973,7.594,-54.624,47.066,2.274,ABC4,0
+Mo2Cr2Te8,0.067,-0.19,No,pm2m,Rectangular (op),0.98,3.584,-69.139,42.794,4.621,ABC4,
+Rh2SeSI2,0.077,-0.343,No,pm11,Rectangular (op),0.98,5.44,-26.867,18.34,4.341,ABC2D2,0
+Ru2Cl8,0,-0.462,Yes,p2_1/b11,Rectangular (op),0.983,4.142,-37.828,37.494,1.733,AB4,3.997
+Ag4H4O4Cl4,0.099,-0.531,No,p2_1/b11,Rectangular (op),0.986,4.932,-60.786,40.595,1.62,ABCD,0
+In4Te6,0.034,-0.285,No,pm2_1n,Rectangular (op),0.995,8.39,-33.128,32,2.804,A2B3,0
+Zr2I2Cl2,0.071,-1.237,No,pm11,Rectangular (op),0.997,4.091,-28.753,23.797,3.788,ABC,0
+Ti2Cl4,0,-1.544,No,p2_1/m11,Rectangular (op),0.997,3.528,-29.784,19.213,3.664,AB2,0
+Ir2S2I2,0.039,-0.265,No,pmmn,Rectangular (op),0.998,6.005,-31.254,17.268,4.484,ABC,
+Zr2I2Br2,0.021,-1.104,No,pm11,Rectangular (op),0.998,4.239,-27.558,24.539,3.811,ABC,0
+Sr4As4Te8F4,0.06,-1.511,No,p2_1/b11,Rectangular (op),1.004,12.256,-87.553,37.268,3.622,ABCD2,0
+Os2O4,0.138,-0.838,No,p2_1/m11,Rectangular (op),1.005,2.501,-47.906,14.994,3.91,AB2,
+Cr2Se2Br2,0.007,-0.7,Yes,pmmn,Rectangular (op),1.009,5.745,-33.149,18.282,3.677,ABC,6
+Os2Cl8,0.042,-0.363,Yes,p2_1/b11,Rectangular (op),1.01,4.189,-40.292,37.451,1.8,AB4,3.993
+Cu2O2,0.079,-0.457,No,p2/m11,Rectangular (op),1.013,1.205,-19.429,15.715,1.798,AB,
+Hf2I4,0.063,-0.725,No,p2_1/m11,Rectangular (op),1.014,4.49,-25.278,25.378,4.215,AB2,
+Pb6S6,0.074,-0.494,No,pm2m,Rectangular (op),1.017,5.817,-52.948,36.064,4.298,AB,0
+Co2O2Cl2,0.012,-0.846,No,pmmn,Rectangular (op),1.027,4.853,-35.353,11.532,3.741,ABC,
+Ag2F4,0.024,-1.222,Yes,p2_1/b11,Rectangular (op),1.028,1.969,-19.359,22.502,1.109,AB2,1.692
+Zr2Sn2Te8,0.012,-0.551,No,pm2_1n,Rectangular (op),1.029,7.609,-55.173,47.169,2.263,ABC4,0
+Nb4S12,0.002,-0.82,No,p2_1/m11,Rectangular (op),1.03,6.232,-103.369,34.014,3.051,AB3,
+Ag4Se4I4,0.097,-0.082,No,p2_1/b11,Rectangular (op),1.031,4.832,-32.186,52.724,1.912,ABC,0
+Zr2Se6,0,-1.078,No,pmmn,Rectangular (op),1.031,6.223,-44.329,20.681,5.061,AB3,
+Ir2IBrS2,0.023,-0.329,No,pmm2,Rectangular (op),1.045,5.856,-31.742,17.006,4.416,ABC2D2,0
+Fe2Se4,0.061,-0.299,No,p2_1/m11,Rectangular (op),1.053,3.179,-33.81,18.888,4.078,AB2,
+MnGeTe2SCl,0.093,-0.347,Yes,pm11,Rectangular (op),1.06,4.768,-28.589,23.341,3.373,ABCDE2,3.999
+Hf2Ge2Te8,0.008,-0.464,No,pm2_1n,Rectangular (op),1.067,7.42,-55.247,44.457,2.303,ABC4,
+Au2Te2,0,-0.105,No,p2/m11,Rectangular (op),1.067,2.792,-13.09,26.609,2.48,AB,
+Ru2Te4,0.117,-0.219,No,p2_1/m11,Rectangular (op),1.071,3.616,-33.057,23.437,4.356,AB2,
+Si2Te4,0.055,0.005,No,p2_111,Rectangular (op),1.088,5.136,-23.587,26.43,3.327,AB2,0
+Au2Hg2Te2Cl2,0.089,-0.265,No,pm2_1b,Rectangular (op),1.09,4.044,-20.131,33.975,1.592,ABCD,0
+Cu4Te4I4,0.004,-0.14,No,p2_1/b11,Rectangular (op),1.097,4.733,-35.116,50.991,1.991,ABC,0
+Au2Hg2Te2I2,0.054,-0.168,No,pm2_1b,Rectangular (op),1.098,4.843,-18.742,36.501,1.722,ABCD,0
+Ag4Te4I4,0.062,-0.117,No,p2_1/b11,Rectangular (op),1.098,4.897,-31.496,57.079,1.949,ABC,0
+Au4Se4,0,-0.123,No,pmma,Rectangular (op),1.1,4.885,-27.435,28.063,3.594,AB,0
+Ge2Te2,0.06,-0.039,No,pm2_1n,Rectangular (op),1.103,3.036,-15.598,18.508,3.573,AB,
+Sn4Sb8,0.02,0.02,No,pm2_1b,Rectangular (op),1.104,6.854,-51.229,50.847,2.123,AB2,0
+CrMo3Te8,0.035,-0.244,No,pm2m,Rectangular (op),1.105,3.688,-71.578,43.195,4.666,AB3C8,
+Cu2Se2,0.101,-0.04,No,p2/m11,Rectangular (op),1.116,2.77,-14.479,18.266,2.595,AB,
+Zr2Ge2Te8,0.007,-0.522,No,pm2_1n,Rectangular (op),1.116,7.451,-55.739,44.634,2.286,ABC4,
+Ag2O2,0.058,-0.046,No,p2/m11,Rectangular (op),1.126,1.219,-16.113,19.139,1.855,AB,
+Rh2O2F2,0.026,-1.125,No,pmmn,Rectangular (op),1.129,4.454,-34.469,12.684,3.225,ABC,0
+Zr2Se4,0.08,-1.287,No,pmmn,Rectangular (op),1.131,3.107,-36.461,25.636,3.719,AB2,0
+Cu4Te4Br4,0,-0.25,No,p2_1/b11,Rectangular (op),1.135,4.331,-36.862,49.362,1.817,ABC,0
+Au2Hg2Te2Br2,0.074,-0.223,No,pm2_1b,Rectangular (op),1.138,3.992,-19.393,35.055,1.615,ABCD,0
+Zr2Br4,0,-1.34,No,p2_1/m11,Rectangular (op),1.14,4.086,-29.181,22.712,3.766,AB2,0
+Y4Te4Br4,0.034,-1.614,No,pmma,Rectangular (op),1.144,4.237,-57.288,61.87,3.258,ABC,0
+Sb2H2Se4,0,-0.17,No,p2_1/m11,Rectangular (op),1.144,6.617,-30.751,24.856,3.303,ABC2,0
+Zr2Br2Cl2,0.024,-1.499,No,pm11,Rectangular (op),1.147,3.943,-30.538,21.789,3.63,ABC,0
+Hf2I2Br2,0.054,-0.922,No,pm11,Rectangular (op),1.15,4.329,-26.672,23.9,3.913,ABC,0
+PdNiS4,0.079,-0.219,No,p2/m11,Rectangular (op),1.153,2.471,-28.695,20.7,3.465,ABC4,0
+Hf2Si2Te8,0.012,-0.43,No,pm2_1n,Rectangular (op),1.157,7.352,-56.612,43.507,2.31,ABC4,0
+Cu4S4I4,0.038,-0.11,No,p2_1/b11,Rectangular (op),1.158,4.743,-38.248,42.781,1.998,ABC,0
+Zr2Cl4,0.029,-1.676,No,p2_1/m11,Rectangular (op),1.161,3.803,-32.004,20.766,3.823,AB2,0
+Ag4S4Cl4,0.104,-0.188,No,p2_1/b11,Rectangular (op),1.164,3.737,-37.07,50.422,1.579,ABC,0
+Hf2IBr3,0.041,-1.029,No,pm11,Rectangular (op),1.165,3.887,-27.418,22.048,4.055,AB2C3,0
+Y4Te4Cl4,0.042,-1.776,No,pmma,Rectangular (op),1.174,3.843,-60.034,61.041,3.253,ABC,0
+Hg3Te3,0.073,-0.13,No,pm2m,Rectangular (op),1.174,5.124,-13.049,30.446,3.027,AB,0
+Ir2S2Br2,0,-0.398,No,pmmn,Rectangular (op),1.178,5.701,-32.265,16.746,4.135,ABC,
+Ag2Se2,0.089,0.022,No,p2/m11,Rectangular (op),1.179,2.76,-12.556,22.76,2.421,AB,
+IrGaS2I2,0.089,-0.407,No,pmm2,Rectangular (op),1.18,6.124,-25.735,17.893,4.195,ABC2D2,0
+Bi2Se2I2,0.022,-0.421,No,pmmn,Rectangular (op),1.18,7.012,-21.796,25.328,3.805,ABC,
+Tl4Te2,0.014,-0.235,No,pmmn,Rectangular (op),1.184,3.724,-17.813,35.912,2.747,AB2,0
+Bi2Se2Br2,0.082,-0.501,No,pm2_1b,Rectangular (op),1.189,4.436,-22.487,30.225,3.133,ABC,0
+Zr2Si2Te8,0.005,-0.487,No,pm2_1n,Rectangular (op),1.191,7.399,-57.088,43.681,2.296,ABC4,0
+CrRhBrClS2,0.084,-0.695,Yes,pmm2,Rectangular (op),1.194,5.551,-32.253,16.684,3.921,ABCDE2,2.995
+Pb2Se6,0.124,-0.167,No,p2_111,Rectangular (op),1.195,6.815,-29.754,28.083,3.807,AB3,
+Ir2S2Cl2,0,-0.5,No,pmmn,Rectangular (op),1.201,5.415,-33.279,16.468,4.096,ABC,
+Mn2Sb2Br2S4,0.102,-0.412,Yes,p2/m11,Rectangular (op),1.201,4.186,-51.849,40.48,1.642,ABCD2,9.983
+W2Cr2Se8,0.015,-0.525,No,pm2m,Rectangular (op),1.203,3.306,-75.952,37.176,4.494,ABC4,
+Co2H2S4,0.017,-0.329,No,p2_1/m11,Rectangular (op),1.204,6.043,-42.054,14.923,3.901,ABC2,
+Cu4Se2,0.083,-0.042,No,pmma,Rectangular (op),1.209,3.846,-21.922,22.262,2.685,AB2,0
+Cu4Se4I4,0.003,-0.148,No,p2_1/b11,Rectangular (op),1.212,4.723,-36.328,45.879,1.987,ABC,0
+Cu2Br2O4,0.054,-0.214,No,p2_122,Rectangular (op),1.212,3.157,-32.732,30.326,2.118,ABC2,0
+Ag4Se4Br4,0.07,-0.168,No,p2_1/b11,Rectangular (op),1.213,4.29,-33.65,52.272,1.713,ABC,0
+TeGe2S,0.081,-0.11,No,pm11,Rectangular (op),1.216,2.702,-16.753,17.728,3.195,ABC2,0
+MoW3Te8,0.018,-0.159,No,pm2m,Rectangular (op),1.22,3.622,-73.202,43.654,4.812,AB3C8,
+Sn4As8,0.011,-0.03,No,pm2_1b,Rectangular (op),1.229,6.183,-53.884,43.276,2.046,AB2,0
+Ta2Rh2S8,0,-0.849,No,p2_1/m11,Rectangular (op),1.231,3.261,-76.737,39.813,2.105,ABC4,0
+Cr2SeSI2,0.011,-0.56,Yes,pmm2,Rectangular (op),1.232,6.053,-32.693,18.314,4.071,ABC2D2,6
+Pd2Se4,0.044,-0.247,No,pmma,Rectangular (op),1.234,2.297,-23.053,29.806,2.805,AB2,0
+Bi2Se2Cl2,0.043,-0.638,No,pmmn,Rectangular (op),1.236,6.196,-23.712,24.412,3.512,ABC,
+Cu4O4Cl4,0.1,-0.34,No,p2_1/b11,Rectangular (op),1.237,3.656,-46.422,33.875,1.623,ABC,
+In2Al2Te6,0.06,-0.324,No,pm2_1n,Rectangular (op),1.238,7.986,-35.476,29.954,2.795,ABC3,0
+Bi2Se2Br2,0.036,-0.547,No,pmmn,Rectangular (op),1.24,6.561,-22.763,24.742,3.56,ABC,
+As6O12,0.159,-0.976,Yes,p2_12_12,Rectangular (op),1.241,3.006,-107.041,56.132,1.322,AB2,1.995
+Mn2Sb2Cl2S4,0.086,-0.494,Yes,p2/m11,Rectangular (op),1.242,4.051,-53.064,40.246,1.595,ABCD2,9.982
+Ga2Se2Cl2,0.176,-0.693,No,pmmn,Rectangular (op),1.243,5.302,-20.498,19.37,3.356,ABC,
+Ag4Te4Cl4,0.033,-0.278,No,p2_1/b11,Rectangular (op),1.247,4.142,-34.659,56.898,1.676,ABC,0
+Hg3Se3,0.077,-0.169,No,pm2m,Rectangular (op),1.248,4.837,-14.118,26.99,2.995,AB,0
+Sr4Sb4F4Se8,0,-1.76,No,p2_1/b11,Rectangular (op),1.249,11.396,-93.724,35.448,3.513,ABCD2,0
+Nb2Ir2S8,0,-0.818,No,p2_1/m11,Rectangular (op),1.253,3.336,-81.641,39.513,2.17,ABC4,0
+Ag4Te4Br4,0.037,-0.208,No,p2_1/b11,Rectangular (op),1.256,4.455,-33.015,57.138,1.741,ABC,0
+Au2Se2Br2,0.054,-0.128,No,p2_1/m11,Rectangular (op),1.271,4.99,-17.162,25.963,3.024,ABC,0
+AuTlBrI3,0.008,-0.318,No,pm11,Rectangular (op),1.275,3.902,-13.553,37.045,2.712,ABCD3,0
+W2Mo2Te8,0.011,-0.207,No,pm2m,Rectangular (op),1.279,3.617,-73.497,43.646,4.791,ABC4,
+Ag4Se4Cl4,0.067,-0.237,No,p2_1/b11,Rectangular (op),1.279,3.903,-35.277,51.982,1.643,ABC,0
+Pd4As4Se4,0.045,-0.326,No,p2/b11,Rectangular (op),1.283,4.659,-51.772,36.61,2.334,ABC,0
+Au4F8,0.014,-0.92,No,p2/b11,Rectangular (op),1.286,2.589,-36.258,43.72,1.214,AB2,0
+Cu2Cl2O4,0.034,-0.296,No,p2_122,Rectangular (op),1.287,2.81,-33.79,29.849,2.029,ABC2,0
+Sb2As2,0.088,0.088,No,pm2_1n,Rectangular (op),1.289,1.929,-17.788,23.944,2.65,AB,0
+PbGeSeS,0.074,-0.359,No,pm11,Rectangular (op),1.303,2.763,-17.27,17.682,3.199,ABCD,0
+Sr4Sb4Te8Cl4,0.078,-1.087,No,p2_1/b11,Rectangular (op),1.303,12.496,-78.846,44.222,3.534,ABCD2,0
+Cu2S2,0.127,-0.086,No,p2/m11,Rectangular (op),1.311,2.357,-15.851,18.144,2.386,AB,
+Cr4O10,0,-1.626,No,pmmn,Rectangular (op),1.321,4.873,-111.637,33.91,1.534,A2B5,0
+As4,0.042,0.042,No,pman,Rectangular (op),1.324,2.399,-18.485,17.592,3.103,A,
+Rb2Ru2N2S2Cl10,0.023,-0.71,Yes,p2_1/m11,Rectangular (op),1.324,9.759,-76.232,44.157,1.999,ABCDE5,1.993
+WMo3Te8,0.005,-0.254,No,pm2m,Rectangular (op),1.326,3.614,-73.783,43.652,4.769,AB3C8,
+Sb4Te6,0.093,-0.032,No,pm2_1n,Rectangular (op),1.327,3.448,-37.169,63.683,1.568,A2B3,0
+Fe2S4,0.148,-0.383,No,p2_1/m11,Rectangular (op),1.331,2.951,-36.692,17.184,3.963,AB2,
+Ta2Ir2S8,0,-0.84,No,p2_1/m11,Rectangular (op),1.331,3.345,-80.883,39.62,2.181,ABC4,0
+CrW3Se8,0.01,-0.557,No,pm2m,Rectangular (op),1.333,3.391,-78.41,37.7,4.575,AB3C8,
+Ge4Sb8,0.051,0.051,No,pm2_1b,Rectangular (op),1.333,6.657,-52.697,47.369,2.087,AB2,0
+Hf2Br4,0,-1.163,No,p2_1/m11,Rectangular (op),1.334,4.172,-28.33,22.114,3.855,AB2,0
+Cu4Te4Cl4,0.004,-0.339,No,p2_1/b11,Rectangular (op),1.339,3.848,-38.734,49.683,1.713,ABC,0
+Au2I2Se4,0.042,-0.025,No,p2_111,Rectangular (op),1.341,3.698,-23.35,46.411,2.713,ABC2,
+Au4S4I4,0.065,0,No,p2_1/b11,Rectangular (op),1.343,4.627,-34.752,50.259,1.913,ABC,0
+Sn2Se2,0.043,-0.389,No,pm2_1n,Rectangular (op),1.345,2.759,-16.633,18.898,3.394,AB,
+Au2Te4I2,0.064,-0.058,No,p2_111,Rectangular (op),1.351,3.571,-22.502,50.67,2.833,ABC2,
+CrMo3O8,0.089,-1.907,No,pm2m,Rectangular (op),1.351,2.449,-106.895,26.784,3.868,AB3C8,0
+Ga2Se2Br2,0.162,-0.582,No,pmmn,Rectangular (op),1.352,5.648,-19.433,19.923,3.399,ABC,
+Pd4I4Br4,0.068,-0.246,No,pb2_1a,Rectangular (op),1.352,5.113,-30.489,62.99,2.585,ABC,0
+Mn2Sb2Br2Se4,0.087,-0.376,Yes,pm2_1b,Rectangular (op),1.366,4.039,-49.105,45.055,1.622,ABCD2,9.986
+Tl2In2Te2,0.063,-0.184,No,pm2_1n,Rectangular (op),1.366,3.983,-18.036,33.495,2.883,ABC,0
+Os2Te4,0.071,0,No,p2_1/m11,Rectangular (op),1.379,3.621,-35.201,23.771,4.486,AB2,
+Re2As2Se2,0.088,-0.142,No,pm2_1n,Rectangular (op),1.379,3.448,-40.46,18.143,4.718,ABC,0
+Sb2P2,0.17,0.17,No,pm2_1n,Rectangular (op),1.379,2.024,-18.863,22.139,2.697,AB,0
+Sr4Bi4F4S8,0.008,-1.823,No,p2_1/b11,Rectangular (op),1.381,11.125,-100.833,33.263,3.419,ABCD2,0
+Os2S4,0.081,-0.3,No,p2_1/m11,Rectangular (op),1.387,3.093,-40.491,19.501,4.231,AB2,
+Bi2S2I2,0,-0.426,No,pmmn,Rectangular (op),1.389,7.026,-23.02,23.694,3.855,ABC,
+Os2Se4,0,-0.173,No,p2_1/m11,Rectangular (op),1.389,3.331,-37.353,21.126,4.272,AB2,
+Ga2Se2I2,0.161,-0.413,No,pmmn,Rectangular (op),1.39,6.124,-18.209,20.659,3.728,ABC,
+Co2O2F2,0,-1.454,No,pmmn,Rectangular (op),1.39,4.164,-38.601,10.743,3.438,ABC,0
+Ga2Al2Te6,0.036,-0.355,No,pm2_1n,Rectangular (op),1.391,7.931,-36.063,28.165,2.789,ABC3,0
+Ba4As4Te8F4,0.052,-1.525,No,p2_1/b11,Rectangular (op),1.409,12.483,-88.457,41.358,3.63,ABCD2,0
+Ba4Sb4Te8Cl4,0.063,-1.146,No,p2_1/b11,Rectangular (op),1.411,11.822,-80.645,49.347,3.407,ABCD2,0
+Cu2Sb2S4,0.063,-0.207,No,pm2_1b,Rectangular (op),1.411,5.23,-34.136,23.421,2.098,ABC2,
+Hf2Br2Cl2,0.032,-1.323,No,pm11,Rectangular (op),1.413,4.026,-29.688,21.204,3.728,ABC,0
+Cu4Se4Br4,0,-0.261,No,p2_1/b11,Rectangular (op),1.419,4.351,-38.109,44.476,1.799,ABC,0
+Pd4Te4P4,0.076,-0.323,No,p2/b11,Rectangular (op),1.419,4.62,-53.437,37.421,2.405,ABC,0
+Na2Ru2N2S2Cl10,0.062,-0.641,Yes,p2_111,Rectangular (op),1.428,9.46,-75.792,42.759,1.863,ABCDE5,1.995
+Au2I2S4,0.056,0.007,No,p2_122,Rectangular (op),1.43,3.581,-25.475,43.932,2.626,ABC2,0
+Rh2Te2I2,0.002,-0.413,No,p2_1/m11,Rectangular (op),1.432,3.141,-26.137,27.49,2.041,ABC,0
+CrMo3Se8,0.01,-0.642,No,pm2m,Rectangular (op),1.432,3.38,-78.582,37.631,4.503,AB3C8,
+HfGeS2Br2,0.063,-1.037,No,pmm2,Rectangular (op),1.434,6.122,-29.568,19.309,3.719,ABC2D2,0
+Ir2S2F2,0,-0.92,No,pmmn,Rectangular (op),1.437,4.731,-35.4,15.775,3.704,ABC,0
+Sc2Te2Cl2,0.026,-1.621,No,pmmn,Rectangular (op),1.441,5.484,-29.023,22.793,3.365,ABC,0
+W2Cr2S8,0.014,-0.759,No,pm2m,Rectangular (op),1.442,3.096,-83.52,33.89,4.443,ABC4,
+Ti2S6,0,-0.991,No,pmmn,Rectangular (op),1.452,5.693,-45.778,17.199,4.85,AB3,
+Cu4Se4Cl4,0.003,-0.351,No,p2_1/b11,Rectangular (op),1.454,3.993,-39.985,43.915,1.737,ABC,0
+Pd2I4,0.036,-0.218,No,p2_1/b11,Rectangular (op),1.472,2.936,-14.861,34.003,2.955,AB2,0
+Hf2Cl4,0.044,-1.503,No,p2_1/m11,Rectangular (op),1.475,3.881,-31.169,20.199,3.914,AB2,0
+Ga8Te12,0,-0.33,No,p2_1/b11,Rectangular (op),1.48,4.578,-68.294,93.64,1.769,A2B3,0
+Ge2Te2,0.096,-0.004,No,pmmn,Rectangular (op),1.483,2.391,-15.455,24.021,2.668,AB,0
+Au4Se4I4,0,-0.09,No,p2_1/b11,Rectangular (op),1.484,4.699,-33.443,53.288,1.918,ABC,0
+Rb2Os2N2S2Cl10,0,-0.725,Yes,p2_1/m11,Rectangular (op),1.486,10.054,-79.955,45.72,1.999,ABCDE5,1.989
+Ga2S2I2,0.132,-0.465,No,pmmn,Rectangular (op),1.487,6.105,-19.709,18.895,3.806,ABC,
+Tl2O2F2,0.076,-1.231,No,pmmn,Rectangular (op),1.488,4.929,-25.805,15.183,3.192,ABC,0
+SnS2Br2,0.086,-0.393,No,p2/m11,Rectangular (op),1.49,4.923,-17.345,19.224,3.283,AB2C2,0
+Mn2SeCl3,0.075,-0.838,Yes,pm11,Rectangular (op),1.494,2.975,-33.298,23.982,3.005,AB2C3,9
+Au2Cd2Te2I2,0.088,-0.295,No,pm2_1b,Rectangular (op),1.501,4.464,-19.843,36.134,1.708,ABCD,0
+Pd4As4S4,0.038,-0.343,No,p2/b11,Rectangular (op),1.501,4.447,-54.364,34.772,2.324,ABC,0
+Au2Br2Se4,0.072,-0.064,No,p2_111,Rectangular (op),1.503,3.197,-23.876,46.555,2.449,ABC2,
+Ni4As4S4,0.094,-0.256,No,p2/b11,Rectangular (op),1.507,4.282,-67.023,31.649,2.266,ABC,0
+P4,0.039,0.039,No,pman,Rectangular (op),1.511,2.11,-21.301,15.312,3.233,A,
+Bi2SeSCl2,0.029,-0.645,No,pm11,Rectangular (op),1.515,6.236,-24.35,24.023,3.479,ABC2D2,0
+Sn2SeS,0.044,-0.4,No,pm11,Rectangular (op),1.522,2.806,-17.275,18.379,3.199,ABC2,0
+Cr2S2F2,0.066,-1.564,Yes,pmmn,Rectangular (op),1.523,4.524,-39.528,15.408,3.158,ABC,6
+Cu4S4Br4,0.032,-0.232,No,p2_1/b11,Rectangular (op),1.528,4.32,-40.139,41.86,1.778,ABC,0
+Al4Te6,0.047,-0.404,No,pm2_1n,Rectangular (op),1.529,7.997,-38.223,28.076,2.791,A2B3,0
+Tl4Se2,0.016,-0.335,No,pmmn,Rectangular (op),1.538,3.602,-18.968,31.972,2.825,AB2,0
+Pd2I2Br2,0.028,-0.286,No,pb11,Rectangular (op),1.541,2.791,-15.484,32.512,2.783,ABC,0
+Cs2Os2N2S2Cl10,0,-0.744,Yes,p2_1/m11,Rectangular (op),1.544,10.037,-80.144,47.862,2.088,ABCDE5,1.994
+HfTi3Se8,0.144,-1.042,No,p211,Rectangular (op),1.544,3.335,-67.937,43.492,3.987,AB3C8,
+Ga4Se6,0.068,-0.526,No,pm2_1n,Rectangular (op),1.545,7.377,-37.766,24.45,2.677,A2B3,0
+Cr2S2I2,0,-0.619,Yes,pmmn,Rectangular (op),1.548,6.014,-33.645,17.507,4.056,ABC,6
+Cu4S4Cl4,0.03,-0.328,No,p2_1/b11,Rectangular (op),1.55,3.979,-42.094,41.39,1.715,ABC,0
+Ag2S2,0.12,0.063,No,p2/m11,Rectangular (op),1.557,2.441,-13.582,21.78,2.343,AB,
+K2Ru2N2O2Cl10,0,-0.864,Yes,p2_1/m11,Rectangular (op),1.558,9.805,-81.724,42.835,1.969,ABCDE5,1.986
+Ge2Se2,0.063,-0.205,No,pm2_1n,Rectangular (op),1.559,2.605,-16.818,16.981,3.311,AB,
+Au2Se2,0.007,-0.116,No,p2/m11,Rectangular (op),1.561,2.592,-13.688,23.606,2.455,AB,
+ZrTi3Se8,0.138,-1.052,No,p211,Rectangular (op),1.563,3.343,-67.964,43.63,3.972,AB3C8,
+Tl2S3,0.066,-0.145,No,p211,Rectangular (op),1.564,4.633,-17.955,19.552,2.969,A2B3,0
+Ni2Te2S6,0.063,-0.118,No,p2_1/m11,Rectangular (op),1.567,5.223,-46.55,26.943,2.33,ABC3,0
+Ba4As4Te8Cl4,0.067,-1.089,No,p2_1/b11,Rectangular (op),1.577,11.966,-80.52,48.909,3.316,ABCD2,0
+Bi2H2S4,0.006,-0.292,No,p2_1/m11,Rectangular (op),1.581,7.062,-34.642,23.365,3.279,ABC2,0
+Ru2S4,0.167,-0.402,No,p2_1/m11,Rectangular (op),1.583,3.086,-37.649,19.231,3.932,AB2,
+In8Te12,0.005,-0.313,No,p2_1/b11,Rectangular (op),1.585,5.145,-66.821,103.041,1.826,A2B3,0
+Au2Cl2Se4,0.079,-0.113,No,p2_111,Rectangular (op),1.586,3.418,-24.664,41.225,2.588,ABC2,0
+Au2Te4Cl2,0.128,-0.158,No,p2_111,Rectangular (op),1.589,3.017,-23.917,49.09,2.579,ABC2,
+HfGeS2Cl2,0.095,-1.163,No,pm11,Rectangular (op),1.594,5.791,-30.727,18.938,3.704,ABC2D2,0
+Ru2Se4,0.076,-0.343,No,p2_1/m11,Rectangular (op),1.595,3.321,-34.918,20.827,4.01,AB2,
+Mn2N2Cl2,0.119,-0.467,Yes,pmmn,Rectangular (op),1.607,5.119,-42.512,11.951,3.831,ABC,5.994
+Hf2Ti2Se8,0.16,-1.08,No,pm2a,Rectangular (op),1.61,3.419,-69.214,44.701,3.99,ABC4,
+Au2Br2S4,0.041,-0.039,No,p2_122,Rectangular (op),1.611,3.069,-26.05,43.984,2.356,ABC2,0
+Hf2Sn2Se8,0.044,-0.804,No,pm2_1n,Rectangular (op),1.614,7.189,-60.637,42.151,2.136,ABC4,0
+As4Te6,0.062,0.046,No,pm2_1n,Rectangular (op),1.616,3.242,-37.426,58.983,1.504,A2B3,0
+Sc2Te2Br2,0.012,-1.464,No,pmmn,Rectangular (op),1.617,5.884,-27.685,23.238,3.447,ABC,0
+Ba4Bi4F4Se8,0.031,-1.785,No,p2_1/b11,Rectangular (op),1.618,11.829,-95.924,38.766,3.613,ABCD2,0
+Mn2Sb2Cl2S4,0.084,-0.496,Yes,pm2_1b,Rectangular (op),1.619,3.821,-53.088,41.397,1.578,ABCD2,9.994
+TiGeS2I2,0.068,-0.768,No,pm11,Rectangular (op),1.621,3.418,-26.928,26.694,3.301,ABC2D2,0
+Bi2S2Br2,0.01,-0.556,No,pmmn,Rectangular (op),1.621,6.601,-24.007,23.132,3.59,ABC,
+Au2Te4Br2,0.085,-0.11,No,p2_111,Rectangular (op),1.621,3.249,-23.131,49.955,2.629,ABC2,
+PdAuSeCl,0.071,-0.264,No,pm11,Rectangular (op),1.623,3.043,-13.275,18.967,2.705,ABCD,0
+Mn2Sb2Br2S4,0.096,-0.419,Yes,pm2_1b,Rectangular (op),1.63,4.177,-51.913,41.92,1.611,ABCD2,9.995
+Ge4Sb4Te4,0.073,0.004,No,p2_122,Rectangular (op),1.636,3.7,-48.464,62.608,1.74,ABC,0
+Zr2Sn2Se8,0.012,-0.851,No,pm2_1n,Rectangular (op),1.636,7.193,-60.991,42.275,2.123,ABC4,0
+Ta2O2I4,0,-1.348,No,pmmm,Rectangular (op),1.637,4.649,-46.581,29.415,2.103,ABC2,
+Ag4F8,0.017,-1.229,No,p2/b11,Rectangular (op),1.637,2.025,-38.801,45.952,1.023,AB2,0
+Na2Nb2I12,0.019,-0.648,No,p2_111,Rectangular (op),1.641,10.949,-51.374,59.11,2.16,ABC6,0
+TiHf3Se8,0.168,-1.127,No,pm11,Rectangular (op),1.643,3.406,-70.591,45.783,4.031,AB3C8,
+Au2Br6,0,-0.138,No,pb11,Rectangular (op),1.643,2.776,-16.872,54.215,2.014,AB3,0
+Rb2Ru2N2O2Cl10,0,-0.876,Yes,p2_1/m11,Rectangular (op),1.645,9.75,-81.318,44.238,1.986,ABCDE5,1.992
+Cu4S4F4,0.047,-0.832,No,p2_1/b11,Rectangular (op),1.646,2.621,-47.351,39.541,1.407,ABC,0
+Bi2S2Cl2,0.019,-0.649,No,pmmn,Rectangular (op),1.658,6.263,-24.97,22.828,3.538,ABC,
+Rh2S2I2,0.049,-0.387,No,p2_1/m11,Rectangular (op),1.665,3.216,-27.729,24.052,2.009,ABC,0
+Zr2Ti2Se8,0.147,-1.102,No,pm2a,Rectangular (op),1.67,3.437,-69.277,44.976,3.961,ABC4,
+In4Te4I4,0.036,-0.415,No,pb2_1a,Rectangular (op),1.67,5.921,-34.763,65.333,3.038,ABC,0
+Ir2Te2I2,0.024,-0.212,No,p2_1/m11,Rectangular (op),1.671,3.015,-29.191,27.792,2.11,ABC,0
+Au4Te4I4,0,-0.16,No,p2_1/b11,Rectangular (op),1.672,4.787,-33.168,58.169,1.943,ABC,
+Sn2Te2,0.104,-0.174,No,pmmn,Rectangular (op),1.674,2.333,-15.22,27.243,2.663,AB,0
+Au2Br2S4,0.036,-0.043,No,p2_111,Rectangular (op),1.677,3.53,-26.089,40.581,2.583,ABC2,0
+Co4O4Br4,0.17,-0.588,No,p2_1/b11,Rectangular (op),1.678,3.314,-66.806,32.795,1.762,ABC,
+Li2Nb2I12,0.028,-0.628,No,p2_111,Rectangular (op),1.686,11.021,-52.227,57.283,2.186,ABC6,0
+ZrHf3Se8,0.169,-1.188,No,pm11,Rectangular (op),1.692,3.428,-72.042,46.979,4.05,AB3C8,
+Au4Cu4Se4,0,-0.13,No,pbma,Rectangular (op),1.693,4.022,-42.721,36.973,3.766,ABC,0
+Na2Os2N2S2Cl10,0,-0.657,Yes,p2_111,Rectangular (op),1.7,9.312,-79.539,44.543,1.846,ABCDE5,1.996
+Ta2O2Br4,0,-1.659,No,pmmm,Rectangular (op),1.7,4.249,-49.492,27.283,1.835,ABC2,0
+Ta2O2Cl4,0,-1.903,No,pmmm,Rectangular (op),1.702,3.93,-52.244,26.007,1.794,ABC2,0
+Ni2Te4,0.176,-0.065,No,p2_1/b11,Rectangular (op),1.703,1.56,-27.702,37.027,2.731,AB2,
+Au6I6,0.029,-0.069,No,pm2a,Rectangular (op),1.703,5.074,-28.483,59.585,2.952,AB,0
+Hf2Zr2Se8,0.161,-1.2,No,pm2a,Rectangular (op),1.715,3.465,-72.086,47.157,4.025,ABC4,
+K2Nb2I12,0.009,-0.714,No,p2_111,Rectangular (op),1.716,11.463,-52.259,63.536,2.114,ABC6,0
+Cu2Te3As4I2,0.04,-0.052,No,pm11,Rectangular (op),1.718,4.693,-39.151,54.693,1.614,A2B2C3D4,0
+Rb2K2O2,0.028,-0.954,No,p2_1/m11,Rectangular (op),1.718,2.686,-20.233,30.493,1.364,ABC,0
+Zr2S4,0.066,-1.52,No,pmmn,Rectangular (op),1.719,2.868,-40.236,23.773,3.623,AB2,0
+Rh2Se2I2,0,-0.401,No,p2_1/m11,Rectangular (op),1.725,3.16,-26.625,25.446,2.007,ABC,0
+Ge4As8,0.006,-0.047,No,pm2_1b,Rectangular (op),1.729,6.049,-55.927,40.117,1.981,AB2,0
+WMo3O8,0.012,-1.999,No,pm2m,Rectangular (op),1.731,2.459,-110.075,27.654,3.999,AB3C8,0
+In4Se6,0.002,-0.531,No,pm2_1n,Rectangular (op),1.731,7.669,-37.263,27.928,2.729,A2B3,0
+Pt2Te2S6,0.091,-0.153,No,p2_1/m11,Rectangular (op),1.731,5.33,-45.114,29.788,2.323,ABC3,0
+Bi8O4Se8,0.067,-0.624,No,p2_1/m11,Rectangular (op),1.736,3.899,-98.239,94.403,1.613,AB2C2,0
+Au2Cl2Se4,0.071,-0.121,No,p2_111,Rectangular (op),1.737,3.11,-24.726,43.782,2.517,ABC2,0
+Cu4Te2O12,0.088,-0.581,No,p2_1/b11,Rectangular (op),1.738,2.805,-93.071,49.238,1.53,AB2C6,
+Pt2I4,0.041,-0.127,No,p2_1/b11,Rectangular (op),1.742,2.843,-19.383,35.084,2.999,AB2,0
+Pd2Te4,0.093,-0.257,No,p2_1/b11,Rectangular (op),1.743,1.684,-21.999,39.464,2.763,AB2,
+In2Se2Cl2,0.058,-0.757,No,pmmn,Rectangular (op),1.747,5.629,-20.605,21.821,3.421,ABC,
+MoW3Se8,0,-0.625,No,pm2m,Rectangular (op),1.749,3.352,-81.015,38.187,4.661,AB3C8,
+Ir2S2I2,0.078,-0.226,No,p2_1/m11,Rectangular (op),1.749,3.135,-31.022,24.317,2.092,ABC,0
+W2Mo2Se8,0,-0.653,No,pm2m,Rectangular (op),1.749,3.347,-81.079,38.189,4.635,ABC4,
+Rb2Os2N2O2Cl10,0,-0.896,Yes,p2_1/m11,Rectangular (op),1.751,9.807,-85.129,45.017,2.027,ABCDE5,1.989
+Sc2Te2I2,0,-1.261,No,pmmn,Rectangular (op),1.751,6.395,-26.254,23.951,3.76,ABC,0
+TiZr3Se8,0.147,-1.162,No,pm11,Rectangular (op),1.753,3.453,-70.7,46.235,3.979,AB3C8,
+Ta2I2O4,0,-2.186,No,pmma,Rectangular (op),1.755,7.388,-60.574,14.804,3.027,ABC2,0
+Hf2Ge2Se8,0.022,-0.785,No,pm2_1n,Rectangular (op),1.759,6.993,-61.327,39.295,2.167,ABC4,0
+Ge2SeS,0.053,-0.222,No,pm11,Rectangular (op),1.766,2.504,-17.481,16.569,3.155,ABC2,0
+Cd4Br4,0.068,-0.609,No,p2/b11,Rectangular (op),1.771,5.375,-14.923,29.019,3.827,AB,0
+Rb2K2O2,0.07,-0.913,No,pmm2,Rectangular (op),1.772,2.659,-19.983,29.116,1.51,ABC,0
+Zr2Ge2Se8,0,-0.828,No,pm2_1n,Rectangular (op),1.776,7.019,-61.63,39.51,2.15,ABC4,0
+Ga2SeSICl,0.025,-0.713,No,pm11,Rectangular (op),1.777,5.782,-20.908,23.995,3.023,ABCDE2,0
+Tl2O2Br2,0,-0.641,No,pmmn,Rectangular (op),1.778,6.195,-22.259,16.247,3.795,ABC,
+Rb2Au2S2,0.096,-0.691,No,pmma,Rectangular (op),1.778,4.262,-20.381,28.207,2.246,ABC,0
+WMo3Se8,0,-0.681,No,pm2m,Rectangular (op),1.785,3.342,-81.13,38.186,4.609,AB3C8,
+Zr2Si2Se8,0.094,-0.815,No,pm2_1n,Rectangular (op),1.787,6.951,-63.241,38.354,2.165,ABC4,0
+PdS2,0.062,-0.234,No,p2/m11,Rectangular (op),1.791,1.471,-12.679,15.076,2.602,AB2,0
+Ag4Te2O12,0.084,-0.386,No,p2_1/b11,Rectangular (op),1.801,2.837,-86.205,54.372,1.533,AB2C6,0
+Rb2C2Se2H6S6,0.064,-0.268,No,p2_111,Rectangular (op),1.809,8.95,-76.458,43.719,1.45,ABCD3E3,0
+Cu2I2S4,0,-0.13,No,p2_122,Rectangular (op),1.818,3.556,-27.658,37.521,2.795,ABC2,
+Pd2Te2S6,0.056,-0.137,No,p2_1/m11,Rectangular (op),1.818,5.309,-39.891,29.183,2.308,ABC3,0
+In2S2I2,0.013,-0.549,No,pm2_1n,Rectangular (op),1.828,6.923,-19.932,23.051,2.196,ABC,0
+Bi2O2I2,0.116,-0.881,No,pmmn,Rectangular (op),1.829,7.017,-27.842,17.829,4.453,ABC,
+Pt4S3Se5,0,-0.407,No,pm11,Rectangular (op),1.829,2.738,-59.949,46.844,3.635,A3B4C5,0
+K2Os2C2O2F10,0.013,-1.952,No,p2_1/m11,Rectangular (op),1.831,10.567,-104.508,27.492,2.132,ABCDE5,0
+In2IBrSe2,0.049,-0.584,No,pmm2,Rectangular (op),1.833,6.223,-19.058,22.723,3.618,ABC2D2,0
+Ge4Te4P4,0.065,-0.002,No,p2_122,Rectangular (op),1.835,4.086,-52.364,52.877,1.778,ABC,0
+Ga2O2I2,0.131,-1.104,No,pmmn,Rectangular (op),1.838,5.9,-25.635,13.903,4.208,ABC,
+W2Mo2O8,0.005,-2.01,No,pm2m,Rectangular (op),1.84,2.462,-110.488,27.728,4.031,ABC4,0
+Nb2O2I4,0,-1.358,No,pm2m,Rectangular (op),1.845,4.596,-47.682,30.086,2.049,ABC2,
+Te2H2P2S10,0.059,-0.044,No,p2_111,Rectangular (op),1.848,6.262,-65.268,44.134,2.157,ABCD5,0
+VOI2,0,-1.14,Yes,pm2m,Rectangular (op),1.849,3.825,-21.164,15.219,1.916,ABC2,1
+Ir2Se2I2,0.045,-0.211,No,p2_1/m11,Rectangular (op),1.857,3.048,-29.738,25.764,2.08,ABC,0
+Tl4S2,0.034,-0.317,No,pmmn,Rectangular (op),1.858,3.509,-20.053,29.603,2.903,AB2,0
+In2Se2I2,0.012,-0.547,No,pm2_1n,Rectangular (op),1.858,6.67,-18.729,25.147,2.148,ABC,0
+Cu2Te3As4Br2,0.045,-0.11,No,pm11,Rectangular (op),1.858,4.461,-40.001,54.346,1.498,A2B2C3D4,0
+Au4Te4Br4,0,-0.251,No,p2_1/b11,Rectangular (op),1.86,4.349,-34.689,56.926,1.772,ABC,0
+Cu2Tl2S2,0.034,-0.234,No,p2_1/m11,Rectangular (op),1.863,3.68,-21.909,24.475,2.797,ABC,0
+Ag2Tl2S2,0.022,-0.192,No,pm2_1n,Rectangular (op),1.865,5.796,-19.981,17.468,3.665,ABC,0
+Ir2Te2Br2,0.028,-0.29,No,p2_1/m11,Rectangular (op),1.869,2.809,-29.869,26.395,1.968,ABC,0
+Ge4As4Te4,0.033,-0.034,No,p2_122,Rectangular (op),1.871,3.938,-49.942,56.366,1.74,ABC,0
+MnGaO2Cl2,0.016,-1.43,Yes,pm11,Rectangular (op),1.873,5.247,-35.016,12.74,3.843,ABC2D2,4
+Li4As4S8,0.018,-0.61,No,p2_1/b11,Rectangular (op),1.873,7.996,-68.593,29.367,2.89,ABC2,0
+In2S2F2,0.086,-1.404,No,pmmn,Rectangular (op),1.873,4.539,-25.278,18.783,3.034,ABC,0
+Ag2Hg2Se2I2,0.023,-0.234,No,pm2_1b,Rectangular (op),1.88,4.793,-19.245,34.758,1.633,ABCD,0
+Li4As4S8,0.02,-0.608,No,pb2_1a,Rectangular (op),1.883,8.03,-68.571,29.373,2.843,ABC2,0
+In2Se2Br2,0.05,-0.657,No,pmmn,Rectangular (op),1.887,5.983,-19.604,22.318,3.459,ABC,
+Ag2Te4I2,0.01,-0.125,No,p2_111,Rectangular (op),1.889,3.871,-22.454,49.217,2.87,ABC2,
+ScInSeSI2,0.074,-1.045,No,pmm2,Rectangular (op),1.894,6.371,-24.212,21.587,3.763,ABCDE2,0
+In2Se2I2,0.053,-0.506,No,pmmn,Rectangular (op),1.903,6.459,-18.482,23.077,3.736,ABC,
+Ni4I8,0.039,-0.091,No,p2_1/b11,Rectangular (op),1.905,5.764,-41.909,57.562,1.643,AB2,0
+In2H2Se4,0,-0.336,No,p2_1/m11,Rectangular (op),1.907,6.411,-28.791,22.632,3.436,ABC2,0
+Ni4S4Cl4,0.082,-0.388,Yes,p2_1/b11,Rectangular (op),1.909,2.949,-57.1,40.352,1.729,ABC,3.999
+Au2Cl2S4,0.04,-0.094,No,p2_111,Rectangular (op),1.913,3.309,-26.896,39.567,2.538,ABC2,0
+K4O2,0.095,-0.951,No,pmmn,Rectangular (op),1.917,2.506,-20.83,28.279,1.362,AB2,0
+Ag2Hg2Te2I2,0.016,-0.219,No,pm2_1b,Rectangular (op),1.923,4.616,-18.572,37.485,1.63,ABCD,0
+Nb2O2Br4,0,-1.66,No,pm2m,Rectangular (op),1.923,4.2,-50.516,27.885,1.814,ABC2,
+Au4Te4Cl4,0.001,-0.319,No,p2_1/b11,Rectangular (op),1.924,3.99,-36.311,56.278,1.717,ABC,0
+Na2Ta2I12,0.012,-0.666,No,p2_111,Rectangular (op),1.931,10.919,-50.645,59.941,2.154,ABC6,0
+Zr2Sn2S8,0.043,-0.954,No,pm2_1n,Rectangular (op),1.937,6.993,-66.997,39.728,2.029,ABC4,0
+Si4Te8,0,-0.05,No,p2_1/b11,Rectangular (op),1.94,3.711,-47.837,62.268,1.719,AB2,0
+Ga2S2I2,0.008,-0.589,No,pm2_1n,Rectangular (op),1.947,6.519,-20.454,20.737,2.132,ABC,0
+Nb2O2Cl4,0,-1.898,No,pm2m,Rectangular (op),1.951,3.886,-53.226,26.564,1.772,ABC2,0
+Zr2Ge2S8,0.026,-0.94,No,pm2_1n,Rectangular (op),1.954,6.758,-67.74,36.827,2.056,ABC4,0
+Si4Se8,0.064,-0.387,No,pm2_1b,Rectangular (op),1.956,6.92,-54.099,43.876,3,AB2,0
+MoW3O8,0,-2.018,No,pm2m,Rectangular (op),1.961,2.47,-110.869,27.786,4.062,AB3C8,0
+Li2Ta2I12,0.021,-0.646,No,p2_111,Rectangular (op),1.962,10.997,-51.484,57.71,2.194,ABC6,0
+Pd4P4Se4,0.002,-0.406,No,p2/b11,Rectangular (op),1.963,4.414,-55.541,34.555,2.348,ABC,
+Cu2Hg2Se2I2,0.03,-0.219,No,pm2_1b,Rectangular (op),1.963,4.965,-20.8,31.23,1.71,ABCD,0
+Rh2Te2Br2,0,-0.513,No,p2_1/m11,Rectangular (op),1.965,2.944,-26.951,25.922,1.907,ABC,0
+Pb2I4,0.055,-0.637,No,pmmn,Rectangular (op),1.965,3.745,-17.255,37.747,3.12,AB2,0
+Si4Sb4Te4,0.083,0.014,No,p2_122,Rectangular (op),1.966,3.596,-51.874,59.63,1.76,ABC,0
+Sr4As4F4Se8,0,-1.698,No,p2_1/b11,Rectangular (op),1.976,11.2,-93.52,34.904,3.36,ABCD2,0
+Hf2Sn2S8,0.078,-0.919,No,pm2_1n,Rectangular (op),1.977,6.993,-66.779,39.543,2.045,ABC4,0
+In3I3,0.089,-0.399,No,pm2m,Rectangular (op),1.984,4.872,-15.117,34.787,2.757,AB,0
+Sn2S2,0.043,-0.415,No,pm2_1n,Rectangular (op),1.987,2.864,-17.928,17.575,3.313,AB,
+Ag2F2S4,0.006,-0.552,No,p2_111,Rectangular (op),1.99,2.616,-29.581,36.61,2.16,ABC2,0
+Au4Se4Br4,0,-0.182,No,p2_1/b11,Rectangular (op),1.991,4.224,-34.974,52.101,1.744,ABC,0
+Au4S4Br4,0.006,-0.1,No,p2_1/b11,Rectangular (op),2,4.18,-36.37,49.128,1.737,ABC,0
+Pt2Te4,0.144,-0.276,No,p2_1/b11,Rectangular (op),2.001,1.713,-27.181,39.15,2.896,AB2,
+Cu2Hg2Se2F2,0.038,-0.698,No,pm2_1b,Rectangular (op),2.003,3.903,-24.849,26.456,1.425,ABCD,0
+Ga2Se2I2,0.007,-0.567,No,pm2_1n,Rectangular (op),2.003,6.403,-19.131,22.584,2.103,ABC,0
+RhGaO2Cl2,0.057,-1.106,No,pmm2,Rectangular (op),2.004,5.135,-30.506,13.139,3.85,ABC2D2,0
+Hf2Ge2S8,0.061,-0.909,No,pm2_1n,Rectangular (op),2.006,6.732,-67.571,36.585,2.074,ABC4,0
+Ag2Hg2S2I2,0.02,-0.213,No,pm2_1b,Rectangular (op),2.009,4.947,-20.266,32.698,1.656,ABCD,0
+Au2S2,0,-0.091,No,p2/m11,Rectangular (op),2.01,2.314,-14.78,22.261,2.438,AB,
+Pd2Br4,0.016,-0.358,No,p2_1/b11,Rectangular (op),2.012,2.73,-16.129,30.091,2.612,AB2,0
+Zr2Ti2S8,0.18,-1.267,No,pm2a,Rectangular (op),2.013,3.25,-76.018,41.657,3.861,ABC4,
+Pd2S4,0.002,-0.294,No,p2_1/b11,Rectangular (op),2.015,1.273,-25.717,30.612,2.605,AB2,
+Pd4I8,0,-0.254,No,p2_1/b11,Rectangular (op),2.017,5.914,-30.155,65.262,1.561,AB2,
+Ni4P4Se4,0.026,-0.304,No,p2/b11,Rectangular (op),2.021,4.237,-68.025,31.513,2.29,ABC,0
+Si4As8,0.003,-0.08,No,pm2_1b,Rectangular (op),2.023,6.01,-59.857,38.866,1.963,AB2,0
+Cr2S2Br2,0.003,-0.807,Yes,pmmn,Rectangular (op),2.023,5.666,-34.982,16.814,3.699,ABC,6
+Cu2Cl4,0.003,-0.506,Yes,p2_1/b11,Rectangular (op),2.023,2.631,-17.528,23.351,1.579,AB2,1.987
+In2O2I2,0.031,-1.098,No,pmmn,Rectangular (op),2.026,6.33,-25.317,15.832,4.261,ABC,
+Tl2Ga2O6,0.08,-1.188,No,pm2_1n,Rectangular (op),2.03,5.932,-53.428,18.352,2.317,ABC3,0
+Cu2Hg2S2I2,0.04,-0.221,No,pm2_1b,Rectangular (op),2.038,5.116,-22.008,29.21,1.742,ABCD,0
+Tl2O2Cl2,0.001,-0.723,No,pmmn,Rectangular (op),2.039,5.883,-23.151,15.953,3.73,ABC,
+In2Se3,0.051,-0.482,No,pm11,Rectangular (op),2.04,3.492,-18.386,28.107,2.688,A2B3,0
+Ge4P8,0.002,0.002,No,pm2_1b,Rectangular (op),2.044,5.68,-60.954,37.02,1.997,AB2,0
+Ba4Sb4F4Se8,0,-1.769,No,p2_1/b11,Rectangular (op),2.045,11.319,-94.534,39.596,3.499,ABCD2,0
+Ag2Cd2Te2I2,0.034,-0.344,No,pm2_1b,Rectangular (op),2.047,5.026,-19.656,36.845,1.622,ABCD,0
+Pd2Se4,0.004,-0.287,No,p2_1/b11,Rectangular (op),2.048,1.487,-23.294,34.042,2.639,AB2,
+Ir2Te2Cl2,0.048,-0.363,No,p2_1/m11,Rectangular (op),2.05,2.649,-30.711,25.477,1.95,ABC,0
+K2Ta2I12,0,-0.735,No,p2_111,Rectangular (op),2.053,11.272,-51.57,65.77,2.071,ABC6,0
+In2Te2I2,0.005,-0.446,No,pm2_1n,Rectangular (op),2.054,6.414,-17.566,28.439,2.093,ABC,0
+Ag2Te4Br2,0,-0.193,No,p2_111,Rectangular (op),2.055,3.412,-23.215,48.514,2.642,ABC2,
+Cu2Hg2Te2Cl2,0.025,-0.332,No,pm2_1b,Rectangular (op),2.058,3.97,-21.76,31.66,1.553,ABCD,0
+Sb4Se6,0.051,-0.212,No,pm2_1n,Rectangular (op),2.061,3.136,-40.646,58.108,1.476,A2B3,0
+Pt4As4S4,0.06,-0.4,No,p2/b11,Rectangular (op),2.061,4.542,-65.178,34.379,2.486,ABC,0
+W2Mo2S8,0,-0.9,No,pm2m,Rectangular (op),2.062,3.134,-88.804,35.175,4.584,ABC4,
+MoW3S8,0,-0.888,No,pm2m,Rectangular (op),2.064,3.139,-88.937,35.184,4.613,AB3C8,
+Ir2S2Br2,0.05,-0.348,No,p2_1/m11,Rectangular (op),2.065,2.936,-31.966,22.912,1.952,ABC,0
+Ir2Se2Br2,0.028,-0.308,No,p2_1/m11,Rectangular (op),2.067,2.856,-30.535,24.358,1.937,ABC,0
+WMo3S8,0,-0.912,No,pm2m,Rectangular (op),2.076,3.13,-88.656,35.159,4.556,AB3C8,
+Cu2Hg2Te2I2,0.028,-0.186,No,pm2_1b,Rectangular (op),2.078,4.837,-19.979,34.008,1.694,ABCD,0
+In8Se12,0.019,-0.515,No,p2_1/b11,Rectangular (op),2.081,4.621,-74.194,92.823,1.723,A2B3,0
+Ag2Cd2Se2Cl2,0.078,-0.532,No,pm2_1b,Rectangular (op),2.081,3.985,-22.325,32.409,1.471,ABCD,0
+Sb8O4Se8,0.027,-0.602,No,p2_1/m11,Rectangular (op),2.083,3.6,-95.649,89.805,1.627,AB2C2,0
+Hf2Ti2S8,0.192,-1.259,No,pm2a,Rectangular (op),2.084,3.238,-76.121,41.34,3.893,ABC4,
+Ti2N2Br2,0,-1.415,No,pmmn,Rectangular (op),2.084,5.515,-41.746,13.327,4.021,ABC,
+Pd4P4S4,0,-0.456,No,p2/b11,Rectangular (op),2.09,4.198,-58.528,32.705,2.345,ABC,
+Sr4Sb4F4S8,0,-1.818,No,p2_1/b11,Rectangular (op),2.092,10.657,-99.651,34.082,3.3,ABCD2,0
+Ti2N2Cl2,0.001,-1.574,No,pmmn,Rectangular (op),2.092,5.245,-43.101,12.952,3.943,ABC,
+Ag2Te4Cl2,0,-0.248,No,p2_111,Rectangular (op),2.098,3.007,-24.054,48.168,2.554,ABC2,
+Cu2I2Se4,0,-0.143,No,p2_122,Rectangular (op),2.099,3.559,-25.386,40.397,2.849,ABC2,
+Cu2Hg2S2Br2,0.039,-0.304,No,pm2_1b,Rectangular (op),2.101,4.579,-22.877,28.314,1.616,ABCD,0
+Na4Sb4S8,0.037,-0.672,No,p2_1/b11,Rectangular (op),2.102,8.665,-66.235,34.51,2.85,ABC2,0
+Na4Sb4S8,0.037,-0.672,No,pb2_1a,Rectangular (op),2.102,8.666,-66.23,34.541,2.803,ABC2,0
+Ag2Cd2Se2Br2,0.054,-0.476,No,pm2_1b,Rectangular (op),2.102,4.523,-21.476,33.11,1.503,ABCD,0
+Ir2S2F2,0.043,-0.877,No,p2_1/m11,Rectangular (op),2.104,2.262,-35.14,20.499,1.718,ABC,0
+AuInF4,0.079,-1.911,No,p2/m11,Rectangular (op),2.106,2.35,-23.704,23.448,2.171,ABC4,0
+Hf2S6,0,-1.209,No,pmmn,Rectangular (op),2.109,5.889,-49.149,18.646,5.001,AB3,
+Rh2Te2Cl2,0,-0.594,No,p2_1/m11,Rectangular (op),2.113,2.733,-27.839,24.945,1.889,ABC,
+Ag2Cd2Te2Br2,0.062,-0.419,No,pm2_1b,Rectangular (op),2.114,4.091,-20.462,35.801,1.517,ABCD,0
+Rh2Te2F2,0.097,-1.017,No,p2_1/m11,Rectangular (op),2.115,2.645,-29.982,22.972,1.688,ABC,0
+Ti2BrClN2,0,-1.501,No,pmm2,Rectangular (op),2.117,5.376,-42.459,13.147,4.17,ABC2D2,0
+Pt2Br4,0.017,-0.251,No,p2_1/b11,Rectangular (op),2.118,2.618,-20.555,31.575,2.608,AB2,0
+PtSnS4,0,-0.422,No,p2/m11,Rectangular (op),2.122,2.81,-29.254,22.88,3.602,ABC4,0
+Ir2BrClS2,0.053,-0.396,No,pm11,Rectangular (op),2.127,2.824,-32.452,22.48,3.574,ABC2D2,0
+VOICl,0.017,-1.377,Yes,pm11,Rectangular (op),2.129,3.539,-22.418,14.179,3.196,ABCD,1
+Rh2S2Br2,0.002,-0.523,No,p2_1/m11,Rectangular (op),2.135,3.021,-28.758,22.553,1.871,ABC,0
+Pd2Br2F2,0.031,-0.799,No,pb11,Rectangular (op),2.137,2.148,-18.778,27.617,2.301,ABC,0
+Bi2Br6,0.029,-0.763,No,pmma,Rectangular (op),2.138,3.808,-24.957,44.684,2.707,AB3,0
+Rh2Se2Br2,0,-0.519,No,p2_1/m11,Rectangular (op),2.14,2.973,-27.541,23.888,1.871,ABC,0
+Cu4H4O4Br4,0.03,-0.635,Yes,p2_1/b11,Rectangular (op),2.143,4.94,-65.003,35.765,1.737,ABCD,3.962
+Sr4Sb4Cl4Se8,0.049,-1.25,No,p2_1/b11,Rectangular (op),2.144,10.712,-84.326,43.004,3.098,ABCD2,0
+Cr2S2Cl2,0,-0.946,Yes,pmmn,Rectangular (op),2.144,5.374,-36.222,16.421,3.643,ABC,6
+Ag2Te3Br2P4,0.072,-0.065,No,pm11,Rectangular (op),2.153,4.54,-40.632,60.187,1.401,A2B2C3D4,0
+Ag2Cd2Te2Cl2,0.085,-0.476,No,pm2_1b,Rectangular (op),2.153,3.785,-21.319,34.668,1.498,ABCD,0
+Zr2S4,0.184,-1.402,No,pm2_1n,Rectangular (op),2.154,3.245,-39.529,22.114,3.935,AB2,0
+Sc2Se2F2,0,-2.691,No,pmmn,Rectangular (op),2.156,4.288,-35.605,18.941,2.842,ABC,0
+Ga2Te2I2,0.003,-0.444,No,pm2_1n,Rectangular (op),2.157,6.234,-17.838,25.797,2.058,ABC,0
+Ge4Sb4Se4,0.04,-0.138,No,p2_122,Rectangular (op),2.165,3.378,-51.278,58.62,1.69,ABC,0
+Cu2Te4I2,0.009,-0.124,No,p2_122,Rectangular (op),2.166,3.427,-24.121,45.531,2.908,ABC2,
+MoAgBr4,0.04,-0.482,Yes,p2/m11,Rectangular (op),2.166,3.08,-23.272,29.201,2.82,ABC4,2.999
+Cu2Hg2Te2Br2,0.021,-0.267,No,pm2_1b,Rectangular (op),2.166,4.106,-20.84,32.656,1.581,ABCD,0
+Ag2Sb4I2S3,0.076,-0.149,No,pm11,Rectangular (op),2.167,5.135,-40.138,52.636,1.694,A2B2C3D4,0
+Ir2Se2F2,0.09,-0.792,No,p2_1/m11,Rectangular (op),2.172,2.439,-33.442,21.774,1.71,ABC,0
+Au2I2Se3P4,0.097,-0.009,No,pm11,Rectangular (op),2.172,4.499,-41.22,59.706,1.389,A2B2C3D4,0
+Ni4P4S4,0,-0.387,No,p2/b11,Rectangular (op),2.172,4.022,-71.408,29.614,2.269,ABC,0
+Ni4Br8,0.098,-0.308,No,p2_1/b11,Rectangular (op),2.174,5.306,-45.366,50.784,1.383,AB2,0
+Rh2S2F2,0,-1.1,No,p2_1/m11,Rectangular (op),2.175,2.308,-32.226,19.898,1.635,ABC,0
+Ni2Se4,0.067,-0.191,No,p2_1/b11,Rectangular (op),2.183,1.375,-29.573,31.424,2.597,AB2,
+Al2IBrS2,0.02,-0.987,No,pm11,Rectangular (op),2.192,6.063,-24.619,22.476,3.074,ABC2D2,0
+Zr2S6,0,-1.254,No,pmmn,Rectangular (op),2.202,5.906,-49.304,18.927,4.91,AB3,
+Cu2Br2S4,0,-0.223,No,p2_122,Rectangular (op),2.203,3.168,-28.62,36.454,2.548,ABC2,
+Ag2Te3Cl2P4,0.09,-0.102,No,pm11,Rectangular (op),2.203,4.348,-41.45,59.84,1.364,A2B2C3D4,0
+Ir2S2Cl2,0.052,-0.448,No,p2_1/m11,Rectangular (op),2.204,2.697,-32.967,22.087,1.938,ABC,0
+In3F3,0.015,-1.748,No,pm2m,Rectangular (op),2.211,4.297,-23.535,18.441,2.923,AB,0
+Bi8O4S8,0.048,-0.626,No,p2_1/m11,Rectangular (op),2.212,3.537,-103.041,89.702,1.557,AB2C2,0
+Pt4I8,0,-0.168,No,p2_1/b11,Rectangular (op),2.212,5.864,-39.259,65.894,1.595,AB2,
+Ag2Cd2Se2I2,0.049,-0.401,No,pm2_1b,Rectangular (op),2.214,5.156,-20.664,33.967,1.622,ABCD,0
+Co2I2Br2,0.025,-0.217,Yes,pm2_1b,Rectangular (op),2.214,5.053,-23.884,27.417,2.826,ABC,6
+Cr2I2Br2,0.106,-0.477,Yes,pb11,Rectangular (op),2.217,3.046,-27.807,29.164,3.122,ABC,8
+Cr2IBrS2,0.038,-0.677,Yes,pm11,Rectangular (op),2.218,3.164,-34.097,23.08,3.39,ABC2D2,6
+Sn2Se2,0.071,-0.361,No,pm2_1n,Rectangular (op),2.222,2.05,-16.522,24.16,2.588,AB,0
+Rh2Se2F2,0,-1.058,No,p2_1/m11,Rectangular (op),2.223,2.476,-30.781,21.1,1.639,ABC,0
+Ag2I2S4,0.048,-0.086,No,p2_122,Rectangular (op),2.223,4.529,-25.637,38.345,2.97,ABC2,
+Al2Se2Cl2,0.084,-1.089,No,pmmn,Rectangular (op),2.225,5.269,-24.549,18.35,3.402,ABC,
+Ag2Sb4I2Se3,0.079,-0.142,No,pm11,Rectangular (op),2.227,5.18,-38.274,56.012,1.674,A2B2C3D4,0
+Ga2S2Cl2,0.125,-0.778,No,pmmn,Rectangular (op),2.23,5.313,-22.199,17.66,3.393,ABC,
+Au4Se4Cl4,0,-0.255,No,p2_1/b11,Rectangular (op),2.23,3.862,-36.657,51.398,1.695,ABC,0
+Ni2S4,0.035,-0.265,No,p2_1/b11,Rectangular (op),2.231,1.16,-32.398,27.9,2.546,AB2,
+Cu2Sb4I2S3,0.095,-0.145,No,pm11,Rectangular (op),2.231,4.741,-41.768,48.119,1.754,A2B2C3D4,0
+Au6I6,0.072,-0.026,No,pb2_1m,Rectangular (op),2.232,5.292,-27.96,59.207,2.923,AB,0
+Ir2Se2Cl2,0.034,-0.396,No,p2_1/m11,Rectangular (op),2.235,2.628,-31.462,23.465,1.923,ABC,0
+Si4Te4P4,0.035,-0.067,No,p2_122,Rectangular (op),2.239,3.978,-56.672,49.737,1.802,ABC,0
+Al2Se2I2,0.061,-0.725,No,pmmn,Rectangular (op),2.239,6.088,-21.748,19.773,3.818,ABC,
+Os2F8,0,-1.721,Yes,p2_1/b11,Rectangular (op),2.24,3.444,-52.289,27.129,1.499,AB4,4
+Ag2Br2S4,0.026,-0.147,No,p2_122,Rectangular (op),2.242,3.89,-26.341,39.132,2.632,ABC2,
+Sn4As4Se4,0.086,-0.202,No,p2_122,Rectangular (op),2.244,3.667,-51.234,60.255,1.658,ABC,0
+Ag2Cl2S4,0.018,-0.201,No,p2_122,Rectangular (op),2.252,3.311,-27.169,40.248,2.446,ABC2,
+Cu2Hg2Se2Br2,0.025,-0.3,No,pm2_1b,Rectangular (op),2.253,4.347,-21.66,30.091,1.596,ABCD,0
+Pt2Br2Cl2,0.016,-0.33,No,pb11,Rectangular (op),2.255,2.511,-21.429,30.353,2.611,ABC,0
+Sb2S2Cl2,0.019,-0.529,No,p2_1/m11,Rectangular (op),2.256,3.227,-23.715,28.99,2.998,ABC,0
+Ag2Hg2Te2Br2,0.007,-0.29,No,pm2_1b,Rectangular (op),2.257,3.845,-19.348,36.311,1.508,ABCD,0
+Cu4O4F4,0.066,-0.915,No,p2_1/b11,Rectangular (op),2.259,2.564,-52.531,31.802,1.31,ABC,0
+Si4As4Te4,0.006,-0.061,No,p2_122,Rectangular (op),2.261,3.83,-53.798,53.313,1.76,ABC,0
+Ag2Br2Se4,0,-0.184,No,p2_111,Rectangular (op),2.262,3.622,-24.254,43.519,2.575,ABC2,
+Ga2S2Br2,0.121,-0.653,No,pmmn,Rectangular (op),2.265,5.647,-21.051,18.178,3.442,ABC,
+Ag2Hg2Se2Br2,0.017,-0.301,No,pm2_1b,Rectangular (op),2.266,3.998,-19.993,33.957,1.503,ABCD,0
+Ag2As4I2Se3,0.028,-0.123,No,pm11,Rectangular (op),2.269,4.943,-39.091,54.415,1.569,A2B2C3D4,0
+Rh2S2Cl2,0,-0.627,No,p2_1/m11,Rectangular (op),2.27,2.797,-29.782,21.655,1.859,ABC,0
+Cu2F2Se4,0,-0.65,No,p2_111,Rectangular (op),2.27,2.206,-29.66,37.555,2.169,ABC2,0
+Rh2Se2Cl2,0,-0.613,No,p2_1/m11,Rectangular (op),2.271,2.754,-28.505,22.969,1.854,ABC,0
+Ag2Hg2Te2Cl2,0.015,-0.342,No,pm2_1b,Rectangular (op),2.272,3.951,-20.17,35.346,1.471,ABCD,0
+In2S2I2,0.021,-0.541,No,pmmn,Rectangular (op),2.281,6.476,-19.884,21.263,3.811,ABC,
+VHBrO2,0.069,-1.532,Yes,pm11,Rectangular (op),2.282,3.393,-31.341,12.599,2.649,ABCD2,1
+Cu2As4I2Se3,0.036,-0.118,No,pm11,Rectangular (op),2.282,4.655,-40.703,48.441,1.656,A2B2C3D4,0
+Ru2F8,0,-1.855,Yes,p2_1/b11,Rectangular (op),2.286,3.407,-50.168,26.731,1.426,AB4,4
+Li4P4S8,0.067,-0.615,No,pb2_1a,Rectangular (op),2.29,7.895,-71.476,28.675,2.833,ABC2,0
+Zr2N2I2,0,-1.474,No,pmmn,Rectangular (op),2.29,6.342,-43.31,15.466,4.703,ABC,
+Nb2I2O4,0,-2.093,No,p2_1/m11,Rectangular (op),2.295,7.37,-60.851,15.063,2.93,ABC2,
+Pt2Se4,0.103,-0.31,No,p2_1/b11,Rectangular (op),2.297,1.503,-28.5,33.867,2.794,AB2,
+Si4P8,0,-0.129,No,pm2_1b,Rectangular (op),2.298,5.626,-66.056,35.603,1.989,AB2,0
+Cu2Te4Br2,0.012,-0.209,No,p2_122,Rectangular (op),2.299,3.081,-25.01,43.795,2.729,ABC2,
+Cu2I2Se3P4,0.03,-0.088,No,pm11,Rectangular (op),2.302,4.557,-43.184,46.771,1.672,A2B2C3D4,0
+Li2V2Au4O12,0.059,-1.118,No,pm2_1n,Rectangular (op),2.302,5.411,-117.201,65.755,1.168,ABC2D6,0
+Cu2Hg2Se2Cl2,0.03,-0.363,No,pm2_1b,Rectangular (op),2.303,3.963,-22.56,29.299,1.565,ABCD,
+Cu2Te4Cl2,0.009,-0.279,No,p2_122,Rectangular (op),2.308,2.772,-25.974,42.854,2.68,ABC2,
+Cu2Sb4I2Se3,0.093,-0.128,No,pm11,Rectangular (op),2.313,4.855,-39.788,51.15,1.738,A2B2C3D4,0
+Ba2Bi4S8,0.061,-0.811,No,p2_1/m11,Rectangular (op),2.313,7.961,-66.336,45.32,2.319,AB2C4,0
+Cu2Br2Se4,0,-0.23,No,p2_122,Rectangular (op),2.315,3.17,-26.293,39.328,2.615,ABC2,
+Bi2O2Br2,0.118,-1.036,No,pmmn,Rectangular (op),2.321,6.626,-28.983,17.298,4.105,ABC,
+Cu6Cl6,0.016,-0.436,No,pm2_1n,Rectangular (op),2.322,7.305,-37.996,25.622,3.826,AB,0
+Al2Se2Br2,0.067,-0.938,No,pmmn,Rectangular (op),2.322,5.623,-23.239,18.924,3.466,ABC,
+Fe2Se2O8,0.073,-0.846,Yes,pm2_1n,Rectangular (op),2.323,3.628,-76.2,27.971,1.562,ABC4,7.999
+Au4Br4,0.085,-0.075,No,pbma,Rectangular (op),2.327,3.351,-19.456,35.994,2.995,AB,0
+Ti2N2F2,0,-2.297,No,pmmn,Rectangular (op),2.328,4.336,-47.039,12.066,3.268,ABC,0
+Au2Ag2Cl8,0,-0.389,No,p2/b11,Rectangular (op),2.332,2.822,-30.882,58.727,1.357,ABC4,
+Ba4Sb4Cl4Se8,0.024,-1.308,No,p2_1/b11,Rectangular (op),2.345,11.161,-86.1,46.598,3.198,ABCD2,0
+Cu2Hg2S2Cl2,0.042,-0.365,No,pm2_1b,Rectangular (op),2.346,4.153,-23.77,27.677,1.583,ABCD,0
+Ba4As4F4Se8,0.005,-1.703,No,p2_1/b11,Rectangular (op),2.348,11.166,-94.244,39.32,3.364,ABCD2,0
+W2O4Br4,0,-1.516,No,pb2_1m,Rectangular (op),2.348,4.909,-64.971,29.975,1.846,AB2C2,0
+In4Br4,0.064,-0.631,No,pbma,Rectangular (op),2.35,2.565,-22.44,56.865,2.032,AB,0
+Au4S4Cl4,0,-0.178,No,p2_1/b11,Rectangular (op),2.35,3.826,-38.114,48.554,1.69,ABC,0
+AgGaI2,0.096,-0.273,No,pm11,Rectangular (op),2.351,3.413,-9.791,22.475,2.728,ABC2,0
+Ba4Bi4F4S8,0,-1.821,No,p2_1/b11,Rectangular (op),2.354,10.938,-101.398,37.619,3.343,ABCD2,0
+Ag2Hg2Se2Cl2,0.03,-0.352,No,pm2_1b,Rectangular (op),2.362,3.566,-20.801,33.173,1.462,ABCD,0
+Cu2Cl2S4,0,-0.303,No,p2_122,Rectangular (op),2.363,2.829,-29.656,35.84,2.473,ABC2,0
+Hg2I2Br2,0.006,-0.438,No,pm2_1b,Rectangular (op),2.363,4.841,-10.526,32.623,2.754,ABC,0
+Ag2Hg2S2Br2,0.023,-0.278,No,pm2_1b,Rectangular (op),2.363,4.203,-21.002,32.098,1.514,ABCD,0
+Pd4Br8,0,-0.375,No,p2_1/b11,Rectangular (op),2.37,5.447,-32.453,58.771,1.322,AB2,0
+Sr4As4Cl4Se8,0.043,-1.183,No,p2_1/b11,Rectangular (op),2.371,10.726,-84.016,42.665,3.018,ABCD2,0
+Ge2S2,0.036,-0.246,No,pm2_1n,Rectangular (op),2.372,2.564,-18.174,16.368,3.107,AB,
+Bi4B4S12,0.085,-0.315,No,p2_1/b11,Rectangular (op),2.378,5.452,-100.753,66.041,1.935,ABC3,0
+Sr4P4F4Se8,0.055,-1.66,No,p2_1/b11,Rectangular (op),2.397,11.028,-95.56,34.673,3.33,ABCD2,0
+Au4O4F4,0,-0.509,No,p2_1/b11,Rectangular (op),2.402,2.729,-45.476,40.249,1.343,ABC,0
+Ba4As4Cl4Se8,0.048,-1.239,No,p2_1/b11,Rectangular (op),2.404,11.115,-85.755,46.406,3.111,ABCD2,0
+Ag2Cl2Se4,0,-0.237,No,p2_111,Rectangular (op),2.421,3.148,-25.078,43.587,2.458,ABC2,
+Cu2Cl2Se4,0.001,-0.304,No,p2_122,Rectangular (op),2.424,2.841,-27.284,38.581,2.549,ABC2,
+In2Al2Se6,0.055,-0.648,No,pm2_1n,Rectangular (op),2.424,7.252,-40.379,25.787,2.712,ABC3,0
+Sn4S4,0.037,-0.421,No,pb2_1a,Rectangular (op),2.426,2.836,-35.905,35.765,1.723,AB,0
+Co2Br4,0.001,-0.36,Yes,pm2_1b,Rectangular (op),2.428,4.754,-24.954,25.565,2.673,AB2,6
+Ge4P4Se4,0.027,-0.152,No,p2_122,Rectangular (op),2.433,3.557,-55.272,50.263,1.706,ABC,0
+Ga4Te4I4,0,-0.447,No,p2_1/b11,Rectangular (op),2.433,4.986,-35.709,60.003,1.795,ABC,0
+Ag2Sb4Br2Se3,0.095,-0.187,No,pm11,Rectangular (op),2.434,4.941,-38.979,55.669,1.559,A2B2C3D4,0
+Al2S2I2,0.018,-0.88,No,pm2_1n,Rectangular (op),2.434,6.492,-23.867,20.471,2.154,ABC,0
+Pt4P4Se4,0.062,-0.496,No,p2/b11,Rectangular (op),2.435,4.492,-66.754,34.209,2.503,ABC,0
+Ga2ICl,0.062,-0.511,No,pm11,Rectangular (op),2.436,3.025,-11.113,21.419,2.384,ABC2,0
+K2Tl2O2,0.052,-0.942,No,p2_1/m11,Rectangular (op),2.436,2.963,-23.332,23.558,2.53,ABC,0
+Ge2Se2,0.083,-0.184,No,pm2_1n,Rectangular (op),2.436,1.854,-16.735,21.579,2.54,AB,0
+Al2S2I2,0.044,-0.854,No,pmmn,Rectangular (op),2.44,6.033,-23.714,18.025,3.922,ABC,
+Al8Te12,0.003,-0.448,No,p2_1/b11,Rectangular (op),2.441,4.254,-77.32,95.082,1.736,A2B3,0
+Cu2Cd2Se2Cl2,0.081,-0.543,No,pm2_1b,Rectangular (op),2.442,4.1,-24.084,28.89,1.553,ABCD,0
+Ag2F2Se4,0.022,-0.569,No,p2_111,Rectangular (op),2.442,2.198,-27.337,42.162,2.078,ABC2,0
+In4Te4I4,0,-0.451,No,p2_1/b11,Rectangular (op),2.444,5.049,-35.192,66.888,1.762,ABC,0
+PdPt3O8,0,-0.524,No,p2/m11,Rectangular (op),2.448,1.905,-70.168,34.084,3.148,AB3C8,0
+Sn4As4S4,0.089,-0.216,No,p2_122,Rectangular (op),2.455,3.311,-53.785,58.448,1.622,ABC,0
+Zn2As4S8,0.076,-0.261,No,p2_111,Rectangular (op),2.457,7.928,-57.301,31.572,2.647,AB2C4,0
+Cu2Cd2Te2Cl2,0.093,-0.464,No,pm2_1b,Rectangular (op),2.458,3.835,-22.902,31.342,1.554,ABCD,0
+Ag2Cd2S2Br2,0.045,-0.489,No,pm2_1b,Rectangular (op),2.461,4.722,-22.77,31.161,1.512,ABCD,0
+Cu2Cd2Se2Br2,0.07,-0.473,No,pm2_1b,Rectangular (op),2.461,4.55,-23.126,29.698,1.575,ABCD,0
+Al4Se6,0.024,-0.833,No,pmmn,Rectangular (op),2.462,4.79,-44.175,40.858,2.929,A2B3,0
+Cu4H4O4Cl4,0.029,-0.712,Yes,p2_1/b11,Rectangular (op),2.462,4.669,-67.028,34.606,1.694,ABCD,3.982
+Cu2Cd2Te2Br2,0.082,-0.395,No,pm2_1b,Rectangular (op),2.466,4.213,-21.947,32.388,1.572,ABCD,0
+Au4Te2O12,0.041,-0.368,No,p2_1/b11,Rectangular (op),2.467,2.828,-87.04,55.362,1.592,AB2C6,0
+Cu2Sb4Br2Se3,0.094,-0.189,No,pm11,Rectangular (op),2.472,4.625,-40.671,50.462,1.622,A2B2C3D4,0
+In2Te2Br2,0.004,-0.592,No,pm2_1n,Rectangular (op),2.473,5.828,-18.656,27.817,1.936,ABC,0
+Ge4Sb4S4,0.011,-0.177,No,p2_122,Rectangular (op),2.476,3.547,-54.12,55.994,1.668,ABC,0
+Cu2As4Br2Se3,0.038,-0.178,No,pm11,Rectangular (op),2.483,4.429,-41.581,48.131,1.526,A2B2C3D4,0
+Cu2Cd2Te2I2,0.067,-0.308,No,pm2_1b,Rectangular (op),2.486,5.039,-21.037,33.592,1.676,ABCD,0
+Hg2I2Br2,0.011,-0.433,No,pmm2,Rectangular (op),2.486,3.413,-10.496,38.544,2.482,ABC,0
+Ge4As4Se4,0.005,-0.181,No,p2_122,Rectangular (op),2.487,3.428,-52.821,53.178,1.675,ABC,0
+Ge2S2,0.052,-0.23,No,pm2_1n,Rectangular (op),2.489,1.845,-18.109,19.873,2.489,AB,0
+Cu2Cl2F2,0.044,-1.014,Yes,pb11,Rectangular (op),2.495,2.255,-20.18,21.328,2.476,ABC,1.993
+Cu2Cd2Se2I2,0.059,-0.382,No,pm2_1b,Rectangular (op),2.498,5.158,-22.185,30.73,1.687,ABCD,0
+Pd2Te2O6,0.08,-0.764,No,p2_1/m11,Rectangular (op),2.509,4.237,-52.431,26.488,1.623,ABC3,0
+K2Os2N2S2F10,0,-1.789,Yes,p2_1/m11,Rectangular (op),2.516,10.9,-97.75,28.46,1.853,ABCDE5,2
+Rb2Os2N2S2F10,0,-1.791,Yes,p2_1/m11,Rectangular (op),2.52,11,-97.173,30.002,1.868,ABCDE5,2
+Sn2S2,0.062,-0.396,No,pm2_1n,Rectangular (op),2.52,2.219,-17.852,22.178,2.558,AB,0
+Cs2Os2N2S2F10,0,-1.801,Yes,p2_1/m11,Rectangular (op),2.525,11.126,-97.201,32.391,1.979,ABCDE5,2
+Ag2Hg2S2Cl2,0.031,-0.328,No,pm2_1b,Rectangular (op),2.526,3.754,-21.799,31.478,1.47,ABCD,0
+Li4Sb4S8,0.017,-0.665,No,p2_1/b11,Rectangular (op),2.535,6.882,-68.447,39.505,2.271,ABC2,0
+As4Se6,0.004,-0.113,No,pm2_1n,Rectangular (op),2.535,2.908,-40.68,54.731,1.369,A2B3,0
+Pt4Br8,0,-0.269,No,p2_1/b11,Rectangular (op),2.538,5.353,-41.316,60.628,1.336,AB2,0
+Ba4P4F4Se8,0.075,-1.662,No,p2_1/b11,Rectangular (op),2.547,11.12,-96.218,39.008,3.369,ABCD2,0
+Ag2Cd2S2I2,0.058,-0.409,No,pm2_1b,Rectangular (op),2.549,5.267,-21.922,31.885,1.645,ABCD,0
+Cu2Br2Se3P4,0.04,-0.148,No,pm11,Rectangular (op),2.556,4.331,-44.054,46.598,1.539,A2B2C3D4,0
+Zn2Te2N4H8,0.131,-0.233,No,p2_111,Rectangular (op),2.567,8.297,-72.513,28.943,1.072,ABC2D4,
+Ag2As4Br2Se3,0.018,-0.167,No,pm11,Rectangular (op),2.572,4.711,-39.786,54.415,1.444,A2B2C3D4,0
+Cu2Cd2S2Br2,0.06,-0.51,No,pm2_1b,Rectangular (op),2.573,4.849,-24.613,27.801,1.589,ABCD,0
+Ga4S6,0.044,-0.619,No,pm2_1n,Rectangular (op),2.574,6.905,-42.274,22.188,2.621,A2B3,0
+Cs2Ru2N2S2F10,0.027,-1.751,Yes,p2_1/m11,Rectangular (op),2.579,10.423,-92.846,32.614,1.786,ABCDE5,2
+In4S6,0.002,-0.577,No,pm2_1n,Rectangular (op),2.581,7.217,-41.287,25.651,2.678,A2B3,0
+Cu2Cd2S2Cl2,0.071,-0.58,No,pm2_1b,Rectangular (op),2.584,4.424,-25.572,27.164,1.56,ABCD,0
+AuInS2Cl2,0.012,-0.605,No,p2/m11,Rectangular (op),2.584,3.515,-21.252,25.808,3.004,ABC2D2,0
+Cu2As4I2S3,0.043,-0.141,No,pm11,Rectangular (op),2.585,4.536,-42.75,45.284,1.673,A2B2C3D4,0
+K4Cu4Te4,0.064,-0.553,No,pmma,Rectangular (op),2.585,4.284,-39.037,53.157,2.527,ABC,0
+Si4Sb4Se4,0.044,-0.181,No,p2_122,Rectangular (op),2.586,3.325,-55.324,55.415,1.719,ABC,0
+Sn2I2Br2,0.083,-0.585,No,pm11,Rectangular (op),2.586,3.345,-17.748,37.582,2.724,ABC,0
+Ag2As4I2S3,0.04,-0.137,No,pm11,Rectangular (op),2.587,4.889,-41.034,50.771,1.592,A2B2C3D4,0
+Co2H2O4,0.051,-1.035,No,p2_1/m11,Rectangular (op),2.596,5.125,-51.881,10.86,2.94,ABC2,
+Cd2Bi2I2O4,0,-1.029,No,p2_1/m11,Rectangular (op),2.598,6.985,-44.949,32.37,2.037,ABCD2,0
+Cr2Br4,0.063,-0.691,Yes,p2_1/b11,Rectangular (op),2.6,2.926,-29.3,26.926,2.877,AB2,8
+Ba4Bi4Cl4S8,0.065,-1.329,No,p2_1/b11,Rectangular (op),2.601,10.904,-92.351,44.68,3.009,ABCD2,0
+In4Se4I4,0,-0.559,No,p2_1/b11,Rectangular (op),2.602,5.284,-37.605,59.83,1.839,ABC,0
+Pd2F4,0,-1.285,No,pman,Rectangular (op),2.606,2.114,-21.699,21.637,1.124,AB2,0
+Cr2Cu2P4S12,0,-0.374,Yes,p2_111,Rectangular (op),2.607,3.375,-104.039,62.162,2.01,ABC2D6,6
+Sn4O4,0.045,-1.258,No,pm2_1b,Rectangular (op),2.611,4.189,-46.79,23.735,3.246,AB,0
+Ga8Se12,0.001,-0.592,No,p2_1/b11,Rectangular (op),2.621,4.044,-76.86,82.688,1.663,A2B3,0
+Rb2Ru2N2S2F10,0.037,-1.738,Yes,p2_1/m11,Rectangular (op),2.622,10.562,-92.764,29.864,1.655,ABCDE5,2
+In2Te2Cl2,0.007,-0.698,No,pm2_1n,Rectangular (op),2.622,5.445,-19.691,27.32,1.901,ABC,0
+K2Ru2N2S2F10,0.03,-1.736,Yes,p2_1/m11,Rectangular (op),2.625,10.443,-93.342,28.504,1.627,ABCDE5,2
+Cs2C2O6,0.007,-1.473,Yes,p2_1/m11,Rectangular (op),2.628,4.669,-65.585,28.876,1.49,ABC3,2
+Sc2I6,0.047,-1.242,No,pmma,Rectangular (op),2.628,3.834,-28.123,44.909,3.1,AB3,0
+Sb4S6,0.046,-0.229,No,p2_111,Rectangular (op),2.635,3.945,-44.387,54.761,1.44,A2B3,0
+NiN2Cl2H4C6,0.181,-0.081,Yes,pm2m,Rectangular (op),2.638,4.333,-97.36,34.042,1.165,AB2C2D4E6,2
+In2Te2F2,0.078,-1.266,No,pm2_1n,Rectangular (op),2.647,4.178,-22.705,24.394,1.722,ABC,0
+In2S2Cl2,0.019,-0.81,No,pmmn,Rectangular (op),2.649,5.669,-22.115,20.082,3.462,ABC,
+Ag2Br2Se3P4,0.037,-0.135,No,pm11,Rectangular (op),2.651,4.595,-42.245,53.907,1.429,A2B2C3D4,0
+Pt4P4S4,0,-0.558,No,p2/b11,Rectangular (op),2.654,4.259,-69.888,32.389,2.503,ABC,0
+Na2Tl2S2,0.047,-0.677,No,pmmn,Rectangular (op),2.658,6.728,-19.83,21.663,2.525,ABC,0
+Hg2Bi2I2O4,0.012,-0.787,No,p2_1/m11,Rectangular (op),2.659,7.185,-42.44,33.299,1.928,ABCD2,0
+Pd2Se2O6,0,-0.646,No,p2_1/m11,Rectangular (op),2.663,3.918,-51.809,26.952,1.51,ABC3,
+Hf2N2I2,0,-1.459,No,pmmn,Rectangular (op),2.664,6.274,-43.43,15.418,4.684,ABC,
+Cs2C2O6,0,-1.481,Yes,p2_1/m11,Rectangular (op),2.664,4.946,-65.659,30.021,1.372,ABC3,2
+Rb2C2O6,0.017,-1.469,Yes,p2_1/m11,Rectangular (op),2.673,4.779,-65.693,26.95,1.244,ABC3,2
+Cu2Sb4Br2S3,0.098,-0.212,No,pm11,Rectangular (op),2.676,4.538,-42.711,46.87,1.65,A2B2C3D4,0
+Cu2Cl2Se3P4,0.067,-0.197,No,pm11,Rectangular (op),2.68,4.164,-44.998,46.465,1.493,A2B2C3D4,0
+Mo2O4Br4,0,-1.384,No,pb2_1m,Rectangular (op),2.682,4.835,-63.082,30.945,1.753,AB2C2,
+Cu4F8,0,-1.606,Yes,pmma,Rectangular (op),2.682,6.342,-46.67,21.011,2.979,AB2,4
+In2BrClS2,0.013,-0.761,No,pmm2,Rectangular (op),2.685,5.837,-21.618,20.336,3.565,ABC2D2,0
+In4S6,0.053,-0.526,No,pmmn,Rectangular (op),2.686,5.255,-40.784,43.424,2.867,A2B3,0
+In8S12,0.062,-0.517,No,p2_1/b11,Rectangular (op),2.69,4.109,-81.387,88.673,1.636,A2B3,0
+Cu2I2S3P4,0.038,-0.141,No,pm11,Rectangular (op),2.692,4.458,-45.555,43.173,1.707,A2B2C3D4,0
+K2C2O6,0.032,-1.473,Yes,p2_1/m11,Rectangular (op),2.692,4.688,-66.353,24.407,1.266,ABC3,2
+P4Se6,0.028,-0.038,No,pb11,Rectangular (op),2.7,2.598,-42.735,56.29,1.297,A2B3,0
+Sc2Se2I2,0,-1.543,No,pmmn,Rectangular (op),2.701,6.315,-28.501,21.421,3.823,ABC,
+Sc2Se2Cl2,0,-1.911,No,pmmn,Rectangular (op),2.702,5.503,-31.323,20.274,3.393,ABC,
+In2Se2Br2,0.013,-0.695,No,pm2_1n,Rectangular (op),2.704,6.016,-19.829,24.82,1.97,ABC,0
+Sn6O6,0.036,-1.268,No,pm2_1n,Rectangular (op),2.707,4.083,-70.297,42.332,2.767,AB,0
+Sr4As4F4S8,0,-1.76,No,p2_1/b11,Rectangular (op),2.707,10.517,-99.517,33.443,3.193,ABCD2,0
+Cr2Ag2P4S12,0,-0.363,Yes,p2/b11,Rectangular (op),2.715,3.761,-102.151,63.803,2.01,ABC2D6,6
+In2H2S4,0,-0.437,No,p2_1/m11,Rectangular (op),2.717,6.179,-31.98,20.403,3.426,ABC2,0
+Bi2O2Cl2,0.136,-1.142,No,pmmn,Rectangular (op),2.721,6.31,-30.02,17.011,4.038,ABC,
+Cu2Cd2S2I2,0.055,-0.413,No,pm2_1b,Rectangular (op),2.722,5.316,-23.622,28.687,1.717,ABCD,0
+In2S2Br2,0.016,-0.703,No,pmmn,Rectangular (op),2.729,6.012,-21.069,20.553,3.503,ABC,
+Ga2Al2Se6,0.012,-0.713,No,pm2_1n,Rectangular (op),2.729,7.269,-41.311,24.009,2.705,ABC3,0
+Pt2Se2O6,0.02,-0.59,No,p2_1/m11,Rectangular (op),2.732,3.85,-56.321,27.817,1.525,ABC3,0
+Pd2I4O12,0.026,-0.157,No,p2_1/b11,Rectangular (op),2.732,5.962,-77.862,43.784,1.798,AB2C6,
+InGaS2Br2,0.017,-0.734,No,pm11,Rectangular (op),2.736,5.626,-21.397,23.382,3.044,ABC2D2,0
+Ga2Te2Br2,0,-0.609,No,pm2_1n,Rectangular (op),2.737,5.692,-19.041,25.165,1.889,ABC,0
+Al2SeSBr2,0.058,-1.003,No,pmm2,Rectangular (op),2.737,5.584,-24.224,18.139,3.612,ABC2D2,0
+Li4Sb4S8,0.011,-0.671,No,pb2_1a,Rectangular (op),2.746,6.715,-68.546,40.747,2.159,ABC2,0
+Ga4Te4Br4,0.002,-0.607,No,p2_1/b11,Rectangular (op),2.747,4.459,-38.054,58.66,1.63,ABC,0
+Ba4Sb4F4S8,0,-1.823,No,p2_1/b11,Rectangular (op),2.749,10.565,-100.368,38.176,3.304,ABCD2,0
+Cr2O2Br2,0.027,-1.438,Yes,pmmn,Rectangular (op),2.752,5.397,-40.86,12.914,2.284,ABC,6
+Zn2P4S8,0.092,-0.261,No,p2_111,Rectangular (op),2.759,7.708,-60.111,30.896,2.627,AB2C4,0
+In4Te4Br4,0,-0.596,No,p2_1/b11,Rectangular (op),2.764,4.431,-37.364,65.615,1.646,ABC,0
+Sc2SeSI2,0.007,-1.604,No,pmm2,Rectangular (op),2.768,6.287,-29.463,20.742,3.846,ABC2D2,0
+Pt2F4,0.084,-1.075,No,pman,Rectangular (op),2.781,2.09,-25.504,22.313,1.182,AB2,0
+Pt2S4,0.05,-0.345,No,p2_1/b11,Rectangular (op),2.787,1.285,-31.089,30.425,2.791,AB2,
+Ge4P4S4,0,-0.194,No,p2_122,Rectangular (op),2.789,3.193,-58.166,48.455,1.676,ABC,0
+In4S4I4,0,-0.561,No,p2_1/b11,Rectangular (op),2.789,5.463,-40.016,55.901,1.856,ABC,0
+Co2Bi4I4O6,0.102,-0.879,Yes,p2_1/m11,Rectangular (op),2.811,7.196,-85.88,46.08,2.339,AB2C2D3,6
+Ni2Se2O6,0.002,-0.734,No,p2_1/m11,Rectangular (op),2.815,3.854,-59.548,23.853,1.523,ABC3,0
+Tl2Cl4,0.039,-0.805,No,p2/m11,Rectangular (op),2.82,2.968,-16.968,33.005,2.593,AB2,
+Sc2Se2Br2,0,-1.752,No,pmmn,Rectangular (op),2.82,5.866,-29.965,20.685,3.483,ABC,
+Ga4Se4I4,0,-0.574,No,p2_1/b11,Rectangular (op),2.821,5.218,-38.348,53.005,1.832,ABC,0
+Ga2Te2F2,0.051,-1.336,No,pm2_1n,Rectangular (op),2.827,4.129,-23.408,22.191,1.661,ABC,0
+Ga4Se4Br4,0.047,-0.697,No,pb2_1a,Rectangular (op),2.829,5.861,-40.245,50.942,2.81,ABC,0
+Si4P4Se4,0.013,-0.277,No,p2_122,Rectangular (op),2.829,3.442,-60.309,46.988,1.729,ABC,0
+Cu2As4Br2S3,0.038,-0.207,No,pm11,Rectangular (op),2.83,4.33,-43.683,44.416,1.552,A2B2C3D4,0
+In2Ga2S6,0.003,-0.638,No,pm2_1n,Rectangular (op),2.831,7.218,-42.183,23.839,2.686,ABC3,0
+Al2Se2I2,0.007,-0.778,No,pm2_1n,Rectangular (op),2.831,6.448,-22.068,22.352,2.111,ABC,0
+Pb2IBr3,0.08,-0.818,No,pm11,Rectangular (op),2.832,3.956,-18.66,32.867,3.088,AB2C3,0
+K2Os2N2O2F10,0,-1.964,Yes,p2_1/m11,Rectangular (op),2.833,10.156,-102.987,27.942,1.925,ABCDE5,2
+In2S2Br2,0.021,-0.698,No,pm2_1n,Rectangular (op),2.834,6.291,-21.037,22.932,2.001,ABC,0
+Cu4H4O4F4,0.078,-1.069,Yes,p2_1/b11,Rectangular (op),2.835,3.983,-71.943,31.743,1.369,ABCD,3.999
+In4Te4Cl4,0.006,-0.699,No,pb2_1a,Rectangular (op),2.839,5.32,-39.395,54.149,3.302,ABC,0
+Ge4As4S4,0,-0.224,No,p2_122,Rectangular (op),2.844,3.075,-55.717,51.093,1.644,ABC,0
+Ag2As4Cl2Se3,0.034,-0.202,No,pm11,Rectangular (op),2.844,4.478,-40.575,55.371,1.368,A2B2C3D4,0
+Pd2S2O6,0.06,-0.845,No,p2_1/m11,Rectangular (op),2.851,3.605,-54.987,27.024,1.489,ABC3,0
+Pb2Br4,0.037,-0.928,No,pmmn,Rectangular (op),2.852,3.323,-19.425,34.713,2.756,AB2,0
+Na4Hg2I8,0.043,-0.85,No,p2_1/m11,Rectangular (op),2.857,5.354,-30.731,73.978,1.525,AB2C4,0
+Sr4Sb4Cl4S8,0.045,-1.28,No,p2_1/b11,Rectangular (op),2.862,10.304,-89.694,41.726,2.913,ABCD2,0
+Rb2Os2N2O2F10,0,-1.966,Yes,p2_1/m11,Rectangular (op),2.864,10.298,-102.405,29.472,1.941,ABCDE5,2
+W2O6,0.066,-2.18,No,p2_1/m11,Rectangular (op),2.865,6.463,-71.154,14.246,2.502,AB3,0
+Ga4Te4Cl4,0.023,-0.707,No,pb2_1a,Rectangular (op),2.868,4.857,-40.062,56.543,2.858,ABC,0
+Cr2Br2Cl2,0.063,-0.833,Yes,pb11,Rectangular (op),2.869,2.794,-30.555,26.054,2.599,ABC,8
+As4S6,0.018,-0.122,No,p2_111,Rectangular (op),2.889,3.684,-44.343,50.118,1.362,A2B3,0
+Ga4Te4Cl4,0.002,-0.728,No,p2_1/b11,Rectangular (op),2.89,4.051,-40.305,57.803,1.582,ABC,0
+Cs2Os2N2O2F10,0,-1.975,Yes,p2_1/m11,Rectangular (op),2.891,10.483,-102.412,31.799,2.057,ABCDE5,2
+Ga2Te2Cl2,0,-0.73,No,pm2_1n,Rectangular (op),2.893,5.304,-20.167,24.752,1.847,ABC,0
+Cu2I4O12,0.03,-0.19,Yes,p2_111,Rectangular (op),2.895,5.507,-78.182,42.267,1.705,AB2C6,1.999
+P4Se6,0.012,-0.054,No,pm2_1n,Rectangular (op),2.896,2.691,-42.896,54.135,1.317,A2B3,0
+In2Te2H2S8,0.08,-0.17,No,p2_1/m11,Rectangular (op),2.9,5.251,-53.589,46.919,1.838,ABCD4,0
+Si4As4Se4,0,-0.266,No,p2_122,Rectangular (op),2.901,3.315,-57.375,49.939,1.699,ABC,0
+Ag4S2,0.034,-0.041,No,pmma,Rectangular (op),2.906,3.487,-19.763,30.637,2.345,AB2,0
+Cu2As4Cl2S3,0.051,-0.257,No,pm11,Rectangular (op),2.91,4.17,-44.64,43.965,1.511,A2B2C3D4,
+Na2Nb2Br12,0,-1.092,No,p2_111,Rectangular (op),2.912,10.065,-59.749,51.885,1.832,ABC6,0
+In4Te4Cl4,0,-0.705,No,p2_1/b11,Rectangular (op),2.916,3.957,-39.468,64.468,1.6,ABC,0
+Sc2SeSCl2,0.007,-1.975,No,pmm2,Rectangular (op),2.918,5.495,-32.302,19.604,3.535,ABC2D2,0
+Ba4As4Cl4S8,0.013,-1.268,No,p2_1/b11,Rectangular (op),2.921,10.69,-91.081,44.98,2.995,ABCD2,0
+Si4Sb4S4,0.057,-0.278,No,p2_122,Rectangular (op),2.922,3.487,-58.874,52.643,1.703,ABC,0
+Cs4Cu4Se4,0,-0.716,No,pmma,Rectangular (op),2.928,4.55,-40.562,56.116,2.531,ABC,0
+Al2H2S4,0,-0.74,No,p2_1/m11,Rectangular (op),2.93,6.063,-36.355,17.023,3.478,ABC2,0
+Sr4P4F4S8,0.061,-1.754,No,p2_1/b11,Rectangular (op),2.936,10.42,-102.201,33.052,3.217,ABCD2,0
+Al2Te2I2,0,-0.569,No,pm2_1n,Rectangular (op),2.938,6.395,-20.258,25.795,2.039,ABC,0
+W2Sb4O12,0.038,-1.722,No,p2_111,Rectangular (op),2.951,8.233,-133.084,28.576,2.861,AB2C6,
+K2Cu2Se2,0.027,-0.677,No,pmma,Rectangular (op),2.957,4.269,-20.819,24.236,2.28,ABC,0
+Ba4P4F4S8,0.087,-1.746,No,p2_1/b11,Rectangular (op),2.96,10.554,-102.667,37.247,3.293,ABCD2,0
+Ba4Sb4Cl4S8,0.019,-1.335,No,p2_1/b11,Rectangular (op),2.967,10.799,-91.393,44.816,3.075,ABCD2,0
+Ga4S4I4,0,-0.597,No,p2_1/b11,Rectangular (op),2.97,5.379,-41.007,48.982,1.855,ABC,0
+Ag8S4,0.002,-0.073,No,pbma,Rectangular (op),2.973,3.715,-39.913,57.198,2.45,AB2,0
+Pt2S2O6,0.072,-0.765,No,p2_1/m11,Rectangular (op),2.976,3.591,-59.259,27.231,1.538,ABC3,0
+Sr4As4Cl4S8,0.042,-1.215,No,p2_1/b11,Rectangular (op),2.976,10.242,-89.42,41.538,2.852,ABCD2,0
+Cu2Br2S3P4,0.03,-0.206,No,pm11,Rectangular (op),2.985,4.244,-46.475,42.607,1.577,A2B2C3D4,0
+Ag2Cl2Se3P4,0.062,-0.171,No,pm11,Rectangular (op),2.987,4.329,-43.04,54.967,1.35,A2B2C3D4,0
+Li6Te2H2S8,0.044,-0.694,No,p2_1/m11,Rectangular (op),2.992,6.967,-69.517,56.946,1.274,ABC3D4,0
+Ba4As4F4S8,0,-1.758,No,p2_1/b11,Rectangular (op),2.995,10.423,-100.1,37.829,3.211,ABCD2,0
+In4F4,0,-1.763,No,pmmn,Rectangular (op),3.003,2.912,-31.501,31.641,2.663,AB,0
+Al4Se6,0.017,-0.839,No,pm2_1n,Rectangular (op),3.01,7.306,-44.243,23.763,2.717,A2B3,0
+VOBr2,0,-1.426,Yes,pm2m,Rectangular (op),3.019,3.517,-22.52,13.93,1.646,ABC2,1
+K4O12,0,-0.689,Yes,pmmn,Rectangular (op),3.024,4.306,-77.399,49.291,1.016,AB3,4
+Sc2S2F2,0.07,-2.839,No,pmmn,Rectangular (op),3.027,4.366,-37.68,17.624,2.804,ABC,0
+Cr2O2Cl2,0,-1.607,Yes,pmmn,Rectangular (op),3.028,5.118,-42.279,12.525,3.711,ABC,6
+Pb4I4Cl4,0.052,-0.883,No,pb2_1a,Rectangular (op),3.029,6.539,-38.688,54.446,3.252,ABC,0
+As4H2P2S12,0.027,-0.125,No,p2_111,Rectangular (op),3.042,3.653,-87.473,85.41,1.408,ABC2D6,0
+In2F2,0,-1.763,No,pmmn,Rectangular (op),3.051,2.904,-15.751,15.855,2.508,AB,0
+K2Nb2Br12,0,-1.159,No,p2_111,Rectangular (op),3.052,10.347,-60.657,58.206,1.762,ABC6,0
+Sc2S2I2,0,-1.679,No,pmmn,Rectangular (op),3.06,6.286,-30.508,20.004,3.859,ABC,
+Li6H2Se2S8,0.083,-0.637,No,p2_1/m11,Rectangular (op),3.065,7.209,-69.041,54.34,1.285,ABC3D4,0
+In2Se2Cl2,0.016,-0.799,No,pm2_1n,Rectangular (op),3.076,5.57,-20.859,24.499,1.933,ABC,0
+K2Ru2N2O2F10,0,-1.914,Yes,p2_1/m11,Rectangular (op),3.089,10.076,-98.646,27.441,1.758,ABCDE5,2
+Sc4I2Br2S4,0,-1.786,No,pmm2,Rectangular (op),3.091,6.082,-62.511,39.256,3.73,ABC2D2,0
+P4S6,0.031,-0.132,No,p2_111,Rectangular (op),3.097,3.241,-47.25,46.602,1.376,A2B3,0
+Ni2I4O12,0.076,-0.209,No,p2_1/b11,Rectangular (op),3.103,5.957,-85.658,40.934,1.851,AB2C6,0
+Bi2Cl6,0.059,-0.956,No,pm2_1n,Rectangular (op),3.106,4.193,-27.705,48.161,2.228,AB3,0
+Ta2Br2O4,0,-2.332,No,pmma,Rectangular (op),3.107,6.997,-61.955,14.432,2.783,ABC2,0
+Ga2Se2Br2,0.002,-0.742,No,pm2_1n,Rectangular (op),3.109,5.824,-20.395,22.118,1.917,ABC,0
+Zr2N2Br2,0.011,-1.703,No,pmmn,Rectangular (op),3.111,5.97,-44.899,14.913,4.257,ABC,
+V2F8,0,-2.928,Yes,p2_1/b11,Rectangular (op),3.112,3.271,-59.016,26.656,1.28,AB4,2
+Rb2Ru2N2O2F10,0,-1.916,Yes,p2_1/m11,Rectangular (op),3.12,10.211,-98.059,29.003,1.776,ABCDE5,2
+Ag2As4Cl2S3,0.037,-0.217,No,pm11,Rectangular (op),3.122,4.468,-42.525,51.058,1.399,A2B2C3D4,0
+Cu2Cl2S3P4,0.069,-0.257,No,pm11,Rectangular (op),3.123,4.086,-47.44,42.288,1.533,A2B2C3D4,0
+Pb4O4,0.064,-1.099,No,pm2_1b,Rectangular (op),3.125,4.175,-44.321,26.437,3.011,AB,0
+K2Cu2S2,0.076,-0.712,No,pmma,Rectangular (op),3.13,4.242,-22.219,22.985,2.116,ABC,0
+W2As4O12,0.038,-1.638,No,pm2_1n,Rectangular (op),3.138,8.101,-132.595,28.713,2.579,AB2C6,0
+Cs2Ru2N2O2F10,0,-1.925,Yes,p2_1/m11,Rectangular (op),3.138,10.356,-98.057,31.326,1.901,ABCDE5,2
+VOCl2,0,-1.647,Yes,pm2m,Rectangular (op),3.144,3.253,-23.805,13.247,1.59,ABC2,1
+In4Se4Br4,0,-0.707,No,p2_1/b11,Rectangular (op),3.146,4.588,-39.807,58.747,1.676,ABC,0
+Zr2N2Cl2,0.025,-1.86,No,pmmn,Rectangular (op),3.148,5.663,-46.244,14.635,4.149,ABC,
+Cr2Cl4,0.053,-0.986,Yes,p2_1/b11,Rectangular (op),3.151,2.669,-31.873,24.852,1.594,AB2,8
+Si4P4S4,0.015,-0.384,No,p2_122,Rectangular (op),3.162,3.078,-63.975,45.119,1.698,ABC,0
+Rh2F6,0,-1.65,No,pmma,Rectangular (op),3.167,2.443,-37.012,22.702,2.514,AB3,0
+Pb2Br2Cl2,0.035,-1.036,No,pm2_1n,Rectangular (op),3.168,3.425,-20.474,33.896,2.663,ABC,0
+Cd2I4,0,-0.63,No,pm2_1b,Rectangular (op),3.172,5.567,-11.548,33.804,2.801,AB2,0
+Al2O2I2,0.186,-1.781,No,pmmn,Rectangular (op),3.181,5.735,-31.366,13.043,4.445,ABC,
+Co2As4I4O6,0.077,-0.741,Yes,p2_1/m11,Rectangular (op),3.183,6.406,-83.624,42.185,2.222,AB2C2D3,6
+In2Se2Cl2,0.021,-0.794,No,p2_111,Rectangular (op),3.19,5.084,-20.824,27.91,2.973,ABC,0
+Al4Te4I4,0,-0.569,No,p2_1/b11,Rectangular (op),3.191,5.252,-40.517,59.925,1.786,ABC,0
+H2P6S12,0.048,-0.12,No,p2_111,Rectangular (op),3.205,2.613,-90.167,82.387,1.432,AB3C6,0
+Cd2Mn3O8,0.196,-1.369,Yes,p2/m11,Rectangular (op),3.208,3.385,-89.79,30.813,1.378,A2B3C8,9
+Ag3Cl3,0,-0.439,No,pm2m,Rectangular (op),3.209,4.876,-16.506,23.704,2.731,AB,0
+Al2S2Br2,0.026,-1.092,No,pmmn,Rectangular (op),3.21,5.581,-25.351,17.205,3.532,ABC,
+Cu4I4,0.031,-0.135,No,pbma,Rectangular (op),3.21,3.434,-21.698,32.292,3.392,AB,0
+HfZrBrClN2,0.009,-1.783,No,pmm2,Rectangular (op),3.213,5.788,-45.682,14.745,4.303,ABCDE2,0
+Sr4Te4S12,0.055,-0.812,No,p2_1/b11,Rectangular (op),3.213,5.048,-84.697,89.082,1.69,ABC3,0
+Mo2Sb4O12,0.038,-1.627,No,p2_111,Rectangular (op),3.217,8.127,-130.806,29.663,2.712,AB2C6,0
+As4S6,0,-0.14,No,pm2_1n,Rectangular (op),3.236,2.597,-44.518,52.442,1.293,A2B3,0
+Cu3Cl3,0.001,-0.451,No,pm2m,Rectangular (op),3.243,4.443,-19.088,19.537,2.823,AB,0
+Si4As4S4,0.006,-0.37,No,p2_122,Rectangular (op),3.254,2.94,-61.007,47.73,1.671,ABC,0
+Sn2O2,0.047,-1.256,No,pm2_1n,Rectangular (op),3.259,2.37,-23.386,16.78,1.403,AB,0
+Ag2Cl2S3P4,0.06,-0.217,No,pm11,Rectangular (op),3.271,4.33,-45.325,50.716,1.38,A2B2C3D4,0
+P4S6,0.021,-0.142,No,pb11,Rectangular (op),3.272,2.368,-47.347,50.531,1.285,A2B3,0
+Na2Ta2Br12,0,-1.136,No,p2_111,Rectangular (op),3.277,10.031,-59.431,52.462,1.839,ABC6,0
+Pd2N4O12,0,-0.387,No,p2_1/b11,Rectangular (op),3.277,4.52,-109.502,47.153,1.268,AB2C6,
+In2Al2S6,0.054,-0.771,No,pm2_1n,Rectangular (op),3.283,6.761,-45.179,23.416,2.655,ABC3,0
+Ga2S2Br2,0.002,-0.772,No,pm2_1n,Rectangular (op),3.284,5.953,-21.767,20.312,1.936,ABC,0
+Zr4N4F4,0,-2.585,No,pmmn,Rectangular (op),3.293,4.671,-100.39,27.743,3.661,ABC,0
+Hf2N2Br2,0,-1.695,No,pmmn,Rectangular (op),3.3,5.911,-45.058,14.858,4.231,ABC,
+Li6H2S10,0.093,-0.627,No,p2_1/m11,Rectangular (op),3.3,7.359,-70.049,52.776,1.295,AB3C5,0
+Al2S2Cl2,0.03,-1.261,No,pmmn,Rectangular (op),3.303,5.241,-26.768,16.66,3.458,ABC,
+VOF2,0.001,-2.707,Yes,pm2m,Rectangular (op),3.311,2.485,-27.649,11.443,1.217,ABC2,1
+Ag4Cl4,0.008,-0.431,No,p2_1/b11,Rectangular (op),3.321,3.244,-21.946,31.641,2.891,AB,0
+Co2Sb4I4O6,0.025,-0.9,Yes,p2_1/m11,Rectangular (op),3.324,6.727,-85.148,44.759,2.319,AB2C2D3,6
+In2O2Br2,0,-1.295,No,pmmn,Rectangular (op),3.324,5.965,-26.715,15.137,3.846,ABC,
+Cr2Br2Cl2,0.091,-0.805,Yes,pm11,Rectangular (op),3.34,5.684,-30.389,22.835,2.845,ABC,8
+Hg2Bi2F2O4,0.085,-1.176,No,p2_1/m11,Rectangular (op),3.344,4.877,-46.549,33.175,1.414,ABCD2,0
+Zn2Sb4I4O6,0.001,-1.081,No,pm2_1n,Rectangular (op),3.35,10.221,-73.953,40.388,2.461,AB2C2D3,0
+Sc4O4I4,0,-2.597,No,p2_1/m11,Rectangular (op),3.35,6.469,-76.211,28.169,2.705,ABC,
+Hf2N2Cl2,0.004,-1.857,No,pmmn,Rectangular (op),3.352,5.607,-46.427,14.571,4.122,ABC,
+Co2I2F2,0.04,-0.922,Yes,pm2_1b,Rectangular (op),3.356,5.336,-28.118,21.253,2.815,ABC,6
+In4Se4Cl4,0,-0.815,No,p2_1/b11,Rectangular (op),3.359,4.086,-41.905,57.973,1.628,ABC,0
+Zn4I8,0,-0.616,No,pm2_1b,Rectangular (op),3.369,5.26,-23.954,60.406,2.867,AB2,0
+MnCoBr4,0.024,-0.548,Yes,pmm2,Rectangular (op),3.371,3.104,-27.57,31.365,2.423,ABC4,8
+Na6H2S10,0.08,-0.56,No,p2_1/m11,Rectangular (op),3.375,8.625,-65.354,62.229,1.175,AB3C5,0
+K2Ta2Br12,0,-1.205,No,p2_111,Rectangular (op),3.385,10.264,-60.372,59.174,1.758,ABC6,0
+Mo2As4O12,0.031,-1.538,No,p2_111,Rectangular (op),3.396,8.003,-130.226,29.507,2.471,AB2C6,0
+K4As4S8,0,-0.648,No,p2_1/b11,Rectangular (op),3.407,5.887,-66.526,61.656,1.593,ABC2,0
+Co2Sb4Br4O6,0.02,-1.018,Yes,p2_1/m11,Rectangular (op),3.435,6.151,-87.461,43.738,2.075,AB2C2D3,6
+Ga8S12,0.011,-0.652,No,p2_1/b11,Rectangular (op),3.44,3.698,-85.204,76.702,1.599,A2B3,0
+ScBiO2Cl2,0.061,-2.103,No,pmm2,Rectangular (op),3.46,5.563,-35.77,14.41,4.284,ABC2D2,0
+K4P4S8,0.014,-0.651,No,p2_1/b11,Rectangular (op),3.462,5.586,-69.382,59.204,1.693,ABC2,0
+Nb2Br2O4,0,-2.229,No,p2_1/m11,Rectangular (op),3.469,7.008,-62.147,14.591,2.709,ABC2,0
+Na6Te2H2S8,0,-0.633,No,p2_1/m11,Rectangular (op),3.502,7.965,-64.917,62.201,1.263,ABC3D4,0
+Cr2O2F2,0,-2.316,Yes,pmmn,Rectangular (op),3.502,4.282,-46.133,11.767,1.866,ABC,6
+In4S4Br4,0,-0.719,No,p2_1/b11,Rectangular (op),3.507,4.674,-42.332,54.047,1.692,ABC,0
+Cd2Sb2F2O4,0.072,-1.517,No,p2_1/m11,Rectangular (op),3.513,4.708,-49.512,30.782,1.513,ABCD2,0
+Cd2Sb2Br2O4,0.018,-1.146,No,p2_1/m11,Rectangular (op),3.518,6.701,-45.795,30.586,1.959,ABCD2,0
+Hg2Bi2Br2O4,0.018,-0.849,No,p2_1/m11,Rectangular (op),3.519,6.628,-43.276,33.383,1.757,ABCD2,0
+Co2Sb4Cl4O6,0.016,-1.108,Yes,p2_1/m11,Rectangular (op),3.522,5.765,-89.69,43.042,1.995,AB2C2D3,6
+In2S2Cl2,0.028,-0.801,No,pm2_1n,Rectangular (op),3.523,5.823,-22.06,22.823,1.958,ABC,0
+Sc2S2Cl2,0,-2.053,No,pmmn,Rectangular (op),3.528,5.535,-33.361,18.834,3.412,ABC,
+Al4S6,0.024,-1.046,No,pm2_1b,Rectangular (op),3.531,2.882,-49.886,38.325,3.083,A2B3,0
+In4S4Cl4,0,-0.83,No,p2_1/b11,Rectangular (op),3.536,4.193,-44.461,53.102,1.655,ABC,0
+Sc2O2I2,0.015,-2.582,No,pmmn,Rectangular (op),3.54,6.196,-38.014,14.895,4.348,ABC,
+Al2Te2Br2,0,-0.777,No,pm2_1n,Rectangular (op),3.547,5.857,-21.718,25.177,1.862,ABC,0
+Hf2N2F2,0,-2.579,No,pmmn,Rectangular (op),3.55,4.632,-50.367,13.83,3.375,ABC,0
+Sc2BrClS2,0,-1.974,No,pmm2,Rectangular (op),3.553,5.699,-32.692,19.055,3.562,ABC2D2,0
+Te6O14,0.093,-0.926,No,pm2_1n,Rectangular (op),3.556,10.365,-109.483,42.309,2.31,A3B7,0
+Sc2S2Br2,0,-1.892,No,pmmn,Rectangular (op),3.561,5.869,-31.995,19.255,3.503,ABC,
+Sc4ClBr3S4,0,-1.935,No,pmm2,Rectangular (op),3.562,5.882,-64.711,38.297,3.556,AB3C4D4,0
+Ag4Br4,0.005,-0.342,No,p2_12_12,Rectangular (op),3.583,3.275,-20.434,38.113,2.65,AB,0
+Mg2I4,0.089,-0.992,No,pmma,Rectangular (op),3.593,4.278,-15.103,30.054,1.748,AB2,0
+Tl4Cl4,0.091,-0.934,No,pbma,Rectangular (op),3.596,2.172,-24.601,60.766,1.823,AB,0
+Al8Se12,0,-0.857,No,p2_1/b11,Rectangular (op),3.6,3.776,-88.833,82.11,1.659,A2B3,0
+Ga2O2Br2,0.019,-1.365,No,pmmn,Rectangular (op),3.601,5.541,-27.415,13.105,3.742,ABC,
+Cr2Cl2F2,0.159,-1.584,Yes,pmmn,Rectangular (op),3.604,4.423,-35.062,19.743,2.745,ABC,8
+Si4Se8,0.004,-0.446,No,p2_1/b11,Rectangular (op),3.613,3.341,-54.81,53.523,1.624,AB2,0
+W2O4Cl4,0,-1.691,No,pb2_1m,Rectangular (op),3.613,4.547,-67.515,30.322,1.748,AB2C2,0
+Sb6H2O12,0.086,-1.254,No,p2_111,Rectangular (op),3.614,3.564,-119.654,63.848,1.415,AB3C6,0
+CdN2Cl2H4C4,0.141,-0.27,No,p2/m11,Rectangular (op),3.619,4.036,-74.89,29.354,1.316,AB2C2D4E4,
+In4Br4,0.05,-0.645,No,pmm2,Rectangular (op),3.624,2.739,-22.551,56.219,1.999,AB,0
+Ga4Se4Br4,0,-0.744,No,p2_1/b11,Rectangular (op),3.625,4.723,-40.81,51.73,1.66,ABC,0
+Ga2Se2Cl2,0.001,-0.868,No,pm2_1n,Rectangular (op),3.625,5.419,-21.549,21.771,1.882,ABC,0
+Ge2O2,0.051,-1.185,No,pm2_1n,Rectangular (op),3.628,2.237,-24.021,14.003,1.387,AB,0
+Al4Te4Br4,0.003,-0.774,No,p2_1/b11,Rectangular (op),3.629,4.721,-43.398,58.662,1.617,ABC,0
+Pb2Cl4,0.032,-1.146,No,pmmn,Rectangular (op),3.649,2.939,-21.533,32.944,2.667,AB2,0
+In2Br2,0.05,-0.645,No,pmmn,Rectangular (op),3.651,2.684,-11.276,28.324,2.02,AB,0
+Ni2N4O12,0.011,-0.428,No,p2_1/b11,Rectangular (op),3.653,4.388,-117.093,43.819,1.263,AB2C6,0
+Al2Te2Cl2,0,-0.939,No,pm2_1n,Rectangular (op),3.659,5.494,-23.09,24.845,1.815,ABC,0
+In2Ga2O6,0.056,-1.66,No,pm2_1n,Rectangular (op),3.665,5.719,-58.675,17.44,2.284,ABC3,0
+Cd2Bi2Br2O4,0.004,-1.111,No,p2_1/m11,Rectangular (op),3.667,6.447,-45.977,32.386,1.852,ABCD2,0
+Al4Se4I4,0,-0.786,No,p2_1/b11,Rectangular (op),3.667,5.384,-44.224,52.153,1.848,ABC,0
+In2O2F2,0.057,-2.035,No,pmmn,Rectangular (op),3.685,4.693,-31.157,13.986,3.137,ABC,0
+Mn2I2Cl2,0.036,-0.704,Yes,pmm2,Rectangular (op),3.692,2.98,-30.183,34.517,2.482,ABC,10
+Ag6Cl6,0.019,-0.42,No,pmmn,Rectangular (op),3.705,5.818,-32.79,56.283,2.209,AB,0
+SrVICl3,0.066,-1.607,Yes,pm11,Rectangular (op),3.719,3.186,-26.671,29.455,2.884,ABCD3,3
+Sn4O4,0.002,-1.301,No,pb2_1a,Rectangular (op),3.719,2.543,-47.13,29.822,1.567,AB,0
+Pb4O4,0.007,-1.156,No,pb2_1a,Rectangular (op),3.731,2.653,-44.78,29.997,1.587,AB,0
+Cr2Cl2F2,0.13,-1.612,Yes,pm2_1n,Rectangular (op),3.731,5.647,-35.233,14.477,3.463,ABC,8
+Mo2O6,0,-2.003,No,p2_1/m11,Rectangular (op),3.738,6.341,-69.176,14.485,2.335,AB3,
+V2Br2Cl2,0,-1.02,Yes,p2_1/m11,Rectangular (op),3.74,2.948,-29.909,24.314,3.021,ABC,6
+Hg2Bi2Cl2O4,0.026,-0.897,No,p2_1/m11,Rectangular (op),3.745,6.194,-44.158,33.496,1.691,ABCD2,0
+Al4S4I4,0.01,-0.888,No,p2_1/b11,Rectangular (op),3.757,5.434,-47.837,47.858,1.886,ABC,0
+Ga2Se2Cl2,0.011,-0.858,No,pm2_1n,Rectangular (op),3.759,5.103,-21.492,24.504,2.918,ABC,0
+Bi4O6,0.034,-1.207,No,p2/b11,Rectangular (op),3.769,2.062,-61.509,34.558,2.92,A2B3,0
+Co2As4Br4O6,0.046,-0.858,Yes,p2_1/m11,Rectangular (op),3.781,5.786,-85.927,41.409,1.975,AB2C2D3,6
+Li4Bi4O8,0,-1.525,No,pb2_1a,Rectangular (op),3.784,5.821,-91.655,27.213,2.02,ABC2,0
+Al4Te4Cl4,0.004,-0.935,No,p2_1/b11,Rectangular (op),3.786,4.291,-46.133,57.845,1.569,ABC,0
+Y2S2F2,0.07,-3.024,No,pmmn,Rectangular (op),3.8,4.689,-38.858,20.086,3.055,ABC,0
+Sn2Cl2F2,0.079,-1.635,No,pm2_1b,Rectangular (op),3.808,3.101,-24.665,26.035,2.219,ABC,0
+Ga2Al2S6,0,-0.874,No,pm2_1n,Rectangular (op),3.811,6.818,-46.488,21.667,2.648,ABC3,0
+Te4O8,0,-1.087,No,p2_1/b11,Rectangular (op),3.812,4.037,-66.858,31.68,1.843,AB2,0
+Ga2Se2F2,0.065,-1.468,No,pm2_1n,Rectangular (op),3.814,4.184,-24.755,20.018,1.659,ABC,0
+Tl2Br2,0.067,-0.812,No,pmmn,Rectangular (op),3.833,2.366,-11.414,31.363,1.912,AB,0
+Sb2Te2H2O10,0.084,-1.09,No,p2_111,Rectangular (op),3.844,6.55,-90.554,31.792,2.113,ABCD5,0
+In2Cl2,0.036,-0.806,No,pmmn,Rectangular (op),3.859,2.795,-12.321,25.214,2.067,AB,0
+Pt2N4O12,0.013,-0.348,No,p2_1/b11,Rectangular (op),3.864,4.635,-113.866,46.106,1.339,AB2C6,0
+Ag2Cl2,0.028,-0.41,No,pmam,Rectangular (op),3.865,0,-10.891,31.585,1.725,AB,0
+Hg2Te2H4O8,0.022,-0.897,No,pm2_1n,Rectangular (op),3.869,4.631,-76.821,32.076,1.622,ABC2D4,0
+V4O10,0.017,-2.261,No,p2_1/m11,Rectangular (op),3.877,7.099,-116.991,22.679,2.175,A2B5,
+Mo2O4Cl4,0,-1.545,No,pb2_1m,Rectangular (op),3.881,4.472,-65.487,31.492,1.649,AB2C2,0
+Mn2I2Cl2,0.037,-0.703,Yes,pm2_1b,Rectangular (op),3.891,4.63,-30.178,28.607,2.738,ABC,10
+Co2As4Cl4O6,0.05,-0.946,Yes,p2_1/m11,Rectangular (op),3.906,5.297,-88.138,41.152,1.882,AB2C2D3,6
+Hg2Se2H4O8,0.006,-0.825,No,pm2_1n,Rectangular (op),3.908,4.332,-76.222,31.242,1.616,ABC2D4,0
+Ca2Bi4O8,0,-1.757,No,p2_1/m11,Rectangular (op),3.923,6.422,-88.307,26.394,2.308,AB2C4,0
+Na2Nb2Cl12,0,-1.453,No,p2_111,Rectangular (op),3.936,9.463,-67.935,46.758,1.811,ABC6,0
+Na4Bi4O8,0,-1.41,No,pbma,Rectangular (op),3.947,6.44,-87.48,29.866,1.973,ABC2,0
+Cd2Sb2Cl2O4,0.035,-1.201,No,p2_1/m11,Rectangular (op),3.951,6.27,-46.742,30.627,1.898,ABCD2,0
+Ga4Se4Cl4,0,-0.869,No,p2_1/b11,Rectangular (op),3.966,4.29,-43.113,51.009,1.615,ABC,0
+W2O4F4,0,-2.59,No,pb2_1m,Rectangular (op),3.972,3.654,-75.711,30.232,1.361,AB2C2,0
+Se4O8,0.023,-0.679,No,p2_1/b11,Rectangular (op),3.98,4.004,-63.076,34.315,1.487,AB2,0
+Zn2Sb4O8,0.028,-1.363,No,p2_111,Rectangular (op),3.983,6.104,-80.075,24.466,2.362,AB2C4,0
+Sb2S2F2,0.071,-1.178,No,pb11,Rectangular (op),3.987,1.833,-27.207,32.365,2.238,ABC,0
+Li2Nb2Cl12,0,-1.444,No,p2_111,Rectangular (op),4.007,9.052,-68.954,42.177,1.936,ABC6,0
+Sb2As4H2O12,0.094,-1.151,No,p2_111,Rectangular (op),4.011,2.861,-118.622,63.265,1.291,ABC2D6,0
+Mg2I2Cl2,0.08,-1.404,No,pmm2,Rectangular (op),4.018,2.986,-18.186,35.114,2.369,ABC,0
+In2O2Cl2,0,-1.42,No,pmmn,Rectangular (op),4.019,5.667,-27.866,14.777,3.772,ABC,
+Rb2Hg4S2O6Br6,0.034,-1.053,No,pm2_1n,Rectangular (op),4.024,11.387,-74.833,40.134,2.489,ABC2D3E3,0
+Cu2F4,0.011,-1.595,Yes,p2_1/b11,Rectangular (op),4.028,1.952,-23.268,18.038,1.174,AB2,2
+Sr2Bi4O8,0,-1.766,No,p2_1/m11,Rectangular (op),4.038,6.448,-87.759,28.56,2.253,AB2C4,0
+Ta2Cl2O4,0,-2.431,No,pmma,Rectangular (op),4.04,6.683,-63.151,14.212,2.751,ABC2,0
+K2Nb2Cl12,0,-1.519,No,p2_111,Rectangular (op),4.055,9.662,-68.818,53.887,1.717,ABC6,0
+Al2S2Br2,0.002,-1.115,No,pm2_1n,Rectangular (op),4.056,5.953,-25.494,19.981,1.939,ABC,0
+Cd2Bi2F2O4,0.039,-1.495,No,p2_1/m11,Rectangular (op),4.057,4.729,-49.821,32.429,1.431,ABCD2,0
+Cd2Bi2Cl2O4,0.027,-1.168,No,p2_1/m11,Rectangular (op),4.073,6.04,-46.954,32.411,1.78,ABCD2,
+Ga4S4Br4,0,-0.774,No,p2_1/b11,Rectangular (op),4.074,4.869,-43.557,47.857,1.673,ABC,0
+Ca2Sb4O8,0,-1.926,No,p2_1/m11,Rectangular (op),4.083,6.093,-89.606,25.602,2.404,AB2C4,0
+Bi4O6,0.063,-1.178,No,p2_1/m11,Rectangular (op),4.095,2.632,-61.22,42.951,1.225,A2B3,0
+Mg2I2Br2,0.062,-1.245,No,pm2_1b,Rectangular (op),4.108,5.035,-16.833,30.466,2.575,ABC,0
+Y2S2Br2,0,-2.087,No,pmmn,Rectangular (op),4.114,6.249,-33.231,21.794,3.586,ABC,0
+Mg2I2Br2,0.06,-1.247,No,pmm2,Rectangular (op),4.122,3.174,-16.842,36.211,2.396,ABC,0
+V4S4F12,0.082,-2.267,No,p2_1/b11,Rectangular (op),4.129,5.268,-114.793,47.553,1.55,ABC3,0
+Ba2Bi4O8,0,-1.75,No,p2_1/m11,Rectangular (op),4.146,6.507,-87.845,31.637,2.275,AB2C4,0
+Y2S2Cl2,0,-2.248,No,pmmn,Rectangular (op),4.146,5.88,-34.596,21.428,3.531,ABC,0
+Al4S6,0,-1.071,No,pm2_1n,Rectangular (op),4.164,6.84,-50.127,21.359,2.658,A2B3,0
+Cd2Br2Cl2,0.029,-0.981,No,pmm2,Rectangular (op),4.186,3.068,-14.479,34.292,2.344,ABC,0
+Y2Br6,0.056,-1.907,No,pmmn,Rectangular (op),4.203,4.242,-34.149,35.938,3.191,AB3,0
+Ga2S2Cl2,0.002,-0.901,No,pm2_1n,Rectangular (op),4.207,5.548,-22.937,20.093,1.9,ABC,0
+Te4Se2O14,0.036,-0.875,No,pm2_1n,Rectangular (op),4.219,9.687,-109.031,42.724,2.173,AB2C7,0
+Bi4B4O12,0.039,-1.861,No,p2_1/b11,Rectangular (op),4.227,4.248,-144.235,41.951,1.868,ABC3,0
+Ga4O6,0.05,-1.763,No,pm2_1n,Rectangular (op),4.238,5.422,-59.989,15.74,2.204,A2B3,0
+Al2Se2Br2,0.003,-1.002,No,pm2_1n,Rectangular (op),4.26,5.898,-23.622,21.84,1.91,ABC,0
+Mn2I2Cl2,0.013,-0.727,Yes,pm2_1b,Rectangular (op),4.269,5.448,-30.323,27.814,2.684,ABC,10
+Cr2F4,0.117,-2.329,Yes,p2_1/b11,Rectangular (op),4.28,1.86,-39.14,20.369,1.122,AB2,8
+Sb2H2Se2O10,0.09,-0.94,No,p2_111,Rectangular (op),4.28,6.527,-88.704,29.466,2.186,ABCD5,0
+Li2Ta2Cl12,0,-1.505,No,p2_12_12,Rectangular (op),4.317,8.796,-68.91,39.128,2.122,ABC6,0
+Mn2Br2F2,0.086,-1.493,Yes,pmmn,Rectangular (op),4.317,4.442,-34.734,19.66,2.797,ABC,10
+Sr2Sb4O8,0,-1.927,No,p2_1/m11,Rectangular (op),4.358,6.158,-88.943,28,2.342,AB2C4,0
+Al8S12,0.022,-1.049,No,p2_1/b11,Rectangular (op),4.387,3.38,-99.812,75.652,1.593,A2B3,0
+In2Al2O6,0.096,-2.21,No,pm2_1n,Rectangular (op),4.392,5.612,-65.852,16.69,2.297,ABC3,0
+Li4Sb4O8,0,-1.681,No,pb2_1a,Rectangular (op),4.432,5.414,-93.08,28.482,1.958,ABC2,0
+Tl2Cl2,0.062,-0.963,No,pmmn,Rectangular (op),4.44,2.501,-12.416,28.638,1.869,AB,0
+K2Ta2Cl12,0,-1.584,No,p2_111,Rectangular (op),4.44,9.596,-68.84,54.646,1.719,ABC6,0
+Cd2Br2Cl2,0.022,-0.988,No,pm2_1b,Rectangular (op),4.446,5.451,-14.52,27.843,2.497,ABC,0
+Nb2Cl2O4,0.012,-2.322,No,p2_1/m11,Rectangular (op),4.453,6.707,-63.292,14.299,2.69,ABC2,0
+Li4Sb4O8,0.003,-1.678,No,p2_1/b11,Rectangular (op),4.47,5.405,-93.029,29.028,1.949,ABC2,0
+V4O10,0,-2.277,No,pmmn,Rectangular (op),4.472,4.459,-117.223,40.744,1.331,A2B5,
+Tl4F4,0.017,-1.807,No,p2_1/m11,Rectangular (op),4.474,3.262,-30.79,30.591,2.502,AB,0
+Zn2Br2Cl2,0.011,-1.044,No,pmm2,Rectangular (op),4.521,2.837,-15.37,29.261,2.394,ABC,0
+Rb2Hg4S2O6Cl6,0.029,-1.123,No,pm2_1n,Rectangular (op),4.545,11.019,-77.435,39.17,2.46,ABC2D3E3,0
+Mo2Zn2Te2O12,0.007,-1.621,No,p2_12_12,Rectangular (op),4.549,7.726,-121.855,26.877,2.818,ABCD6,
+Si4S8,0.01,-0.661,No,p2_1/b11,Rectangular (op),4.553,3.059,-62.149,48.277,1.575,AB2,0
+Ba2Sb4O8,0,-1.9,No,p2_1/m11,Rectangular (op),4.562,6.332,-88.873,31.171,2.376,AB2C4,0
+Bi2As2O8,0.06,-1.247,No,p2_1/m11,Rectangular (op),4.6,3.404,-74.639,35.963,1.459,ABC4,0
+Cd4Cl8,0.038,-1.079,No,pmmn,Rectangular (op),4.606,5.867,-30.942,41.982,3.244,AB2,0
+Ba2I4,0.043,-1.794,No,pmmn,Rectangular (op),4.607,3.731,-20.335,44.517,2.995,AB2,0
+Te4S2O14,0.026,-1.169,No,pm2_1n,Rectangular (op),4.609,9.033,-116.085,43.119,2.085,AB2C7,0
+Mg2Mo2Te2O12,0.004,-1.951,No,p2_12_12,Rectangular (op),4.611,7.708,-128.662,26.922,2.797,ABCD6,0
+Ca2I4,0.071,-1.595,No,pmmn,Rectangular (op),4.652,3.58,-19.508,35.838,3.048,AB2,0
+Sb4O6,0,-1.362,No,pm2_1n,Rectangular (op),4.675,4.462,-61.988,25.66,1.895,A2B3,0
+Cu2C2O2Cl2,0.119,-0.613,No,pm2_1n,Rectangular (op),4.689,7.525,-44.514,18.665,1.553,ABCD,
+Al2Se2Cl2,0.009,-1.164,No,pm2_1n,Rectangular (op),4.701,5.285,-24.994,24.058,2.904,ABC,0
+Mn2Cl2F2,0.075,-1.643,Yes,pm2_1n,Rectangular (op),4.702,3.251,-36.035,20.18,2.638,ABC,10
+Ga4S4Cl4,0,-0.902,No,p2_1/b11,Rectangular (op),4.705,4.436,-45.894,47.214,1.633,ABC,0
+Pb2Cl2F2,0.081,-1.786,No,pm2_1n,Rectangular (op),4.706,3.463,-24.977,27.199,2.516,ABC,0
+Ga2S2F2,0.079,-1.493,No,pm2_1n,Rectangular (op),4.706,4.276,-26.094,18.776,1.665,ABC,0
+Tl4F4,0,-1.824,No,pbma,Rectangular (op),4.709,3.137,-30.928,29.531,2.598,AB,0
+Al4Se4Br4,0,-1.005,No,p2_1/b11,Rectangular (op),4.724,4.904,-47.281,50.772,1.668,ABC,0
+Na4Sb4O8,0,-1.561,No,p2_1/b11,Rectangular (op),4.726,6.007,-88.827,32.312,1.898,ABC2,0
+Na4Sb4O8,0,-1.561,No,pb2_1a,Rectangular (op),4.747,5.978,-88.83,32.595,1.85,ABC2,0
+Ga2O2F2,0,-2.229,No,pmmn,Rectangular (op),4.755,4.338,-32.605,11.738,3.03,ABC,0
+As2Sb4H2O12,0.024,-1.281,No,p2_111,Rectangular (op),4.765,3.44,-120.708,60.171,1.395,ABC2D6,0
+W2Zn2Te2O12,0.032,-1.673,No,p2_12_12,Rectangular (op),4.792,7.715,-123.346,26.937,2.907,ABCD6,0
+Sr2S6H8,0.004,-0.673,No,pm2_1b,Rectangular (op),4.8,7.616,-65.188,37.144,1.549,AB3C4,0
+Cd4Cl8,0.039,-1.078,No,pbma,Rectangular (op),4.827,5.327,-30.93,52.917,2.54,AB2,0
+Al2Se2Cl2,0.002,-1.171,No,pm2_1n,Rectangular (op),4.835,5.522,-25.039,21.532,1.865,ABC,0
+As2H2Se2O10,0.023,-0.916,No,p2_111,Rectangular (op),4.841,6.351,-88.84,29.815,1.915,ABCD5,0
+K4Sb4O8,0.001,-1.564,No,p2_1/b11,Rectangular (op),4.853,5.757,-88.514,43.795,1.684,ABC2,0
+As2Te2H2O10,0,-1.114,No,p2_111,Rectangular (op),4.857,6.305,-91.45,30.135,2.058,ABCD5,0
+Mg2W2Te2O12,0.028,-2.003,No,p2_12_12,Rectangular (op),4.867,7.7,-130.159,26.975,2.888,ABCD6,0
+Ca2S6H8,0.034,-0.646,No,pm2_1b,Rectangular (op),4.911,7.343,-65.429,34.068,1.575,AB3C4,0
+Ga2O2Cl2,0,-1.531,No,pmmn,Rectangular (op),4.957,5.243,-28.812,12.678,3.654,ABC,
+Bi2P2O8,0.081,-1.849,No,p2_1/m11,Rectangular (op),4.969,3.034,-83.26,34.813,1.398,ABC4,0
+Zn2As4O8,0,-1.312,No,p2_111,Rectangular (op),4.987,5.951,-80.38,23.779,2.161,AB2C4,
+Sr2S4I4H8,0,-0.71,No,pman,Rectangular (op),4.991,5.212,-64.943,62.852,1.488,AB2C2D4,0
+Al4Se4Cl4,0.008,-1.165,No,pb2_1a,Rectangular (op),4.992,5.597,-50.005,42.824,3.211,ABC,0
+Tl2F2,0,-1.824,No,pmmn,Rectangular (op),4.992,2.828,-15.465,18.129,2.162,AB,0
+Ti2O6,0.144,-2.166,No,pmmn,Rectangular (op),4.995,4.518,-61.457,11.821,4.408,AB3,
+Te2H2P2O10,0,-1.554,No,p2_111,Rectangular (op),5.027,5.835,-99.891,28.874,2.034,ABCD5,0
+B4Sb4O12,0.006,-1.877,No,p2_1/b11,Rectangular (op),5.051,4.021,-143.469,44.593,1.727,ABC3,0
+Sr2I2Cl2,0.063,-2.065,No,pm2_1n,Rectangular (op),5.081,4.093,-22.267,35.7,2.733,ABC,0
+Na6H2S2O8,0.064,-1.557,No,p2_1/m11,Rectangular (op),5.084,6.759,-91.662,40.954,1.031,ABC3D4,0
+Al4Se4Cl4,0,-1.173,No,p2_1/b11,Rectangular (op),5.087,4.501,-50.101,50.008,1.622,ABC,0
+W2Zn2Se2O12,0.092,-1.521,No,p2_12_12,Rectangular (op),5.09,7.805,-121.173,25.809,2.945,ABCD6,0
+Sr2O4I4H8,0,-1.31,No,pman,Rectangular (op),5.091,3.511,-79.944,58.9,1.323,AB2C2D4,0
+Mg2W2Se2O12,0.076,-1.857,No,p2_12_12,Rectangular (op),5.091,7.793,-128.085,25.825,2.931,ABCD6,0
+Zn2Br2Cl2,0,-1.055,No,pm2_1b,Rectangular (op),5.121,4.912,-15.436,24.613,2.525,ABC,0
+Al4S4Br4,0,-1.117,No,p2_1/b11,Rectangular (op),5.123,4.974,-51.013,46.589,1.691,ABC,0
+In2H2S2O8,0.033,-1.319,No,p2_1/m11,Rectangular (op),5.132,3.861,-79.795,31.316,1.629,ABCD4,0
+Na2C2N2S2,0.102,-0.328,No,pm2_1n,Rectangular (op),5.137,4.744,-48.542,23.163,1.198,ABCD,0
+As4O6,0.005,-1.215,No,p2_111,Rectangular (op),5.154,2.14,-61.55,39.413,1.117,A2B3,0
+Ba2I2Cl2,0.084,-2.14,No,pm2_1n,Rectangular (op),5.159,4.167,-23.022,40.331,2.79,ABC,0
+Ca2S4I4H8,0,-0.685,No,pman,Rectangular (op),5.166,4.929,-65.181,59.132,1.487,AB2C2D4,0
+Cd2S2H4O8,0.049,-1.181,No,pm2_1n,Rectangular (op),5.176,4.063,-83.203,29.518,1.673,ABC2D4,0
+Ca2O4I4H8,0,-1.292,No,pman,Rectangular (op),5.179,3.355,-80.295,54.696,1.334,AB2C2D4,0
+K2C2N2S2,0.066,-0.415,No,pm2_1n,Rectangular (op),5.188,5.055,-49.055,28.211,1.164,ABCD,0
+Al2S2Cl2,0,-1.291,No,pm2_1n,Rectangular (op),5.19,5.579,-26.946,19.737,1.89,ABC,0
+Ca2I2Cl2,0.077,-1.971,No,pmmn,Rectangular (op),5.193,6.075,-22.379,27.511,3.105,ABC,0
+Mo2Zn2S2O12,0.09,-1.555,No,p2_111,Rectangular (op),5.202,7.733,-122.413,30,2.331,ABCD6,0
+In2Te2H2O8,0.021,-1.265,No,p2_1/m11,Rectangular (op),5.209,4.401,-77.288,33.065,1.56,ABCD4,0
+As6H2O12,0,-1.18,No,p2_111,Rectangular (op),5.211,2.878,-119.727,59.923,1.259,AB3C6,0
+H2P2Se2O10,0,-1.341,No,p2_111,Rectangular (op),5.225,5.877,-97.038,28.384,1.912,ABCD5,0
+Sc2O2Br2,0,-2.837,No,pmmn,Rectangular (op),5.237,5.832,-39.758,14.191,3.893,ABC,
+K2N2O6,0.008,-1.059,No,p2_1/m11,Rectangular (op),5.261,4.588,-60.475,24.026,1.298,ABC3,0
+Rb2N2O6,0,-1.055,No,p2_1/m11,Rectangular (op),5.286,4.571,-59.817,26.614,1.246,ABC3,0
+Ga2Te2H2O8,0.046,-1.327,No,p2_1/m11,Rectangular (op),5.308,4.292,-78.443,28.974,1.587,ABCD4,0
+Cs2N2O6,0,-1.067,No,p2_1/m11,Rectangular (op),5.324,4.787,-59.784,29.478,1.395,ABC3,0
+Al2Te2H2O8,0.048,-1.736,No,p2_1/m11,Rectangular (op),5.331,4.195,-85.828,27.518,1.609,ABCD4,0
+Ti2O4,0.122,-2.959,No,p2_1/m11,Rectangular (op),5.342,1.976,-51.628,15.563,3.128,AB2,0
+Li6Te2H2O8,0,-1.682,No,p2_1/m11,Rectangular (op),5.347,5.529,-95.662,35.455,1.119,ABC3D4,0
+Ca4Te4O12,0.01,-2.02,No,p2_1/b11,Rectangular (op),5.348,4.384,-122.75,54.274,1.608,ABC3,0
+Li4As4O8,0,-1.654,No,pb2_1a,Rectangular (op),5.351,5.102,-93.678,27.294,1.783,ABC2,0
+Y2Cl6,0.041,-2.303,No,pmmn,Rectangular (op),5.361,3.939,-38.519,32.554,3.213,AB3,0
+P4O6,0.062,-1.537,No,pb11,Rectangular (op),5.363,1.469,-67.575,36.781,1.134,A2B3,0
+P4O6,0.062,-1.537,No,p2_111,Rectangular (op),5.376,1.97,-67.576,34.947,1.194,A2B3,0
+Na6Te2H2O8,0.007,-1.487,No,p2_1/m11,Rectangular (op),5.379,6.505,-88.664,44.653,1.028,ABC3D4,0
+Sr4Te4O12,0.011,-2.004,No,p2_1/b11,Rectangular (op),5.384,4.387,-121.087,61.362,1.541,ABC3,0
+Li4As4O8,0.003,-1.652,No,p2_1/b11,Rectangular (op),5.392,5.101,-93.631,27.625,1.789,ABC2,0
+Al2O2Br2,0.04,-2.126,No,pmmn,Rectangular (op),5.397,5.356,-33.647,12.156,3.948,ABC,
+Sb4S2O12,0,-1.369,No,p2_12_12,Rectangular (op),5.447,3.304,-111.915,58.59,1.346,AB2C6,0
+As4O6,0,-1.22,No,pb11,Rectangular (op),5.45,1.617,-61.599,40.465,1.066,A2B3,0
+Sb4H2P2O12,0,-1.631,No,p2_111,Rectangular (op),5.463,3.328,-129.118,57.325,1.393,ABC2D6,0
+Cd2Se2H4O8,0,-1.054,No,pm2_1n,Rectangular (op),5.485,4.208,-79.975,30.5,1.604,ABC2D4,
+In2H2Se2O8,0,-1.176,No,p2_1/m11,Rectangular (op),5.487,4.136,-76.592,32.035,1.58,ABCD4,0
+K4As4O8,0,-1.556,No,pbma,Rectangular (op),5.496,5.194,-89.422,41.419,1.606,ABC2,0
+Zn2Cl2F2,0.041,-1.748,No,p2_1/m11,Rectangular (op),5.535,2.955,-19.602,19.368,2.634,ABC,0
+Na4As4O8,0,-1.535,No,p2_1/b11,Rectangular (op),5.613,5.248,-89.439,34.335,1.553,ABC2,0
+Na6H2Se2O8,0.014,-1.428,No,p2_1/m11,Rectangular (op),5.631,6.641,-88.149,43.055,1.001,ABC3D4,0
+Na4As4O8,0,-1.535,No,pb2_1a,Rectangular (op),5.635,5.28,-89.443,34.124,1.54,ABC2,0
+Li6H2S2O8,0.024,-1.741,No,p2_1/m11,Rectangular (op),5.694,5.793,-98.476,32.787,1.127,ABC3D4,0
+Sr2Br4,0.054,-2.119,No,pmmn,Rectangular (op),5.741,3.258,-22.398,35.525,2.617,AB2,0
+Be2I2F2,0,-1.951,No,pm2_1b,Rectangular (op),5.741,4.705,-25.242,18.833,2.89,ABC,0
+Hf2O6,0.177,-2.461,No,pmmn,Rectangular (op),5.747,4.713,-65.446,13.209,4.712,AB3,
+Zr2O6,0.155,-2.482,No,pmmn,Rectangular (op),5.76,4.713,-65.407,13.329,4.641,AB3,
+Sb2P2O8,0.005,-1.864,No,p2_1/m11,Rectangular (op),5.77,3.082,-82.903,33.638,1.452,ABC4,0
+Ba2Br4,0.075,-2.191,No,pmmn,Rectangular (op),5.787,3.286,-23.142,40.364,2.682,AB2,0
+Ga2H2Se2O8,0,-1.241,No,p2_1/m11,Rectangular (op),5.796,4.03,-77.785,28.25,1.576,ABCD4,0
+Pb2F4,0.07,-2.432,No,pmmn,Rectangular (op),5.806,1.817,-28.457,24.261,2.224,AB2,0
+Sr2S4Br4H8,0.003,-0.842,No,pman,Rectangular (op),5.813,5.231,-67.746,56.124,1.415,AB2C2D4,0
+H2P6O12,0,-1.656,No,p2_111,Rectangular (op),5.829,2.016,-133.444,57.685,1.237,AB3C6,0
+Li6H2Se2O8,0,-1.619,No,p2_1/m11,Rectangular (op),5.856,5.659,-95.084,34.277,1.085,ABC3D4,0
+As4S2O12,0,-1.232,No,p2_12_12,Rectangular (op),5.874,2.661,-110.478,57.896,1.21,AB2C6,0
+Ca2S4Br4H8,0,-0.82,No,pman,Rectangular (op),5.884,4.989,-68.033,52.325,1.415,AB2C2D4,0
+Mg2Cl4,0.139,-1.748,No,pmma,Rectangular (op),5.908,3.544,-20.862,23.145,1.53,AB2,0
+K2C2N2O2,0.002,-1.013,No,pm2_1n,Rectangular (op),5.93,4.424,-55.937,23.927,1.093,ABCD,0
+Al4S4Cl4,0,-1.291,No,p2_1/b11,Rectangular (op),5.932,4.593,-53.895,45.883,1.645,ABC,0
+Ga2H2S2O8,0.018,-1.381,No,p2_1/m11,Rectangular (op),5.938,3.777,-80.946,27.392,1.647,ABCD4,0
+Ca2Br4,0.059,-2.035,No,pmmn,Rectangular (op),5.946,3.211,-22.573,31.379,2.716,AB2,0
+Sr2O4Br4H8,0.01,-1.444,No,pman,Rectangular (op),5.989,3.491,-82.768,53.085,1.2,AB2C2D4,0
+As4H2P2O12,0,-1.531,No,p2_111,Rectangular (op),5.999,2.811,-128.137,57.5,1.244,ABC2D6,0
+Sr4Se4O12,0.029,-1.895,No,p2_1/b11,Rectangular (op),6.001,4.04,-120.025,60.378,1.487,ABC3,0
+Ca4Se4O12,0.01,-1.907,No,p2_1/b11,Rectangular (op),6.045,4.031,-121.605,53.742,1.535,ABC3,0
+Cs2H2C2O6,0,-1.537,No,p2_111,Rectangular (op),6.047,7.225,-75.938,26.972,1.397,ABCD3,0
+Al2H2Se2O8,0,-1.652,No,p2_1/m11,Rectangular (op),6.063,3.947,-85.207,26.692,1.595,ABCD4,0
+Sr2O6H8,0.016,-1.571,No,pm2_1b,Rectangular (op),6.07,6.563,-85.823,25.068,1.204,AB3C4,0
+Ca2O4Br4H8,0,-1.429,No,pman,Rectangular (op),6.093,3.378,-83.183,49.029,1.203,AB2C2D4,0
+Cs2C2S2H6O6,0.096,-1.065,No,p2_111,Rectangular (op),6.116,9.037,-98.129,31.932,1.41,ABCD3E3,0
+Na2C2N2O2,0.027,-0.962,No,pm2_1n,Rectangular (op),6.127,4.091,-55.704,19.03,1.071,ABCD,0
+Rb2H2C2O6,0,-1.533,No,p2_111,Rectangular (op),6.136,7.072,-76.046,24.044,1.243,ABCD3,0
+Ca2O6H8,0.041,-1.58,No,pm2_1b,Rectangular (op),6.176,6.246,-86.644,22.459,1.188,AB3C4,0
+K2H2C2O6,0,-1.542,No,p2_111,Rectangular (op),6.216,6.947,-76.773,21.859,1.221,ABCD3,0
+V4O4F12,0,-2.756,No,p2_1/b11,Rectangular (op),6.247,4.432,-128.758,44.491,1.439,ABC3,
+Ca2S4F4H8,0.073,-1.396,No,pman,Rectangular (op),6.255,5.191,-78.413,34.11,1.579,AB2C2D4,0
+Ca2Br2Cl2,0.061,-2.202,No,p2_1/m11,Rectangular (op),6.266,3.252,-23.976,30.112,2.662,ABC,0
+Na2H2C2O6,0,-1.519,No,p2_111,Rectangular (op),6.301,7.195,-76.671,18.074,1.115,ABCD3,0
+Sc2O2Cl2,0,-3.012,No,pmmn,Rectangular (op),6.461,5.534,-41.21,13.837,3.78,ABC,
+Ca2S4Cl4H8,0.009,-0.922,No,pman,Rectangular (op),6.475,5.024,-70.673,47.904,1.439,AB2C2D4,0
+Cs2Cl2O6,0.06,-0.738,No,p2_1/m11,Rectangular (op),6.616,4.581,-43.36,31.399,1.536,ABC3,0
+Si2N2F2,0,-1.977,No,pm2_1n,Rectangular (op),6.701,4.375,-42.536,13.94,3.021,ABC,0
+Mg4Cl8,0.066,-1.821,No,pmmn,Rectangular (op),6.753,5.552,-42.606,37.533,3.261,AB2,0
+Sr2Cl4,0.079,-2.435,No,pmmn,Rectangular (op),6.767,2.959,-25.101,32.806,2.553,AB2,0
+Rb2Cl2O6,0.062,-0.726,No,p2_1/m11,Rectangular (op),6.795,4.511,-43.391,28.404,1.428,ABC3,0
+Al2H2S2O8,0.04,-1.793,No,p2_1/m11,Rectangular (op),6.8,3.708,-88.38,25.821,1.668,ABCD4,0
+Be2Br2Cl2,0.026,-1.224,No,pm2_1b,Rectangular (op),6.921,4.446,-21.485,20.572,2.742,ABC,0
+Sr2O4Cl4H8,0.023,-1.544,No,pman,Rectangular (op),6.943,3.519,-85.378,48.958,1.193,AB2C2D4,0
+Sc2O2F2,0.043,-3.807,No,pmmn,Rectangular (op),6.986,4.518,-45.582,12.969,2.933,ABC,0
+K2Cl2O6,0.066,-0.727,No,p2_1/m11,Rectangular (op),7.004,4.503,-44.023,26.045,1.47,ABC3,0
+Ca2O4Cl4H8,0.006,-1.534,No,pman,Rectangular (op),7.085,3.408,-85.86,45,1.195,AB2C2D4,0
+Al2O2Cl2,0,-2.354,No,pmmn,Rectangular (op),7.217,5.049,-35.418,11.665,3.841,ABC,
+Al2O2F2,0.015,-3.248,No,pmmn,Rectangular (op),7.451,4.066,-40.388,10.57,3.066,ABC,0
+K2C2S2O6F6,0.05,-1.725,No,p2_111,Rectangular (op),7.674,9.398,-100.356,27.33,1.926,ABCD3E3,0
+Sr2O4F4H8,0.074,-2.005,No,pman,Rectangular (op),7.695,3.615,-92.876,35.819,1.182,AB2C2D4,0
+Ca2O4F4H8,0.064,-2.014,No,pman,Rectangular (op),7.966,3.626,-93.712,31.981,1.185,AB2C2D4,0
+B4O6,0,-2.404,No,pb2n,Rectangular (op),8.005,1.764,-81.606,30.191,1.615,A2B3,0
+Li2Nb2F12,0,-3.285,No,p2_12_12,Rectangular (op),8.141,7.32,-96.038,23.483,1.922,ABC6,0
+K2Nb2F12,0,-3.326,No,p2_1/m11,Rectangular (op),8.177,8.167,-95.354,28.428,1.941,ABC6,0
+Na2Nb2F12,0,-3.273,No,p2_12_12,Rectangular (op),8.25,7.707,-94.682,26.612,1.81,ABC6,0
+K2Ta2F12,0,-3.387,No,p2_1/m11,Rectangular (op),8.681,8.095,-95.311,28.361,1.998,ABC6,0
+Li2Ta2F12,0,-3.347,No,p2_12_12,Rectangular (op),8.725,7.328,-95.999,23.792,1.957,ABC6,0
+Na2Ta2F12,0,-3.336,No,p2_12_12,Rectangular (op),8.85,7.733,-94.668,26.897,1.846,ABC6,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,2
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.235
+,,,,,,,,,,,,
+,,,,,,,,,,,,5.015
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,4
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.999
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,3.999
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0.934
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,3.997
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,4.933
+,,,,,,,,,,,,0
+,,,,,,,,,,,,4
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,1.643
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,2.989
+,,,,,,,,,,,,
+,,,,,,,,,,,,3.961
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0.754
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.122
+,,,,,,,,,,,,2.822
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,2.94
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.994
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.995
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,6
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,10
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.984
+,,,,,,,,,,,,4.882
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,2
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,4
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0.935
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.009
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,4
+,,,,,,,,,,,,6.124
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,10
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,2.189
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,8
+,,,,,,,,,,,,7.999
+,,,,,,,,,,,,8
+,,,,,,,,,,,,8.005
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0.254
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.598
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,4
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,4
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,4
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0.874
+,,,,,,,,,,,,4.18
+,,,,,,,,,,,,4.01
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,4
+,,,,,,,,,,,,6.217
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,2.013
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,8.39
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,1.103
+,,,,,,,,,,,,16.729
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,8
+,,,,,,,,,,,,7.998
+,,,,,,,,,,,,8
+,,,,,,,,,,,,8.058
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.362
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,28.734
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,4
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,3.505
+,,,,,,,,,,,,4
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,4.002
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,1.003
+,,,,,,,,,,,,3.975
+,,,,,,,,,,,,4.26
+,,,,,,,,,,,,4.044
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0.744
+,,,,,,,,,,,,6.078
+,,,,,,,,,,,,
+,,,,,,,,,,,,4.319
+,,,,,,,,,,,,
+,,,,,,,,,,,,6.066
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0.849
+,,,,,,,,,,,,0.785
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,8
+,,,,,,,,,,,,9.291
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,8
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.397
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,8.982
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,5.882
+,,,,,,,,,,,,8
+,,,,,,,,,,,,8
+,,,,,,,,,,,,8
+,,,,,,,,,,,,7.999
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0.981
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.88
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,4
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,2
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,4
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,4
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,20
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,2.489
+,,,,,,,,,,,,2.043
+,,,,,,,,,,,,1.597
+,,,,,,,,,,,,0
+,,,,,,,,,,,,4.008
+,,,,,,,,,,,,3.996
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,3.533
+,,,,,,,,,,,,3.076
+,,,,,,,,,,,,3.866
+,,,,,,,,,,,,3.145
+,,,,,,,,,,,,2.906
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,2.472
+,,,,,,,,,,,,1.957
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,3.573
+,,,,,,,,,,,,3.143
+,,,,,,,,,,,,3.838
+,,,,,,,,,,,,3.144
+,,,,,,,,,,,,3.82
+,,,,,,,,,,,,2.679
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,1.22
+,,,,,,,,,,,,0
+,,,,,,,,,,,,2.868
+,,,,,,,,,,,,2.007
+,,,,,,,,,,,,1.492
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,3.808
+,,,,,,,,,,,,2.961
+,,,,,,,,,,,,2.802
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0.913
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0.833
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,1
+,,,,,,,,,,,,
+,,,,,,,,,,,,2
+,,,,,,,,,,,,2
+,,,,,,,,,,,,2
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,1
+,,,,,,,,,,,,1
+,,,,,,,,,,,,1
+,,,,,,,,,,,,1.041
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.984
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,7.124
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,5.988
+,,,,,,,,,,,,5.879
+,,,,,,,,,,,,7.911
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,2.761
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,7.484
+,,,,,,,,,,,,-1.133
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,-6.485
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,4
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,7.997
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,-10
+,,,,,,,,,,,,
+,,,,,,,,,,,,0.413
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,9
+,,,,,,,,,,,,9
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0.98
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,3.065
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0.955
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0.87
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0.66
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,2.685
+,,,,,,,,,,,,3.299
+,,,,,,,,,,,,3.665
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,3.844
+,,,,,,,,,,,,4
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,8
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,14.744
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,6
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,4
+,,,,,,,,,,,,4
+,,,,,,,,,,,,4
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,1.55
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,2.067
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,1.915
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,4.323
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.959
+,,,,,,,,,,,,5.199
+,,,,,,,,,,,,1.94
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0.846
+,,,,,,,,,,,,2
+,,,,,,,,,,,,0
+,,,,,,,,,,,,1.53
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,12
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,20
+,,,,,,,,,,,,20
+,,,,,,,,,,,,3.999
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,5.997
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,6
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,4.002
+,,,,,,,,,,,,0.252
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,5.991
+,,,,,,,,,,,,5.984
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,2.072
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,2
+,,,,,,,,,,,,2
+,,,,,,,,,,,,2
+,,,,,,,,,,,,0
+,,,,,,,,,,,,2.35
+,,,,,,,,,,,,2.888
+,,,,,,,,,,,,2.743
+,,,,,,,,,,,,2.49
+,,,,,,,,,,,,2.884
+,,,,,,,,,,,,2.748
+,,,,,,,,,,,,0
+,,,,,,,,,,,,1.906
+,,,,,,,,,,,,0
+,,,,,,,,,,,,1.996
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,2.788
+,,,,,,,,,,,,3.847
+,,,,,,,,,,,,2.992
+,,,,,,,,,,,,3.834
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.016
+,,,,,,,,,,,,2.227
+,,,,,,,,,,,,
+,,,,,,,,,,,,0.961
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,1.003
+,,,,,,,,,,,,2.172
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0.461
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0.643
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,6.973
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,4.798
+,,,,,,,,,,,,6.148
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,11.998
+,,,,,,,,,,,,0
+,,,,,,,,,,,,3.979
+,,,,,,,,,,,,3.987
+,,,,,,,,,,,,3.843
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,10.721
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0.591
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,3
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,1.634
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0.542
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,6
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,8
+,,,,,,,,,,,,8
+,,,,,,,,,,,,8
+,,,,,,,,,,,,8
+,,,,,,,,,,,,8
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
+,,,,,,,,,,,,
+,,,,,,,,,,,,0
+,,,,,,,,,,,,0
