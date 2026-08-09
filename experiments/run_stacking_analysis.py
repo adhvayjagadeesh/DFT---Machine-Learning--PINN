@@ -155,12 +155,20 @@ def run(repeats: int, quick: bool) -> None:
     for dropped in BASE:
         d = drop_df[drop_df.dropped == dropped].sort_values(["repeat", "fold"]).mse.to_numpy()
         loss = d - piv_full            # positive => removing this model hurts
+        # Fold estimates come from repeated CV with overlapping training sets,
+        # so the uncorrected paired t-test is anti-conservative here. The
+        # Nadeau-Bengio corrected value is the one to report.
+        n_tr = int(df.n_train.mean())
+        n_va = int(df.n_valid.mean())
         drop_summary[dropped] = {
             "mean_r2_without": float(drop_df[drop_df.dropped == dropped].r2.mean()),
             "mse_penalty_when_removed": float(loss.mean()),
             "folds_worse_without": int((loss > 0).sum()),
             "n_folds": len(loss),
-            "p_one_sided": fold_level_ttest(loss).p_value_one_sided,
+            "test": "Nadeau-Bengio corrected paired t-test",
+            "p_one_sided": corrected_repeated_kfold_ttest(
+                loss, n_train=n_tr, n_test=n_va).p_value_one_sided,
+            "p_one_sided_plain": fold_level_ttest(loss).p_value_one_sided,
         }
     summary["drop_one_ablation"] = drop_summary
 

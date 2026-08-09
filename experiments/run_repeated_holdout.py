@@ -34,7 +34,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from pinn_dft import config                                    # noqa: E402
 from pinn_dft.data import build_dataset, encode_fold           # noqa: E402
 from pinn_dft.evaluation.metrics import regression_metrics     # noqa: E402
-from pinn_dft.evaluation.statistics import fold_level_ttest    # noqa: E402
+from pinn_dft.evaluation.statistics import (                   # noqa: E402
+    corrected_repeated_kfold_ttest, fold_level_ttest)
 from pinn_dft.models.baselines import train_baseline           # noqa: E402
 from pinn_dft.models.hybrid import out_of_fold_prior           # noqa: E402
 from pinn_dft.models.neural import predict, train_mlp, train_pinn  # noqa: E402
@@ -109,12 +110,20 @@ def run(splits: int, test_fraction: float, quick: bool) -> None:
     for challenger in ("stack_ridge", "stack_nnls"):
         for incumbent in ("pinn", "mlp", "gbr"):
             d = (piv[incumbent] - piv[challenger]).to_numpy()
-            t = fold_level_ttest(d)
+            # Splits are drawn from one finite pool, so their training sets
+            # overlap heavily and the differences are positively correlated.
+            # The Nadeau-Bengio correction is the appropriate test; the
+            # uncorrected value is retained only for comparison.
+            n_test = int(df.n_test.mean())
+            n_train = len(y) - n_test
             summary["comparisons"][f"{challenger}_vs_{incumbent}"] = {
                 "mean_mse_gain": float(d.mean()),
                 "splits_won": int((d > 0).sum()),
                 "n_splits": len(d),
-                "p_one_sided": t.p_value_one_sided,
+                "test": "Nadeau-Bengio corrected paired t-test",
+                "p_one_sided": corrected_repeated_kfold_ttest(
+                    d, n_train=n_train, n_test=n_test).p_value_one_sided,
+                "p_one_sided_plain": fold_level_ttest(d).p_value_one_sided,
             }
 
     summary["runtime_seconds"] = round(time.time() - t0, 1)
