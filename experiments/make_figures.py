@@ -1,7 +1,7 @@
 """Regenerate every manuscript figure from the committed result files.
 
-Run after run_benchmarks.py, run_ablation.py, run_recovery_study.py and
-run_stacking_analysis.py::
+Run after the experiment scripts in experiments/. Figures whose inputs are missing
+are skipped with a message rather than failing::
 
     python experiments/make_figures.py
 
@@ -401,10 +401,76 @@ def fig_utility():
     plt.close(fig)
 
 
+# ---------------------------------------------------------------- figure 10
+def fig_feature_tiers():
+    """What accuracy costs in DFT, and how the pipeline compares to the prior one."""
+    if not _exists("feature_tier_metrics.csv", "feature_tiers.json"):
+        return
+    df = pd.read_csv(M / "feature_tier_metrics.csv")
+    with open(M / "feature_tiers.json") as fh:
+        s = json.load(fh)
+
+    tiers = ["full", "geometry_only", "dft_free"]
+    tier_label = {"full": "All descriptors", "geometry_only": "No DFT energies",
+                  "dft_free": "No DFT at all\n(composition + symmetry)"}
+
+    fig, axes = plt.subplots(1, 2, figsize=(11.0, 4.0))
+
+    # (a) accuracy vs DFT cost, ensemble and the prior pipeline's best model
+    for model, color, label, marker in (
+            ("stack_ridge", ACCENT, "Stacked ensemble (ours)", "o"),
+            ("prior_xgb", NEUTRAL, "XGBoost (prior pipeline)", "s")):
+        means = [df[(df.tier == t) & (df.variant == model)].r2.mean() for t in tiers]
+        errs = [1.96 * df[(df.tier == t) & (df.variant == model)].r2.sem()
+                for t in tiers]
+        axes[0].errorbar(range(3), means, yerr=errs, marker=marker, color=color,
+                         lw=2, capsize=3, markersize=7, label=label)
+        for i, v in enumerate(means):
+            axes[0].annotate(f"{v:.3f}", (i, v), textcoords="offset points",
+                             xytext=(0, 11 if model == "stack_ridge" else -16),
+                             ha="center", fontsize=7.5, color=color)
+    axes[0].axhline(0.7431, ls="--", lw=1.2, color=WARN)
+    axes[0].text(2.05, 0.7431, " previously published\n hybrid (0.743)",
+                 fontsize=7.5, color=WARN, va="center", ha="left")
+    axes[0].set_xticks(range(3), [tier_label[t] for t in tiers], fontsize=8)
+    axes[0].set_ylabel("Cross-validated $R^2$")
+    axes[0].set_xlim(-0.3, 3.05)
+    axes[0].set_title("(a) Accuracy against DFT cost", fontsize=9.5, fontweight="bold")
+    axes[0].legend(frameon=False, fontsize=8, loc="lower left")
+
+    # (b) head-to-head within the full tier
+    full = df[df.tier == "full"]
+    order = ["svr", "gbr", "rf", "prior_rf", "prior_gbr", "prior_xgb",
+             "pinn", "mlp", "stack_nnls", "stack_ridge"]
+    order = [m for m in order if m in full.variant.unique()]
+    names = {**PRETTY, "prior_xgb": "XGBoost (prior)", "prior_gbr": "GBR (prior)",
+             "prior_rf": "RF (prior)"}
+    means = [full[full.variant == m].r2.mean() for m in order]
+    colors = [ACCENT if "stack" in m else (WARN if m.startswith("prior") else NEUTRAL)
+              for m in order]
+    axes[1].barh(range(len(order)), means, color=colors, edgecolor="white", height=.68)
+    for i, v in enumerate(means):
+        axes[1].text(v + .004, i, f"{v:.3f}", va="center", fontsize=7.5)
+    axes[1].set_yticks(range(len(order)), [names[m] for m in order], fontsize=8)
+    axes[1].set_xlim(0.70, max(means) * 1.045)
+    axes[1].set_xlabel("Cross-validated $R^2$")
+    axes[1].set_title("(b) Head-to-head, all descriptors", fontsize=9.5,
+                      fontweight="bold")
+
+    fig.subplots_adjust(wspace=0.34)
+    fig.text(0.5, -0.05,
+             "Red bars are the estimators specified by the prior pipeline, at their "
+             "original hyperparameters, on identical folds. Removing every DFT-derived "
+             "descriptor costs 0.044 $R^2$ and still exceeds the published hybrid.",
+             ha="center", fontsize=7.5, color="#666")
+    fig.savefig(F / "fig10_feature_tiers.png")
+    plt.close(fig)
+
+
 def main() -> None:
     for fn in (fig_model_comparison, fig_drop_one_and_weights, fig_error_correlation,
                fig_learning_curve, fig_parity_and_rec, fig_ablation, fig_calibration,
-               fig_repeated_holdout, fig_utility):
+               fig_repeated_holdout, fig_utility, fig_feature_tiers):
         try:
             fn()
         except Exception as exc:  # keep going; report what failed
