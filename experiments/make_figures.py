@@ -331,10 +331,80 @@ def fig_repeated_holdout():
     plt.close(fig)
 
 
+# ---------------------------------------------------------------- figure 9
+def fig_utility():
+    """Why the ensemble earns its cost, in decision-relevant terms."""
+    if not _exists("utility_study.json"):
+        return
+    with open(M / "utility_study.json") as fh:
+        s = json.load(fh)
+    base = ["rf", "gbr", "svr", "mlp", "pinn"]
+
+    fig, axes = plt.subplots(1, 3, figsize=(12.4, 3.8))
+
+    # (a) which single model wins, per fold
+    r = s["model_selection_risk"]
+    wins = [r["win_counts"][m] for m in base]
+    axes[0].bar(range(len(base)), wins, color=NEUTRAL, edgecolor="white", width=.62)
+    axes[0].set_xticks(range(len(base)), [PRETTY[m] for m in base],
+                       rotation=20, ha="right", fontsize=8)
+    axes[0].set_ylabel(f"Folds won (of {r['n_folds']})")
+    axes[0].set_title("(a) The best single model is not stable",
+                      fontsize=9.5, fontweight="bold")
+    axes[0].set_ylim(0, max(wins) * 1.55)
+    axes[0].text(0.5, 0.97,
+                 f"stack beats the committed choice\non "
+                 f"{r['folds_stack_beats_committed']}/{r['n_folds']} folds "
+                 f"(p={r['p_stack_vs_committed']:.4f})",
+                 transform=axes[0].transAxes, ha="center", va="top", fontsize=7.5,
+                 bbox=dict(boxstyle="round,pad=0.35", fc="#EEF3FC", ec="none"))
+
+    # (b) tail risk
+    t = s["tail_risk"]
+    order = base + ["stack_nnls"]
+    rates = [t[m]["rate_error_above_1eV"] * 100 for m in order]
+    colors = [ACCENT if m == "stack_nnls" else NEUTRAL for m in order]
+    axes[1].bar(range(len(order)), rates, color=colors, edgecolor="white", width=.62)
+    for i, v in enumerate(rates):
+        axes[1].text(i, v + .15, f"{v:.1f}", ha="center", fontsize=7.5)
+    axes[1].set_xticks(range(len(order)), [PRETTY[m] for m in order],
+                       rotation=25, ha="right", fontsize=8)
+    axes[1].set_ylabel("% of predictions in error by >1 eV")
+    axes[1].set_title("(b) Fewer large errors", fontsize=9.5, fontweight="bold")
+
+    # (c) cost in context
+    if "cost" in s:
+        c = s["cost"]
+        labels = ["MLP\nalone", "Full\nensemble", "One HSE06\ncalculation"]
+        # A single HSE06 calculation on a small 2D cell is hours of CPU time;
+        # 1 CPU-hour is used as a deliberately conservative reference point.
+        values = [c["per_model"]["mlp"]["train_s"], c["stack_total_train_s"], 3600.0]
+        bars = axes[2].bar(range(3), values,
+                           color=[NEUTRAL, ACCENT, WARN], edgecolor="white", width=.6)
+        axes[2].set_yscale("log")
+        axes[2].set_ylabel("Wall-clock seconds (log scale)")
+        axes[2].set_xticks(range(3), labels, fontsize=8)
+        for b, v in zip(bars, values):
+            axes[2].text(b.get_x() + b.get_width() / 2, v * 1.25,
+                         f"{v:.1f}s" if v < 100 else f"{v / 3600:.0f} CPU-h",
+                         ha="center", fontsize=7.5)
+        axes[2].set_title("(c) The ensemble's overhead is negligible",
+                          fontsize=9.5, fontweight="bold")
+
+    fig.subplots_adjust(wspace=0.33)
+    fig.text(0.5, -0.06,
+             "The ensemble is justified not by its $R^2$ margin but by removing the "
+             "risk of committing to the wrong single model, cutting large errors, "
+             "and costing seconds against the CPU-hours of the calculation it replaces.",
+             ha="center", fontsize=7.5, color="#666")
+    fig.savefig(F / "fig9_utility.png")
+    plt.close(fig)
+
+
 def main() -> None:
     for fn in (fig_model_comparison, fig_drop_one_and_weights, fig_error_correlation,
                fig_learning_curve, fig_parity_and_rec, fig_ablation, fig_calibration,
-               fig_repeated_holdout):
+               fig_repeated_holdout, fig_utility):
         try:
             fn()
         except Exception as exc:  # keep going; report what failed
