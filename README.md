@@ -1,12 +1,20 @@
-# Physics-Informed Hybrid Residual Learning for Band-Gap Prediction of 2D Materials
+# Band-Gap Prediction for 2D Materials Without DFT
 
-Code and data accompanying the manuscript *Physics-Informed Hybrid Residual Learning for
-Band-Gap Prediction of Two-Dimensional Materials* (Jagadeesh, Mudalagi, Akl), prepared for
-submission to **IEEE Access**.
+Code and data for *Band-Gap Prediction for Two-Dimensional Materials Without Density
+Functional Theory: A Leakage-Controlled Evaluation of Hybrid and Ensemble Models*
+(Jagadeesh, Mudalagi, Akl), prepared for **IEEE Access**.
 
-The pipeline predicts HSE06 band gaps of rectangular-lattice two-dimensional materials from
-tabular physicochemical descriptors, combining a gradient-boosted tree prior with a neural
-residual correction head.
+**Headline result.** HSE06 band gaps of rectangular-lattice 2D materials are predicted to
+**R² = 0.836, MAE = 0.417 eV from chemical composition and crystal symmetry alone** — no
+electronic-structure calculation on the target material. That is more accurate than a
+previously published physics-informed hybrid which used the full DFT-derived descriptor
+set (R² = 0.743, MAE = 0.555 eV), and unlike it, applies to compounds never calculated.
+
+**Secondary result (negative).** Under the same protocol, a physics-informed hybrid that
+corrects a gradient-boosted prior with a neural residual head does *not* improve on that
+prior. Reverting one implementation detail — building the prior in-sample rather than
+out-of-fold — reproduces the previously reported gain, identifying it as an evaluation
+artifact.
 
 ---
 
@@ -17,24 +25,60 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Reproduce the full benchmark and the ablation:
-
-```bash
-python experiments/run_benchmarks.py --splitter group --tune
-```
-
-```bash
-python experiments/run_ablation.py --splitter group
-```
-
-Run the test suite:
-
 ```bash
 python -m pytest tests/ -q
 ```
 
-Add `--quick` to either experiment for a fast smoke test (short training schedules, no
-hyperparameter search). Results are not publication-grade in that mode.
+| Experiment | Command | Runtime |
+|---|---|---|
+| Seven-model benchmark | `python experiments/run_benchmarks.py --splitter group --tune` | ~11 min |
+| Component ablation | `python experiments/run_ablation.py --splitter group` | ~11 min |
+| Hybrid recovery study | `python experiments/run_recovery_study.py --repeats 5` | ~13 min |
+| Stacking analysis | `python experiments/run_stacking_analysis.py --repeats 3` | ~5 min |
+| Repeated held-out | `python experiments/run_repeated_holdout.py --splits 8` | ~13 min |
+| DFT-cost tiers | `python experiments/run_feature_tiers.py --repeats 3` | ~11 min |
+| Ensemble utility | `python experiments/run_utility_study.py` | ~1 min |
+| All figures | `python experiments/make_figures.py` | ~30 s |
+
+Add `--quick` to any experiment for a fast smoke test. Results in that mode are not
+publication-grade.
+
+---
+
+## Results
+
+Repeated grouped five-fold cross-validation, 25 fold estimates, all descriptors.
+*p*-values are Nadeau–Bengio corrected, one-sided, against the GBR baseline.
+
+| Model | R² | MAE (eV) | Beats GBR | *p* |
+|---|---|---|---|---|
+| **Stacked ensemble (ridge)** | **0.877 ± 0.038** | **0.363** | 25/25 | <0.001 |
+| Stacked ensemble (NNLS) | 0.875 ± 0.038 | 0.364 | 25/25 | <0.001 |
+| Deep MLP | 0.864 ± 0.039 | 0.378 | 24/25 | 0.002 |
+| Standalone PINN | 0.856 ± 0.043 | 0.385 | 22/25 | 0.033 |
+| Random forest | 0.827 ± 0.041 | 0.442 | 13/25 | 0.323 |
+| GBR (baseline) | 0.823 ± 0.043 | 0.464 | — | — |
+| Hybrid GBR + corrector | 0.810 ± 0.047 | 0.445 | 12/25 | 0.271 |
+| SVR | 0.774 ± 0.039 | 0.497 | 1/25 | — |
+
+### Accuracy against DFT cost
+
+| Tier | What it needs | R² | MAE (eV) |
+|---|---|---|---|
+| All descriptors | Converged DFT | 0.880 ± 0.037 | 0.360 |
+| No DFT energies | Relaxed geometry | 0.845 ± 0.046 | 0.398 |
+| **No DFT at all** | **Formula + symmetry** | **0.836 ± 0.057** | **0.417** |
+
+### Head-to-head against the prior pipeline
+
+The estimators specified by the earlier code, at their original hyperparameters, on
+identical folds:
+
+| Model | R² | MAE (eV) | Ensemble wins | *p* |
+|---|---|---|---|---|
+| XGBoost (prior) | 0.858 | 0.388 | 14/15 | 0.025 |
+| GBR (prior) | 0.852 | 0.405 | 14/15 | 0.002 |
+| RF (prior) | 0.826 | 0.443 | 15/15 | <0.001 |
 
 ---
 
@@ -42,30 +86,28 @@ hyperparameter search). Results are not publication-grade in that mode.
 
 ```
 data/
-  raw/c2db_raw.csv                 C2DB export, 2,848 rows (1,169 carry an HSE06 label)
-  processed/                       generated feature matrices
+  raw/c2db_raw.csv               C2DB export (1,169 rows carry an HSE06 label)
+  processed/                     generated feature matrices
 src/pinn_dft/
-  config.py                        paths, schema, protocol constants
-  data.py                          cleaning, composition featurisation, fold-safe encoding
-  utils.py                         seeding
+  config.py                      paths, schema, protocol constants
+  data.py                        cleaning, Magpie featurisation, fold-safe encoding
+  utils.py                       seeding
   models/
-    baselines.py                   RF / GBR / SVR with in-fold hyperparameter search
-    neural.py                      deep MLP and standalone PINN
-    structural_layer.py            geometric coupling layer
-    hybrid.py                      hybrid residual model + out-of-fold prior construction
-    losses.py                      boundary, pinball, and anisotropy terms
+    baselines.py                 RF / GBR / SVR with in-fold hyperparameter search
+    neural.py                    deep MLP and standalone PINN
+    structural_layer.py          geometric coupling layer
+    hybrid.py                    hybrid residual model + out-of-fold prior
+    losses.py                    boundary, pinball, anisotropy terms
   evaluation/
-    metrics.py                     point metrics, REC curves, quantile calibration
-    statistics.py                  fold-level and Nadeau-Bengio corrected tests
-experiments/
-  run_benchmarks.py                seven-model benchmark, grouped CV, held-out test set
-  run_ablation.py                  measured component ablation
+    metrics.py                   point metrics, REC curves, quantile calibration
+    statistics.py                fold-level and Nadeau–Bengio corrected tests
+experiments/                     one script per experiment, all reproducible
 results/
-  metrics/                         generated JSON/CSV outputs
-  figures/                         generated figures
-tests/                             pytest suite
-paper/                             manuscript sources
-archive/exploratory/               superseded exploratory scripts, kept for provenance
+  metrics/                       generated JSON/CSV outputs
+  figures/                       generated figures (fig1–fig10)
+tests/                           pytest suite
+paper/ieee_access/               IEEE Access manuscript sources
+archive/exploratory/             superseded scripts, kept for provenance
 ```
 
 ---
@@ -75,90 +117,72 @@ archive/exploratory/               superseded exploratory scripts, kept for prov
 | Aspect | Setting |
 |---|---|
 | Data | 1,169 C2DB materials with an HSE06 label |
-| Held-out test set | 15%, carved by formula group before any model selection |
-| Cross-validation | 5-fold `GroupKFold` on the remaining 85% |
+| Held-out evaluation | 8 independent formula-grouped sets (~234 each) |
+| Cross-validation | 5 repeats × grouped 5-fold = 25 fold estimates |
 | Grouping key | chemical formula |
-| Feature scaling | fitted on the training fold only |
-| Categorical encoding | vocabulary taken from the training fold only |
-| Base-model prior | out-of-fold, via an inner 5-fold split |
-| Significance | Nadeau-Bengio corrected paired t-test over fold scores |
+| Feature scaling / encoding | fitted on the training fold only |
+| Stacked inputs | out-of-fold, via an inner 5-fold split |
+| Significance | Nadeau–Bengio corrected paired *t*-test |
 | Seed | 42 |
 
-**Why grouping matters.** 176 labelled materials share a chemical formula with at least one
-other entry — these are polymorphs, distinguished by layer group, whose band gaps differ by up
-to 2.9 eV. Because the feature set includes composition-derived descriptors, an ungrouped split
-lets a model see one polymorph in training and be scored on another with near-identical
-features. `--splitter random` reproduces the ungrouped protocol for comparison; grouped is the
-figure that should be reported.
+**Why grouping matters.** 176 materials share a formula with another entry — polymorphs
+distinguished by layer group, whose gaps differ by up to 2.9 eV. Because composition
+descriptors are near-identical within such a pair, an ungrouped split lets a model
+memorise one polymorph and be scored on another.
 
 ---
 
-## Corrections made in this revision
+## Corrections relative to the earlier pipeline
 
-This revision fixes several defects that biased the previously reported results. They are
-documented here because the numbers in the current manuscript draft predate the fixes.
+Documented because the numbers in the earlier manuscript predate these fixes.
 
-**Leakage: in-sample base-model prior.** The hybrid built its training features from
-`base_model.predict(X_train)` — in-sample predictions of a tree already fitted to those rows.
-The residual head therefore trained against a prior far more accurate than the one it meets at
-inference. `hybrid.out_of_fold_prior()` replaces this with the standard stacked-generalisation
-construction. The `in_sample_prior` ablation variant quantifies the difference.
-
-**Feature matrix dominated by row identifiers.** The raw `Formula` string was one-hot encoded
-into 1,077 columns, 825 of which occurred in exactly one material. These are identifiers, not
-descriptors. They are replaced by Magpie elemental-property statistics (120 columns after
-constant/NaN filtering) plus atom count and packing density.
-
-**Encoding fitted on the full dataset.** One-hot encoding ran before cross-validation, exposing
-the category vocabulary of every validation fold. Encoding now happens inside each fold.
-
-**Geometric channels pointed at the wrong columns.** The structural layer was instantiated with
-positional indices 0 and 1, which in the assembled matrix were *Energy above hull* and *Heat of
-formation* — two formation energies. Channels are now resolved by name (see
-`config.GEOMETRIC_CHANNELS`), and a test asserts this.
-
-**239 labelled materials silently discarded.** A blanket `dropna()` removed every row missing
-*Total magnetic moment*, cutting 1,169 labelled materials to 930. That column is now imputed
-from the training fold with an accompanying missingness indicator.
-
-**Invalid significance test.** The reported p-value came from a paired t-test over 930
-per-sample squared errors, which are not independent observations of model performance. The
-test is now applied at fold level, with the Nadeau-Bengio variance correction for overlapping
-training sets. A helper previously named `run_dietterich_5x2cv_test` implemented neither
-Dietterich's test nor any variance correction and has been removed.
-
-**Ablation study reported fabricated numbers.** The previous `submit/ablation.py` computed each
-variant as `optimized_hybrid - numpy.random.uniform(...)` and raised `KeyError` before training
-anything. `experiments/run_ablation.py` trains and evaluates every configuration.
-
-**Untuned baselines.** Baselines ran at library defaults while the hybrid was hand-tuned.
-All baselines now receive an equal in-fold randomised search budget.
+| Defect | Effect | Fix |
+|---|---|---|
+| Prior built from **in-sample** tree predictions | Corrector trained against a prior far better than at inference | Out-of-fold construction (inner 5-fold) |
+| One-hot encoding fitted on the **full table** | Validation-fold vocabulary visible in training | Encoding inside each fold |
+| 1,077 `Formula_` one-hot columns (825 singletons) | Row identifiers, not descriptors | Replaced by 120 Magpie statistics |
+| Blanket `dropna()` | Discarded 239 of 1,169 labelled materials | Median imputation + missingness indicator |
+| Random CV with 176 polymorph rows | Same-formula polymorphs straddling folds | `GroupKFold` on formula |
+| Geometric channels at **positions 0 and 1** | Pointed at two formation energies, not geometry | Resolved by name, asserted in tests |
+| Paired *t*-test over 930 per-sample errors | Non-independent; overstated significance | Fold-level, Nadeau–Bengio corrected |
+| Ablation via `− np.random.uniform(...)` | Values were not measurements | All 8 configurations trained |
+| Baselines at library defaults | Comparison biased toward the hybrid | Equal in-fold search budget |
 
 ---
 
 ## Known limitations
 
-- **No true in-plane lattice vectors.** The anisotropy argument in the manuscript concerns
-  unequal in-plane lattice vectors *a* and *b*. The current C2DB export contains neither; the
-  structural layer therefore operates on unit-cell area and thickness. Recovering *a* and *b*
-  requires a re-pull from C2DB and would materially strengthen the physical claim.
-- **Single database.** All data are C2DB. No external validation set.
-- **Modest dataset.** 1,169 labelled materials, all of rectangular (op) Bravais type.
+- **No in-plane lattice vectors.** The anisotropy hypothesis motivating the structural
+  layer concerns unequal in-plane vectors *a* and *b*. The current C2DB export contains
+  neither, so the layer operates on unit-cell area and thickness and the hypothesis
+  cannot be tested here. A full C2DB structure pull is the most valuable extension.
+- **Single database, single Bravais class.** All data are C2DB rectangular (*op*).
+- **In the DFT-free tier** the ensemble's advantage over a well-tuned XGBoost is not
+  statistically significant (*p* = 0.097).
+- **No graph-network comparison.** Those require relaxed atomic coordinates, which would
+  reintroduce the DFT dependence the DFT-free tier exists to avoid.
 - **The structural layer is a soft inductive bias**, not a derivation from elasticity theory.
 
----
+## Reproducibility note
+
+XGBoost and PyTorch each link their own copy of `libomp`. On macOS, importing torch first
+makes later XGBoost fits segfault; leaving OpenMP multi-threaded deadlocks the process
+instead. `experiments/run_feature_tiers.py` pins `OMP_NUM_THREADS` before any such import
+and loads xgboost first — do not reorder those lines.
 
 ## Data provenance
 
-Descriptors and HSE06 band gaps derive from the Computational 2D Materials Database (C2DB).
-Please cite C2DB alongside this repository; see `paper/ieee_access_bibliography.bib`.
+Descriptors and HSE06 band gaps derive from the Computational 2D Materials Database
+(C2DB), licensed CC-BY-SA 4.0. Please cite C2DB alongside this repository; see
+`paper/ieee_access/references.bib`.
 
 ## Citation
 
 ```bibtex
-@article{jagadeesh2026hybrid,
-  title  = {Physics-Informed Hybrid Residual Learning for Band-Gap Prediction
-            of Two-Dimensional Materials},
+@article{jagadeesh2026dftfree,
+  title  = {Band-Gap Prediction for Two-Dimensional Materials Without Density
+            Functional Theory: A Leakage-Controlled Evaluation of Hybrid and
+            Ensemble Models},
   author = {Jagadeesh, Adhvay and Mudalagi, Rutvi and Akl, Marx},
   year   = {2026},
   note   = {Manuscript under preparation}

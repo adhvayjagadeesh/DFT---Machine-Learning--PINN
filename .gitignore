@@ -10,3 +10,5 @@ paper/ieee_access/*.blg
 paper/ieee_access/*.fls
 paper/ieee_access/*.fdb_latexmk
 paper/ieee_access/*.synctex
+.pytest_cache/
+.claude/
