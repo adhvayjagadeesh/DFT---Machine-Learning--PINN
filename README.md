@@ -4,6 +4,8 @@ Code and data for *Band-Gap Prediction for Two-Dimensional Materials Without Den
 Functional Theory: A Leakage-Controlled Evaluation of Hybrid and Ensemble Models*
 (Jagadeesh, Mudalagi, Akl), prepared for **IEEE Access**.
 
+Repository: <https://github.com/adhvayjagadeesh/DFT---Machine-Learning--PINN>
+
 **Headline result.** HSE06 band gaps of rectangular-lattice 2D materials are predicted to
 **R² = 0.836, MAE = 0.417 eV from chemical composition and crystal symmetry alone** — no
 electronic-structure calculation on the target material. That is more accurate than a
