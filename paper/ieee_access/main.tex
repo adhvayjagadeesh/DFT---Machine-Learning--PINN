@@ -16,8 +16,8 @@
 \history{Date of publication xxxx 00, 0000, date of current version xxxx 00, 0000.}
 \doi{10.1109/ACCESS.2026.0000000}
 
-\title{Band-Gap Prediction for Two-Dimensional Materials Without Density
-Functional Theory: A Leakage-Controlled Evaluation of Hybrid and Ensemble Models}
+\title{Evaluation Artefacts in Physics-Informed Band-Gap Prediction:
+A Leakage-Controlled Study of Two-Dimensional Materials}
 
 % =====================================================================
 % NOTE TO AUTHOR: IEEE Access requires every author to have an ORCID
@@ -30,17 +30,17 @@ Functional Theory: A Leakage-Controlled Evaluation of Hybrid and Ensemble Models
 \tfootnote{This work was conducted through the Aspiring Scholars Directed Research Program (ASDRP), Fremont, CA, USA.}
 
 \markboth
-{Jagadeesh \headeretal: Band-Gap Prediction for Two-Dimensional Materials Without Density Functional Theory}
-{Jagadeesh \headeretal: Band-Gap Prediction for Two-Dimensional Materials Without Density Functional Theory}
+{Jagadeesh \headeretal: Evaluation Artefacts in Physics-Informed Band-Gap Prediction}
+{Jagadeesh \headeretal: Evaluation Artefacts in Physics-Informed Band-Gap Prediction}
 
 \corresp{Corresponding author: Marx Akl (e-mail: makl@asdrp.org).}
 
 \begin{abstract}
-Machine-learned surrogates for band-gap prediction are usually trained on descriptors that themselves require a density functional theory (DFT) calculation on the target material, which limits their value for screening uncharacterised compounds. We ask how much accuracy survives when every DFT-derived descriptor is removed, under an evaluation protocol built to close the leakage pathways that commonly inflate such comparisons: composition-grouped cross-validation, fold-local encoding, out-of-fold construction of stacked inputs, repeated held-out sets carved before model selection, and the Nadeau--Bengio variance correction. On 1{,}169 rectangular-lattice two-dimensional materials from C2DB, a stacked ensemble of five heterogeneous learners reaches $R^2 = 0.880 \pm 0.037$ (MAE $0.360$ eV) using all descriptors, and $R^2 = 0.836 \pm 0.057$ (MAE $0.417$ eV) using composition and symmetry alone --- no electronic-structure calculation on the target material. The DFT-free model still exceeds a previously published full-descriptor physics-informed hybrid ($R^2 = 0.743$, MAE $0.555$ eV) on the same data. We further report a negative result: under the same protocol that hybrid does not improve on the gradient-boosted prior it corrects ($0.810 \pm 0.047$ against $0.823 \pm 0.043$; $p = 0.27$), and reverting one implementation detail --- constructing the prior in sample rather than out of fold --- reproduces the previously reported gain, identifying it as an evaluation artefact. Because the ensemble's margin over the best single model is small, we justify it on decision-relevant grounds: the best single model is unstable across folds, the ensemble beats a committed choice on 15 of 15 folds, it cuts predictions in error by over 1 eV from 7.3\% to 6.1\%, and it trains in 8 seconds against the CPU-hours it replaces.
+Hybrid architectures that correct a gradient-boosted prior with a neural residual head are widely reported to improve tabular property prediction in materials informatics. We show that one such improvement, previously reported for band gaps of two-dimensional materials, is an artefact of how the model was evaluated rather than a property of the model. Under a protocol that closes six leakage pathways --- identifier-like features, whole-dataset encoding, in-sample construction of stacked priors, polymorphs straddling folds, absent held-out data, and significance tests applied per sample rather than per fold --- the hybrid does not improve on the prior it corrects ($R^2 = 0.810 \pm 0.047$ against $0.823 \pm 0.043$; superior on 12 of 25 fold estimates; $p = 0.27$), and no physics-motivated component contributes measurably. Reverting a single implementation detail, constructing the prior in sample rather than out of fold, reproduces the original gain on demand, because a prior that appears near-perfect on training rows trains the corrector to emit nothing. On 1{,}169 rectangular-lattice C2DB materials a stacked ensemble of five heterogeneous learners is the strongest configuration ($R^2 = 0.880 \pm 0.037$, MAE $0.360$ eV). Because its margin over the best single model is small, we justify it on decision-relevant grounds: the best single model is unstable across folds, the ensemble beats a committed choice on 15 of 15 folds, cuts errors above 1 eV from 7.3\% to 6.1\%, and trains in 8 seconds against the CPU-hours it replaces. We additionally decompose accuracy by descriptor cost, finding that removing every DFT-derived descriptor costs $0.044$ in $R^2$.
 \end{abstract}
 
 \begin{keywords}
-Band-gap prediction, data leakage, ensemble learning, materials informatics, materials screening, physics-informed neural networks, reproducibility, two-dimensional materials.
+Cross-validation, data leakage, ensemble learning, materials informatics, model evaluation, physics-informed neural networks, reproducibility, two-dimensional materials.
 \end{keywords}
 
 \titlepgskip=-21pt
@@ -51,20 +51,20 @@ Band-gap prediction, data leakage, ensemble learning, materials informatics, mat
 \label{sec:introduction}
 \PARstart{A}{ccurate} prediction of electronic band gaps ($E_g$) is a foundational objective in computational materials design. The magnitude and nature of the band gap govern whether a low-dimensional material acts as a metal, semiconductor, or insulator, and determine candidate suitability for field-effect transistors \cite{fiori2014electronics}, valleytronic architectures \cite{schaibley2016valleytronics,xiao2012coupled}, and photocatalytic water splitting \cite{singh2015computational}. Density functional theory with hybrid functionals such as HSE06 \cite{heyd2003hybrid} offers excellent accuracy at computational scaling that makes exhaustive screening impractical, which motivates fast surrogate estimators.
 
-There is a tension at the heart of that motivation. The strongest reported surrogates for 2D band gaps are trained on descriptors that are themselves DFT outputs --- formation energies, total energies, vacuum levels, relaxed geometries, and in several cases a semi-local band gap supplied directly as an input feature \cite{zhang2021bandgap}. A model of that kind is useful for functional upscaling, but it cannot screen a material that has never been calculated, because obtaining its inputs requires the calculation the model was meant to avoid. The practically valuable question is different: how well can $E_g$ be predicted from quantities available \emph{before} any electronic-structure calculation --- composition and crystal symmetry?
+For heterogeneous tabular materials data, decision-tree ensembles \cite{breiman2001random,friedman2001greedy} frequently match or exceed deep architectures \cite{shwartzziv2022tabular,grinsztajn2022why}, though the conditions under which this holds are narrower than often assumed \cite{mcelfresh2023when}. A natural response is the hybrid residual design: a tree supplies a prior estimate and a neural network learns a correction, optionally regularised by physical constraints in the manner of physics-informed neural networks \cite{raissi2019physics,karniadakis2021physics}. Such designs are attractive because they appear to combine the sample efficiency of ensembles with the smoothness of neural function approximation, and because anisotropic two-dimensional systems --- where in-plane lattice vectors are unequal and strain couples strongly to the electronic structure \cite{rodin2014strain,li2014black,xia2014rediscovering} --- are precisely the setting in which axis-aligned tree partitions appear least suited.
 
-Composition-based band-gap models are not new. Zhuo \textit{et al.} predicted gaps of inorganic solids from composition alone \cite{zhuo2018predicting}, and subsequent work has mapped the accuracy such models can reach across large inorganic databases \cite{gomes2021utility,wang2024gbdt}. Their well-documented weakness is polymorph blindness: composition alone cannot distinguish two structures of identical stoichiometry, which may differ in gap by an electronvolt or more \cite{gomes2021utility}. We therefore do not claim that composition-only prediction is novel. Our DFT-free tier pairs composition statistics with a crystal-symmetry label, which addresses that weakness directly, and our evaluation groups on chemical formula so that no polymorph is ever scored against a sibling seen in training --- a confound the composition-only literature identifies but which is rarely controlled in cross-validation.
+An earlier version of this work reported exactly that: a gradient-boosted prior coupled to a quantile residual head with an engineered structural layer, improving pooled $R^2$ from $0.7323$ to $0.7431$ with a nominally significant $p$-value. This article reports what happened when that pipeline was re-evaluated under controls for data leakage. The improvement did not survive, and the reason turns out to be a single line of the training procedure rather than anything about the architecture. Leakage of the kinds we identify has been argued to be a principal driver of irreproducibility across machine-learning-based science \cite{kapoor2023leakage}, and the specific failure we document is easy to introduce by accident and difficult to detect from reported results alone.
 
-This article therefore answers a narrower and, we argue, more actionable question --- what does each class of descriptor actually buy, for HSE06 gaps of 2D materials, under an evaluation that cannot be inflated by leakage --- and in the course of doing so reports a negative result about a popular architectural family. Our contributions are four.
+Our contributions are four.
 
 \begin{enumerate}
-\item \textbf{A DFT-cost ablation of the descriptor set.} We partition C2DB descriptors by what they must be computed from and measure accuracy in three tiers, from all descriptors down to composition and symmetry alone. Quantifying the marginal value of each descriptor class --- rather than reporting a single accuracy figure for one fixed feature set --- tells a practitioner which calculations are worth running.
+\item \textbf{A leakage-controlled evaluation protocol} for tabular materials regression, closing six specific pathways: identifier-like features, whole-dataset encoding, in-sample construction of stacked priors, polymorphs straddling folds, absent held-out data, and significance tests applied at the sample rather than the fold level.
 
-\item \textbf{A leakage-controlled evaluation protocol}, closing six specific pathways: identifier-like features, whole-dataset encoding, in-sample construction of stacked priors, polymorphs straddling folds, absent held-out data, and significance tests applied at the sample rather than the fold level. Leakage of these kinds has been argued to be a principal driver of irreproducibility in machine-learning-based science \cite{kapoor2023leakage}.
+\item \textbf{A negative result with an identified mechanism.} Under that protocol the physics-informed hybrid does not improve on its own prior, and no physics-motivated component contributes measurably. We show that the earlier apparent gain arises because an in-sample prior trains the corrector to be inert, and we reproduce it deliberately by reverting that one detail.
 
-\item \textbf{A negative result with an identified mechanism.} A physics-informed hybrid residual model does not improve on the gradient-boosted prior it corrects, no physics-motivated component contributes measurably, and the previously reported gain is reproduced on demand by reverting one implementation detail.
+\item \textbf{A decision-relevant justification for ensembling.} Where a small accuracy margin cannot carry the argument, we quantify model-selection risk, large-error rates, and measured wall-clock cost instead.
 
-\item \textbf{A decision-relevant justification for ensembling.} Rather than resting on a small $R^2$ margin, we quantify model-selection risk, large-error rates, and measured wall-clock cost.
+\item \textbf{A decomposition of accuracy by descriptor cost}, separating what composition and symmetry provide from what a relaxed geometry and a converged DFT calculation add.
 \end{enumerate}
 
 \section{Methods}
@@ -177,7 +177,7 @@ For an unbiased comparison against prior work we additionally reproduce, at thei
 \section{Results}
 \label{sec:results}
 
-\subsection{Prediction Without DFT}
+\subsection{Marginal Value of DFT-Derived Descriptors}
 \label{sec:dftfree}
 Table~\ref{tab:tiers_results} and Fig.~\ref{fig:tiers} report accuracy in each descriptor tier.
 
@@ -204,7 +204,11 @@ No DFT energies      & $0.845 \pm 0.046$ & $0.398$ & $-0.035$ \\
 \label{fig:tiers}
 \end{figure*}
 
-Removing every DFT-derived descriptor costs $0.044$ in $R^2$ and $0.057$ eV in MAE. The resulting model uses only a chemical formula and a crystal symmetry label, and it remains substantially more accurate than the previously published full-descriptor hybrid ($0.743$ / $0.555$ eV) evaluated on the same materials. This is the result with the clearest practical consequence: candidate 2D compositions can be ranked before any electronic-structure calculation is performed on them.
+Removing every DFT-derived descriptor costs $0.044$ in $R^2$ and $0.057$ eV in MAE. Most of the attainable accuracy therefore rests on composition and symmetry, and the six DFT energy channels together buy less than a tenth of the variance explained.
+
+We do not present this as a novel capability. Composition-based band-gap models are well established for inorganic solids \cite{zhuo2018predicting,gomes2021utility,wang2024gbdt}, and composition-derived descriptors have already been applied to C2DB monolayers specifically: a recent transfer-learning study built 290 compositional descriptors over 2{,}915 monolayers and reports MAE $0.27$ eV \cite{transfer2025monolayer}, better than the $0.417$ eV of our DFT-free tier on a smaller and structurally narrower subset. Restricting attention to rectangular-lattice materials narrows the sample; it does not by itself make the composition-to-gap mapping a different problem.
+
+What the decomposition adds is the marginal accounting itself. Studies of composition-only models typically report a single accuracy figure for one fixed descriptor set; separating the tiers tells a practitioner which calculations are worth running before screening, and establishes the baseline against which the hybrid in Section~\ref{sec:hybrid} must be judged. It also interacts with a known weakness of composition-based models. Composition alone cannot distinguish polymorphs of one stoichiometry \cite{gomes2021utility}, and 176 of our materials share a formula with at least one other entry, differing in gap by up to $2.92$ eV. Our DFT-free tier pairs composition with a symmetry label, and our folds are grouped on formula, so no polymorph is ever scored against a sibling seen in training --- a confound the composition-only literature names but which is rarely controlled in cross-validation, and which inflates accuracy when left uncontrolled.
 
 Fig.~\ref{fig:parity} shows the pooled out-of-fold agreement with the HSE06 reference and the regression error characteristic, which reports the fraction of materials resolved within a given absolute tolerance.
 
@@ -369,9 +373,9 @@ All data derive from one database and one Bravais class, with 1{,}169 labelled m
 
 \section{Conclusion}
 \label{sec:conclusion}
-Band gaps of rectangular-lattice two-dimensional materials can be predicted to $R^2 = 0.836$ and MAE $0.417$ eV from chemical composition and crystal symmetry alone, with no electronic-structure calculation on the target material. That model is more accurate than a previously published physics-informed hybrid that used the full DFT-derived descriptor set, and it is applicable to compounds that have never been calculated --- which the full-descriptor model, by construction, is not.
+A physics-informed hybrid residual architecture, previously reported to improve band-gap prediction for two-dimensional materials, does not improve on the gradient-boosted prior it corrects once the evaluation is controlled for leakage, and none of its physics-motivated components contributes measurably. The earlier improvement is reproduced on demand by reverting a single implementation detail --- building the tree prior in sample rather than out of fold --- which trains the corrector to emit nothing and leaves a pass-through of the tree wearing the appearance of a hybrid. We regard this as the transferable finding: hybrid residual designs are widely reported to help, this particular failure is easy to introduce by accident, and it is invisible in the metrics such papers normally report.
 
-Under the same leakage-controlled protocol, the physics-informed hybrid residual architecture does not improve on the gradient-boosted prior it corrects, and none of its physics-motivated components contributes measurably. The previously reported improvement is reproduced on demand by reverting a single implementation detail, identifying it as an evaluation artefact rather than a modelling effect. We regard this negative result as the more transferable of the two findings, because hybrid residual designs are widely reported to help and the specific way this one appeared to help is easy to reproduce by accident.
+Two positive results accompany it. A stacked ensemble of five heterogeneous learners is the strongest configuration tested, and we argue it should be justified by the risk it removes and the large errors it avoids at negligible absolute cost, rather than by a difference in $R^2$ that cannot carry the argument. Separately, decomposing accuracy by descriptor cost shows that composition and symmetry account for most of what is attainable here, with the full set of DFT energy channels adding $0.044$ in $R^2$.
 
 Where a modest ensemble gain must be justified, we suggest it be justified as we have here: by the risk it removes and the errors it avoids, at a cost measured against the calculation it replaces, rather than by a difference in $R^2$.
 
