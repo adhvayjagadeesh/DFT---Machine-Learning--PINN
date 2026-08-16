@@ -47,25 +47,54 @@ J.~Heyd, G.~E. Scuseria, and M.~Ernzerhof, ``Hybrid functionals based on a
   screened {C}oulomb potential,'' \emph{The Journal of Chemical Physics}, vol.
   118, no.~18, pp. 8207--8215, 2003.
 
-\bibitem{zhang2021bandgap}
-Y.~Zhang, W.~Xu, G.~Liu, Z.~Zhang, J.~Zhu, and M.~Li, ``Bandgap prediction of
-  two-dimensional materials using machine learning,'' \emph{PLOS ONE}, vol.~16,
-  no.~8, p. e0255637, 2021.
+\bibitem{breiman2001random}
+L.~Breiman, ``Random forests,'' \emph{Machine Learning}, vol.~45, pp. 5--32,
+  2001.
 
-\bibitem{zhuo2018predicting}
-Y.~Zhuo, A.~Mansouri~Tehrani, and J.~Brgoch, ``Predicting the band gaps of
-  inorganic solids by machine learning,'' \emph{The Journal of Physical
-  Chemistry Letters}, vol.~9, no.~7, pp. 1668--1673, 2018.
+\bibitem{friedman2001greedy}
+J.~H. Friedman, ``Greedy function approximation: A gradient boosting machine,''
+  \emph{Annals of Statistics}, vol.~29, no.~5, pp. 1189--1232, 2001.
 
-\bibitem{gomes2021utility}
-L.~C. Gomes \emph{et~al.}, ``The utility of composition-based machine learning
-  models for band gap prediction,'' \emph{Computational Materials Science},
-  vol. 197, p. 110995, 2021.
+\bibitem{shwartzziv2022tabular}
+R.~Shwartz-Ziv and A.~Armon, ``Tabular data: Deep learning is not all you
+  need,'' \emph{Information Fusion}, vol.~81, pp. 84--90, 2022.
 
-\bibitem{wang2024gbdt}
-A.~Zeb \emph{et~al.}, ``Machine learning-enhanced prediction of inorganic
-  semiconductor bandgaps for advancing optoelectronic technologies,''
-  \emph{Advanced Theory and Simulations}, vol.~7, p. 2400190, 2024.
+\bibitem{grinsztajn2022why}
+L.~Grinsztajn, E.~Oyallon, and G.~Varoquaux, ``Why do tree-based models still
+  outperform deep learning on typical tabular data?'' in \emph{Advances in
+  Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks
+  Track}, vol.~35, 2022, pp. 507--520.
+
+\bibitem{mcelfresh2023when}
+D.~McElfresh, S.~Khandagale, J.~Valverde, G.~Ramakrishnan, M.~Goldblum, and
+  C.~White, ``When do neural nets outperform boosted trees on tabular data?''
+  in \emph{Advances in Neural Information Processing Systems}, 2023.
+
+\bibitem{raissi2019physics}
+M.~Raissi, P.~Perdikaris, and G.~E. Karniadakis, ``Physics-informed neural
+  networks: A deep learning framework for solving forward and inverse problems
+  involving nonlinear partial differential equations,'' \emph{Journal of
+  Computational Physics}, vol. 378, pp. 686--707, 2019.
+
+\bibitem{karniadakis2021physics}
+G.~E. Karniadakis, I.~G. Kevrekidis, L.~Lu, P.~Perdikaris, S.~Wang, and
+  L.~Yang, ``Physics-informed machine learning,'' \emph{Nature Reviews
+  Physics}, vol.~3, no.~6, pp. 422--440, 2021.
+
+\bibitem{rodin2014strain}
+A.~S. Rodin, A.~Carvalho, and A.~H. Castro~Neto, ``Strain-induced gap
+  modification in black phosphorus,'' \emph{Physical Review Letters}, vol. 112,
+  p. 176801, 2014.
+
+\bibitem{li2014black}
+L.~Li, Y.~Yu, G.~J. Ye, Q.~Ge, X.~Ou, H.~Wu, D.~Feng, X.~H. Chen, and Y.~Zhang,
+  ``Black phosphorus field-effect transistors,'' \emph{Nature Nanotechnology},
+  vol.~9, pp. 372--377, 2014.
+
+\bibitem{xia2014rediscovering}
+F.~Xia, H.~Wang, and Y.~Jia, ``Rediscovering black phosphorus as an anisotropic
+  layered material for optoelectronics and electronics,'' \emph{Nature
+  Communications}, vol.~5, p. 4458, 2014.
 
 \bibitem{kapoor2023leakage}
 S.~Kapoor and A.~Narayanan, ``Leakage and the reproducibility crisis in
@@ -89,6 +118,11 @@ L.~Ward, A.~Agrawal, A.~Choudhary, and C.~Wolverton, ``A general-purpose
 L.~Ward, A.~Dunn, A.~Faghaninia \emph{et~al.}, ``Matminer: An open source
   toolkit for materials data mining,'' \emph{Computational Materials Science},
   vol. 152, pp. 60--69, 2018.
+
+\bibitem{zhang2021bandgap}
+Y.~Zhang, W.~Xu, G.~Liu, Z.~Zhang, J.~Zhu, and M.~Li, ``Bandgap prediction of
+  two-dimensional materials using machine learning,'' \emph{PLOS ONE}, vol.~16,
+  no.~8, p. e0255637, 2021.
 
 \bibitem{wolpert1992stacked}
 D.~H. Wolpert, ``Stacked generalization,'' \emph{Neural Networks}, vol.~5,
@@ -130,20 +164,26 @@ L.~Breiman, ``Stacked regressions,'' \emph{Machine Learning}, vol.~24, no.~1,
 R.~Koenker and G.~Bassett, ``Regression quantiles,'' \emph{Econometrica},
   vol.~46, no.~1, pp. 33--50, 1978.
 
-\bibitem{shwartzziv2022tabular}
-R.~Shwartz-Ziv and A.~Armon, ``Tabular data: Deep learning is not all you
-  need,'' \emph{Information Fusion}, vol.~81, pp. 84--90, 2022.
+\bibitem{zhuo2018predicting}
+Y.~Zhuo, A.~Mansouri~Tehrani, and J.~Brgoch, ``Predicting the band gaps of
+  inorganic solids by machine learning,'' \emph{The Journal of Physical
+  Chemistry Letters}, vol.~9, no.~7, pp. 1668--1673, 2018.
 
-\bibitem{grinsztajn2022why}
-L.~Grinsztajn, E.~Oyallon, and G.~Varoquaux, ``Why do tree-based models still
-  outperform deep learning on typical tabular data?'' in \emph{Advances in
-  Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks
-  Track}, vol.~35, 2022, pp. 507--520.
+\bibitem{gomes2021utility}
+L.~C. Gomes \emph{et~al.}, ``The utility of composition-based machine learning
+  models for band gap prediction,'' \emph{Computational Materials Science},
+  vol. 197, p. 110995, 2021.
 
-\bibitem{mcelfresh2023when}
-D.~McElfresh, S.~Khandagale, J.~Valverde, G.~Ramakrishnan, M.~Goldblum, and
-  C.~White, ``When do neural nets outperform boosted trees on tabular data?''
-  in \emph{Advances in Neural Information Processing Systems}, 2023.
+\bibitem{wang2024gbdt}
+A.~Zeb \emph{et~al.}, ``Machine learning-enhanced prediction of inorganic
+  semiconductor bandgaps for advancing optoelectronic technologies,''
+  \emph{Advanced Theory and Simulations}, vol.~7, p. 2400190, 2024.
+
+\bibitem{transfer2025monolayer}
+Y.~Wang \emph{et~al.}, ``Accurate prediction of band gap of two-dimensional
+  monolayer materials via transfer learning,'' \emph{Materials Today
+  Communications}, 2025, 290 compositional descriptors over 2,915 C2DB
+  monolayers.
 
 \bibitem{gneiting2007probabilistic}
 T.~Gneiting and A.~E. Raftery, ``Strictly proper scoring rules, prediction, and
@@ -160,11 +200,6 @@ G.~Airlangga and A.~Liu, ``A hybrid gradient boosting and neural network model
   for predicting urban happiness: Integrating ensemble learning with deep
   representation for enhanced accuracy,'' \emph{Machine Learning and Knowledge
   Extraction}, vol.~7, no.~1, p.~4, 2025.
-
-\bibitem{rodin2014strain}
-A.~S. Rodin, A.~Carvalho, and A.~H. Castro~Neto, ``Strain-induced gap
-  modification in black phosphorus,'' \emph{Physical Review Letters}, vol. 112,
-  p. 176801, 2014.
 
 \bibitem{tran2014layer}
 V.~Tran, R.~Soklaski, Y.~Liang, and L.~Yang, ``Layer-controlled band gap and

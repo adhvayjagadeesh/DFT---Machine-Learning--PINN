@@ -1,22 +1,29 @@
-# Band-Gap Prediction for 2D Materials Without DFT
+# Evaluation Artefacts in Physics-Informed Band-Gap Prediction
 
-Code and data for *Band-Gap Prediction for Two-Dimensional Materials Without Density
-Functional Theory: A Leakage-Controlled Evaluation of Hybrid and Ensemble Models*
+Code and data for *Evaluation Artefacts in Physics-Informed Band-Gap Prediction:
+A Leakage-Controlled Study of Two-Dimensional Materials*
 (Jagadeesh, Mudalagi, Akl), prepared for **IEEE Access**.
 
 Repository: <https://github.com/adhvayjagadeesh/DFT---Machine-Learning--PINN>
 
-**Headline result.** HSE06 band gaps of rectangular-lattice 2D materials are predicted to
-**R² = 0.836, MAE = 0.417 eV from chemical composition and crystal symmetry alone** — no
-electronic-structure calculation on the target material. That is more accurate than a
-previously published physics-informed hybrid which used the full DFT-derived descriptor
-set (R² = 0.743, MAE = 0.555 eV), and unlike it, applies to compounds never calculated.
+**Headline result (negative).** A physics-informed hybrid that corrects a gradient-boosted
+prior with a neural residual head does **not** improve on that prior once the evaluation is
+controlled for leakage (R² = 0.810 ± 0.047 vs 0.823 ± 0.043; better on 12/25 fold estimates;
+*p* = 0.27), and no physics component contributes measurably. Reverting **one implementation
+detail** — building the prior in-sample rather than out-of-fold — reproduces the previously
+reported gain on demand, because a prior that looks near-perfect on training rows trains the
+corrector to emit nothing.
 
-**Secondary result (negative).** Under the same protocol, a physics-informed hybrid that
-corrects a gradient-boosted prior with a neural residual head does *not* improve on that
-prior. Reverting one implementation detail — building the prior in-sample rather than
-out-of-fold — reproduces the previously reported gain, identifying it as an evaluation
-artifact.
+**Supporting results.** A stacked ensemble of five heterogeneous learners is the strongest
+configuration (R² = 0.880 ± 0.037, MAE 0.360 eV), justified by model-selection risk and
+large-error rate rather than by its R² margin. Decomposing accuracy by descriptor cost shows
+composition and symmetry account for most of what is attainable: removing every DFT-derived
+descriptor costs 0.044 R².
+
+> **On novelty.** Composition-based band-gap prediction is well established, including on
+> C2DB monolayers — a transfer-learning study reports MAE 0.27 eV over 2,915 monolayers,
+> better than our DFT-free tier. The contribution here is the leakage-controlled protocol
+> and the documented negative result, not the accuracy.
 
 ---
 
