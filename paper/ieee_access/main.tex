@@ -36,11 +36,11 @@ Functional Theory: A Leakage-Controlled Evaluation of Hybrid and Ensemble Models
 \corresp{Corresponding author: Marx Akl (e-mail: makl@asdrp.org).}
 
 \begin{abstract}
-Machine-learned surrogates for band-gap prediction are usually trained on descriptors that themselves require a density functional theory (DFT) calculation on the target material, which limits their value for screening uncharacterised compounds. We ask how much accuracy survives when every DFT-derived descriptor is removed, and we do so under an evaluation protocol built to close the leakage pathways that commonly inflate such comparisons: composition-grouped cross-validation, fold-local encoding and scaling, out-of-fold construction of stacked inputs, repeated held-out sets carved before model selection, and significance testing with the Nadeau--Bengio variance correction. On 1{,}169 rectangular-lattice two-dimensional materials from C2DB, a stacked ensemble of five heterogeneous learners reaches $R^2 = 0.880 \pm 0.037$ (MAE $0.360$ eV) using all descriptors, and $R^2 = 0.836 \pm 0.057$ (MAE $0.417$ eV) using \emph{composition and symmetry alone} --- no electronic-structure calculation on the target material of any kind. The DFT-free model still exceeds a previously published full-descriptor physics-informed hybrid ($R^2 = 0.743$, MAE $0.555$ eV) evaluated on the same data. We further report a negative result: under the same protocol, a physics-informed hybrid that corrects a gradient-boosted prior with a neural residual head does not improve on that prior ($0.810 \pm 0.047$ versus $0.823 \pm 0.043$; $p = 0.27$), and reverting a single implementation detail --- constructing the prior in sample rather than out of fold --- reproduces the previously reported gain, identifying it as an evaluation artefact. Finally, because the ensemble's margin over the best single model is small ($\Delta R^2 \approx 0.016$), we justify it on decision-relevant grounds instead: the identity of the best single model is unstable across folds, the ensemble beats a committed choice on 15 of 15 folds, it reduces predictions in error by more than 1 eV from 7.3\% to 6.1\%, and it costs 8 seconds to train against the CPU-hours of the calculation it replaces.
+Machine-learned surrogates for band-gap prediction are usually trained on descriptors that themselves require a density functional theory (DFT) calculation on the target material, which limits their value for screening uncharacterised compounds. We ask how much accuracy survives when every DFT-derived descriptor is removed, under an evaluation protocol built to close the leakage pathways that commonly inflate such comparisons: composition-grouped cross-validation, fold-local encoding, out-of-fold construction of stacked inputs, repeated held-out sets carved before model selection, and the Nadeau--Bengio variance correction. On 1{,}169 rectangular-lattice two-dimensional materials from C2DB, a stacked ensemble of five heterogeneous learners reaches $R^2 = 0.880 \pm 0.037$ (MAE $0.360$ eV) using all descriptors, and $R^2 = 0.836 \pm 0.057$ (MAE $0.417$ eV) using composition and symmetry alone --- no electronic-structure calculation on the target material. The DFT-free model still exceeds a previously published full-descriptor physics-informed hybrid ($R^2 = 0.743$, MAE $0.555$ eV) on the same data. We further report a negative result: under the same protocol that hybrid does not improve on the gradient-boosted prior it corrects ($0.810 \pm 0.047$ against $0.823 \pm 0.043$; $p = 0.27$), and reverting one implementation detail --- constructing the prior in sample rather than out of fold --- reproduces the previously reported gain, identifying it as an evaluation artefact. Because the ensemble's margin over the best single model is small, we justify it on decision-relevant grounds: the best single model is unstable across folds, the ensemble beats a committed choice on 15 of 15 folds, it cuts predictions in error by over 1 eV from 7.3\% to 6.1\%, and it trains in 8 seconds against the CPU-hours it replaces.
 \end{abstract}
 
 \begin{keywords}
-Band-gap prediction, cross-validation, data leakage, ensemble learning, machine learning, materials informatics, materials screening, physics-informed neural networks, reproducibility, two-dimensional materials.
+Band-gap prediction, data leakage, ensemble learning, materials informatics, materials screening, physics-informed neural networks, reproducibility, two-dimensional materials.
 \end{keywords}
 
 \titlepgskip=-21pt
@@ -53,10 +53,12 @@ Band-gap prediction, cross-validation, data leakage, ensemble learning, machine 
 
 There is a tension at the heart of that motivation. The strongest reported surrogates for 2D band gaps are trained on descriptors that are themselves DFT outputs --- formation energies, total energies, vacuum levels, relaxed geometries, and in several cases a semi-local band gap supplied directly as an input feature \cite{zhang2021bandgap}. A model of that kind is useful for functional upscaling, but it cannot screen a material that has never been calculated, because obtaining its inputs requires the calculation the model was meant to avoid. The practically valuable question is different: how well can $E_g$ be predicted from quantities available \emph{before} any electronic-structure calculation --- composition and crystal symmetry?
 
-This article answers that question, and in the course of doing so reports a negative result about a popular architectural family. Our contributions are four.
+Composition-based band-gap models are not new. Zhuo \textit{et al.} predicted gaps of inorganic solids from composition alone \cite{zhuo2018predicting}, and subsequent work has mapped the accuracy such models can reach across large inorganic databases \cite{gomes2021utility,wang2024gbdt}. Their well-documented weakness is polymorph blindness: composition alone cannot distinguish two structures of identical stoichiometry, which may differ in gap by an electronvolt or more \cite{gomes2021utility}. We therefore do not claim that composition-only prediction is novel. Our DFT-free tier pairs composition statistics with a crystal-symmetry label, which addresses that weakness directly, and our evaluation groups on chemical formula so that no polymorph is ever scored against a sibling seen in training --- a confound the composition-only literature identifies but which is rarely controlled in cross-validation.
+
+This article therefore answers a narrower and, we argue, more actionable question --- what does each class of descriptor actually buy, for HSE06 gaps of 2D materials, under an evaluation that cannot be inflated by leakage --- and in the course of doing so reports a negative result about a popular architectural family. Our contributions are four.
 
 \begin{enumerate}
-\item \textbf{A DFT-cost ablation of the descriptor set.} We partition C2DB descriptors by what they cost to obtain and measure accuracy in three tiers, from all descriptors down to composition and symmetry alone. The DFT-free tier retains most of the accuracy, which makes screening of uncalculated materials feasible.
+\item \textbf{A DFT-cost ablation of the descriptor set.} We partition C2DB descriptors by what they must be computed from and measure accuracy in three tiers, from all descriptors down to composition and symmetry alone. Quantifying the marginal value of each descriptor class --- rather than reporting a single accuracy figure for one fixed feature set --- tells a practitioner which calculations are worth running.
 
 \item \textbf{A leakage-controlled evaluation protocol}, closing six specific pathways: identifier-like features, whole-dataset encoding, in-sample construction of stacked priors, polymorphs straddling folds, absent held-out data, and significance tests applied at the sample rather than the fold level. Leakage of these kinds has been argued to be a principal driver of irreproducibility in machine-learning-based science \cite{kapoor2023leakage}.
 
@@ -86,14 +88,19 @@ Tier & Descriptors \\
 \midrule
 \textbf{DFT-free} & 120 Magpie elemental-property statistics \cite{ward2016general} via matminer \cite{ward2018matminer}, atom count, layer group, stoichiometry prototype \\
 \addlinespace
-\textbf{+ Geometry} & Above, plus thickness, unit-cell area, packing density $\rho_{\mathrm{cell}} = N_{\mathrm{atoms}}/A_{\mathrm{cell}}$ (requires a relaxed geometry) \\
+\textbf{+ Geometry} & Above, plus thickness, unit-cell area, and packing density (Eq.~\eqref{eq:density}); requires a relaxed geometry \\
 \addlinespace
 \textbf{+ Energies (full)} & Above, plus energy above hull, heat of formation, total energy, vacuum level, magnetic moment, magnetic state (requires converged DFT) \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The DFT-free tier is obtainable from a chemical formula and a candidate space group alone. No tier contains a band gap at any level of theory, which distinguishes this setting from $\Delta$-learning studies that supply a semi-local gap as an input \cite{zhang2021bandgap}.
+The packing-density proxy is
+\begin{equation}
+\rho_{\mathrm{cell}} = \frac{N_{\mathrm{atoms}}}{A_{\mathrm{cell}}},
+\label{eq:density}
+\end{equation}
+where $N_{\mathrm{atoms}}$ is the atom count of the formula unit and $A_{\mathrm{cell}}$ the unit-cell area. The DFT-free tier is obtainable from a chemical formula and a candidate space group alone. No tier contains a band gap at any level of theory, which distinguishes this setting from $\Delta$-learning studies that supply a semi-local gap as an input \cite{zhang2021bandgap}.
 
 Magpie statistics replace the raw chemical formula. An earlier pipeline one-hot encoded the formula string into 1{,}077 indicator columns, of which 825 occurred in exactly one material; such columns are row identifiers rather than descriptors, and a formula appearing only in a validation fold contributes an all-zero block.
 
@@ -101,13 +108,29 @@ Magpie statistics replace the raw chemical formula. An earlier pipeline one-hot 
 \label{sec:protocol}
 \textit{Composition grouping.} 176 labelled materials share a formula with at least one other entry. These are polymorphs, distinguished by layer group, whose gaps differ by up to $2.92$ eV. Because composition-derived descriptors are near-identical within such a pair, an ungrouped split lets a model memorise one polymorph and be scored on another. All splits are grouped on chemical formula.
 
-\textit{Fold-local preprocessing.} Category vocabularies, imputation medians, and standardisation statistics are estimated on the training partition only.
+\textit{Fold-local preprocessing.} Category vocabularies, imputation medians, and standardisation statistics are estimated on the training partition only. For a feature $j$ and training fold $\mathcal{T}$,
+\begin{equation}
+\tilde{x}_{ij} = \frac{x_{ij} - \mu_j^{(\mathcal{T})}}{\sigma_j^{(\mathcal{T})}},
+\label{eq:zscore}
+\end{equation}
+with $\mu_j^{(\mathcal{T})}$ and $\sigma_j^{(\mathcal{T})}$ computed over $\mathcal{T}$ alone and applied unchanged to the held-out partition.
 
-\textit{Out-of-fold stacked inputs.} Meta-learners and residual heads are trained against out-of-fold predictions from an inner five-fold split, never in-sample predictions of a fitted base model \cite{wolpert1992stacked}.
+\textit{Out-of-fold stacked inputs.} Meta-learners and residual heads are trained against out-of-fold predictions, never in-sample predictions of a fitted base model \cite{wolpert1992stacked}. Partitioning the training fold into $K$ inner blocks $\{\mathcal{I}_1,\dots,\mathcal{I}_K\}$, the out-of-fold prediction of base learner $m$ for sample $i \in \mathcal{I}_k$ is
+\begin{equation}
+z_i^{(m)} = f^{(m)}_{-\mathcal{I}_k}(\mathbf{x}_i),
+\label{eq:oof}
+\end{equation}
+where $f^{(m)}_{-\mathcal{I}_k}$ is model $m$ fitted with block $\mathcal{I}_k$ withheld. Section~\ref{sec:hybrid} shows that replacing Eq.~\eqref{eq:oof} with the in-sample alternative $f^{(m)}(\mathbf{x}_i)$ is sufficient on its own to manufacture the improvement reported in earlier work.
 
 \textit{Held-out evaluation.} We report eight independent formula-grouped held-out sets ($\approx$234 materials each) in addition to cross-validation, since a single split of this size cannot resolve closely matched models \cite{varoquaux2018crossvalidation}.
 
-\textit{Corrected inference.} We report five repeats of grouped five-fold cross-validation and compare models with the Nadeau--Bengio variance-corrected paired $t$-test \cite{nadeau2003inference}, which accounts for the positive correlation induced by overlapping training partitions. An earlier revision applied a paired test to 930 per-sample squared errors, treating non-independent quantities as independent observations of model performance.
+\textit{Corrected inference.} We report five repeats of grouped five-fold cross-validation and compare models with the Nadeau--Bengio variance-corrected paired $t$-test \cite{nadeau2003inference}. For per-fold score differences $d_1,\dots,d_n$ between two models, the naive paired statistic understates variance because the $n$ training partitions overlap. The corrected statistic inflates the variance by the ratio of test to training set size,
+\begin{equation}
+t_{\mathrm{NB}} = \frac{\bar{d}}
+  {\sqrt{\left(\dfrac{1}{n} + \dfrac{n_{\mathrm{test}}}{n_{\mathrm{train}}}\right) s_d^2}},
+\label{eq:nb}
+\end{equation}
+where $\bar{d}$ and $s_d^2$ are the sample mean and variance of the differences, and $t_{\mathrm{NB}}$ is referred to $t_{n-1}$. Every $p$-value we report uses Eq.~\eqref{eq:nb}. An earlier revision applied a paired test to 930 per-sample squared errors, treating non-independent quantities as independent observations of model performance.
 
 \subsection{Models}
 Base learners are random forest, gradient boosting, support vector regression \cite{drucker1996support}, a deep multilayer perceptron with SiLU activations \cite{elfwing2018sigmoid,ramachandran2017searching} and batch normalisation \cite{ioffe2015batch}, and a physics-informed network sharing the MLP backbone with a boundary penalty
@@ -115,14 +138,39 @@ Base learners are random forest, gradient boosting, support vector regression \c
 \mathcal{L}_{\mathrm{phy}} = \mathrm{ReLU}(-\hat{y}) + 0.1\left(e^{\mathrm{ReLU}(0.05-\hat{y})}-1\right)
 \label{eq:phy}
 \end{equation}
-discouraging physically impossible negative gaps. Two meta-learners combine their out-of-fold predictions: ridge regression, and non-negative least squares \cite{breiman1996stacked} for interpretability.
+discouraging physically impossible negative gaps. Two meta-learners combine their out-of-fold predictions $\mathbf{z}_i = [z_i^{(1)},\dots,z_i^{(M)}]^\top$ from Eq.~\eqref{eq:oof}. The ridge meta-learner solves
+\begin{equation}
+\hat{\boldsymbol{\beta}} = \arg\min_{\boldsymbol{\beta}}
+  \sum_{i \in \mathcal{T}} \left(y_i - \boldsymbol{\beta}^\top \mathbf{z}_i\right)^2
+  + \lambda \lVert \boldsymbol{\beta} \rVert_2^2,
+\label{eq:ridge}
+\end{equation}
+with $\lambda$ selected by generalised cross-validation within the training fold. The non-negative variant \cite{breiman1996stacked} additionally constrains $\beta_m \geq 0$, giving weights that are directly readable as ensemble shares and a prediction confined to the convex cone of its members:
+\begin{equation}
+\hat{y}_i = \sum_{m=1}^{M} \beta_m z_i^{(m)}, \qquad \beta_m \geq 0 .
+\label{eq:nnls}
+\end{equation}
 
 The hybrid forms $\mathbf{x}_{\mathrm{hybrid}} = [\mathbf{x},\; \mathbf{x}\odot\hat{y}_{\mathrm{prior}},\; \hat{y}_{\mathrm{prior}}]$ and adds a learned correction to the prior, with a structural coupling layer building
 \begin{equation}
 \mathbf{s} = \left[g_1 g_2,\; g_1^2-g_2^2,\; \sqrt{g_1^2+g_2^2+\epsilon},\; g_1,\; g_2\right]
 \label{eq:strain}
 \end{equation}
-from two geometric channels. One correction to the earlier implementation bears on every physical claim made about this layer: the channels were selected by array position (indices 0 and 1), which in the assembled matrix were energy above hull and heat of formation --- two formation energies, not geometric quantities. Channels are now resolved by name. The available C2DB export contains no in-plane lattice vectors $a$ and $b$, so we describe Eq.~\eqref{eq:strain} as a soft geometric inductive bias and make no claim that it derives from elasticity theory.
+from two geometric channels $g_1, g_2$, projecting it back onto the feature map through a small multilayer block. Three heads predict residual quantiles at $\tau \in \{0.25, 0.50, 0.75\}$ under the pinball loss \cite{koenker1978regression}
+\begin{equation}
+\mathcal{L}_\tau = \frac{1}{N}\sum_{i=1}^{N}
+  \max\!\left(\tau\,(y_i - q_{\tau,i}),\; (\tau-1)(y_i - q_{\tau,i})\right),
+\label{eq:pinball}
+\end{equation}
+alongside a point residual head $r(\cdot)$. The correction is combined with the prior as
+\begin{equation}
+\begin{split}
+\hat{y}_{\mathrm{hybrid}} = {}& \hat{y}_{\mathrm{prior}} + \tfrac{3}{4}\, r \\
+  &+ \tfrac{1}{4}\left[q_{0.50} + 0.1\,\sigma(\Delta q)\,\Delta q\right],
+\end{split}
+\label{eq:hybrid}
+\end{equation}
+where $\Delta q = q_{0.75}-q_{0.25}$ and $\sigma(\cdot)$ is the logistic function. One correction to the earlier implementation bears on every physical claim made about this layer: the channels were selected by array position (indices 0 and 1), which in the assembled matrix were energy above hull and heat of formation --- two formation energies, not geometric quantities. Channels are now resolved by name. The available C2DB export contains no in-plane lattice vectors $a$ and $b$, so we describe Eq.~\eqref{eq:strain} as a soft geometric inductive bias and make no claim that it derives from elasticity theory.
 
 For an unbiased comparison against prior work we additionally reproduce, at their original hyperparameters, the three estimators specified by our earlier pipeline: XGBoost (500 trees, depth 5, $\eta=0.03$), gradient boosting (400 trees, depth 4), and random forest (400 trees, depth 14).
 
@@ -150,19 +198,38 @@ No DFT energies      & $0.845 \pm 0.046$ & $0.398$ & $-0.035$ \\
 \end{table}
 
 \begin{figure*}[!t]
-\centerline{\includegraphics[width=\textwidth]{figures/fig10_feature_tiers.png}}
+\centering
+\includegraphics[width=\textwidth]{figures/fig10_feature_tiers.png}
 \caption{(a) Accuracy against DFT cost. Removing every DFT-derived descriptor costs $0.044$ in $R^2$, and the resulting model still exceeds the previously published full-descriptor hybrid. (b) Head-to-head within the full tier; red bars are the estimators specified by the prior pipeline, at their original hyperparameters, on identical folds.}
 \label{fig:tiers}
 \end{figure*}
 
 Removing every DFT-derived descriptor costs $0.044$ in $R^2$ and $0.057$ eV in MAE. The resulting model uses only a chemical formula and a crystal symmetry label, and it remains substantially more accurate than the previously published full-descriptor hybrid ($0.743$ / $0.555$ eV) evaluated on the same materials. This is the result with the clearest practical consequence: candidate 2D compositions can be ranked before any electronic-structure calculation is performed on them.
 
+Fig.~\ref{fig:parity} shows the pooled out-of-fold agreement with the HSE06 reference and the regression error characteristic, which reports the fraction of materials resolved within a given absolute tolerance.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig5_parity_rec.png}
+\caption{Left and centre: pooled out-of-fold predictions against HSE06 reference values for the gradient-boosting baseline and the stacked ensemble. Right: regression error characteristic curves, giving the fraction of materials predicted within a given absolute tolerance $\tau$.}
+\label{fig:parity}
+\end{figure*}
+
 Fig.~\ref{fig:tiers}(b) gives the head-to-head against the prior pipeline within the full tier. The ensemble beats XGBoost on 14 of 15 fold estimates ($p = 0.025$), gradient boosting on 14 of 15 ($p = 0.002$), and random forest on 15 of 15 ($p < 0.001$). Within the DFT-free tier the margin over XGBoost narrows and is not significant ($p = 0.097$); we report this as a limitation rather than as support.
+
+Fig.~\ref{fig:learning} shows that the ensemble's advantage is not an artefact of sample size: it leads at every training-set size tested, and its margin over the tree baselines widens as data are added, with no sign of saturation at the full 792-material training partition.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig4_learning_curve.png}
+\caption{Learning curves under grouped cross-validation. Shaded bands are 95\% confidence intervals over folds.}
+\label{fig:learning}
+\end{figure}
 
 \subsection{Model Comparison}
 Table~\ref{tab:benchmark} reports all models over 25 fold estimates.
 
-\begin{table}[!t]
+\begin{table*}[!t]
 \caption{Repeated grouped five-fold cross-validation, all descriptors, 25 fold estimates. ``Folds'' counts estimates beating the GBR baseline; $p$-values are Nadeau--Bengio corrected, one-sided.\label{tab:benchmark}}
 \centering
 \begin{tabular}{lcccc}
@@ -180,17 +247,25 @@ SVR                      & $0.774 \pm 0.039$ & $0.497$ &  1/25 & --- \\
 Hybrid + shrinkage gate  & $0.681 \pm 0.237$ & $0.571$ &  3/25 & $0.090$ \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
 \begin{figure}[!t]
-\centerline{\includegraphics[width=\columnwidth]{figures/fig1_model_comparison.png}}
+\centering
+\includegraphics[width=\columnwidth]{figures/fig1_model_comparison.png}
 \caption{Cross-validated $R^2$ with 95\% confidence intervals over 25 fold estimates. Hybrid variants are shown in red.}
 \label{fig:comparison}
 \end{figure}
 
 Both neural models outperform every tree ensemble. With identifier-like features removed and composition statistics supplied, this task falls outside the regime in which boosted trees dominate neural networks \cite{shwartzziv2022tabular,grinsztajn2022why,mcelfresh2023when}.
 
-Across eight independent held-out sets the ordering is reproduced: stacked ridge $0.879 \pm 0.025$, PINN $0.866 \pm 0.028$, MLP $0.858 \pm 0.032$, GBR $0.823 \pm 0.025$. The ensemble beats GBR on 8 of 8 splits ($p = 0.001$) and the MLP on 8 of 8 ($p = 0.041$); its margin over the PINN is positive on 7 of 8 splits but only marginally significant ($p = 0.051$).
+Across eight independent held-out sets the ordering is reproduced: stacked ridge $0.879 \pm 0.025$, PINN $0.866 \pm 0.028$, MLP $0.858 \pm 0.032$, GBR $0.823 \pm 0.025$. The ensemble beats GBR on 8 of 8 splits ($p = 0.001$) and the MLP on 8 of 8 ($p = 0.041$); its margin over the PINN is positive on 7 of 8 splits but only marginally significant ($p = 0.051$). Per-split results are shown in Fig.~\ref{fig:holdout}. We report eight sets rather than one because a single split of this size cannot resolve closely matched models: on one 179-material split the ensemble and the PINN were indistinguishable ($0.856$ against $0.855$), a null that reflects the resolution of that split rather than equivalence of the models.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig8_repeated_holdout.png}
+\caption{Repeated held-out evaluation. (a) Per-split $R^2$ on eight independent formula-grouped held-out sets; horizontal bars are means. (b) Paired per-split difference between the stacked ensemble and each single model, annotated with splits won and the one-sided $p$-value.}
+\label{fig:holdout}
+\end{figure}
 
 \subsection{The Hybrid Does Not Improve on Its Prior}
 \label{sec:hybrid}
@@ -215,19 +290,40 @@ Without residual head          & 0.766 & $-0.035$ \\
 \end{tabular}
 \end{table}
 
-No physics-motivated component contributes positively, and the tree prior alone is the strongest configuration in the table. The second row identifies the mechanism: reverting to an in-sample prior \emph{raises} measured $R^2$. With a prior that appears near-perfect on training rows, the correction head has almost no residual signal to fit; it learns to emit approximately zero and degenerates into a pass-through of the tree. The previously reported gain is therefore substantially an artefact of the corrector being trained to be inert, and the ablation recovers that artefact on demand by changing one line.
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig6_ablation.png}
+\caption{Component ablation of the hybrid. Every configuration shown was trained and evaluated; no physics-motivated component contributes positively, and the tree prior alone is the strongest configuration.}
+\label{fig:ablation}
+\end{figure}
+
+No physics-motivated component contributes positively, and the tree prior alone is the strongest configuration in the table (Fig.~\ref{fig:ablation}). The second row identifies the mechanism: reverting to an in-sample prior \emph{raises} measured $R^2$. With a prior that appears near-perfect on training rows, the correction head has almost no residual signal to fit; it learns to emit approximately zero and degenerates into a pass-through of the tree. The previously reported gain is therefore substantially an artefact of the corrector being trained to be inert, and the ablation recovers that artefact on demand by changing one line.
 
 We also tested the natural remedy. A shrinkage gate constrains the correction by $\sigma(\cdot) \in (0,1)$, initialised near zero so the model begins as a pass-through and must earn any departure. It did not work: the gate converged small ($0.081 \pm 0.007$) but accuracy destabilised ($R^2 = 0.681 \pm 0.237$, with 7 of 25 fold estimates below $0.70$ and one at $-0.24$). Shrinking the gate rescales the gradient reaching the head, whose raw output grows to compensate, leaving the product poorly controlled on unseen data.
 
 \subsection{Uncertainty Calibration}
-The hybrid predicts quantiles at $\tau \in \{0.25, 0.50, 0.75\}$, previously described as uncertainty estimates. The nominal interquartile interval should cover 50\% of outcomes; measured coverage is $17.2\%$ at a mean width of $2.47$ eV. The intervals are simultaneously wide and badly miscalibrated, so we withdraw the uncertainty claim; supporting one requires scoring the predictive distribution with a proper rule \cite{gneiting2007probabilistic}.
+The hybrid predicts quantiles at $\tau \in \{0.25, 0.50, 0.75\}$, previously described as uncertainty estimates. Empirical coverage of the predicted interval,
+\begin{equation}
+C = \frac{1}{N}\sum_{i=1}^{N}
+  \mathbb{1}\!\left[q_{0.25,i} \leq y_i \leq q_{0.75,i}\right],
+\label{eq:coverage}
+\end{equation}
+should equal the nominal level of $0.50$; the measured value is $C = 0.172$ at a mean interval width of $2.47$ eV (Fig.~\ref{fig:calibration}). The intervals are simultaneously wide and badly miscalibrated, and the deficit persists across every nominal level tested (Fig.~\ref{fig:calibration}(a)). We therefore withdraw the uncertainty claim; supporting one requires scoring the predictive distribution with a proper rule \cite{gneiting2007probabilistic}.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig7_calibration.png}
+\caption{Quantile calibration of the hybrid. (a) Empirical against nominal coverage; the model is over-confident at every level. (b) Distribution of predicted interval widths.}
+\label{fig:calibration}
+\end{figure}
 
 \subsection{Why the Ensemble Is Worth Its Cost}
 \label{sec:utility}
 The ensemble's margin over the best single model is small ($\Delta R^2 \approx 0.016$) and would not by itself justify a fivefold training cost. We therefore evaluate it on three decision-relevant axes (Fig.~\ref{fig:utility}).
 
 \begin{figure*}[!t]
-\centerline{\includegraphics[width=\textwidth]{figures/fig9_utility.png}}
+\centering
+\includegraphics[width=\textwidth]{figures/fig9_utility.png}
 \caption{(a) The best single model is unstable across folds. (b) Rate of predictions in error by more than 1 eV. (c) Measured training cost against the calculation being replaced, on a logarithmic scale.}
 \label{fig:utility}
 \end{figure*}
@@ -247,7 +343,23 @@ We report one axis that does not support the ensemble. On a screening task measu
 Once the prior is constructed out of fold, its residuals on unseen materials are dominated by irreducible noise rather than recoverable structure, and a corrector fitted to them adds variance without removing bias. This is not specific to materials data; residual-boosting correctors are known to yield negative gains when the residual signal is noise-dominated \cite{airlangga2025hybrid}. The practical consequence is that hybrid residual designs must be validated against their own prior with an out-of-fold construction. Compared against an in-sample prior they can appear to help while doing nothing, and that appearance is stable enough to survive review.
 
 \subsection{What the Ensemble Buys}
-The stacking gain arises from error diversity rather than from any member's individual strength: the mean pairwise correlation between base-learner residuals is $0.750$, with the neural and tree models forming distinct error clusters. A drop-one ablation orders the members consistently with their individual accuracy, but no single member's contribution is statistically significant once the Nadeau--Bengio correction is applied ($p = 0.11$--$0.45$). The defensible statement is that the ensemble as a whole outperforms its members, not that any one member is indispensable.
+The stacking gain arises from error diversity rather than from any member's individual strength. The mean pairwise correlation between base-learner residuals is $0.750$, and Fig.~\ref{fig:correlation} shows the neural and tree models forming visibly distinct error clusters; it is combination across those clusters that the meta-learner exploits.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig3_error_correlation.png}
+\caption{Pearson correlation between out-of-fold residuals of the base learners. Lower correlation between clusters is what makes stacking profitable.}
+\label{fig:correlation}
+\end{figure}
+
+Fig.~\ref{fig:contributions} contrasts the fitted ensemble weights with a drop-one ablation. The two disagree: SVR receives zero weight yet gradient boosting receives $0.238$ while contributing nothing measurable when removed. Collinear members split weight between them, so weights alone cannot establish a contribution and the drop-one test is the appropriate instrument. That test orders the members consistently with their individual accuracy, but no single member's contribution is statistically significant once the Nadeau--Bengio correction is applied ($p = 0.11$--$0.45$); the uncorrected test would report $p < 0.05$ for three of them. The defensible statement is that the ensemble as a whole outperforms its members, not that any one member is indispensable.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig2_ensemble_contributions.png}
+\caption{Ensemble member contributions. (a) Mean non-negative stacking weights. (b) Drop-one ablation: change in ensemble MSE when each member is removed, with fold estimates degraded and the corrected one-sided $p$-value. Positive values indicate that removing the member hurts.}
+\label{fig:contributions}
+\end{figure}
 
 \subsection{On the Anisotropy Hypothesis}
 Our results do not refute the physical hypothesis that motivated the original architecture --- that in-plane anisotropy shapes band gaps in rectangular 2D lattices \cite{rodin2014strain,tran2014layer,kim2015observation}. They show that the present implementation cannot test it: the coupling layer was wired to two formation energies, and the available data contain no in-plane lattice vectors. Recovering $a$ and $b$ from a full C2DB structure pull is the single most valuable extension of this work.

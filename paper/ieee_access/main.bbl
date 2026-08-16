@@ -52,6 +52,21 @@ Y.~Zhang, W.~Xu, G.~Liu, Z.~Zhang, J.~Zhu, and M.~Li, ``Bandgap prediction of
   two-dimensional materials using machine learning,'' \emph{PLOS ONE}, vol.~16,
   no.~8, p. e0255637, 2021.
 
+\bibitem{zhuo2018predicting}
+Y.~Zhuo, A.~Mansouri~Tehrani, and J.~Brgoch, ``Predicting the band gaps of
+  inorganic solids by machine learning,'' \emph{The Journal of Physical
+  Chemistry Letters}, vol.~9, no.~7, pp. 1668--1673, 2018.
+
+\bibitem{gomes2021utility}
+L.~C. Gomes \emph{et~al.}, ``The utility of composition-based machine learning
+  models for band gap prediction,'' \emph{Computational Materials Science},
+  vol. 197, p. 110995, 2021.
+
+\bibitem{wang2024gbdt}
+A.~Zeb \emph{et~al.}, ``Machine learning-enhanced prediction of inorganic
+  semiconductor bandgaps for advancing optoelectronic technologies,''
+  \emph{Advanced Theory and Simulations}, vol.~7, p. 2400190, 2024.
+
 \bibitem{kapoor2023leakage}
 S.~Kapoor and A.~Narayanan, ``Leakage and the reproducibility crisis in
   machine-learning-based science,'' \emph{Patterns}, vol.~4, no.~9, p. 100804,
@@ -110,6 +125,10 @@ S.~Ioffe and C.~Szegedy, ``Batch normalization: Accelerating deep network
 \bibitem{breiman1996stacked}
 L.~Breiman, ``Stacked regressions,'' \emph{Machine Learning}, vol.~24, no.~1,
   pp. 49--64, 1996.
+
+\bibitem{koenker1978regression}
+R.~Koenker and G.~Bassett, ``Regression quantiles,'' \emph{Econometrica},
+  vol.~46, no.~1, pp. 33--50, 1978.
 
 \bibitem{shwartzziv2022tabular}
 R.~Shwartz-Ziv and A.~Armon, ``Tabular data: Deep learning is not all you
