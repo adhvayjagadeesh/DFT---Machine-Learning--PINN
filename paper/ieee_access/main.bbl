@@ -164,6 +164,16 @@ L.~Breiman, ``Stacked regressions,'' \emph{Machine Learning}, vol.~24, no.~1,
 R.~Koenker and G.~Bassett, ``Regression quantiles,'' \emph{Econometrica},
   vol.~46, no.~1, pp. 33--50, 1978.
 
+\bibitem{tavazza2023approaches}
+F.~Tavazza, K.~Choudhary, and B.~DeCost, ``Approaches for uncertainty
+  quantification of {AI}-predicted material properties: A comparison,''
+  \emph{arXiv preprint arXiv:2310.13136}, 2023.
+
+\bibitem{gneiting2007probabilistic}
+T.~Gneiting and A.~E. Raftery, ``Strictly proper scoring rules, prediction, and
+  estimation,'' \emph{Journal of the American Statistical Association}, vol.
+  102, no. 477, pp. 359--378, 2007.
+
 \bibitem{zhuo2018predicting}
 Y.~Zhuo, A.~Mansouri~Tehrani, and J.~Brgoch, ``Predicting the band gaps of
   inorganic solids by machine learning,'' \emph{The Journal of Physical
@@ -184,16 +194,6 @@ Y.~Wang \emph{et~al.}, ``Accurate prediction of band gap of two-dimensional
   monolayer materials via transfer learning,'' \emph{Materials Today
   Communications}, 2025, 290 compositional descriptors over 2,915 C2DB
   monolayers.
-
-\bibitem{gneiting2007probabilistic}
-T.~Gneiting and A.~E. Raftery, ``Strictly proper scoring rules, prediction, and
-  estimation,'' \emph{Journal of the American Statistical Association}, vol.
-  102, no. 477, pp. 359--378, 2007.
-
-\bibitem{tavazza2023approaches}
-F.~Tavazza, K.~Choudhary, and B.~DeCost, ``Approaches for uncertainty
-  quantification of {AI}-predicted material properties: A comparison,''
-  \emph{arXiv preprint arXiv:2310.13136}, 2023.
 
 \bibitem{airlangga2025hybrid}
 G.~Airlangga and A.~Liu, ``A hybrid gradient boosting and neural network model
