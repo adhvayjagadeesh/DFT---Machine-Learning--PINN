@@ -133,30 +133,78 @@ def fig_drop_one_and_weights():
 
 # ---------------------------------------------------------------- figure 3
 def fig_error_correlation():
-    """Error-correlation heatmap - the diversity stacking exploits."""
-    if not _exists("stacking_analysis.json"):
+    """Residual correlation above the diagonal, RMS disagreement below it.
+
+    A symmetric correlation matrix wastes half the panel. The lower triangle
+    instead carries the root-mean-square disagreement between each pair's
+    predictions in eV, which is the quantity a practitioner feels: correlation
+    describes whether two models err in the same direction, disagreement says by
+    how much. The diagonal carries each model's own MAE.
+    """
+    if not _exists("stacking_analysis.json", "stacking_oof_predictions.csv"):
         return
     with open(M / "stacking_analysis.json") as fh:
         s = json.load(fh)
-    corr = pd.DataFrame(s["error_correlation"])
+    oof = pd.read_csv(M / "stacking_oof_predictions.csv")
     order = ["rf", "gbr", "svr", "mlp", "pinn"]
-    corr = corr.loc[order, order]
+    corr = pd.DataFrame(s["error_correlation"]).loc[order, order]
 
-    fig, ax = plt.subplots(figsize=(4.6, 4.0))
-    im = ax.imshow(corr.to_numpy(), cmap="RdBu_r", vmin=0, vmax=1)
-    ax.set_xticks(range(len(order)), [PRETTY[m] for m in order],
-                  rotation=40, ha="right", fontsize=8)
-    ax.set_yticks(range(len(order)), [PRETTY[m] for m in order], fontsize=8)
-    for i in range(len(order)):
-        for j in range(len(order)):
-            v = corr.iloc[i, j]
-            ax.text(j, i, f"{v:.2f}", ha="center", va="center", fontsize=7.5,
-                    color="white" if v > 0.75 else "#222")
+    n = len(order)
+    disagree = np.zeros((n, n))
+    for i, a in enumerate(order):
+        for j, b in enumerate(order):
+            disagree[i, j] = np.sqrt(np.mean((oof[a] - oof[b]) ** 2))
+    mae = {m: float(np.mean(np.abs(oof["true"] - oof[m]))) for m in order}
+
+    fig, ax = plt.subplots(figsize=(5.0, 5.4))
+    upper = np.full((n, n), np.nan)
+    lower = np.full((n, n), np.nan)
+    for i in range(n):
+        for j in range(n):
+            if j > i:
+                upper[i, j] = corr.iloc[i, j]
+            elif j < i:
+                lower[i, j] = disagree[i, j]
+
+    im1 = ax.imshow(upper, cmap="Blues", vmin=0.4, vmax=1.0)
+    im2 = ax.imshow(lower, cmap="Oranges", vmin=0, vmax=np.nanmax(lower))
+
+    for i in range(n):
+        for j in range(n):
+            if j > i:
+                v = corr.iloc[i, j]
+                ax.text(j, i, f"{v:.2f}", ha="center", va="center", fontsize=8,
+                        color="white" if v > 0.82 else "#222")
+            elif j < i:
+                v = disagree[i, j]
+                ax.text(j, i, f"{v:.2f}", ha="center", va="center", fontsize=8,
+                        color="white" if v > 0.75 * np.nanmax(lower) else "#222")
+            else:
+                ax.add_patch(plt.Rectangle((j - .5, i - .5), 1, 1,
+                                           facecolor="#EDEFF2", edgecolor="none"))
+                ax.text(j, i, f"MAE\n{mae[order[i]]:.2f}", ha="center", va="center",
+                        fontsize=7, color="#333")
+
+    short = {"rf": "RF", "gbr": "GBR", "svr": "SVR", "mlp": "MLP", "pinn": "PINN"}
+    ax.set_xticks(range(n), [short[m] for m in order], fontsize=8.5)
+    ax.set_yticks(range(n), [PRETTY[m] for m in order], fontsize=8)
+    ax.set_xticks(np.arange(-.5, n, 1), minor=True)
+    ax.set_yticks(np.arange(-.5, n, 1), minor=True)
+    ax.grid(which="minor", color="white", lw=1.5)
     ax.grid(False)
-    fig.colorbar(im, ax=ax, shrink=.8, label="Pearson correlation of residuals")
-    ax.set_title(f"Residual correlation (mean off-diagonal "
-                 f"{s['mean_pairwise_error_correlation']:.2f})",
-                 fontsize=9.5, fontweight="bold")
+    ax.tick_params(which="minor", length=0)
+
+    # Two horizontal colourbars beneath the matrix; side-by-side vertical bars
+    # collide with each other and with the title.
+    cb1 = fig.colorbar(im1, ax=ax, orientation="horizontal",
+                       fraction=.045, pad=.20, aspect=30)
+    cb1.set_label("Residual correlation — upper triangle", fontsize=8)
+    cb1.ax.tick_params(labelsize=7)
+    cb2 = fig.colorbar(im2, ax=ax, orientation="horizontal",
+                       fraction=.045, pad=.10, aspect=30)
+    cb2.set_label("RMS prediction disagreement, eV — lower triangle", fontsize=8)
+    cb2.ax.tick_params(labelsize=7)
+    ax.set_title("Base-learner agreement", fontsize=10, fontweight="bold", pad=10)
     fig.savefig(F / "fig3_error_correlation.png")
     plt.close(fig)
 
@@ -268,9 +316,19 @@ def fig_calibration():
     axes[0].set_title("(a) Interval calibration", fontsize=9.5, fontweight="bold")
     axes[0].legend(frameon=False, fontsize=8)
 
-    axes[1].hist(hi - lo, bins=40, color=NEUTRAL, edgecolor="white")
-    axes[1].axvline((hi - lo).mean(), color=WARN, lw=1.6,
-                    label=f"mean {float((hi - lo).mean()):.2f} eV")
+    width = hi - lo
+    # The upper tail is nearly empty and compresses the informative bulk, so the
+    # axis is clipped at the 99.5th percentile and the remainder reported in the
+    # legend rather than shown as blank space.
+    clip = float(np.percentile(width, 99.5))
+    n_beyond = int((width > clip).sum())
+    axes[1].hist(width[width <= clip], bins=45, range=(0, clip),
+                 color=NEUTRAL, edgecolor="white")
+    axes[1].set_xlim(0, clip)
+    axes[1].axvline(float(width.mean()), color=WARN, lw=1.6,
+                    label=f"mean {float(width.mean()):.2f} eV")
+    if n_beyond:
+        axes[1].plot([], [], " ", label=f"{n_beyond} beyond {clip:.1f} eV, not shown")
     axes[1].set_xlabel("Predicted interval width (eV)")
     axes[1].set_ylabel("Count")
     axes[1].set_title("(b) Interval width", fontsize=9.5, fontweight="bold")
