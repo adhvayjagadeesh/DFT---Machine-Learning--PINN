@@ -200,9 +200,10 @@ def run(repeats: int, quick: bool) -> None:
             entry["stack_vs_prior"][opponent] = {
                 "mean_mse_gain": float(d.mean()),
                 "folds_won": int((d > 0).sum()), "n_folds": len(d),
+                "p_two_sided": corrected_repeated_kfold_ttest(
+                    d, n_train=n_tr, n_test=n_va).p_value_two_sided,
                 "p_one_sided": corrected_repeated_kfold_ttest(
                     d, n_train=n_tr, n_test=n_va).p_value_one_sided,
-                "p_one_sided_plain": fold_level_ttest(d).p_value_one_sided,
             }
         summary["tiers"][tier] = entry
 
@@ -231,7 +232,7 @@ def run(repeats: int, quick: bool) -> None:
                   f"+/-{models[v]['r2_std']:.4f}  MAE={models[v]['mae_mean']:.4f}")
         for opp, c in summary["tiers"][tier]["stack_vs_prior"].items():
             print(f"    stack vs {opp:10} won {c['folds_won']}/{c['n_folds']}  "
-                  f"p={c['p_one_sided']:.4f}")
+                  f"p={c['p_two_sided']:.4f}")
     print(f"\nruntime {summary['runtime_seconds']}s")
 
 

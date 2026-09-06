@@ -47,7 +47,8 @@ from sklearn.model_selection import GroupKFold, GroupShuffleSplit, KFold
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from pinn_dft import config                                    # noqa: E402
-from pinn_dft.evaluation.statistics import fold_level_ttest    # noqa: E402
+from pinn_dft.evaluation.statistics import (                   # noqa: E402
+    corrected_repeated_kfold_ttest, fold_level_ttest)
 
 BASE = ["rf", "gbr", "svr", "mlp", "pinn"]
 STACK = "stack_nnls"
@@ -61,7 +62,7 @@ WINDOWS = {
 
 
 # ---------------------------------------------------------------- 1
-def model_selection_risk(oof: pd.DataFrame) -> dict:
+def model_selection_risk(oof: pd.DataFrame, n_train: int, n_test: int) -> dict:
     """How risky is committing to a single model chosen in advance?"""
     per_fold = []
     for (rep, fold), g in oof.groupby(["repeat", "fold"]):
@@ -101,8 +102,11 @@ def model_selection_risk(oof: pd.DataFrame) -> dict:
             df.stack_r2.mean() - means[worst_choice]),
         "folds_stack_beats_committed": int(
             (df.stack_r2 > df[f"r2_{committed}"]).sum()),
-        "p_stack_vs_committed": fold_level_ttest(
-            (df.stack_r2 - df[f"r2_{committed}"]).to_numpy()).p_value_one_sided,
+        # Fold estimates share overlapping training partitions, so the
+        # corrected two-sided test is the one reported.
+        "p_stack_vs_committed": corrected_repeated_kfold_ttest(
+            (df.stack_r2 - df[f"r2_{committed}"]).to_numpy(),
+            n_train=n_train, n_test=n_test).p_value_two_sided,
     }
 
 
@@ -227,9 +231,11 @@ def main(skip_timing: bool) -> None:
     if not path.exists():
         raise SystemExit("run experiments/run_stacking_analysis.py first")
     oof = pd.read_csv(path)
+    folds = pd.read_csv(config.RESULTS_METRICS / "stacking_fold_metrics.csv")
+    n_train, n_test = int(folds.n_train.mean()), int(folds.n_valid.mean())
 
     summary = {
-        "model_selection_risk": model_selection_risk(oof),
+        "model_selection_risk": model_selection_risk(oof, n_train, n_test),
         "screening_utility": screening_utility(oof),
         "tail_risk": tail_risk(oof),
     }

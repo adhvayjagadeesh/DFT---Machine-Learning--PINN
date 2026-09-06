@@ -172,7 +172,7 @@ def run(repeats: int, quick: bool) -> None:
         }
         if variant != "gbr":
             entry["p_plain"] = fold_level_ttest(d).p_value_one_sided
-            entry["p_nadeau_bengio"] = corrected_repeated_kfold_ttest(
+            entry["p_two_sided"] = corrected_repeated_kfold_ttest(
                 d, n_train=n_tr, n_test=n_va).p_value_one_sided
         summary["variants"][variant] = entry
 

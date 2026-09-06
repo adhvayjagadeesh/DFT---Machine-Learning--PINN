@@ -166,9 +166,10 @@ def run(repeats: int, quick: bool) -> None:
             "folds_worse_without": int((loss > 0).sum()),
             "n_folds": len(loss),
             "test": "Nadeau-Bengio corrected paired t-test",
+            "p_two_sided": corrected_repeated_kfold_ttest(
+                loss, n_train=n_tr, n_test=n_va).p_value_two_sided,
             "p_one_sided": corrected_repeated_kfold_ttest(
                 loss, n_train=n_tr, n_test=n_va).p_value_one_sided,
-            "p_one_sided_plain": fold_level_ttest(loss).p_value_one_sided,
         }
     summary["drop_one_ablation"] = drop_summary
 
@@ -234,7 +235,7 @@ def run(repeats: int, quick: bool) -> None:
         print(f"  remove {m:5} -> R2 {e['mean_r2_without']:.4f}  "
               f"MSE penalty {e['mse_penalty_when_removed']:+.4f}  "
               f"worse on {e['folds_worse_without']}/{e['n_folds']}  "
-              f"p={e['p_one_sided']:.4f}")
+              f"p={e['p_two_sided']:.4f}")
     print(f"\nmean pairwise error correlation: "
           f"{summary['mean_pairwise_error_correlation']:.3f}")
     print("\n=== held-out test ===")

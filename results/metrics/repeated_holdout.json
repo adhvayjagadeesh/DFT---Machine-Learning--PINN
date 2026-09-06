@@ -52,7 +52,8 @@
       "n_splits": 8,
       "p_one_sided": 0.050967685440367456,
       "p_one_sided_plain": 0.0069314331376722806,
-      "test": "Nadeau-Bengio corrected paired t-test"
+      "test": "Nadeau-Bengio corrected paired t-test",
+      "p_two_sided": 0.10193537088073491
     },
     "stack_ridge_vs_mlp": {
       "mean_mse_gain": 0.05082267659668313,
@@ -60,7 +61,8 @@
       "n_splits": 8,
       "p_one_sided": 0.040466579025118674,
       "p_one_sided_plain": 0.0047896200771690165,
-      "test": "Nadeau-Bengio corrected paired t-test"
+      "test": "Nadeau-Bengio corrected paired t-test",
+      "p_two_sided": 0.08093315805023735
     },
     "stack_ridge_vs_gbr": {
       "mean_mse_gain": 0.13281957710732797,
@@ -68,7 +70,8 @@
       "n_splits": 8,
       "p_one_sided": 0.0010647393648123226,
       "p_one_sided_plain": 3.8984869281166646e-05,
-      "test": "Nadeau-Bengio corrected paired t-test"
+      "test": "Nadeau-Bengio corrected paired t-test",
+      "p_two_sided": 0.002129478729624645
     },
     "stack_nnls_vs_pinn": {
       "mean_mse_gain": 0.02632245597908011,
