@@ -102,7 +102,9 @@ The packing-density proxy is
 \rho_{\mathrm{cell}} = \frac{N_{\mathrm{atoms}}}{A_{\mathrm{cell}}},
 \label{eq:density}
 \end{equation}
-where $N_{\mathrm{atoms}}$ is the atom count of the formula unit and $A_{\mathrm{cell}}$ the unit-cell area. The DFT-free tier is obtainable from a chemical formula and a candidate space group alone. No tier contains a band gap at any level of theory, which distinguishes this setting from $\Delta$-learning studies that supply a semi-local gap as an input \cite{zhang2021bandgap}.
+where $N_{\mathrm{atoms}}$ is the atom count of the formula unit and $A_{\mathrm{cell}}$ the unit-cell area. The DFT-free tier is obtainable from a chemical formula and a candidate symmetry assignment alone, so a material that has never been calculated can be scored. No tier contains a band gap at any level of theory, which distinguishes this setting from $\Delta$-learning studies that supply a semi-local gap as an input \cite{zhang2021bandgap}.
+
+Two qualifications attach to the term ``DFT-free'' and we state them explicitly. First, it describes the model's \emph{inputs at inference}, not the pipeline as a whole: the training labels are HSE06 gaps and were obtained by DFT on the 1{,}169 materials of the training set. The claim is that no electronic-structure calculation is required on the material being predicted, not that the method dispenses with DFT altogether. Second, the layer group is a symmetry label rather than a computed quantity, but for a hypothetical compound it must still be assigned --- in practice from a structural prototype rather than derived from first principles. It is therefore cheap rather than costless, and the tier is more precisely described as composition plus assumed symmetry.
 
 Magpie statistics replace the raw chemical formula. An earlier pipeline one-hot encoded the formula string into 1{,}077 indicator columns, of which 825 occurred in exactly one material; such columns are row identifiers rather than descriptors, and a formula appearing only in a validation fold contributes an all-zero block.
 
@@ -186,7 +188,7 @@ For an unbiased comparison against prior work we additionally reproduce, at thei
 \label{sec:results}
 
 \subsection{Model Comparison}
-Table~\ref{tab:benchmark} reports all models over 25 fold estimates.
+Table~\ref{tab:benchmark} and Fig.~\ref{fig:comparison} report all models over 25 fold estimates.
 
 \begin{table*}[!t]
 \caption{Repeated grouped five-fold cross-validation, all descriptors, 25 fold estimates. ``Folds'' counts estimates beating the GBR baseline; $p$-values are Nadeau--Bengio corrected and two-sided. SVR differs significantly from the baseline in the negative direction.\label{tab:benchmark}}
@@ -278,7 +280,7 @@ Across eight independent held-out sets the cross-validated ordering is reproduce
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig8_repeated_holdout.png}
-\caption{Repeated held-out evaluation. (a) Per-split $R^2$ on eight independent formula-grouped held-out sets; horizontal bars are means. (b) Paired per-split difference between the stacked ensemble and each single model, annotated with splits won and the one-sided $p$-value.}
+\caption{Repeated held-out evaluation. (a) Per-split $R^2$ on eight independent formula-grouped held-out sets; horizontal bars are means. (b) Paired per-split difference between the stacked ensemble and each single model, annotated with splits won and the corrected two-sided $p$-value.}
 \label{fig:holdout}
 \end{figure}
 
@@ -332,7 +334,7 @@ Table~\ref{tab:tiers_results} and Fig.~\ref{fig:tiers} report accuracy in each d
 \toprule
 Tier & $R^2$ & MAE [eV] & $\Delta R^2$ \\
 \midrule
-All descriptors      & $0.877 \pm 0.036$ & $0.364$ & --- \\
+All descriptors      & $0.877 \pm 0.036$ & $0.363$ & --- \\
 No DFT energies      & $0.844 \pm 0.044$ & $0.399$ & $-0.033$ \\
 \textbf{No DFT at all} & $\mathbf{0.834 \pm 0.048}$ & $\mathbf{0.425}$ & $-0.044$ \\
 \midrule
@@ -377,7 +379,7 @@ Fig.~\ref{fig:contributions} contrasts the fitted ensemble weights with a drop-o
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig2_ensemble_contributions.png}
-\caption{Ensemble member contributions. (a) Mean non-negative stacking weights. (b) Drop-one ablation: change in ensemble MSE when each member is removed, with fold estimates degraded and the corrected one-sided $p$-value. Positive values indicate that removing the member hurts.}
+\caption{Ensemble member contributions. (a) Mean non-negative stacking weights. (b) Drop-one ablation: change in ensemble MSE when each member is removed, with fold estimates degraded and the corrected two-sided $p$-value. Positive values indicate that removing the member hurts.}
 \label{fig:contributions}
 \end{figure}
 
