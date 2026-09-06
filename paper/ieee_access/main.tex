@@ -72,6 +72,56 @@ Our contributions are four.
 \section{Methods}
 \label{sec:methods}
 
+\begin{table}[!t]
+\caption{Nomenclature. Symbols are listed in order of first appearance.\label{tab:nomenclature}}
+\centering
+\small
+\begin{tabular}{@{}p{0.20\columnwidth}p{0.72\columnwidth}@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$y_i,\ \hat{y}_i$ & Reference HSE06 band gap of material $i$, and its prediction (eV) \\
+$\mathbf{x}_i$ & Descriptor vector of material $i$ \\
+$N$ & Number of materials in the set being summed over \\
+$\rho_{\mathrm{cell}}$ & Packing-density proxy (Eq.~\eqref{eq:density}) \\
+$N_{\mathrm{atoms}}$, $A_{\mathrm{cell}}$ & Atom count of the formula unit; unit-cell area (\AA$^2$) \\
+$\mathcal{T}$ & Training partition of the current fold \\
+$\mu_j^{(\mathcal{T})},\ \sigma_j^{(\mathcal{T})}$ & Mean and standard deviation of feature $j$ over $\mathcal{T}$ \\
+$\tilde{x}_{ij}$ & Feature $j$ of material $i$ after standardisation (Eq.~\eqref{eq:zscore}) \\
+$\mathcal{I}_k$ & $k$th inner block used to build out-of-fold predictions \\
+$f^{(m)}_{-\mathcal{I}_k}$ & Base learner $m$ fitted with block $\mathcal{I}_k$ withheld \\
+$z_i^{(m)}$ & Out-of-fold prediction of learner $m$ for material $i$ (Eq.~\eqref{eq:oof}) \\
+$M$ & Number of base learners in the ensemble ($M=5$) \\
+$\bar{d},\ s_d^2$ & Sample mean and variance of the per-fold score differences \\
+$n$ & Number of fold estimates ($n=25$) \\
+$n_{\mathrm{train}},\ n_{\mathrm{test}}$ & Sizes of the training and validation partitions \\
+$t_{\mathrm{NB}}$ & Nadeau--Bengio corrected $t$ statistic (Eq.~\eqref{eq:nb}) \\
+$\mathrm{ReLU}(u)$ & Rectifier, $\max(0,u)$ \\
+$\mathcal{L}_{\mathrm{phy}}$ & Boundary penalty on negative gaps (Eq.~\eqref{eq:phy}) \\
+$\boldsymbol{\beta},\ \hat{\boldsymbol{\beta}}$ & Meta-learner weight vector and its estimate \\
+$\lVert \boldsymbol{\beta} \rVert_2^2$ & Squared Euclidean ($\ell_2$) norm, $\sum_m \beta_m^2$ \\
+$\lambda$ & Ridge regularisation strength \\
+$g_1,\ g_2$ & The two geometric channels (unit-cell area, thickness) \\
+$\epsilon$ & Small constant preventing division by zero ($10^{-6}$) \\
+$\mathbf{s}$ & Structural coupling descriptor (Eq.~\eqref{eq:strain}) \\
+$\tau$ & Quantile level, $\tau \in \{0.25, 0.50, 0.75\}$ \\
+$q_{\tau,i}$ & Predicted $\tau$-quantile of the residual for material $i$ \\
+$\mathcal{L}_\tau$ & Pinball (quantile) loss at level $\tau$ (Eq.~\eqref{eq:pinball}) \\
+$\mathcal{L}_{\mathrm{aniso}}$ & Anisotropy penalty (Eq.~\eqref{eq:aniso}) \\
+$\hat{y}_{\mathrm{prior}}$ & Prediction of the first-stage tree, the prior the hybrid corrects \\
+$\hat{y}_{\mathrm{hybrid}}$ & Final hybrid prediction (Eq.~\eqref{eq:hybrid}) \\
+$r$ & Output of the point residual head \\
+$\Delta q$ & Interquartile spread, $q_{0.75}-q_{0.25}$ \\
+$\sigma(\cdot)$ & Logistic function, $1/(1+e^{-u})$ \\
+$C$ & Empirical interval coverage (Eq.~\eqref{eq:coverage}) \\
+$\mathbb{1}[\cdot]$ & Indicator function: $1$ if the bracketed condition holds, else $0$ \\
+$R^2$, MAE, MSE & Coefficient of determination, mean absolute error, mean squared error \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
 \subsection{Dataset and Target}
 We use 1{,}169 rectangular-lattice (\textit{op}) two-dimensional monolayers from the Computational 2D Materials Database \cite{haastrup2018c2db} carrying an HSE06 band gap \cite{heyd2003hybrid}. The target $y \in \mathbb{R}^+$ spans $0.001$--$8.85$ eV with mean $2.60$ eV.
 
@@ -149,7 +199,7 @@ discouraging physically impossible negative gaps. We retain the term ``physics-i
   + \lambda \lVert \boldsymbol{\beta} \rVert_2^2,
 \label{eq:ridge}
 \end{equation}
-with $\lambda$ selected by generalised cross-validation within the training fold. The non-negative variant \cite{breiman1996stacked} additionally constrains $\beta_m \geq 0$, giving weights that are directly readable as ensemble shares and a prediction confined to the convex cone of its members:
+where $\lVert \cdot \rVert_2$ denotes the Euclidean norm, so the penalty $\lambda \lVert \boldsymbol{\beta} \rVert_2^2$ shrinks the meta-learner weights toward zero, and $\lambda$ is selected by generalised cross-validation within the training fold. The non-negative variant \cite{breiman1996stacked} additionally constrains $\beta_m \geq 0$, giving weights that are directly readable as ensemble shares and a prediction confined to the convex cone of its members:
 \begin{equation}
 \hat{y}_i = \sum_{m=1}^{M} \beta_m z_i^{(m)}, \qquad \beta_m \geq 0 .
 \label{eq:nnls}
@@ -310,7 +360,7 @@ C = \frac{1}{N}\sum_{i=1}^{N}
   \mathbb{1}\!\left[q_{0.25,i} \leq y_i \leq q_{0.75,i}\right],
 \label{eq:coverage}
 \end{equation}
-should equal the nominal level of $0.50$; the measured value is $C = 0.172$ at a mean interval width of $2.47$ eV (Fig.~\ref{fig:calibration}). This diagnostic is descriptive rather than comparative, and is computed from a single grouped five-fold pass rather than the repeated protocol used for every model comparison. The intervals are simultaneously wide and badly miscalibrated, and the deficit persists across every nominal level tested (Fig.~\ref{fig:calibration}(a)).
+in which $\mathbb{1}[\cdot]$ is the indicator function, equal to one when the reference value falls inside the predicted interval and zero otherwise, should equal the nominal level of $0.50$; the measured value is $C = 0.172$ at a mean interval width of $2.47$ eV (Fig.~\ref{fig:calibration}). This diagnostic is descriptive rather than comparative, and is computed from a single grouped five-fold pass rather than the repeated protocol used for every model comparison. The intervals are simultaneously wide and badly miscalibrated, and the deficit persists across every nominal level tested (Fig.~\ref{fig:calibration}(a)).
 
 We report this diagnosis without attempting to repair it. No post-hoc recalibration was applied: the intervals shown are the raw quantile-head outputs, and we did not fit conformal, isotonic, or Platt-style corrections on held-out data. That choice is deliberate. Recalibration would change the coverage figure without changing the conclusion that the architecture as published does not produce usable intervals, and applying it here would obscure the diagnosis. We therefore withdraw the uncertainty claim rather than rescue it.
 
