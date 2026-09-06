@@ -36,7 +36,7 @@ A Leakage-Controlled Study of Two-Dimensional Materials}
 \corresp{Corresponding author: Marx Akl (e-mail: makl@asdrp.org).}
 
 \begin{abstract}
-Hybrid architectures that correct a gradient-boosted prior with a neural residual head are widely reported to improve tabular property prediction in materials informatics. Evaluating one such architecture for band gaps of two-dimensional materials under a protocol that closes six leakage pathways, we find that its reported advantage does not survive: it fails to improve on the prior it corrects ($R^2 = 0.810 \pm 0.047$ against $0.823 \pm 0.043$; superior on 12 of 25 fold estimates; $p = 0.54$), and none of its physics-motivated components contributes measurably. A component ablation traces the discrepancy to how the tree prior is constructed, a detail invisible in the metrics such comparisons normally report. What does work on the same 1{,}169 rectangular-lattice C2DB materials is heterogeneous stacking: an ensemble of five base learners is the strongest configuration tested ($R^2 = 0.877 \pm 0.038$, MAE $0.363$ eV), beating the gradient-boosting baseline on 8 of 8 independent held-out sets ($p = 0.002$). Because its margin over the best single model is small, we justify it on decision-relevant grounds rather than accuracy alone. The identity of the best single model is unstable across folds, so committing to one in advance carries a risk the ensemble removes: it beats a committed choice on 22 of 25 folds, cuts predictions in error by more than 1 eV from 7.4\% to 6.3\%, and trains in 8 seconds against the CPU-hours of the calculation it replaces. Decomposing accuracy by descriptor cost, we find that removing every DFT-derived descriptor costs $0.044$ in $R^2$, most of the attainable accuracy resting on composition and symmetry.
+Hybrid architectures that correct a gradient-boosted prior with a neural residual head are widely reported to improve tabular property prediction in materials informatics. Evaluating one such architecture for band gaps of two-dimensional materials under a protocol that closes six leakage pathways, we find that its reported advantage does not survive: it fails to improve on the prior it corrects ($R^2 = 0.810 \pm 0.047$ against $0.823 \pm 0.043$; superior on 12 of 25 fold estimates; $p = 0.54$), and none of its physics-motivated components contributes measurably. A component ablation traces the discrepancy to a single implementation detail: constructing the tree prior in sample rather than out of fold lifts the same architecture above its baseline on 21 of 25 fold estimates, manufacturing the reported improvement with every other component held fixed. What does work on the same 1{,}169 rectangular-lattice C2DB materials is heterogeneous stacking: an ensemble of five base learners is the strongest configuration tested ($R^2 = 0.877 \pm 0.038$, MAE $0.363$ eV), beating the gradient-boosting baseline on 8 of 8 independent held-out sets ($p = 0.002$). Because its margin over the best single model is small, we justify it on decision-relevant grounds: the best single model is unstable across folds, the ensemble beats a committed choice on 22 of 25 folds, and it cuts predictions in error by more than 1 eV from 7.4\% to 6.3\% for nine seconds of training. Removing every DFT-derived descriptor costs $0.044$ in $R^2$.
 \end{abstract}
 
 \begin{keywords}
@@ -62,7 +62,7 @@ Our contributions are four.
 \begin{enumerate}
 \item \textbf{A leakage-controlled evaluation protocol} for tabular materials regression, closing six specific pathways: identifier-like features, whole-dataset encoding, in-sample construction of stacked priors, polymorphs straddling folds, absent held-out data, and significance tests applied at the sample rather than the fold level.
 
-\item \textbf{A demonstrated failure mechanism in residual correction (primary).} Under that protocol the physics-informed hybrid does not improve on its own prior, and no physics-motivated component contributes measurably. The mechanism is identified rather than inferred: an in-sample prior leaves the corrector no residual signal, so it learns to emit approximately zero, and we recover that behaviour deliberately by reverting the one line responsible.
+\item \textbf{A demonstrated failure mechanism in residual correction (primary).} Under that protocol the physics-informed hybrid does not improve on its own prior, and no physics-motivated component contributes measurably. The mechanism is identified rather than inferred: an in-sample prior leaves the corrector no residual signal, so it learns to emit approximately zero, and we recover the reported improvement deliberately by reverting the one line responsible.
 
 \item \textbf{A decision-relevant justification for ensembling.} Where a small accuracy margin cannot carry the argument, we quantify model-selection risk, large-error rates, and measured wall-clock cost instead.
 
@@ -231,7 +231,7 @@ Fig.~\ref{fig:learning} shows that the ensemble's advantage is not an artefact o
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig4_learning_curve.png}
-\caption{Learning curves under grouped cross-validation. Shaded bands are 95\% confidence intervals over folds.}
+\caption{Learning curves under grouped cross-validation, from a single five-fold pass at each training-set size. Shaded bands are 95\% confidence intervals over folds.}
 \label{fig:learning}
 \end{figure}
 
@@ -240,20 +240,20 @@ Fig.~\ref{fig:learning} shows that the ensemble's advantage is not an artefact o
 The hybrid is superior to its own gradient-boosted prior on 12 of 25 fold estimates --- almost exactly the coin-flip a null effect predicts --- and the corrected test does not reject the null ($p = 0.54$). Table~\ref{tab:ablation} reports the component ablation; every configuration listed was trained and evaluated.
 
 \begin{table}[!t]
-\caption{Component ablation of the hybrid, pooled out-of-fold $R^2$.\label{tab:ablation}}
+\caption{Component ablation of the hybrid, mean $R^2$ over 25 fold estimates. Every configuration was trained and evaluated.\label{tab:ablation}}
 \centering
 \begin{tabular}{lcc}
 \toprule
 Configuration & $R^2$ & $\Delta$ vs.\ full \\
 \midrule
-Tree prior alone, no corrector & 0.819 & $+0.018$ \\
-In-sample prior (leaky)        & 0.817 & $+0.015$ \\
-Without boundary penalty       & 0.806 & $+0.004$ \\
-Without structural layer       & 0.804 & $+0.002$ \\
-Without anisotropy penalty     & 0.804 & $+0.002$ \\
-\textbf{Full framework}        & 0.801 & --- \\
-Without quantile heads         & 0.796 & $-0.005$ \\
-Without residual head          & 0.766 & $-0.035$ \\
+In-sample prior (leaky)        & 0.837 & $+0.035$ \\
+Tree prior alone, no corrector & 0.823 & $+0.021$ \\
+Without anisotropy penalty     & 0.809 & $+0.007$ \\
+Without structural layer       & 0.806 & $+0.004$ \\
+Without quantile heads         & 0.805 & $+0.002$ \\
+\textbf{Full framework}        & 0.802 & --- \\
+Without boundary penalty       & 0.801 & $-0.001$ \\
+Without residual head          & 0.777 & $-0.025$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -265,7 +265,9 @@ Without residual head          & 0.766 & $-0.035$ \\
 \label{fig:ablation}
 \end{figure}
 
-No physics-motivated component contributes positively, and the tree prior alone is the strongest configuration in the table (Fig.~\ref{fig:ablation}). The second row identifies the mechanism. Reverting to an in-sample prior \emph{raises} measured $R^2$, from $0.801$ to $0.817$, recovering almost the whole gap to the tree prior alone ($0.819$). It does not exceed that prior, and we do not claim it reproduces the original gain over the baseline; what it reproduces is the corrector's degeneration into a pass-through. With a prior that appears near-perfect on training rows the correction head has almost no residual signal to fit, so it learns to emit approximately zero and the architecture collapses onto the tree it was meant to improve. The ablation recovers that behaviour on demand by changing one line, which is why we regard the effect as a property of the evaluation rather than of the model.
+No physics-motivated component contributes positively, and the tree prior alone is the strongest configuration in the table (Fig.~\ref{fig:ablation}). The first row identifies the mechanism. Reverting to an in-sample prior raises measured $R^2$ from $0.802$ to $0.837$, and --- crucially --- lifts the hybrid \emph{above} the tree prior it corrects ($0.823$), on 21 of 25 fold estimates. That is the qualitative result reported in earlier work: a hybrid that appears to beat its baseline. Constructed correctly, the same architecture falls below that baseline on 18 of 25 estimates. The apparent improvement is thus manufactured by the prior construction alone, with every other component held fixed.
+
+The mechanism is straightforward. A prior fitted in sample is near-perfect on the rows the corrector trains on, so the residual signal it must learn is almost absent; the head learns to emit approximately zero and the architecture collapses onto the tree, while the training-time metrics --- computed against that same optimistic prior --- look healthy throughout. We note that the leaky variant's advantage is not itself statistically significant under the corrected two-sided test ($p = 0.11$), which is precisely the point: an effect of this size is easy to report as real, and nothing in the usual reported metrics distinguishes it from one.
 
 We also tested the natural remedy. A shrinkage gate constrains the correction by $\sigma(\cdot) \in (0,1)$, initialised near zero so the model begins as a pass-through and must earn any departure. It did not work: the gate converged small ($0.081 \pm 0.007$) but accuracy destabilised ($R^2 = 0.681 \pm 0.237$, with 7 of 25 fold estimates below $0.70$ and one at $-0.24$). Shrinking the gate rescales the gradient reaching the head, whose raw output grows to compensate, leaving the product poorly controlled on unseen data.
 
@@ -295,7 +297,7 @@ The ensemble's margin over the best single model is small ($\Delta R^2 \approx 0
 
 \textit{Large-error rate.} Screening is harmed more by rare large errors, which move a material between application classes, than by average error. Predictions in error by more than 1 eV occur at $6.3\%$ for the ensemble against $7.4\%$ for both neural models and $10$--$13\%$ for the tree baselines, a relative reduction of $15\%$ against the best single model.
 
-\textit{Cost.} Training the full ensemble, including the out-of-fold predictions the meta-learner requires, takes $8.0$ s against $0.5$ s for the MLP alone, and inference over 198 materials takes $22$ ms. The relative overhead of $16\times$ is real but the absolute cost is eight seconds, against the CPU-hours of the HSE06 calculation being replaced. The standard objection that an ensemble of $N$ models costs $N$ times more \cite{tavazza2023approaches} does not bind in this regime.
+\textit{Cost.} Training the full ensemble, including the out-of-fold predictions the meta-learner requires, takes $9.1$ s against $0.5$ s for the MLP alone, and inference over 198 materials takes $27$ ms. The relative overhead of $18\times$ is real but the absolute cost is nine seconds, against the CPU-hours of the HSE06 calculation being replaced. The standard objection that an ensemble of $N$ models costs $N$ times more \cite{tavazza2023approaches} does not bind in this regime.
 
 We report one axis that does not support the ensemble. On a screening task measuring wasted DFT evaluations per true hit, results are mixed: the ensemble is best for a visible-photocatalysis window ($1.8$--$3.0$ eV), the PINN is best for a photovoltaic window ($1.0$--$2.0$ eV), and several models tie for wide-gap selection.
 
@@ -306,7 +308,7 @@ C = \frac{1}{N}\sum_{i=1}^{N}
   \mathbb{1}\!\left[q_{0.25,i} \leq y_i \leq q_{0.75,i}\right],
 \label{eq:coverage}
 \end{equation}
-should equal the nominal level of $0.50$; the measured value is $C = 0.172$ at a mean interval width of $2.47$ eV (Fig.~\ref{fig:calibration}). The intervals are simultaneously wide and badly miscalibrated, and the deficit persists across every nominal level tested (Fig.~\ref{fig:calibration}(a)).
+should equal the nominal level of $0.50$; the measured value is $C = 0.172$ at a mean interval width of $2.47$ eV (Fig.~\ref{fig:calibration}). This diagnostic is descriptive rather than comparative, and is computed from a single grouped five-fold pass rather than the repeated protocol used for every model comparison. The intervals are simultaneously wide and badly miscalibrated, and the deficit persists across every nominal level tested (Fig.~\ref{fig:calibration}(a)).
 
 We report this diagnosis without attempting to repair it. No post-hoc recalibration was applied: the intervals shown are the raw quantile-head outputs, and we did not fit conformal, isotonic, or Platt-style corrections on held-out data. That choice is deliberate. Recalibration would change the coverage figure without changing the conclusion that the architecture as published does not produce usable intervals, and applying it here would obscure the diagnosis. We therefore withdraw the uncertainty claim rather than rescue it.
 
@@ -361,7 +363,7 @@ Fig.~\ref{fig:tiers}(b) gives the head-to-head against the prior pipeline within
 Once the prior is constructed out of fold, its residuals on unseen materials are dominated by irreducible noise rather than recoverable structure, and a corrector fitted to them adds variance without removing bias. This is not specific to materials data; residual-boosting correctors are known to yield negative gains when the residual signal is noise-dominated \cite{airlangga2025hybrid}. The practical consequence is that hybrid residual designs must be validated against their own prior with an out-of-fold construction. Compared against an in-sample prior they can appear to help while doing nothing, and that appearance is stable enough to survive review.
 
 \subsection{What the Ensemble Buys}
-The stacking gain arises from error diversity rather than from any member's individual strength. The mean pairwise correlation between base-learner residuals is $0.750$, and Fig.~\ref{fig:correlation} shows the neural and tree models forming visibly distinct error clusters; it is combination across those clusters that the meta-learner exploits.
+The stacking gain arises from error diversity rather than from any member's individual strength. The mean pairwise correlation between base-learner residuals is $0.754$, and Fig.~\ref{fig:correlation} shows the neural and tree models forming visibly distinct error clusters; it is combination across those clusters that the meta-learner exploits.
 
 \begin{figure}[!t]
 \centering
@@ -370,7 +372,7 @@ The stacking gain arises from error diversity rather than from any member's indi
 \label{fig:correlation}
 \end{figure}
 
-Fig.~\ref{fig:contributions} contrasts the fitted ensemble weights with a drop-one ablation. The two disagree: SVR receives zero weight yet gradient boosting receives $0.238$ while contributing nothing measurable when removed. Collinear members split weight between them, so weights alone cannot establish a contribution and the drop-one test is the appropriate instrument. That test orders the members consistently with their individual accuracy --- removing the PINN costs most ($+0.008$ eV$^2$, 17 of 25 estimates degraded), then the MLP and random forest --- but no single member's contribution is statistically significant under the corrected two-sided test ($p = 0.22$--$0.94$). The defensible statement is that the ensemble as a whole outperforms its members, not that any one member is indispensable.
+Fig.~\ref{fig:contributions} contrasts the fitted ensemble weights with a drop-one ablation. The two disagree: SVR receives zero weight yet gradient boosting receives $0.249$ while contributing nothing measurable when removed. Collinear members split weight between them, so weights alone cannot establish a contribution and the drop-one test is the appropriate instrument. That test orders the members consistently with their individual accuracy --- removing the PINN costs most ($+0.008$ eV$^2$, 17 of 25 estimates degraded), then the MLP and random forest --- but no single member's contribution is statistically significant under the corrected two-sided test ($p = 0.22$--$0.94$). The defensible statement is that the ensemble as a whole outperforms its members, not that any one member is indispensable.
 
 \begin{figure}[!t]
 \centering
@@ -400,7 +402,7 @@ All data derive from one database and one Bravais class, with 1{,}169 labelled m
 
 \section{Conclusion}
 \label{sec:conclusion}
-A physics-informed hybrid residual architecture, previously reported to improve band-gap prediction for two-dimensional materials, does not improve on the gradient-boosted prior it corrects once the evaluation is controlled for leakage, and none of its physics-motivated components contributes measurably. The earlier improvement is reproduced on demand by reverting a single implementation detail --- building the tree prior in sample rather than out of fold --- which trains the corrector to emit nothing and leaves a pass-through of the tree wearing the appearance of a hybrid. We regard this as the transferable finding: hybrid residual designs are widely reported to help, this particular failure is easy to introduce by accident, and it is invisible in the metrics such papers normally report.
+A physics-informed hybrid residual architecture, previously reported to improve band-gap prediction for two-dimensional materials, does not improve on the gradient-boosted prior it corrects once the evaluation is controlled for leakage, and none of its physics-motivated components contributes measurably. The earlier improvement is reproduced on demand by reverting a single implementation detail --- building the tree prior in sample rather than out of fold --- which lifts the architecture above its baseline while training the corrector to emit nothing, leaving a pass-through of the tree wearing the appearance of a hybrid. We regard this as the transferable finding: hybrid residual designs are widely reported to help, this particular failure is easy to introduce by accident, and it is invisible in the metrics such papers normally report.
 
 Two positive results accompany it. A stacked ensemble of five heterogeneous learners is the strongest configuration tested, and we argue it should be justified by the risk it removes and the large errors it avoids at negligible absolute cost, rather than by a difference in $R^2$ that cannot carry the argument. Separately, decomposing accuracy by descriptor cost shows that composition and symmetry account for most of what is attainable here, with the full set of DFT energy channels adding $0.044$ in $R^2$.
 

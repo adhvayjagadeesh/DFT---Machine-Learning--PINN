@@ -222,7 +222,7 @@ def fig_parity_and_rec():
 def fig_ablation():
     if not _exists("ablation_results.csv"):
         return
-    df = pd.read_csv(M / "ablation_results.csv").sort_values("pooled_r2")
+    df = pd.read_csv(M / "ablation_results.csv").sort_values("r2_mean")
     labels = {
         "gbr_prior_only": "Tree prior alone", "in_sample_prior": "In-sample prior (leaky)",
         "no_physics_loss": "No boundary penalty", "no_structural_layer": "No coupling layer",
@@ -231,14 +231,14 @@ def fig_ablation():
     }
     fig, ax = plt.subplots(figsize=(6.6, 3.9))
     colors = [ACCENT if v == "full" else NEUTRAL for v in df["variant"]]
-    ax.barh(np.arange(len(df)), df["pooled_r2"], color=colors,
+    ax.barh(np.arange(len(df)), df["r2_mean"], color=colors,
             edgecolor="white", height=.66)
-    for i, r in enumerate(df["pooled_r2"]):
+    for i, r in enumerate(df["r2_mean"]):
         ax.text(r + .003, i, f"{r:.4f}", va="center", fontsize=7.5)
     ax.set_yticks(np.arange(len(df)),
                   [labels.get(v, v) for v in df["variant"]], fontsize=8)
-    ax.set_xlim(0, df["pooled_r2"].max() * 1.10)
-    ax.set_xlabel("Pooled out-of-fold $R^2$")
+    ax.set_xlim(0, df["r2_mean"].max() * 1.10)
+    ax.set_xlabel("Cross-validated $R^2$ (25 fold estimates)")
     ax.set_title("Component ablation (all configurations trained)",
                  fontsize=10, fontweight="bold")
     fig.savefig(F / "fig6_ablation.png")
