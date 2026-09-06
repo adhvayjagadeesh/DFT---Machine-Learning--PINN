@@ -28,7 +28,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from pinn_dft import config                                     # noqa: E402
 from pinn_dft.data import build_dataset, encode_fold, geometric_indices  # noqa: E402
 from pinn_dft.evaluation.metrics import regression_metrics      # noqa: E402
-from pinn_dft.evaluation.statistics import fold_level_ttest     # noqa: E402
+from pinn_dft.evaluation.statistics import (                   # noqa: E402
+    corrected_repeated_kfold_ttest, fold_level_ttest)
 from pinn_dft.models.baselines import train_baseline            # noqa: E402
 from pinn_dft.models.hybrid import (                            # noqa: E402
     HybridConfig, predict_hybrid, train_hybrid)
@@ -67,7 +68,7 @@ VARIANTS: dict[str, tuple[HybridConfig, str]] = {
 }
 
 
-def run(splitter_kind: str, quick: bool) -> None:
+def run(splitter_kind: str, quick: bool, repeats: int = 5) -> None:
     seed_everything(config.SEED)
     t_start = time.time()
 
@@ -80,78 +81,91 @@ def run(splitter_kind: str, quick: bool) -> None:
     cv = (GroupKFold(n_splits=config.N_SPLITS) if splitter_kind == "group"
           else KFold(n_splits=config.N_SPLITS, shuffle=True, random_state=config.SEED))
 
-    per_fold: dict[str, list[dict]] = {name: [] for name in VARIANTS}
-    per_fold["gbr_prior_only"] = []
-    pooled_pred: dict[str, np.ndarray] = {k: np.zeros(len(X_dev)) for k in per_fold}
-    y_pooled = np.zeros(len(X_dev))
+    names = list(VARIANTS) + ["gbr_prior_only"]
+    per_fold: dict[str, list[dict]] = {name: [] for name in names}
+    estimate = -1
 
-    for fold, (tr, va) in enumerate(cv.split(X_dev, y_dev, g_dev)):
-        t0 = time.time()
-        Xtr, Xva, columns = encode_fold(X_dev.iloc[tr], X_dev.iloc[va])
-        ytr, yva = y_dev[tr], y_dev[va]
-        ch_a, ch_b = geometric_indices(columns)
-        seed = config.SEED + fold
-        y_pooled[va] = yva
+    for rep in range(repeats):
+        # GroupKFold is deterministic, so permute group identity per repeat to
+        # obtain independent partitions -- the same construction used by the
+        # other experiments, so all tables rest on one protocol.
+        rng = np.random.RandomState(config.SEED + rep)
+        uniq = np.unique(g_dev)
+        remap = dict(zip(uniq, rng.permutation(len(uniq))))
+        g_rep = np.array([remap[g] for g in g_dev])
 
-        base = clone(train_baseline("gbr", Xtr, ytr, tune=False))
-        prior_pred = clone(base).fit(Xtr, ytr.ravel()).predict(Xva)
-        per_fold["gbr_prior_only"].append(
-            {"fold": fold, **regression_metrics(yva, prior_pred)})
-        pooled_pred["gbr_prior_only"][va] = prior_pred
+        for tr, va in cv.split(X_dev, y_dev, g_rep):
+            estimate += 1
+            t0 = time.time()
+            Xtr, Xva, columns = encode_fold(X_dev.iloc[tr], X_dev.iloc[va])
+            ytr, yva = y_dev[tr], y_dev[va]
+            ch_a, ch_b = geometric_indices(columns)
+            seed = config.SEED + 100 * rep + estimate
+            tag = {"repeat": rep, "fold": estimate,
+                   "n_train": len(tr), "n_valid": len(va)}
 
-        for name, (cfg, _) in VARIANTS.items():
-            model, va_feats, _ = train_hybrid(
-                base, Xtr, ytr, Xva, ch_a, ch_b, cfg, seed,
-                epochs=200 if quick else 1000)
-            point, _ = predict_hybrid(model, va_feats)
-            per_fold[name].append({"fold": fold, **regression_metrics(yva, point)})
-            pooled_pred[name][va] = point
+            base = clone(train_baseline("gbr", Xtr, ytr, tune=False))
+            prior_pred = clone(base).fit(Xtr, ytr.ravel()).predict(Xva)
+            per_fold["gbr_prior_only"].append(
+                {**tag, **regression_metrics(yva, prior_pred)})
 
-        print(f"[fold {fold + 1}/{config.N_SPLITS}] done ({time.time() - t0:.0f}s)")
+            for name, (cfg, _) in VARIANTS.items():
+                model, va_feats, _ = train_hybrid(
+                    base, Xtr, ytr, Xva, ch_a, ch_b, cfg, seed,
+                    epochs=200 if quick else 1000)
+                point, _ = predict_hybrid(model, va_feats)
+                per_fold[name].append({**tag, **regression_metrics(yva, point)})
+
+            print(f"[estimate {estimate + 1}/{repeats * config.N_SPLITS}] "
+                  f"({time.time() - t0:.0f}s)")
 
     # --- assemble ------------------------------------------------------------
-    from sklearn.metrics import r2_score
+    frames = {n: pd.DataFrame(v).sort_values("fold") for n, v in per_fold.items()}
+    pd.concat([d.assign(variant=n) for n, d in frames.items()]).to_csv(
+        config.RESULTS_METRICS / "ablation_fold_metrics.csv", index=False)
 
-    rows, table = [], {}
-    baseline_mse = np.array([r["mse"] for r in per_fold["gbr_prior_only"]])
-    for name, folds in per_fold.items():
-        df = pd.DataFrame(folds)
-        pooled = regression_metrics(y_pooled, pooled_pred[name])
+    baseline_mse = frames["gbr_prior_only"].mse.to_numpy()
+    n_tr = int(frames["gbr_prior_only"].n_train.mean())
+    n_va = int(frames["gbr_prior_only"].n_valid.mean())
+
+    rows = []
+    for name, df in frames.items():
         entry = {
             "variant": name,
-            "description": VARIANTS[name][1] if name in VARIANTS else "tree prior, no neural correction",
-            "pooled_r2": pooled["r2"],
-            "pooled_mse": pooled["mse"],
-            "pooled_mae": pooled["mae"],
-            "fold_r2_mean": float(df.r2.mean()),
-            "fold_r2_std": float(df.r2.std(ddof=1)),
+            "description": VARIANTS[name][1] if name in VARIANTS
+                           else "tree prior, no neural correction",
+            "n_estimates": len(df),
+            "r2_mean": float(df.r2.mean()),
+            "r2_std": float(df.r2.std(ddof=1)),
+            "mae_mean": float(df.mae.mean()),
         }
         if name != "gbr_prior_only":
-            diffs = baseline_mse - df.sort_values("fold").mse.to_numpy()
-            test = fold_level_ttest(diffs)
+            diffs = baseline_mse - df.mse.to_numpy()
             entry.update({
-                "mean_mse_gain_vs_prior": test.mean_difference,
-                "folds_improved_vs_prior": int((diffs > 0).sum()),
-                "p_one_sided_vs_prior": test.p_value_one_sided,
+                "mean_mse_gain_vs_prior": float(diffs.mean()),
+                "estimates_improved_vs_prior": int((diffs > 0).sum()),
+                "test": "Nadeau-Bengio corrected paired t-test",
+                "p_two_sided_vs_prior": corrected_repeated_kfold_ttest(
+                    diffs, n_train=n_tr, n_test=n_va).p_value_two_sided,
             })
         rows.append(entry)
-        table[name] = entry
 
-    # deltas relative to the full framework
-    full_r2 = table["full"]["pooled_r2"]
+    full_r2 = next(r["r2_mean"] for r in rows if r["variant"] == "full")
     for row in rows:
-        row["delta_r2_vs_full"] = row["pooled_r2"] - full_r2
+        row["delta_r2_vs_full"] = row["r2_mean"] - full_r2
 
-    out = pd.DataFrame(rows).sort_values("pooled_r2", ascending=False)
+    out = pd.DataFrame(rows).sort_values("r2_mean", ascending=False)
     out.to_csv(config.RESULTS_METRICS / "ablation_results.csv", index=False)
     with open(config.RESULTS_METRICS / "ablation_results.json", "w") as fh:
         json.dump({"runtime_seconds": round(time.time() - t_start, 1),
-                   "splitter": splitter_kind, "variants": rows}, fh, indent=2)
+                   "splitter": splitter_kind, "repeats": repeats,
+                   "n_estimates": repeats * config.N_SPLITS,
+                   "variants": rows}, fh, indent=2)
 
-    print("\n=== ablation (measured) ===")
+    print(f"\n=== ablation, {repeats * config.N_SPLITS} fold estimates ===")
     for _, r in out.iterrows():
-        print(f"  {r['variant']:22} R2={r['pooled_r2']:.4f}  "
-              f"dR2 vs full={r['delta_r2_vs_full']:+.4f}  MAE={r['pooled_mae']:.4f}")
+        print(f"  {r['variant']:22} R2={r['r2_mean']:.4f}+/-{r['r2_std']:.4f}  "
+              f"dR2 vs full={r['delta_r2_vs_full']:+.4f}  MAE={r['mae_mean']:.4f}")
     print(f"\nruntime {time.time() - t_start:.0f}s")
 
 
@@ -159,5 +173,6 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--splitter", choices=["group", "random"], default="group")
     ap.add_argument("--quick", action="store_true")
+    ap.add_argument("--repeats", type=int, default=5)
     args = ap.parse_args()
-    run(args.splitter, args.quick)
+    run(args.splitter, args.quick, args.repeats)

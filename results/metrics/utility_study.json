@@ -305,5 +305,38 @@
       "rate_error_above_1eV": 0.06343434343434344,
       "rate_error_above_2eV": 0.00787878787878788
     }
+  },
+  "cost": {
+    "per_model": {
+      "rf": {
+        "train_s": 0.23,
+        "predict_s": 0.0142,
+        "oof_for_stacking_s": 0.98
+      },
+      "gbr": {
+        "train_s": 0.7,
+        "predict_s": 0.0004,
+        "oof_for_stacking_s": 2.83
+      },
+      "svr": {
+        "train_s": 0.03,
+        "predict_s": 0.0116,
+        "oof_for_stacking_s": 0.12
+      },
+      "mlp": {
+        "train_s": 0.49,
+        "predict_s": 0.0002,
+        "oof_for_stacking_s": 2.11
+      },
+      "pinn": {
+        "train_s": 0.28,
+        "predict_s": 0.0002,
+        "oof_for_stacking_s": 1.36
+      }
+    },
+    "stack_total_train_s": 9.13,
+    "stack_total_predict_s": 0.0266,
+    "cheapest_single_model": "svr",
+    "cost_ratio_vs_mlp": 18.6
   }
 }

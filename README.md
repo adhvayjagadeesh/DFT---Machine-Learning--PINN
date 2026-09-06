@@ -10,9 +10,10 @@ Repository: <https://github.com/adhvayjagadeesh/DFT---Machine-Learning--PINN>
 prior with a neural residual head does **not** improve on that prior once the evaluation is
 controlled for leakage (R² = 0.810 ± 0.047 vs 0.823 ± 0.043; better on 12/25 fold estimates;
 *p* = 0.54), and no physics component contributes measurably. Reverting **one implementation
-detail** — building the prior in-sample rather than out-of-fold — reproduces the previously
-reported gain on demand, because a prior that looks near-perfect on training rows trains the
-corrector to emit nothing.
+detail** — building the prior in-sample rather than out-of-fold — lifts the same architecture
+*above* its baseline on 21/25 estimates (0.837 vs 0.823), manufacturing the reported
+improvement with every other component held fixed, because a prior that looks near-perfect on
+training rows trains the corrector to emit nothing.
 
 **Supporting results.** A stacked ensemble of five heterogeneous learners is the strongest
 configuration (R² = 0.877 ± 0.038, MAE 0.363 eV), justified by model-selection risk and
@@ -41,7 +42,7 @@ python -m pytest tests/ -q
 | Experiment | Command | Runtime |
 |---|---|---|
 | Seven-model benchmark | `python experiments/run_benchmarks.py --splitter group --tune` | ~11 min |
-| Component ablation | `python experiments/run_ablation.py --splitter group` | ~11 min |
+| Component ablation | `python experiments/run_ablation.py --splitter group --repeats 5` | ~11 min |
 | Hybrid recovery study | `python experiments/run_recovery_study.py --repeats 5` | ~13 min |
 | Stacking analysis | `python experiments/run_stacking_analysis.py --repeats 5` | ~8 min |
 | Repeated held-out | `python experiments/run_repeated_holdout.py --splits 8` | ~13 min |
