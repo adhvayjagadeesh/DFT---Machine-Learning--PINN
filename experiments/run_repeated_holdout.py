@@ -121,9 +121,10 @@ def run(splits: int, test_fraction: float, quick: bool) -> None:
                 "splits_won": int((d > 0).sum()),
                 "n_splits": len(d),
                 "test": "Nadeau-Bengio corrected paired t-test",
+                "p_two_sided": corrected_repeated_kfold_ttest(
+                    d, n_train=n_train, n_test=n_test).p_value_two_sided,
                 "p_one_sided": corrected_repeated_kfold_ttest(
                     d, n_train=n_train, n_test=n_test).p_value_one_sided,
-                "p_one_sided_plain": fold_level_ttest(d).p_value_one_sided,
             }
 
     summary["runtime_seconds"] = round(time.time() - t0, 1)
@@ -138,7 +139,7 @@ def run(splits: int, test_fraction: float, quick: bool) -> None:
     print()
     for k, c in summary["comparisons"].items():
         print(f"  {k:26} gain={c['mean_mse_gain']:+.4f}  "
-              f"won {c['splits_won']}/{c['n_splits']}  p={c['p_one_sided']:.4f}")
+              f"won {c['splits_won']}/{c['n_splits']}  p={c['p_two_sided']:.4f}")
     print(f"\nruntime {summary['runtime_seconds']}s")
 
 

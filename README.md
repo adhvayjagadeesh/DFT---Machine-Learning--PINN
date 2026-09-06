@@ -9,20 +9,20 @@ Repository: <https://github.com/adhvayjagadeesh/DFT---Machine-Learning--PINN>
 **Headline result (negative).** A physics-informed hybrid that corrects a gradient-boosted
 prior with a neural residual head does **not** improve on that prior once the evaluation is
 controlled for leakage (R² = 0.810 ± 0.047 vs 0.823 ± 0.043; better on 12/25 fold estimates;
-*p* = 0.27), and no physics component contributes measurably. Reverting **one implementation
+*p* = 0.54), and no physics component contributes measurably. Reverting **one implementation
 detail** — building the prior in-sample rather than out-of-fold — reproduces the previously
 reported gain on demand, because a prior that looks near-perfect on training rows trains the
 corrector to emit nothing.
 
 **Supporting results.** A stacked ensemble of five heterogeneous learners is the strongest
-configuration (R² = 0.880 ± 0.037, MAE 0.360 eV), justified by model-selection risk and
+configuration (R² = 0.877 ± 0.038, MAE 0.363 eV), justified by model-selection risk and
 large-error rate rather than by its R² margin. Decomposing accuracy by descriptor cost shows
 composition and symmetry account for most of what is attainable: removing every DFT-derived
 descriptor costs 0.044 R².
 
 > **On novelty.** Composition-based band-gap prediction is well established, including on
 > C2DB monolayers — a transfer-learning study reports MAE 0.27 eV over 2,915 monolayers,
-> better than our DFT-free tier. The contribution here is the leakage-controlled protocol
+> better than our DFT-free tier (0.425 eV). The contribution here is the leakage-controlled protocol
 > and the documented negative result, not the accuracy.
 
 ---
@@ -43,9 +43,9 @@ python -m pytest tests/ -q
 | Seven-model benchmark | `python experiments/run_benchmarks.py --splitter group --tune` | ~11 min |
 | Component ablation | `python experiments/run_ablation.py --splitter group` | ~11 min |
 | Hybrid recovery study | `python experiments/run_recovery_study.py --repeats 5` | ~13 min |
-| Stacking analysis | `python experiments/run_stacking_analysis.py --repeats 3` | ~5 min |
+| Stacking analysis | `python experiments/run_stacking_analysis.py --repeats 5` | ~8 min |
 | Repeated held-out | `python experiments/run_repeated_holdout.py --splits 8` | ~13 min |
-| DFT-cost tiers | `python experiments/run_feature_tiers.py --repeats 3` | ~11 min |
+| DFT-cost tiers | `python experiments/run_feature_tiers.py --repeats 5` | ~19 min |
 | Ensemble utility | `python experiments/run_utility_study.py` | ~1 min |
 | All figures | `python experiments/make_figures.py` | ~30 s |
 
@@ -57,26 +57,26 @@ publication-grade.
 ## Results
 
 Repeated grouped five-fold cross-validation, 25 fold estimates, all descriptors.
-*p*-values are Nadeau–Bengio corrected, one-sided, against the GBR baseline.
+*p*-values are Nadeau–Bengio corrected and **two-sided**, against the GBR baseline.
 
 | Model | R² | MAE (eV) | Beats GBR | *p* |
 |---|---|---|---|---|
 | **Stacked ensemble (ridge)** | **0.877 ± 0.038** | **0.363** | 25/25 | <0.001 |
 | Stacked ensemble (NNLS) | 0.875 ± 0.038 | 0.364 | 25/25 | <0.001 |
-| Deep MLP | 0.864 ± 0.039 | 0.378 | 24/25 | 0.002 |
-| Standalone PINN | 0.856 ± 0.043 | 0.385 | 22/25 | 0.033 |
-| Random forest | 0.827 ± 0.041 | 0.442 | 13/25 | 0.323 |
+| Deep MLP | 0.864 ± 0.039 | 0.378 | 24/25 | 0.004 |
+| Standalone PINN | 0.856 ± 0.043 | 0.385 | 22/25 | 0.066 |
+| Random forest | 0.827 ± 0.041 | 0.442 | 13/25 | 0.647 |
 | GBR (baseline) | 0.823 ± 0.043 | 0.464 | — | — |
-| Hybrid GBR + corrector | 0.810 ± 0.047 | 0.445 | 12/25 | 0.271 |
-| SVR | 0.774 ± 0.039 | 0.497 | 1/25 | — |
+| Hybrid GBR + corrector | 0.810 ± 0.047 | 0.445 | 12/25 | 0.541 |
+| SVR | 0.774 ± 0.039 | 0.497 | 1/25 | <0.001 |
 
 ### Accuracy against DFT cost
 
 | Tier | What it needs | R² | MAE (eV) |
 |---|---|---|---|
-| All descriptors | Converged DFT | 0.880 ± 0.037 | 0.360 |
-| No DFT energies | Relaxed geometry | 0.845 ± 0.046 | 0.398 |
-| **No DFT at all** | **Formula + symmetry** | **0.836 ± 0.057** | **0.417** |
+| All descriptors | Converged DFT | 0.877 ± 0.036 | 0.364 |
+| No DFT energies | Relaxed geometry | 0.844 ± 0.044 | 0.399 |
+| **No DFT at all** | **Formula + symmetry** | **0.834 ± 0.048** | **0.425** |
 
 ### Head-to-head against the prior pipeline
 
@@ -85,9 +85,9 @@ identical folds:
 
 | Model | R² | MAE (eV) | Ensemble wins | *p* |
 |---|---|---|---|---|
-| XGBoost (prior) | 0.858 | 0.388 | 14/15 | 0.025 |
-| GBR (prior) | 0.852 | 0.405 | 14/15 | 0.002 |
-| RF (prior) | 0.826 | 0.443 | 15/15 | <0.001 |
+| XGBoost (prior) | 0.859 | 0.386 | 22/25 | 0.079 |
+| GBR (prior) | 0.853 | 0.404 | 22/25 | 0.024 |
+| RF (prior) | 0.826 | 0.443 | 25/25 | <0.001 |
 
 ---
 

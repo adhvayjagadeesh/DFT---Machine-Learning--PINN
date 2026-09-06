@@ -117,7 +117,7 @@ def fig_drop_one_and_weights():
     for i, m in enumerate(order):
         d = drop[m]
         axes[1].text(label_x, i, f"{d['folds_worse_without']}/{d['n_folds']}"
-                     f"  p={d['p_one_sided']:.3f}", va="center", ha="left",
+                     f"  p={d.get('p_two_sided', d['p_one_sided']):.3f}", va="center", ha="left",
                      fontsize=7)
     short = {"rf": "RF", "gbr": "GBR", "svr": "SVR", "mlp": "MLP", "pinn": "PINN"}
     axes[1].set_yticks(range(len(order)), [short[m] for m in order])
@@ -317,7 +317,7 @@ def fig_repeated_holdout():
         c = s["comparisons"].get(f"{ch}_vs_{inc}")
         if c:
             axes[1].annotate(f"{c['splits_won']}/{c['n_splits']}\n"
-                             f"p={c['p_one_sided']:.3f}", (j, delta.max()),
+                             f"p={c.get('p_two_sided', c['p_one_sided']):.3f}", (j, delta.max()),
                              textcoords="offset points", xytext=(0, 9),
                              ha="center", fontsize=7.5)
     axes[1].axhline(0, color="#333", lw=1)
@@ -355,7 +355,7 @@ def fig_utility():
     axes[0].text(0.5, 0.97,
                  f"stack beats the committed choice\non "
                  f"{r['folds_stack_beats_committed']}/{r['n_folds']} folds "
-                 f"(p={r['p_stack_vs_committed']:.4f})",
+                 f"(p={r['p_stack_vs_committed']:.3f})",
                  transform=axes[0].transAxes, ha="center", va="top", fontsize=7.5,
                  bbox=dict(boxstyle="round,pad=0.35", fc="#EEF3FC", ec="none"))
 
