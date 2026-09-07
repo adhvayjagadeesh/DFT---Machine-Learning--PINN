@@ -19,12 +19,12 @@
     "mean_r2_committed": 0.860202429454928,
     "mean_r2_stack": 0.8753378786738446,
     "mean_regret_committed_vs_oracle": 0.008546132352494497,
-    "mean_regret_stack_vs_oracle": -0.006589316866422008,
+    "mean_regret_stack_vs_oracle": -0.006589316866422017,
     "worst_case_single_choice": "svr",
     "mean_r2_worst_choice": 0.7736447951313901,
     "stack_advantage_over_worst_choice": 0.10169308354245454,
     "folds_stack_beats_committed": 22,
-    "p_stack_vs_committed": 0.10983250148618139
+    "p_stack_vs_committed": 0.10983250148618122
   },
   "screening_utility": {
     "photovoltaic_1.0_2.0eV": {
@@ -260,8 +260,8 @@
     "rf": {
       "mae": 0.4423105333333333,
       "p95_abs_error": 1.3488215000000006,
-      "p99_abs_error": 2.253195300000001,
-      "max_abs_error": 3.270999999999998,
+      "p99_abs_error": 2.2531953000000007,
+      "max_abs_error": 3.271,
       "rate_error_above_1eV": 0.10868686868686869,
       "rate_error_above_2eV": 0.014141414141414142
     },
@@ -299,7 +299,7 @@
     },
     "stack_nnls": {
       "mae": 0.36374141887836003,
-      "p95_abs_error": 1.1047529580411295,
+      "p95_abs_error": 1.1047529580411293,
       "p99_abs_error": 1.917423567977397,
       "max_abs_error": 3.9281505883666794,
       "rate_error_above_1eV": 0.06343434343434344,
@@ -309,34 +309,34 @@
   "cost": {
     "per_model": {
       "rf": {
-        "train_s": 0.23,
-        "predict_s": 0.0142,
-        "oof_for_stacking_s": 0.98
+        "train_s": 0.28,
+        "predict_s": 0.0145,
+        "oof_for_stacking_s": 1.29
       },
       "gbr": {
-        "train_s": 0.7,
+        "train_s": 0.82,
         "predict_s": 0.0004,
-        "oof_for_stacking_s": 2.83
+        "oof_for_stacking_s": 2.42
       },
       "svr": {
-        "train_s": 0.03,
-        "predict_s": 0.0116,
-        "oof_for_stacking_s": 0.12
+        "train_s": 0.02,
+        "predict_s": 0.0089,
+        "oof_for_stacking_s": 0.1
       },
       "mlp": {
-        "train_s": 0.49,
+        "train_s": 0.43,
         "predict_s": 0.0002,
-        "oof_for_stacking_s": 2.11
+        "oof_for_stacking_s": 1.82
       },
       "pinn": {
-        "train_s": 0.28,
+        "train_s": 0.25,
         "predict_s": 0.0002,
-        "oof_for_stacking_s": 1.36
+        "oof_for_stacking_s": 1.11
       }
     },
-    "stack_total_train_s": 9.13,
-    "stack_total_predict_s": 0.0266,
+    "stack_total_train_s": 8.54,
+    "stack_total_predict_s": 0.0242,
     "cheapest_single_model": "svr",
-    "cost_ratio_vs_mlp": 18.6
+    "cost_ratio_vs_mlp": 19.9
   }
 }

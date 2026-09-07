@@ -1,102 +1,100 @@
 {
   "n_splits": 8,
+  "test_fraction": 0.2,
   "mean_n_test": 234,
   "per_model": {
     "gbr": {
       "r2_mean": 0.823230376944099,
       "r2_std": 0.025092928414317667,
-      "mae_mean": 0.47124128228983647,
-      "mae_std": 0.029364389044432563
+      "mae_mean": 0.4712412822898365,
+      "mae_std": 0.029364389044432542
     },
     "mlp": {
       "r2_mean": 0.8576084854433674,
       "r2_std": 0.03169705570155533,
       "mae_mean": 0.3907776455781603,
-      "mae_std": 0.04378827664827697
+      "mae_std": 0.043788276648276954
     },
     "pinn": {
       "r2_mean": 0.8662469298584505,
-      "r2_std": 0.028365636122367248,
-      "mae_mean": 0.38249066093523193,
+      "r2_std": 0.028365636122367265,
+      "mae_mean": 0.382490660935232,
       "mae_std": 0.03268429540520401
     },
     "rf": {
       "r2_mean": 0.8238857051941454,
-      "r2_std": 0.0308979916149882,
+      "r2_std": 0.030897991614988227,
       "mae_mean": 0.44485428457771714,
-      "mae_std": 0.031111464052660298
+      "mae_std": 0.031111464052660326
     },
     "stack_nnls": {
       "r2_mean": 0.87732976166945,
-      "r2_std": 0.025180773548572764,
+      "r2_std": 0.025180773548572784,
       "mae_mean": 0.36139696781307556,
-      "mae_std": 0.030732748645573266
+      "mae_std": 0.030732748645573283
     },
     "stack_ridge": {
-      "r2_mean": 0.8785036802224,
-      "r2_std": 0.0246978744152904,
-      "mae_mean": 0.3606824935220957,
-      "mae_std": 0.03050996244170724
+      "r2_mean": 0.8785036802223998,
+      "r2_std": 0.024697874415290824,
+      "mae_mean": 0.3606824935220959,
+      "mae_std": 0.030509962441707766
     },
     "svr": {
       "r2_mean": 0.7701541354842711,
       "r2_std": 0.023642937823004813,
       "mae_mean": 0.5041748418115604,
-      "mae_std": 0.03107246444081309
+      "mae_std": 0.031072464440813075
     }
   },
   "comparisons": {
     "stack_ridge_vs_pinn": {
-      "mean_mse_gain": 0.029328298590177247,
+      "mean_mse_gain": 0.02932829859017689,
       "splits_won": 7,
       "n_splits": 8,
-      "p_one_sided": 0.050967685440367456,
-      "p_one_sided_plain": 0.0069314331376722806,
       "test": "Nadeau-Bengio corrected paired t-test",
-      "p_two_sided": 0.10193537088073491
+      "p_two_sided": 0.10193537088073296,
+      "p_one_sided": 0.05096768544036648
     },
     "stack_ridge_vs_mlp": {
-      "mean_mse_gain": 0.05082267659668313,
+      "mean_mse_gain": 0.05082267659668278,
       "splits_won": 8,
       "n_splits": 8,
-      "p_one_sided": 0.040466579025118674,
-      "p_one_sided_plain": 0.0047896200771690165,
       "test": "Nadeau-Bengio corrected paired t-test",
-      "p_two_sided": 0.08093315805023735
+      "p_two_sided": 0.08093315805023599,
+      "p_one_sided": 0.040466579025117994
     },
     "stack_ridge_vs_gbr": {
-      "mean_mse_gain": 0.13281957710732797,
+      "mean_mse_gain": 0.1328195771073276,
       "splits_won": 8,
       "n_splits": 8,
-      "p_one_sided": 0.0010647393648123226,
-      "p_one_sided_plain": 3.8984869281166646e-05,
       "test": "Nadeau-Bengio corrected paired t-test",
-      "p_two_sided": 0.002129478729624645
+      "p_two_sided": 0.0021294787296248625,
+      "p_one_sided": 0.0010647393648124312
     },
     "stack_nnls_vs_pinn": {
-      "mean_mse_gain": 0.02632245597908011,
+      "mean_mse_gain": 0.026322455979080107,
       "splits_won": 7,
       "n_splits": 8,
-      "p_one_sided": 0.05016048514254551,
-      "p_one_sided_plain": 0.006753768268816072,
-      "test": "Nadeau-Bengio corrected paired t-test"
+      "test": "Nadeau-Bengio corrected paired t-test",
+      "p_two_sided": 0.10032097028509153,
+      "p_one_sided": 0.050160485142545765
     },
     "stack_nnls_vs_mlp": {
       "mean_mse_gain": 0.04781683398558599,
       "splits_won": 8,
       "n_splits": 8,
-      "p_one_sided": 0.05164712422646074,
-      "p_one_sided_plain": 0.007082673030018434,
-      "test": "Nadeau-Bengio corrected paired t-test"
+      "test": "Nadeau-Bengio corrected paired t-test",
+      "p_two_sided": 0.10329424845292134,
+      "p_one_sided": 0.05164712422646067
     },
     "stack_nnls_vs_gbr": {
       "mean_mse_gain": 0.12981373449623085,
       "splits_won": 8,
       "n_splits": 8,
-      "p_one_sided": 0.0014516474855690517,
-      "p_one_sided_plain": 5.6066547758070416e-05,
-      "test": "Nadeau-Bengio corrected paired t-test"
+      "test": "Nadeau-Bengio corrected paired t-test",
+      "p_two_sided": 0.002903294971138116,
+      "p_one_sided": 0.001451647485569058
     }
   },
-  "n_train_per_split": 935
+  "runtime_seconds": 137.9
 }
