@@ -75,7 +75,7 @@ Repeated grouped five-fold cross-validation, 25 fold estimates, all descriptors.
 
 | Tier | What it needs | R² | MAE (eV) |
 |---|---|---|---|
-| All descriptors | Converged DFT | 0.877 ± 0.036 | 0.364 |
+| All descriptors | Converged DFT | 0.877 ± 0.036 | 0.363 |
 | No DFT energies | Relaxed geometry | 0.844 ± 0.044 | 0.399 |
 | **No DFT at all** | **Formula + symmetry** | **0.834 ± 0.048** | **0.425** |
 
