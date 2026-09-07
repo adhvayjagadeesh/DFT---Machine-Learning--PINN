@@ -32,6 +32,20 @@ mpl.rcParams.update({
 })
 
 ACCENT, NEUTRAL, WARN, GOOD = "#2E6FD9", "#6B7280", "#C2453B", "#1A7A3C"
+
+#: One colour per model, shared by every figure. A colour must not denote
+#: different models in different panels; readers compare across figures.
+MODEL_COLOR = {
+    "rf": "#9CA3AF",          # light grey  - tree cluster
+    "gbr": "#6B7280",         # mid grey    - tree cluster
+    "svr": "#C7CCD4",         # pale grey   - weakest baseline
+    "mlp": "#7C3AED",         # purple      - neural cluster
+    "pinn": "#B07CE8",        # light purple- neural cluster
+    "stack_nnls": ACCENT,     # blue        - ensemble
+    "stack_ridge": ACCENT,
+    "hybrid_ungated": WARN,   # red         - hybrid variants
+    "hybrid_gated": "#E08A82",
+}
 PRETTY = {"rf": "Random forest", "gbr": "GBR", "svr": "SVR", "mlp": "MLP",
           "pinn": "PINN", "stack_ridge": "Stack (ridge)", "stack_nnls": "Stack (NNLS)",
           "hybrid_ungated": "Hybrid residual", "hybrid_gated": "Hybrid + gate"}
@@ -59,8 +73,7 @@ def fig_model_comparison():
 
     fig, ax = plt.subplots(figsize=(6.6, 4.2))
     ypos = np.arange(len(stats))
-    colors = [ACCENT if "stack" in v else (WARN if "hybrid" in v else NEUTRAL)
-              for v in stats.index]
+    colors = [MODEL_COLOR.get(v, NEUTRAL) for v in stats.index]
     ax.errorbar(stats["mean"], ypos, xerr=1.96 * stats["se"], fmt="o",
                 ecolor="#999", elinewidth=1.2, capsize=3, markersize=0, zorder=1)
     ax.scatter(stats["mean"], ypos, s=46, c=colors, zorder=2, edgecolors="white")
@@ -96,7 +109,7 @@ def fig_drop_one_and_weights():
     fig, axes = plt.subplots(1, 2, figsize=(9.0, 3.8))
 
     axes[0].bar(range(len(base)), [mean_w[b] for b in base],
-                color=NEUTRAL, edgecolor="white", width=.62)
+                color=[MODEL_COLOR[b] for b in base], edgecolor="white", width=.62)
     axes[0].set_xticks(range(len(base)), [PRETTY[b] for b in base],
                        rotation=20, ha="right")
     axes[0].set_ylabel("Mean NNLS weight")
@@ -215,8 +228,8 @@ def fig_learning_curve():
         return
     df = pd.read_csv(M / "learning_curve.csv")
     fig, ax = plt.subplots(figsize=(6.0, 4.0))
-    for model, color, lw in (("stack_nnls", ACCENT, 2.0), ("mlp", "#7C3AED", 1.4),
-                             ("gbr", NEUTRAL, 1.4), ("rf", "#9CA3AF", 1.2)):
+    for model, lw in (("stack_nnls", 2.0), ("mlp", 1.4), ("gbr", 1.4), ("rf", 1.2)):
+        color = MODEL_COLOR[model]
         if model not in df.columns:
             continue
         g = df.groupby("n_train")[model].agg(["mean", "std", "count"])
@@ -254,8 +267,8 @@ def fig_parity_and_rec():
                      fontsize=9)
     axes[0].set_ylabel("Predicted band gap (eV)")
 
-    for model, color, lw in (("pinn", "#9CA3AF", 1.2), ("gbr", NEUTRAL, 1.4),
-                             ("mlp", "#7C3AED", 1.4), ("stack_nnls", ACCENT, 2.0)):
+    for model, lw in (("pinn", 1.2), ("gbr", 1.4), ("mlp", 1.4), ("stack_nnls", 2.0)):
+        color = MODEL_COLOR[model]
         tol, acc = rec_curve(oof["true"], oof[model])
         axes[2].plot(tol, acc, lw=lw, color=color, label=PRETTY[model])
     axes[2].set_xlabel("Absolute error tolerance $\\tau$ (eV)")
@@ -353,7 +366,7 @@ def fig_repeated_holdout():
     fig, axes = plt.subplots(1, 2, figsize=(9.2, 3.9))
     for i, m in enumerate(order):
         g = df[df.variant == m]
-        color = ACCENT if "stack" in m else NEUTRAL
+        color = MODEL_COLOR.get(m, NEUTRAL)
         axes[0].scatter(np.full(len(g), i) + jitter.uniform(-.12, .12, len(g)),
                         g.r2, s=22, color=color, alpha=.65, edgecolors="none")
         axes[0].hlines(g.r2.mean(), i - .28, i + .28, color=color, lw=2.2)
@@ -403,7 +416,8 @@ def fig_utility():
     # (a) which single model wins, per fold
     r = s["model_selection_risk"]
     wins = [r["win_counts"][m] for m in base]
-    axes[0].bar(range(len(base)), wins, color=NEUTRAL, edgecolor="white", width=.62)
+    axes[0].bar(range(len(base)), wins,
+                color=[MODEL_COLOR[m] for m in base], edgecolor="white", width=.62)
     axes[0].set_xticks(range(len(base)), [PRETTY[m] for m in base],
                        rotation=20, ha="right", fontsize=8)
     axes[0].set_ylabel(f"Folds won (of {r['n_folds']})")
@@ -421,7 +435,7 @@ def fig_utility():
     t = s["tail_risk"]
     order = base + ["stack_nnls"]
     rates = [t[m]["rate_error_above_1eV"] * 100 for m in order]
-    colors = [ACCENT if m == "stack_nnls" else NEUTRAL for m in order]
+    colors = [MODEL_COLOR.get(m, NEUTRAL) for m in order]
     axes[1].bar(range(len(order)), rates, color=colors, edgecolor="white", width=.62)
     for i, v in enumerate(rates):
         axes[1].text(i, v + .15, f"{v:.1f}", ha="center", fontsize=7.5)

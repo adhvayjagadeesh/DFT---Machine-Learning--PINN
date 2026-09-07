@@ -41,11 +41,11 @@ python -m pytest tests/ -q
 
 | Experiment | Command | Runtime |
 |---|---|---|
-| Seven-model benchmark | `python experiments/run_benchmarks.py --splitter group --tune` | ~11 min |
-| Component ablation | `python experiments/run_ablation.py --splitter group --repeats 5` | ~11 min |
-| Hybrid recovery study | `python experiments/run_recovery_study.py --repeats 5` | ~13 min |
-| Stacking analysis | `python experiments/run_stacking_analysis.py --repeats 5` | ~8 min |
-| Repeated held-out | `python experiments/run_repeated_holdout.py --splits 8` | ~13 min |
+| Seven-model benchmark | `python experiments/run_benchmarks.py --splitter group --tune` | ~7 min |
+| Component ablation | `python experiments/run_ablation.py --splitter group --repeats 5` | ~14 min |
+| Hybrid recovery study | `python experiments/run_recovery_study.py --repeats 5` | ~8 min |
+| Stacking analysis | `python experiments/run_stacking_analysis.py --repeats 5` | ~6 min |
+| Repeated held-out | `python experiments/run_repeated_holdout.py --splits 8` | ~2 min |
 | DFT-cost tiers | `python experiments/run_feature_tiers.py --repeats 5` | ~19 min |
 | Ensemble utility | `python experiments/run_utility_study.py` | ~1 min |
 | All figures | `python experiments/make_figures.py` | ~30 s |
@@ -115,7 +115,7 @@ experiments/                     one script per experiment, all reproducible
 results/
   metrics/                       generated JSON/CSV outputs
   figures/                       generated figures (fig1–fig10)
-tests/                           pytest suite
+tests/                           pytest suite, incl. active leakage guards
 paper/ieee_access/               IEEE Access manuscript sources
 archive/exploratory/             superseded scripts, kept for provenance
 ```
@@ -132,7 +132,7 @@ archive/exploratory/             superseded scripts, kept for provenance
 | Grouping key | chemical formula |
 | Feature scaling / encoding | fitted on the training fold only |
 | Stacked inputs | out-of-fold, via an inner 5-fold split |
-| Significance | Nadeau–Bengio corrected paired *t*-test |
+| Significance | Nadeau–Bengio corrected paired *t*-test, **two-sided** |
 | Seed | 42 |
 
 **Why grouping matters.** 176 materials share a formula with another entry — polymorphs
