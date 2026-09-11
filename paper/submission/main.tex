@@ -1,0 +1,487 @@
+\documentclass{ieeeaccess}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{booktabs}
+\usepackage{url}
+
+%Your document starts from here ___________________________________________________
+\begin{document}
+% =====================================================================
+% NOTE TO AUTHOR: Fill in the DOI/volume placeholders assigned by IEEE
+% after acceptance. The \history line is standard template boilerplate.
+% =====================================================================
+\doi{10.1109/ACCESS.2026.0000000}
+
+\title{Evaluation Artefacts in Physics-Informed Band-Gap Prediction:
+A Leakage-Controlled Study of Two-Dimensional Materials}
+
+% =====================================================================
+% NOTE TO AUTHOR: IEEE Access requires every author to have an ORCID
+% linked in the submission system, and author order/details here must
+% exactly match the submission metadata.
+% =====================================================================
+\author{\uppercase{Adhvay Jagadeesh}\authorrefmark{1}, \uppercase{Rutvi Mudalagi}\authorrefmark{1}, and \uppercase{Marx Akl}\authorrefmark{1}}
+\address[1]{Aspiring Scholars Directed Research Program (ASDRP), Fremont, CA 94539 USA (e-mail: adhvay.jagadeesh@students.asdrp.org; rutvi.mudalagi@students.asdrp.org; makl@asdrp.org)}
+
+\tfootnote{This work was conducted through the Aspiring Scholars Directed Research Program (ASDRP), Fremont, CA, USA.}
+
+\markboth
+{Jagadeesh \headeretal: Evaluation Artefacts in Physics-Informed Band-Gap Prediction}
+{Jagadeesh \headeretal: Evaluation Artefacts in Physics-Informed Band-Gap Prediction}
+
+\corresp{Corresponding author: Marx Akl (e-mail: makl@asdrp.org).}
+
+\begin{abstract}
+Hybrid architectures that correct a gradient-boosted prior with a neural residual head are widely reported to improve tabular property prediction in materials informatics. Evaluating one such architecture for band gaps of two-dimensional materials under a protocol that closes six leakage pathways, we find that its reported advantage does not survive: it fails to improve on the prior it corrects ($R^2 = 0.810 \pm 0.047$ against $0.823 \pm 0.043$; superior on 12 of 25 fold estimates; $p = 0.54$), and none of its physics-motivated components contributes measurably. A component ablation traces the discrepancy to a single implementation detail: constructing the tree prior in sample rather than out of fold lifts the same architecture above its baseline on 21 of 25 fold estimates, manufacturing the reported improvement with every other component held fixed. What does work on the same 1{,}169 rectangular-lattice C2DB materials is heterogeneous stacking: an ensemble of five base learners is the strongest configuration tested ($R^2 = 0.877 \pm 0.038$, MAE $0.363$ eV), beating the gradient-boosting baseline on 8 of 8 independent held-out sets ($p = 0.002$). Because its margin over the best single model is small, we justify it on decision-relevant grounds: the best single model is unstable across folds, the ensemble beats a committed choice on 22 of 25 folds, and it cuts predictions in error by more than 1 eV from 7.4\% to 6.3\% for under nine seconds of training. Removing every DFT-derived descriptor costs $0.044$ in $R^2$.
+\end{abstract}
+
+\begin{keywords}
+Cross-validation, data leakage, ensemble learning, materials informatics, model evaluation, physics-informed neural networks, reproducibility, two-dimensional materials.
+\end{keywords}
+
+\titlepgskip=-21pt
+
+\maketitle
+
+\section{Introduction}
+\label{sec:introduction}
+\PARstart{A}{ccurate} prediction of electronic band gaps ($E_g$) is a foundational objective in computational materials design. The magnitude and nature of the band gap govern whether a low-dimensional material acts as a metal, semiconductor, or insulator, and determine candidate suitability for field-effect transistors \cite{fiori2014electronics}, valleytronic architectures \cite{schaibley2016valleytronics,xiao2012coupled}, and photocatalytic water splitting \cite{singh2015computational}. Density functional theory with hybrid functionals such as HSE06 \cite{heyd2003hybrid} offers excellent accuracy at computational scaling that makes exhaustive screening impractical, which motivates fast surrogate estimators.
+
+For heterogeneous tabular materials data, decision-tree ensembles \cite{breiman2001random,friedman2001greedy} frequently match or exceed deep architectures \cite{shwartzziv2022tabular,grinsztajn2022why}, though the conditions under which this holds are narrower than often assumed \cite{mcelfresh2023when}. A natural response is the hybrid residual design: a tree supplies a prior estimate and a neural network learns a correction, optionally regularised by physical constraints in the manner of physics-informed neural networks \cite{raissi2019physics,karniadakis2021physics}. Such designs are attractive because they appear to combine the sample efficiency of ensembles with the smoothness of neural function approximation, and because anisotropic two-dimensional systems --- where in-plane lattice vectors are unequal and strain couples strongly to the electronic structure \cite{rodin2014strain,li2014black,xia2014rediscovering} --- are precisely the setting in which axis-aligned tree partitions appear least suited.
+
+An earlier version of this work reported exactly that: a gradient-boosted prior coupled to a quantile residual head with an engineered structural layer, improving pooled $R^2$ from $0.7323$ to $0.7431$ with a nominally significant $p$-value. This article reports what happened when that pipeline was re-evaluated under controls for data leakage. The improvement did not survive, and the reason turns out to be a single line of the training procedure rather than anything about the architecture. Leakage of the kinds we identify has been argued to be a principal driver of irreproducibility across machine-learning-based science \cite{kapoor2023leakage}, and the specific failure we document is easy to introduce by accident and difficult to detect from reported results alone.
+
+\textbf{The principal contribution of this article is the demonstrated failure mechanism itself.} We show not merely that a physics-informed residual correction fails to improve its prior, but \emph{why}: the construction of the prior determines whether the corrector has anything to learn, and an in-sample construction trains it to be inert while leaving every reported metric looking healthy. The remaining contributions support, quantify, or follow from that result.
+
+Our contributions are four.
+
+\begin{enumerate}
+\item \textbf{A leakage-controlled evaluation protocol} for tabular materials regression, closing six specific pathways: identifier-like features, whole-dataset encoding, in-sample construction of stacked priors, polymorphs straddling folds, absent held-out data, and significance tests applied at the sample rather than the fold level.
+
+\item \textbf{A demonstrated failure mechanism in residual correction (primary).} Under that protocol the physics-informed hybrid does not improve on its own prior, and no physics-motivated component contributes measurably. The mechanism is identified rather than inferred: an in-sample prior leaves the corrector no residual signal, so it learns to emit approximately zero, and we recover the reported improvement deliberately by reverting the one line responsible.
+
+\item \textbf{A decision-relevant justification for ensembling.} Where a small accuracy margin cannot carry the argument, we quantify model-selection risk, large-error rates, and measured wall-clock cost instead.
+
+\item \textbf{A decomposition of accuracy by descriptor cost}, separating what composition and symmetry provide from what a relaxed geometry and a converged DFT calculation add.
+\end{enumerate}
+
+\section{Methods}
+\label{sec:methods}
+
+\begin{table}[!t]
+\caption{Nomenclature. Symbols are listed in order of first appearance.\label{tab:nomenclature}}
+\centering
+\small
+\begin{tabular}{@{}p{0.20\columnwidth}p{0.72\columnwidth}@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$y_i,\ \hat{y}_i$ & Reference HSE06 band gap of material $i$, and its prediction (eV) \\
+$\mathbf{x}_i$ & Descriptor vector of material $i$ \\
+$N$ & Number of materials in the set being summed over \\
+$\rho_{\mathrm{cell}}$ & Packing-density proxy (Eq.~\eqref{eq:density}) \\
+$N_{\mathrm{atoms}}$, $A_{\mathrm{cell}}$ & Atom count of the formula unit; unit-cell area (\AA$^2$) \\
+$\mathcal{T}$ & Training partition of the current fold \\
+$\mu_j^{(\mathcal{T})},\ \sigma_j^{(\mathcal{T})}$ & Mean and standard deviation of feature $j$ over $\mathcal{T}$ \\
+$\tilde{x}_{ij}$ & Feature $j$ of material $i$ after standardisation (Eq.~\eqref{eq:zscore}) \\
+$\mathcal{I}_k$ & $k$th inner block used to build out-of-fold predictions \\
+$f^{(m)}_{-\mathcal{I}_k}$ & Base learner $m$ fitted with block $\mathcal{I}_k$ withheld \\
+$z_i^{(m)}$ & Out-of-fold prediction of learner $m$ for material $i$ (Eq.~\eqref{eq:oof}) \\
+$M$ & Number of base learners in the ensemble ($M=5$) \\
+$\bar{d},\ s_d^2$ & Sample mean and variance of the per-fold score differences \\
+$n$ & Number of fold estimates ($n=25$) \\
+$n_{\mathrm{train}},\ n_{\mathrm{test}}$ & Sizes of the training and validation partitions \\
+$t_{\mathrm{NB}}$ & Nadeau--Bengio corrected $t$ statistic (Eq.~\eqref{eq:nb}) \\
+$\mathrm{ReLU}(u)$ & Rectifier, $\max(0,u)$ \\
+$\mathcal{L}_{\mathrm{phy}}$ & Boundary penalty on negative gaps (Eq.~\eqref{eq:phy}) \\
+$\boldsymbol{\beta},\ \hat{\boldsymbol{\beta}}$ & Meta-learner weight vector and its estimate \\
+$\lVert \boldsymbol{\beta} \rVert_2^2$ & Squared Euclidean ($\ell_2$) norm, $\sum_m \beta_m^2$ \\
+$\lambda$ & Ridge regularisation strength \\
+$g_1,\ g_2$ & The two geometric channels (unit-cell area, thickness) \\
+$\epsilon$ & Small constant preventing division by zero ($10^{-6}$) \\
+$\mathbf{s}$ & Structural coupling descriptor (Eq.~\eqref{eq:strain}) \\
+$\tau$ & Quantile level, $\tau \in \{0.25, 0.50, 0.75\}$ \\
+$q_{\tau,i}$ & Predicted $\tau$-quantile of the residual for material $i$ \\
+$\mathcal{L}_\tau$ & Pinball (quantile) loss at level $\tau$ (Eq.~\eqref{eq:pinball}) \\
+$\mathcal{L}_{\mathrm{aniso}}$ & Anisotropy penalty (Eq.~\eqref{eq:aniso}) \\
+$\hat{y}_{\mathrm{prior}}$ & Prediction of the first-stage tree, the prior the hybrid corrects \\
+$\hat{y}_{\mathrm{hybrid}}$ & Final hybrid prediction (Eq.~\eqref{eq:hybrid}) \\
+$r$ & Output of the point residual head \\
+$\Delta q$ & Interquartile spread, $q_{0.75}-q_{0.25}$ \\
+$\sigma(\cdot)$ & Logistic function, $1/(1+e^{-u})$ \\
+$C$ & Empirical interval coverage (Eq.~\eqref{eq:coverage}) \\
+$\mathbb{1}[\cdot]$ & Indicator function: $1$ if the bracketed condition holds, else $0$ \\
+$R^2$, MAE, MSE & Coefficient of determination, mean absolute error, mean squared error \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+\subsection{Dataset and Target}
+We use 1{,}169 rectangular-lattice (\textit{op}) two-dimensional monolayers from the Computational 2D Materials Database \cite{haastrup2018c2db} carrying an HSE06 band gap \cite{heyd2003hybrid}. The target $y \in \mathbb{R}^+$ spans $0.001$--$8.85$ eV with mean $2.60$ eV.
+
+An earlier version of this work reported 930 materials. That figure resulted from a blanket missing-value filter applied across all columns, which discarded 239 labelled entries because one descriptor --- total magnetic moment --- was absent. We impute that column from training-fold medians with an explicit missingness indicator, recovering the full labelled set.
+
+\subsection{Descriptor Tiers by DFT Cost}
+\label{sec:tiers}
+C2DB descriptors are not equally cheap, and a claim to avoid expensive computation is only meaningful if it is stated against a defined cost boundary. We therefore partition them (Table~\ref{tab:tiers}) and evaluate every tier. Symbols used throughout are collected in Table~\ref{tab:nomenclature}.
+
+\begin{table}[!t]
+\caption{Descriptor tiers, by what must be computed to obtain them.\label{tab:tiers}}
+\centering
+\begin{tabular}{p{0.30\columnwidth}p{0.60\columnwidth}}
+\toprule
+Tier & Descriptors \\
+\midrule
+\textbf{DFT-free} & 120 Magpie elemental-property statistics \cite{ward2016general} via matminer \cite{ward2018matminer}, atom count, layer group, stoichiometry prototype \\
+\addlinespace
+\textbf{+ Geometry} & Above, plus thickness, unit-cell area, and packing density (Eq.~\eqref{eq:density}); requires a relaxed geometry \\
+\addlinespace
+\textbf{+ Energies (full)} & Above, plus energy above hull, heat of formation, total energy, vacuum level, magnetic moment, magnetic state (requires converged DFT) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The packing-density proxy is
+\begin{equation}
+\rho_{\mathrm{cell}} = \frac{N_{\mathrm{atoms}}}{A_{\mathrm{cell}}},
+\label{eq:density}
+\end{equation}
+where $N_{\mathrm{atoms}}$ is the atom count of the formula unit and $A_{\mathrm{cell}}$ the unit-cell area. The DFT-free tier is obtainable from a chemical formula and a candidate symmetry assignment alone, so a material that has never been calculated can be scored. No tier contains a band gap at any level of theory, which distinguishes this setting from $\Delta$-learning studies that supply a semi-local gap as an input \cite{zhang2021bandgap}.
+
+Two qualifications attach to the term ``DFT-free'' and we state them explicitly. First, it describes the model's \emph{inputs at inference}, not the pipeline as a whole: the training labels are HSE06 gaps, obtained by DFT on all 1{,}169 labelled materials. The claim is that no electronic-structure calculation is required on the material being predicted, not that the method dispenses with DFT altogether. Second, the layer group is a symmetry label rather than a computed quantity, but for a hypothetical compound it must still be assigned --- in practice from a structural prototype rather than derived from first principles. It is therefore cheap rather than costless, and the tier is more precisely described as composition plus assumed symmetry.
+
+Magpie statistics replace the raw chemical formula. An earlier pipeline one-hot encoded the formula string into 1{,}077 indicator columns, of which 825 occurred in exactly one material; such columns are row identifiers rather than descriptors, and a formula appearing only in a validation fold contributes an all-zero block.
+
+\subsection{Evaluation Protocol}
+\label{sec:protocol}
+\textit{Composition grouping.} 176 labelled materials share a formula with at least one other entry. These are polymorphs, distinguished by layer group, whose gaps differ by up to $2.92$ eV. Because composition-derived descriptors are near-identical within such a pair, an ungrouped split lets a model memorise one polymorph and be scored on another. All splits are grouped on chemical formula.
+
+\textit{Fold-local preprocessing.} Category vocabularies, imputation medians, and standardisation statistics are estimated on the training partition only. For a feature $j$ and training fold $\mathcal{T}$,
+\begin{equation}
+\tilde{x}_{ij} = \frac{x_{ij} - \mu_j^{(\mathcal{T})}}{\sigma_j^{(\mathcal{T})}},
+\label{eq:zscore}
+\end{equation}
+with $\mu_j^{(\mathcal{T})}$ and $\sigma_j^{(\mathcal{T})}$ computed over $\mathcal{T}$ alone and applied unchanged to the held-out partition.
+
+\textit{Out-of-fold stacked inputs.} Meta-learners and residual heads are trained against out-of-fold predictions, never in-sample predictions of a fitted base model \cite{wolpert1992stacked}. Partitioning the training fold into $K$ inner blocks $\{\mathcal{I}_1,\dots,\mathcal{I}_K\}$, the out-of-fold prediction of base learner $m$ for sample $i \in \mathcal{I}_k$ is
+\begin{equation}
+z_i^{(m)} = f^{(m)}_{-\mathcal{I}_k}(\mathbf{x}_i),
+\label{eq:oof}
+\end{equation}
+where $f^{(m)}_{-\mathcal{I}_k}$ is model $m$ fitted with block $\mathcal{I}_k$ withheld. Section~\ref{sec:hybrid} shows that replacing Eq.~\eqref{eq:oof} with the in-sample alternative $f^{(m)}(\mathbf{x}_i)$ is sufficient on its own to manufacture the improvement reported in earlier work.
+
+\textit{Held-out evaluation.} We report eight independent formula-grouped held-out sets ($\approx$234 materials each) in addition to cross-validation, since a single split of this size cannot resolve closely matched models \cite{varoquaux2018crossvalidation}.
+
+\textit{Corrected inference.} We report five repeats of grouped five-fold cross-validation and compare models with the Nadeau--Bengio variance-corrected paired $t$-test \cite{nadeau2003inference}. For per-fold score differences $d_1,\dots,d_n$ between two models, the naive paired statistic understates variance because the $n$ training partitions overlap. The corrected statistic inflates the variance by the ratio of test to training set size,
+\begin{equation}
+t_{\mathrm{NB}} = \frac{\bar{d}}
+  {\sqrt{\left(\dfrac{1}{n} + \dfrac{n_{\mathrm{test}}}{n_{\mathrm{train}}}\right) s_d^2}},
+\label{eq:nb}
+\end{equation}
+where $\bar{d}$ and $s_d^2$ are the sample mean and variance of the differences, and $t_{\mathrm{NB}}$ is referred to $t_{n-1}$. Every $p$-value we report uses Eq.~\eqref{eq:nb} and is \emph{two-sided}: although several comparisons have an obvious expected direction, that direction was not pre-registered, and a one-sided test would understate the evidence required. All comparisons use a single protocol of five repeats of grouped five-fold cross-validation, giving 25 fold estimates. An earlier revision applied a paired test to 930 per-sample squared errors, treating non-independent quantities as independent observations of model performance.
+
+\subsection{Models}
+Base learners are random forest, gradient boosting, support vector regression \cite{drucker1996support}, a deep multilayer perceptron with SiLU activations \cite{elfwing2018sigmoid,ramachandran2017searching} and batch normalisation \cite{ioffe2015batch}, and a physics-informed network sharing the MLP backbone with a boundary penalty
+\begin{equation}
+\mathcal{L}_{\mathrm{phy}} = \mathrm{ReLU}(-\hat{y}) + 0.1\left(e^{\mathrm{ReLU}(0.05-\hat{y})}-1\right)
+\label{eq:phy}
+\end{equation}
+discouraging physically impossible negative gaps. We retain the term ``physics-informed'' for continuity with the architecture as originally proposed, but note that Eq.~\eqref{eq:phy} imposes a soft inequality constraint on the network output rather than a differential-equation residual of the kind used in the canonical formulation \cite{raissi2019physics}. The model is therefore a constrained network within the physics-informed family, and a reader may reasonably regard it as a constrained multilayer perceptron; nothing in our conclusions depends on which label is preferred. Two meta-learners combine their out-of-fold predictions $\mathbf{z}_i = [z_i^{(1)},\dots,z_i^{(M)}]^\top$ from Eq.~\eqref{eq:oof}. The ridge meta-learner solves
+\begin{equation}
+\hat{\boldsymbol{\beta}} = \arg\min_{\boldsymbol{\beta}}
+  \sum_{i \in \mathcal{T}} \left(y_i - \boldsymbol{\beta}^\top \mathbf{z}_i\right)^2
+  + \lambda \lVert \boldsymbol{\beta} \rVert_2^2,
+\label{eq:ridge}
+\end{equation}
+where $\lVert \cdot \rVert_2$ denotes the Euclidean norm, so the penalty $\lambda \lVert \boldsymbol{\beta} \rVert_2^2$ shrinks the meta-learner weights toward zero, and $\lambda$ is selected by generalised cross-validation within the training fold. The non-negative variant \cite{breiman1996stacked} additionally constrains $\beta_m \geq 0$, giving weights that are directly readable as ensemble shares and a prediction confined to the convex cone of its members:
+\begin{equation}
+\hat{y}_i = \sum_{m=1}^{M} \beta_m z_i^{(m)}, \qquad \beta_m \geq 0 .
+\label{eq:nnls}
+\end{equation}
+
+The hybrid forms $\mathbf{x}_{\mathrm{hybrid}} = [\mathbf{x},\; \mathbf{x}\odot\hat{y}_{\mathrm{prior}},\; \hat{y}_{\mathrm{prior}}]$ and adds a learned correction to the prior, with a structural coupling layer building
+\begin{equation}
+\mathbf{s} = \left[g_1 g_2,\; g_1^2-g_2^2,\; \sqrt{g_1^2+g_2^2+\epsilon},\; g_1,\; g_2\right]
+\label{eq:strain}
+\end{equation}
+from two geometric channels $g_1, g_2$, projecting it back onto the feature map through a small multilayer block. Three heads predict residual quantiles at $\tau \in \{0.25, 0.50, 0.75\}$ under the pinball loss \cite{koenker1978regression}
+\begin{equation}
+\mathcal{L}_\tau = \frac{1}{N}\sum_{i=1}^{N}
+  \max\!\left(\tau\,(y_i - q_{\tau,i}),\; (\tau-1)(y_i - q_{\tau,i})\right),
+\label{eq:pinball}
+\end{equation}
+alongside a point residual head $r(\cdot)$. A second physics term, the anisotropy penalty, imposes a lower bound on the prediction that scales with the geometric aspect ratio of the two channels,
+\begin{equation}
+\mathcal{L}_{\mathrm{aniso}} = \frac{1}{N}\sum_{i=1}^{N}
+  \mathrm{ReLU}\!\left(0.1\,\frac{g_{1,i}}{g_{2,i}+\epsilon} - \hat{y}_i\right),
+\label{eq:aniso}
+\end{equation}
+penalising predictions that fall below that floor. Equations~\eqref{eq:phy} and \eqref{eq:aniso} are distinct terms and are ablated separately in Table~\ref{tab:ablation}: the former constrains the output to be non-negative, the latter couples it to lattice geometry. The correction is combined with the prior as
+\begin{equation}
+\begin{split}
+\hat{y}_{\mathrm{hybrid}} = {}& \hat{y}_{\mathrm{prior}} + \tfrac{3}{4}\, r \\
+  &+ \tfrac{1}{4}\left[q_{0.50} + 0.1\,\sigma(\Delta q)\,\Delta q\right],
+\end{split}
+\label{eq:hybrid}
+\end{equation}
+where $\Delta q = q_{0.75}-q_{0.25}$ and $\sigma(\cdot)$ is the logistic function. One correction to the earlier implementation bears on every physical claim made about this layer: the channels were selected by array position (indices 0 and 1), which in the assembled matrix were energy above hull and heat of formation --- two formation energies, not geometric quantities. Channels are now resolved by name. The available C2DB export contains no in-plane lattice vectors $a$ and $b$, so we describe Eq.~\eqref{eq:strain} as a soft geometric inductive bias and make no claim that it derives from elasticity theory.
+
+For an unbiased comparison against prior work we additionally reproduce, at their original hyperparameters, the three estimators specified by our earlier pipeline: XGBoost (500 trees, depth 5, $\eta=0.03$), gradient boosting (400 trees, depth 4), and random forest (400 trees, depth 14).
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Model Comparison}
+Table~\ref{tab:benchmark} and Fig.~\ref{fig:comparison} report all models over 25 fold estimates.
+
+\begin{table*}[!t]
+\caption{Repeated grouped five-fold cross-validation, all descriptors, 25 fold estimates. ``Folds'' counts estimates beating the GBR baseline; $p$-values are Nadeau--Bengio corrected and two-sided. SVR differs significantly from the baseline in the negative direction.\label{tab:benchmark}}
+\centering
+\begin{tabular}{lcccc}
+\toprule
+Model & $R^2$ & MAE [eV] & Folds & $p$ \\
+\midrule
+Stacked ensemble (ridge) & $\mathbf{0.877 \pm 0.038}$ & $\mathbf{0.363}$ & 25/25 & $<0.001$ \\
+Stacked ensemble (NNLS)  & $0.875 \pm 0.038$ & $0.364$ & 25/25 & $<0.001$ \\
+Deep MLP                 & $0.864 \pm 0.039$ & $0.378$ & 24/25 & $0.004$ \\
+Standalone PINN          & $0.856 \pm 0.043$ & $0.385$ & 22/25 & $0.066$ \\
+Random forest            & $0.827 \pm 0.041$ & $0.442$ & 13/25 & $0.647$ \\
+GBR (baseline)           & $0.823 \pm 0.043$ & $0.464$ & ---   & ---    \\
+Hybrid GBR + corrector   & $0.810 \pm 0.047$ & $0.445$ & 12/25 & $0.541$ \\
+SVR                      & $0.774 \pm 0.039$ & $0.497$ &  1/25 & $<0.001$ \\
+Hybrid + shrinkage gate  & $0.681 \pm 0.237$ & $0.571$ &  3/25 & $0.180$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig1_model_comparison.png}
+\caption{Cross-validated $R^2$ with 95\% confidence intervals over 25 fold estimates. Hybrid variants are shown in red.}
+\label{fig:comparison}
+\end{figure}
+
+Both neural models outperform every tree ensemble. With identifier-like features removed and composition statistics supplied, this task falls outside the regime in which boosted trees dominate neural networks \cite{shwartzziv2022tabular,grinsztajn2022why,mcelfresh2023when}.
+
+Fig.~\ref{fig:parity} shows out-of-fold agreement with the HSE06 reference alongside the regression error characteristic, which reports the fraction of materials resolved within a given absolute tolerance. Predictions are taken from a single repeat of the protocol, so that each material appears once.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig5_parity_rec.png}
+\caption{Left and centre: out-of-fold predictions against HSE06 reference values for the gradient-boosting baseline and the stacked ensemble, from a single repeat of the protocol so that each material appears once. Panel scores therefore differ slightly from the 25-estimate means in Table~\ref{tab:benchmark}. Right: regression error characteristic curves, giving the fraction of materials predicted within a given absolute tolerance $\tau$.}
+\label{fig:parity}
+\end{figure*}
+
+Fig.~\ref{fig:learning} shows that the ensemble's advantage is not an artefact of sample size: it leads at every training-set size tested, and its margin over the tree baselines widens as data are added, with no sign of saturation at the full 792-material training partition.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig4_learning_curve.png}
+\caption{Learning curves under grouped cross-validation, from a single five-fold pass at each training-set size. Shaded bands are 95\% confidence intervals over folds.}
+\label{fig:learning}
+\end{figure}
+
+\subsection{The Hybrid Does Not Improve on Its Prior}
+\label{sec:hybrid}
+The hybrid is superior to its own gradient-boosted prior on 12 of 25 fold estimates --- almost exactly the coin-flip a null effect predicts --- and the corrected test does not reject the null ($p = 0.54$). Table~\ref{tab:ablation} reports the component ablation; every configuration listed was trained and evaluated.
+
+\begin{table}[!t]
+\caption{Component ablation of the hybrid, mean $R^2$ over 25 fold estimates. Every configuration was trained and evaluated.\label{tab:ablation}}
+\centering
+\begin{tabular}{lcc}
+\toprule
+Configuration & $R^2$ & $\Delta$ vs.\ full \\
+\midrule
+In-sample prior (leaky)        & 0.837 & $+0.035$ \\
+Tree prior alone, no corrector & 0.823 & $+0.021$ \\
+Without anisotropy penalty     & 0.809 & $+0.007$ \\
+Without structural layer       & 0.806 & $+0.004$ \\
+Without quantile heads         & 0.805 & $+0.002$ \\
+\textbf{Full framework}        & 0.802 & --- \\
+Without boundary penalty       & 0.801 & $-0.001$ \\
+Without residual head          & 0.777 & $-0.025$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig6_ablation.png}
+\caption{Component ablation of the hybrid. Every configuration shown was trained and evaluated; no physics-motivated component contributes positively, and the tree prior alone is the strongest configuration.}
+\label{fig:ablation}
+\end{figure}
+
+No physics-motivated component contributes positively, and the tree prior alone --- with no neural correction at all --- outscores every configuration that includes one (Fig.~\ref{fig:ablation}). Only the leaky variant sits higher, for the reason given below. The first row identifies the mechanism. Reverting to an in-sample prior raises measured $R^2$ from $0.802$ to $0.837$, and --- crucially --- lifts the hybrid \emph{above} the tree prior it corrects ($0.823$), on 21 of 25 fold estimates. That is the qualitative result reported in earlier work: a hybrid that appears to beat its baseline. Constructed correctly, the same architecture falls below that baseline on 18 of 25 estimates. The apparent improvement is thus manufactured by the prior construction alone, with every other component held fixed.
+
+The mechanism is straightforward. A prior fitted in sample is near-perfect on the rows the corrector trains on, so the residual signal it must learn is almost absent; the head learns to emit approximately zero and the architecture collapses onto the tree, while the training-time metrics --- computed against that same optimistic prior --- look healthy throughout. We note that the leaky variant's advantage is not itself statistically significant under the corrected two-sided test ($p = 0.11$), which is precisely the point: an effect of this size is easy to report as real, and nothing in the usual reported metrics distinguishes it from one.
+
+We also tested the natural remedy. A shrinkage gate constrains the correction by $\sigma(\cdot) \in (0,1)$, initialised near zero so the model begins as a pass-through and must earn any departure. It did not work: the gate converged small ($0.081 \pm 0.007$) but accuracy destabilised ($R^2 = 0.681 \pm 0.237$, with 7 of 25 fold estimates below $0.70$ and one at $-0.24$). Shrinking the gate rescales the gradient reaching the head, whose raw output grows to compensate, leaving the product poorly controlled on unseen data.
+
+\subsection{Held-Out Evaluation}
+\label{sec:holdout}
+Across eight independent held-out sets the cross-validated ordering is reproduced: stacked ridge $0.879 \pm 0.025$, PINN $0.866 \pm 0.028$, MLP $0.858 \pm 0.032$, GBR $0.823 \pm 0.025$. The ensemble beats GBR on 8 of 8 splits ($p = 0.002$). Its margins over the two neural models are positive and consistent in sign --- 8 of 8 splits against the MLP, 7 of 8 against the PINN --- but neither reaches two-sided significance at this number of splits ($p = 0.081$ and $p = 0.102$). We therefore claim superiority over the tree baselines, and parity or better, not demonstrated superiority, against the strongest single neural model. Per-split results are shown in Fig.~\ref{fig:holdout}. We report eight sets rather than one because a single split of this size cannot resolve closely matched models: on one 179-material split the ensemble and the PINN were indistinguishable ($0.856$ against $0.855$), a null that reflects the resolution of that split rather than equivalence of the models.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig8_repeated_holdout.png}
+\caption{Repeated held-out evaluation. (a) Per-split $R^2$ on eight independent formula-grouped held-out sets; horizontal bars are means. (b) Paired per-split difference between the stacked ensemble and each single model, annotated with splits won and the corrected two-sided $p$-value.}
+\label{fig:holdout}
+\end{figure}
+
+\subsection{Why the Ensemble Is Worth Its Cost}
+\label{sec:utility}
+The ensemble's margin over the best single model is small ($\Delta R^2 = 0.013$ against the MLP) and would not by itself justify training five models instead of one. We therefore evaluate it on three decision-relevant axes (Fig.~\ref{fig:utility}).
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig9_utility.png}
+\caption{(a) The best single model is unstable across folds. (b) Rate of predictions in error by more than 1 eV. (c) Measured training cost against the calculation being replaced, on a logarithmic scale.}
+\label{fig:utility}
+\end{figure*}
+
+\textit{Model-selection risk.} The best single model is not the same model on every fold: over 25 estimates the MLP and the PINN win 11 each, gradient boosting twice and random forest once. A practitioner must commit to one architecture in advance and cannot know which will win. The ensemble beats the best-on-average committed choice on 22 of 25 folds, though the corrected two-sided test does not reach significance ($p = 0.11$); its regret against a per-fold oracle is negative ($-0.007$), meaning it slightly outperforms an oracle that always selects the fold's best single model. The asymmetry of the risk is the substantive point: committing to the weakest plausible choice costs $0.102$ in $R^2$, roughly eight times the ensemble's margin over the strongest.
+
+\textit{Large-error rate.} Screening is harmed more by rare large errors, which move a material between application classes, than by average error. Predictions in error by more than 1 eV occur at $6.3\%$ for the ensemble against $7.4\%$ for both neural models and $10$--$13\%$ for the tree baselines, a relative reduction of $15\%$ against the best single model.
+
+\textit{Cost.} Training the full ensemble, including the out-of-fold predictions the meta-learner requires, takes $8.5$ s against $0.43$ s for the MLP alone, and inference over 198 materials takes $24$ ms. The relative overhead of $20\times$ is real but the absolute cost is under nine seconds, against the CPU-hours of the HSE06 calculation being replaced. The standard objection that an ensemble of $N$ models costs $N$ times more \cite{tavazza2023approaches} does not bind in this regime.
+
+We report one axis that does not support the ensemble. On a screening task measuring wasted DFT evaluations per true hit, results are mixed: the ensemble is best for a visible-photocatalysis window ($1.8$--$3.0$ eV), the PINN is best for a photovoltaic window ($1.0$--$2.0$ eV), and several models tie for wide-gap selection.
+
+\subsection{Uncertainty Calibration}
+The hybrid predicts quantiles at $\tau \in \{0.25, 0.50, 0.75\}$, previously described as uncertainty estimates. Empirical coverage of the predicted interval,
+\begin{equation}
+C = \frac{1}{N}\sum_{i=1}^{N}
+  \mathbb{1}\!\left[q_{0.25,i} \leq y_i \leq q_{0.75,i}\right],
+\label{eq:coverage}
+\end{equation}
+in which $\mathbb{1}[\cdot]$ is the indicator function, equal to one when the reference value falls inside the predicted interval and zero otherwise, should equal the nominal level of $0.50$; the measured value is $C = 0.172$ at a mean interval width of $2.47$ eV (Fig.~\ref{fig:calibration}). This diagnostic is descriptive rather than comparative, and is computed from a single grouped five-fold pass rather than the repeated protocol used for every model comparison. The intervals are simultaneously wide and badly miscalibrated, and the deficit persists across every nominal level tested (Fig.~\ref{fig:calibration}(a)).
+
+We report this diagnosis without attempting to repair it. No post-hoc recalibration was applied: the intervals shown are the raw quantile-head outputs, and we did not fit conformal, isotonic, or Platt-style corrections on held-out data. That choice is deliberate. Recalibration would change the coverage figure without changing the conclusion that the architecture as published does not produce usable intervals, and applying it here would obscure the diagnosis. We therefore withdraw the uncertainty claim rather than rescue it.
+
+Post-hoc correction is nonetheless the natural next step for anyone wishing to use quantile heads in this setting. Split conformal prediction is the obvious candidate: it is distribution-free, requires only a held-out calibration split, and would deliver the nominal coverage by construction, at the cost of intervals whose width is set by the calibration residuals rather than learned per material. Whether the resulting intervals would be narrow enough to be decision-relevant --- given a mean raw width of $2.47$ eV against a target range spanning $0.001$--$8.85$ eV --- is an open question this dataset can answer but we have not. Any such claim should be scored with a proper rule \cite{gneiting2007probabilistic} rather than by coverage alone, since coverage can be met trivially by widening every interval.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig7_calibration.png}
+\caption{Quantile calibration of the hybrid. (a) Empirical against nominal coverage; the model is over-confident at every level. (b) Distribution of predicted interval widths.}
+\label{fig:calibration}
+\end{figure}
+
+\subsection{Marginal Value of DFT-Derived Descriptors}
+\label{sec:dftfree}
+Table~\ref{tab:tiers_results} and Fig.~\ref{fig:tiers} report accuracy in each descriptor tier.
+
+\begin{table}[!t]
+\caption{Stacked-ensemble accuracy by descriptor tier, 25 fold estimates.\label{tab:tiers_results}}
+\centering
+\begin{tabular}{lccc}
+\toprule
+Tier & $R^2$ & MAE [eV] & $\Delta R^2$ \\
+\midrule
+All descriptors      & $0.877 \pm 0.036$ & $0.363$ & --- \\
+No DFT energies      & $0.844 \pm 0.044$ & $0.399$ & $-0.033$ \\
+\textbf{No DFT at all} & $\mathbf{0.834 \pm 0.048}$ & $\mathbf{0.425}$ & $-0.044$ \\
+\midrule
+\multicolumn{4}{l}{\textit{Prior published hybrid, all descriptors:} $R^2 = 0.743$, MAE $= 0.555$} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig10_feature_tiers.png}
+\caption{(a) Accuracy against DFT cost. Removing every DFT-derived descriptor costs $0.044$ in $R^2$, and the resulting model still exceeds the previously published full-descriptor hybrid. (b) Head-to-head within the full tier; red bars are the estimators specified by the prior pipeline, at their original hyperparameters, on identical folds.}
+\label{fig:tiers}
+\end{figure*}
+
+Removing every DFT-derived descriptor costs $0.044$ in $R^2$ and $0.061$ eV in MAE. Most of the attainable accuracy therefore rests on composition and symmetry, and the six DFT energy channels together buy less than a tenth of the variance explained.
+
+We do not present this as a novel capability. Composition-based band-gap models are well established for inorganic solids \cite{zhuo2018predicting,gomes2021utility,wang2024gbdt}, and composition-derived descriptors have already been applied to C2DB monolayers specifically: a recent transfer-learning study built 290 compositional descriptors over 2{,}915 monolayers and reports MAE $0.27$ eV \cite{transfer2025monolayer}, better than the $0.425$ eV of our DFT-free tier on a smaller and structurally narrower subset. Restricting attention to rectangular-lattice materials narrows the sample; it does not by itself make the composition-to-gap mapping a different problem.
+
+What the decomposition adds is the marginal accounting itself. Studies of composition-only models typically report a single accuracy figure for one fixed descriptor set; separating the tiers tells a practitioner which calculations are worth running before screening, and it fixes the descriptor budget within which the comparisons of Section~\ref{sec:hybrid} were made. It also interacts with a known weakness of composition-based models. Composition alone cannot distinguish polymorphs of one stoichiometry \cite{gomes2021utility}, and 176 of our materials share a formula with at least one other entry, differing in gap by up to $2.92$ eV. Our DFT-free tier pairs composition with a symmetry label, and our folds are grouped on formula, so no polymorph is ever scored against a sibling seen in training --- a confound the composition-only literature names but which is rarely controlled in cross-validation, and which inflates accuracy when left uncontrolled.
+
+Fig.~\ref{fig:tiers}(b) gives the head-to-head against the prior pipeline within the full tier. The ensemble beats gradient boosting on 22 of 25 fold estimates ($p = 0.024$) and random forest on 25 of 25 ($p < 0.001$). Against XGBoost, the strongest of the three, it leads on 22 of 25 estimates but the two-sided test does not reach significance ($p = 0.079$); within the DFT-free tier that margin narrows further ($p = 0.320$). We report these as they stand: the ensemble is reliably better than two of the three prior estimators, and not distinguishable from the third.
+
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Why Residual Correction Fails}
+Once the prior is constructed out of fold, its residuals on unseen materials are dominated by irreducible noise rather than recoverable structure, and a corrector fitted to them adds variance without removing bias. This is not specific to materials data; residual-boosting correctors are known to yield negative gains when the residual signal is noise-dominated \cite{airlangga2025hybrid}. The practical consequence is that hybrid residual designs must be validated against their own prior with an out-of-fold construction. Compared against an in-sample prior they can appear to help while doing nothing, and that appearance is stable enough to survive review.
+
+\subsection{What the Ensemble Buys}
+The stacking gain arises from error diversity rather than from any member's individual strength. The mean pairwise correlation between base-learner residuals is $0.754$, and Fig.~\ref{fig:correlation} shows the neural and tree models forming visibly distinct error clusters; it is combination across those clusters that the meta-learner exploits.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig3_error_correlation.png}
+\caption{Pearson correlation between out-of-fold residuals of the base learners. Lower correlation between clusters is what makes stacking profitable.}
+\label{fig:correlation}
+\end{figure}
+
+Fig.~\ref{fig:contributions} contrasts the fitted ensemble weights with a drop-one ablation. The two disagree: SVR receives zero weight yet gradient boosting receives $0.249$ while contributing nothing measurable when removed. Collinear members split weight between them, so weights alone cannot establish a contribution and the drop-one test is the appropriate instrument. That test orders the members consistently with their individual accuracy --- removing the PINN costs most ($+0.008$ eV$^2$, 17 of 25 estimates degraded), then the MLP and random forest --- but no single member's contribution is statistically significant under the corrected two-sided test ($p = 0.22$--$0.82$). The defensible statement is that the ensemble as a whole outperforms its members, not that any one member is indispensable.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig2_ensemble_contributions.png}
+\caption{Ensemble member contributions. (a) Mean non-negative stacking weights. (b) Drop-one ablation: change in ensemble MSE when each member is removed, with fold estimates degraded and the corrected two-sided $p$-value. Positive values indicate that removing the member hurts.}
+\label{fig:contributions}
+\end{figure}
+
+\subsection{On the Anisotropy Hypothesis}
+\label{sec:anisotropy}
+Our results do not refute the physical hypothesis that motivated the original architecture --- that in-plane anisotropy shapes band gaps in rectangular 2D lattices \cite{rodin2014strain,tran2014layer,kim2015observation}. They show that neither the original implementation nor ours can test it. In the earlier code the coupling layer was wired by array position to two formation energies, so it never received a geometric quantity at all; we resolve the channels by name, but the available export contains no in-plane lattice vectors, leaving unit-cell area and thickness as the only geometric inputs. Testing an anisotropy hypothesis requires $a$ and $b$ themselves, and recovering them from a full C2DB structure pull is the single most valuable extension of this work.
+
+\subsection{On the Absence of a Graph-Network Baseline}
+\label{sec:gnn}
+The most conspicuous omission from our comparison is the family of structure-aware graph neural networks --- crystal graph convolutional networks \cite{xie2018crystal}, continuous-filter message passing \cite{schutt2018schnet}, and graph networks incorporating bond-angle or three-body terms \cite{chen2019graph,choudhary2021atomistic,chen2022universal} --- which represent the state of the art for crystal property prediction on large databases. Three considerations placed them outside the scope of this study, and we state them explicitly because the omission is otherwise easy to read as an oversight.
+
+First, and most importantly, a graph network is not an alternative within the descriptor-cost framework of Section~\ref{sec:tiers}. Its input is a graph over relaxed atomic positions, which presupposes the converged DFT geometry that the DFT-free and geometry-only tiers are constructed to do without. Including one would answer a different question --- how much accuracy is available once a structure has been computed --- rather than the one this article asks. It would sit strictly above our full tier in cost, not alongside it.
+
+Second, the data regime is unfavourable. Graph architectures are typically trained on $10^4$--$10^6$ structures; the reported advantages over descriptor-based models narrow substantially in the low-data limit, and our 1{,}169 materials across a single Bravais class sit well below the scale at which those advantages have been demonstrated. A weak graph-network result here would be uninformative, since it could not be distinguished from insufficient data.
+
+Third, the negative result of Section~\ref{sec:hybrid} concerns a specific claim --- that a neural residual correction improves a tree prior on tabular descriptors --- and is unaffected by how a graph model would perform. The comparison we owe that claim is against the prior it corrects, which we make.
+
+A graph-network comparison would nonetheless be valuable in its own right, and is the most natural extension of this work should a full C2DB structure pull be undertaken. It would also make the anisotropy hypothesis of Section~\ref{sec:anisotropy} directly testable, since in-plane lattice vectors are recoverable from the same pull.
+
+\subsection{Limitations}
+All data derive from one database and one Bravais class, with 1{,}169 labelled materials. The ensemble's advantage over a well-tuned XGBoost does not reach two-sided significance even with all descriptors ($p = 0.079$), and narrows further in the DFT-free tier ($p = 0.320$). Its margin over the best single neural model on held-out data likewise falls short of significance. The claims that survive at $\alpha = 0.05$ are superiority over the gradient-boosting and random-forest baselines, and the null result for the hybrid. Single-split held-out comparisons at this sample size lack the resolution to separate closely matched models, which is why Section~\ref{sec:holdout} reports eight independent held-out sets rather than one. The uncertainty intervals are reported as diagnosed, not repaired.
+
+\section{Conclusion}
+\label{sec:conclusion}
+A physics-informed hybrid residual architecture, previously reported to improve band-gap prediction for two-dimensional materials, does not improve on the gradient-boosted prior it corrects once the evaluation is controlled for leakage, and none of its physics-motivated components contributes measurably. The earlier improvement is reproduced on demand by reverting a single implementation detail --- building the tree prior in sample rather than out of fold --- which lifts the architecture above its baseline while training the corrector to emit nothing, leaving a pass-through of the tree wearing the appearance of a hybrid. We regard this as the transferable finding: hybrid residual designs are widely reported to help, this particular failure is easy to introduce by accident, and it is invisible in the metrics such papers normally report.
+
+Two positive results accompany it. A stacked ensemble of five heterogeneous learners is the strongest configuration tested. Where a modest ensemble gain must be justified, we suggest doing so as we have here --- by the model-choice risk it removes and the large errors it avoids, at a cost measured against the calculation being replaced --- rather than by a difference in $R^2$ that cannot carry the argument. Separately, decomposing accuracy by descriptor cost shows that composition and symmetry account for most of what is attainable here: the DFT energy channels add $0.033$ in $R^2$, and the relaxed geometry a further $0.011$.
+
+\section*{Data and Code Availability}
+All code, the curated dataset, per-fold out-of-sample predictions, and the scripts generating every table and figure are available at \url{https://github.com/adhvayjagadeesh/DFT---Machine-Learning--PINN}. Every experiment reproduces from a single command under a pinned environment with a fixed random seed.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\begin{IEEEbiographynophoto}{Adhvay Jagadeesh}
+is a student researcher with the Aspiring Scholars Directed Research Program (ASDRP), Fremont, CA, USA. His research interests include machine learning for materials science, physics-informed neural networks, and computational modeling of two-dimensional materials.
+\end{IEEEbiographynophoto}
+
+% =====================================================================
+% NOTE TO AUTHOR: IEEE Access requires a short biography for EVERY
+% author. The two entries below are brief stubs; expand them with
+% affiliation history and research interests before submission. Use
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photo}}]{Name}
+% if you wish to include an author photograph.
+% =====================================================================
+\begin{IEEEbiographynophoto}{Rutvi Mudalagi}
+is a high school student researcher with the Aspiring Scholars Directed Research Program (ASDRP), Fremont, CA, USA.
+\end{IEEEbiographynophoto}
+
+\begin{IEEEbiographynophoto}{Marx Akl}
+received the Ph.D. degree in physics. He is the faculty advisor with the Aspiring Scholars Directed Research Program (ASDRP), Fremont, CA, USA.
+\end{IEEEbiographynophoto}
+
+\EOD
+
+\end{document}
