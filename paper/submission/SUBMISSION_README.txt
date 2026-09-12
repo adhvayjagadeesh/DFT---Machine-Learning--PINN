@@ -26,6 +26,9 @@ CONTENTS
     main.bbl                 pre-built bibliography (53 entries, IEEEtran style)
     references.bib           BibTeX source for the above
     main.pdf                 compiled reference copy
+    graphical_abstract.png   graphical abstract, 3600 x 2025 px (upload separately)
+    graphical_abstract.pdf   same, vector
+    graphical_abstract_caption.txt
     figures/fig1 ... fig10   all figures, PNG, 300 dpi
     ieeeaccess.cls           IEEE Access class (unmodified, from the template)
     IEEEtran.cls, .bst       dependencies of the class
@@ -46,12 +49,12 @@ STILL REQUIRED, NOT IN THIS PACKAGE
 These are entered in the ScholarOne forms or uploaded separately; they are
 not part of the LaTeX source.
 
-  [ ] Graphical abstract  -- IEEE Access REQUIRES one. A single image
-                             (JPG/PNG, min 1000 px wide) summarising the
-                             paper, plus a ~100-word caption. Figure 6
-                             (the ablation) or Figure 9 (ensemble utility)
-                             is the natural choice; ask if you want one
-                             composed.
+  [x] Graphical abstract  -- graphical_abstract.png (3600 x 2025 px, 300 dpi)
+                             and graphical_abstract.pdf (vector) in this
+                             directory. Caption in graphical_abstract_caption.txt
+                             (98 words). Regenerate with
+                             experiments/make_graphical_abstract.py; every
+                             number is read from the result artefacts.
   [ ] ORCID for every author (linked in each author's ScholarOne profile;
                              the submission cannot proceed without them)
   [ ] Cover letter        -- draft exists in the project as

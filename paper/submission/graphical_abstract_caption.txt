@@ -1,0 +1,11 @@
+GRAPHICAL ABSTRACT CAPTION  (98 words)
+
+A physics-informed hybrid that corrects a gradient-boosted prior with a neural
+residual head appears to outperform that prior (R^2 0.837 against 0.823, on 21
+of 25 fold estimates) when the prior is fitted on the same rows the corrector
+trains on. Constructing the prior out of fold instead -- one line of code --
+reverses the result (0.802, 7 of 25 folds, p = 0.54): a near-perfect
+training-time prior leaves the corrector nothing to learn. Under the same
+leakage-controlled protocol on 1,169 C2DB two-dimensional materials, a stacked
+ensemble of five heterogeneous learners is the strongest configuration tested
+(R^2 0.877, 25 of 25 folds, p < 0.001).
