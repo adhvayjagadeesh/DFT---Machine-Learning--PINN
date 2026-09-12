@@ -189,10 +189,9 @@ Descriptors and HSE06 band gaps derive from the Computational 2D Materials Datab
 ## Citation
 
 ```bibtex
-@article{jagadeesh2026dftfree,
-  title  = {Band-Gap Prediction for Two-Dimensional Materials Without Density
-            Functional Theory: A Leakage-Controlled Evaluation of Hybrid and
-            Ensemble Models},
+@article{jagadeesh2026artefacts,
+  title  = {Evaluation Artefacts in Physics-Informed Band-Gap Prediction:
+            A Leakage-Controlled Study of Two-Dimensional Materials},
   author = {Jagadeesh, Adhvay and Mudalagi, Rutvi and Akl, Marx},
   year   = {2026},
   note   = {Manuscript under preparation}
